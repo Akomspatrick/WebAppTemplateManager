@@ -1,0 +1,11 @@
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Domain\bin\Debug\net7.0\DocumentVersionManager.Domain.deps.json
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Domain\bin\Debug\net7.0\DocumentVersionManager.Domain.dll
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Domain\bin\Debug\net7.0\DocumentVersionManager.Domain.pdb
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Domain\obj\Debug\net7.0\DocumentVersionManager.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Domain\obj\Debug\net7.0\DocumentVersionManager.Domain.AssemblyInfoInputs.cache
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Domain\obj\Debug\net7.0\DocumentVersionManager.Domain.AssemblyInfo.cs
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Domain\obj\Debug\net7.0\DocumentVersionManager.Domain.csproj.CoreCompileInputs.cache
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Domain\obj\Debug\net7.0\DocumentVersionManager.Domain.dll
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Domain\obj\Debug\net7.0\refint\DocumentVersionManager.Domain.dll
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Domain\obj\Debug\net7.0\DocumentVersionManager.Domain.pdb
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Domain\obj\Debug\net7.0\ref\DocumentVersionManager.Domain.dll

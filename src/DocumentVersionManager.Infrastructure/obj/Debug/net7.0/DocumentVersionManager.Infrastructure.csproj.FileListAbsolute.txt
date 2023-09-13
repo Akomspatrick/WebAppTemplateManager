@@ -1,0 +1,17 @@
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\bin\Debug\net7.0\DocumentVersionManager.Infrastructure.deps.json
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\bin\Debug\net7.0\DocumentVersionManager.Infrastructure.dll
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\bin\Debug\net7.0\DocumentVersionManager.Infrastructure.pdb
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\DocumentVersionManager.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\DocumentVersionManager.Infrastructure.AssemblyInfoInputs.cache
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\DocumentVersionManager.Infrastructure.AssemblyInfo.cs
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\DocumentVersionManager.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\DocumentVersionManager.Infrastructure.dll
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\refint\DocumentVersionManager.Infrastructure.dll
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\DocumentVersionManager.Infrastructure.pdb
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\ref\DocumentVersionManager.Infrastructure.dll
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\bin\Debug\net7.0\DocumentVersionManager.Application.dll
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\bin\Debug\net7.0\DocumentVersionManager.Domain.dll
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\bin\Debug\net7.0\DocumentVersionManager.Application.pdb
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\bin\Debug\net7.0\DocumentVersionManager.Domain.pdb
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\DocumentVersionManager.Infrastructure.csproj.AssemblyReference.cache
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\DocumentVersionManager.Infrastructure.csproj.CopyComplete
