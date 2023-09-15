@@ -15,3 +15,5 @@ C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastr
 C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\bin\Debug\net7.0\DocumentVersionManager.Domain.pdb
 C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\DocumentVersionManager.Infrastructure.csproj.AssemblyReference.cache
 C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\DocumentVersionManager.Infrastructure.csproj.CopyComplete
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\bin\Debug\net7.0\DocumentVersionManager.Infrastructure.runtimeconfig.json
+C:\Works\CSharp\MassFussion2\DocumentManager\src\DocumentVersionManager.Infrastructure\obj\Debug\net7.0\DocumentVersionManager.Infrastructure.genruntimeconfig.cache
