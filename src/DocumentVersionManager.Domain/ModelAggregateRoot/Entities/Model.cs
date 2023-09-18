@@ -1,10 +1,4 @@
-﻿using DocumentVersionManager.Domain.Enumerations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection.Metadata;
 
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 {
@@ -25,6 +19,9 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public IReadOnlyCollection<CapacitySpecification> CapacitySpecificationsv => _capacitySpecifications.AsReadOnly();
 
         private delegate void ModelDataUpdatedEventHandler(Dictionary<string, List<int>> models);
+
+
+
         private static ModelDataUpdatedEventHandler DataUpdated;
 
         private static object pollingLock = new object();

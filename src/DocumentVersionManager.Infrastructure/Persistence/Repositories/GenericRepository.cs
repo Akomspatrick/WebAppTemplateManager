@@ -10,8 +10,18 @@ using System.Threading.Tasks;
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
-    {
-        private readonly DbSet<T> _dbSet;
+    {    private readonly DbSet<T> _dbSet;
+        public GenericRepository( DocumentVersionManagerContext ctx)
+        {
+            _dbSet = ctx.Set<T>();     
+        }
+       
+
+        public  async Task<T> AddAsync(T entity, CancellationToken cancellationToken)
+        {
+            var x = await _dbSet.AddAsync(entity,cancellationToken);
+            return  (entity);
+        }
 
         public Task<T> AddAsync(T entity)
         {
@@ -19,6 +29,11 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         }
 
         public Task<T> DeleteAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IReadOnlyList<T>> GetAll()
         {
             throw new NotImplementedException();
         }

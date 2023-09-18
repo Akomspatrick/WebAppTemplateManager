@@ -11,6 +11,6 @@ namespace DocumentVersionManager.Domain.Interfaces
     {
         Task<int> CommitAllChanges();
         IGenericRepository<T> asyncRepository<T>() where T :BaseEntity;
-        IModelRepository<T> modelRepository<T>() where T : BaseEntity;
+       // IModelRepository modelRepository();
     }
 }

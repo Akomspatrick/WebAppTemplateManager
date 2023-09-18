@@ -183,6 +183,7 @@ Execute statement:
         REFERENCES `mydb_test`.`users` (`username`))
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = latin1
+
 - Creating table mydb_test.models
 Execute statement: 
     CREATE TABLE IF NOT EXISTS `mydb_test`.`models` (
@@ -197,6 +198,12 @@ Execute statement:
         ON UPDATE CASCADE)
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = latin1
+
+
+
+
+
+
 - Creating table mydb_test.modeltypes
 Execute statement: 
     CREATE TABLE IF NOT EXISTS `mydb_test`.`modeltypes` (

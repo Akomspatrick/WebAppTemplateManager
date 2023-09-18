@@ -1,4 +1,5 @@
-﻿using DocumentVersionManager.Domain.Errors;
+﻿using DocumentVersionManager.Domain.Base;
+using DocumentVersionManager.Domain.Errors;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 {
 
-    public class CapacityDocument
+    public class CapacityDocument : BaseEntity<string>
     {
         public string ModelName { get; init; }
         public int Capacity { get; init; }

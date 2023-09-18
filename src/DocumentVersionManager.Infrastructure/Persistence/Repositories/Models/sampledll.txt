@@ -53,7 +53,7 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `mydb_test`.`models`
+-- Table `mydb_test`.`models`--- WORKING-DJ
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb_test`.`models` (
   `name` VARCHAR(128) NOT NULL,

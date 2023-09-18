@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "sQ8sgkRUxtjKSsz8eCJglniHor9yGfEHAy8G93XxikhQ9WRtj+o2w4e3Kjzi3LzFMgDseREawIpAuAF4TEgisA==",
+  "dgSpecHash": "P4/AvSSvgK42qLyAHD2bQ2b4QW7RU4sgmBqIbUdLAdUM1EWZk2JcLQAb/eqvF4713r2+AqxF9biqSd+HN4LXgw==",
   "success": true,
   "projectFilePath": "C:\\Works\\CSharp\\MassFussion2\\DocumentManager\\src\\DocumentVersionManager.Domain\\DocumentVersionManager.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\SWeng\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\SWeng\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\SWeng\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

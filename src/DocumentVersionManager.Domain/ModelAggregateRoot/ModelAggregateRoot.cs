@@ -1,4 +1,5 @@
-﻿using DocumentVersionManager.Domain.Enumerations;
+﻿using DocumentVersionManager.Domain.Base;
+using DocumentVersionManager.Domain.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Xml.Linq;
 
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 {
-    public partial class Model
+    public partial class Model:BaseEntity<string>
     {
 
         public Model(string modelName, string modelTypeName)

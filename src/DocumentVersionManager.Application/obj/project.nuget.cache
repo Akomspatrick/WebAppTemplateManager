@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "9BzT3KzsnQAAJ0w3Lsa1RuL+g6zzZ7MoivM8PBarkO242uqTTHMKMybfnFPpLJEuJfebeCZVVzyawaNYhhRW8g==",
+  "dgSpecHash": "49yZ0f7m/R00gUaI3fep1HDVRzkAvF+anyG90OuiLwucxHyACeYL1axzciuB7omAkKUeO77f58M6iD2I/tzpHw==",
   "success": true,
   "projectFilePath": "C:\\Works\\CSharp\\MassFussion2\\DocumentManager\\src\\DocumentVersionManager.Application\\DocumentVersionManager.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\SWeng\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\SWeng\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\SWeng\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.0.0\\mediatr.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\SWeng\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\SWeng\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\SWeng\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
