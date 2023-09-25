@@ -248,19 +248,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\SWeng\\.nuget\\packages\\": {}
+    "C:\\Users\\sweng\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Works\\CSharp\\MassFussion2\\DocumentManager\\src\\DocumentVersionManager.Application\\DocumentVersionManager.Application.csproj",
+      "projectUniqueName": "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Application\\DocumentVersionManager.Application.csproj",
       "projectName": "DocumentVersionManager.Application",
-      "projectPath": "C:\\Works\\CSharp\\MassFussion2\\DocumentManager\\src\\DocumentVersionManager.Application\\DocumentVersionManager.Application.csproj",
-      "packagesPath": "C:\\Users\\SWeng\\.nuget\\packages\\",
-      "outputPath": "C:\\Works\\CSharp\\MassFussion2\\DocumentManager\\src\\DocumentVersionManager.Application\\obj\\",
+      "projectPath": "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Application\\DocumentVersionManager.Application.csproj",
+      "packagesPath": "C:\\Users\\sweng\\.nuget\\packages\\",
+      "outputPath": "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\SWeng\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sweng\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -274,8 +274,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Works\\CSharp\\MassFussion2\\DocumentManager\\src\\DocumentVersionManager.Domain\\DocumentVersionManager.Domain.csproj": {
-              "projectPath": "C:\\Works\\CSharp\\MassFussion2\\DocumentManager\\src\\DocumentVersionManager.Domain\\DocumentVersionManager.Domain.csproj"
+            "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Domain\\DocumentVersionManager.Domain.csproj": {
+              "projectPath": "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Domain\\DocumentVersionManager.Domain.csproj"
             }
           }
         }
@@ -315,7 +315,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

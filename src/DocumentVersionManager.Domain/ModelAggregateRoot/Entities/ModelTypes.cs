@@ -9,5 +9,5 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 
     public class ModelTypes : BaseEntity<string>
 {
-        public required string ModelName { get; init; }
+        public required string ModelTypeName { get; init; }
     }

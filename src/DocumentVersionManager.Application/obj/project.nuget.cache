@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "49yZ0f7m/R00gUaI3fep1HDVRzkAvF+anyG90OuiLwucxHyACeYL1axzciuB7omAkKUeO77f58M6iD2I/tzpHw==",
+  "dgSpecHash": "tAuSGg4+H4mNkLBQn8s903SlMpeLfa75QCASyMFV+nDTJruA8iYN991agx61e0bdGL9a+hKkk0ew9CRvZnqxXA==",
   "success": true,
-  "projectFilePath": "C:\\Works\\CSharp\\MassFussion2\\DocumentManager\\src\\DocumentVersionManager.Application\\DocumentVersionManager.Application.csproj",
+  "projectFilePath": "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Application\\DocumentVersionManager.Application.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\SWeng\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
-    "C:\\Users\\SWeng\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
-    "C:\\Users\\SWeng\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.0.0\\mediatr.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
-    "C:\\Users\\SWeng\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
-    "C:\\Users\\SWeng\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
-    "C:\\Users\\SWeng\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512"
+    "C:\\Users\\sweng\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\sweng\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\sweng\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.0.0\\mediatr.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\sweng\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\sweng\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\sweng\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }

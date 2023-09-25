@@ -42,31 +42,7 @@ AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = latin1;
 
 
--- -----------------------------------------------------
--- Table `mydb_test`.`modeltypes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb_test`.`modeltypes` (
-  `name` VARCHAR(128) NOT NULL,
-  PRIMARY KEY (`name`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
 
-
--- -----------------------------------------------------
--- Table `mydb_test`.`models`--- WORKING-DJ
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb_test`.`models` (
-  `name` VARCHAR(128) NOT NULL,
-  `modelTypes_name` VARCHAR(128) NOT NULL,
-  PRIMARY KEY (`name`),
-  INDEX `fk_models_modelTypes1` (`modelTypes_name` ASC) VISIBLE,
-  CONSTRAINT `fk_models_modelTypes1`
-    FOREIGN KEY (`modelTypes_name`)
-    REFERENCES `mydb_test`.`modeltypes` (`name`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -95,62 +71,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
--- -----------------------------------------------------
--- Table `mydb_test`.`modelcapacityspecifications`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb_test`.`modelcapacityspecifications` (
-  `models_name` VARCHAR(128) NOT NULL,
-  `capacity` INT NOT NULL,
-  `timestamp` DATETIME NOT NULL,
-  `users_username` VARCHAR(45) NOT NULL,
-  `nominalOutput` DECIMAL(18,6) NOT NULL,
-  `nominalOutputPercentage` DECIMAL(4,2) NOT NULL,
-  `nonlinearityPercentage` DECIMAL(3,2) NOT NULL,
-  `minimumDeadLoad` INT NULL DEFAULT NULL,
-  `safeLoad` INT NULL DEFAULT NULL,
-  `ultimateLoad` INT NULL DEFAULT NULL,
-  `ccNumber` VARCHAR(45) NULL DEFAULT NULL,
-  `vMin` DECIMAL(11,1) NULL DEFAULT NULL,
-  `nMax` INT NULL DEFAULT NULL,
-  `shellMaterial` VARCHAR(45) NOT NULL,
-  `alloy` TINYINT(1) NOT NULL,
-  `defaultCableLength` INT NULL DEFAULT NULL,
-  `tempRangeLow` INT NULL DEFAULT NULL,
-  `tempRangeHigh` INT NULL DEFAULT NULL,
-  `numberOfGauges` INT NULL DEFAULT NULL,
-  `resistance` INT NULL DEFAULT NULL,
-  `class` VARCHAR(45) NULL DEFAULT NULL,
-  `application` VARCHAR(45) NULL DEFAULT NULL,
-  `numberInBasket` INT NULL DEFAULT NULL,
-  `austenitizationTemperatureInF` DECIMAL(18,6) NULL DEFAULT NULL,
-  `austenitizationTimeInSeconds` INT NULL DEFAULT NULL,
-  `austenitizationHardnessLow` INT NULL DEFAULT NULL,
-  `austenitizationHardnessHigh` INT NULL DEFAULT NULL,
-  `temperingTemperatureInF` DECIMAL(18,6) NULL DEFAULT NULL,
-  `temperingTimeInSeconds` INT NULL DEFAULT NULL,
-  `temperingHardnessLow` INT NULL DEFAULT NULL,
-  `temperingHardnessHigh` INT NULL DEFAULT NULL,
-  `hasScrews` TINYINT(1) NOT NULL DEFAULT '0',
-  `ntepCertificationId` VARCHAR(128) NULL DEFAULT NULL,
-  `ntepCertificationDate` DATETIME NULL DEFAULT NULL,
-  `oimlCertificationId` VARCHAR(128) NULL DEFAULT NULL,
-  `oimlCertificationDate` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`models_name`, `capacity`, `timestamp`),
-  INDEX `fk_modelCapacitySpecifications_users1` (`users_username` ASC) VISIBLE,
-  INDEX `fk_modelCapacitySpecifications_shellMaterials1` (`shellMaterial` ASC) VISIBLE,
-  CONSTRAINT `fk_modelCapacitySpecifications_models1`
-    FOREIGN KEY (`models_name`)
-    REFERENCES `mydb_test`.`models` (`name`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_modelCapacitySpecifications_shellMaterials1`
-    FOREIGN KEY (`shellMaterial`)
-    REFERENCES `mydb_test`.`shellmaterials` (`name`),
-  CONSTRAINT `fk_modelCapacitySpecifications_users1`
-    FOREIGN KEY (`users_username`)
-    REFERENCES `mydb_test`.`users` (`username`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -172,53 +92,7 @@ AUTO_INCREMENT = 1547
 DEFAULT CHARACTER SET = latin1;
 
 
--- -----------------------------------------------------
--- Table `mydb_test`.`documents`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb_test`.`documents` (
-  `name` VARCHAR(256) NOT NULL,
-  `models_name` VARCHAR(128) NOT NULL,
-  PRIMARY KEY (`name`, `models_name`),
-  INDEX `fk_documents_models1` (`models_name` ASC) VISIBLE,
-  CONSTRAINT `fk_documents_models1`
-    FOREIGN KEY (`models_name`)
-    REFERENCES `mydb_test`.`models` (`name`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
 
-
--- -----------------------------------------------------
--- Table `mydb_test`.`documenttypes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb_test`.`documenttypes` (
-  `name` VARCHAR(256) NOT NULL,
-  PRIMARY KEY (`name`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `mydb_test`.`documentdocumenttypes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb_test`.`documentdocumenttypes` (
-  `documents_name` VARCHAR(256) NOT NULL,
-  `documents_models_name` VARCHAR(128) NOT NULL,
-  `documentTypes_name` VARCHAR(256) NOT NULL,
-  PRIMARY KEY (`documents_name`, `documents_models_name`, `documentTypes_name`),
-  INDEX `fk_documentDocumentTypes_documentTypes1` (`documentTypes_name` ASC) VISIBLE,
-  CONSTRAINT `fk_documentDocumentTypes_documents1`
-    FOREIGN KEY (`documents_name` , `documents_models_name`)
-    REFERENCES `mydb_test`.`documents` (`name` , `models_name`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_documentDocumentTypes_documentTypes1`
-    FOREIGN KEY (`documentTypes_name`)
-    REFERENCES `mydb_test`.`documenttypes` (`name`)
-    ON DELETE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -230,17 +104,6 @@ CREATE TABLE IF NOT EXISTS `mydb_test`.`heattreatmenttypes` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
-
--- -----------------------------------------------------
--- Table `mydb_test`.`modelcapacitydocuments`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb_test`.`modelcapacitydocuments` (
-  `model_name` VARCHAR(128) NOT NULL,
-  `capacity` INT NOT NULL,
-  `documents_path` VARCHAR(1000) NULL DEFAULT NULL,
-  PRIMARY KEY (`model_name`, `capacity`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -902,49 +765,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
--- -----------------------------------------------------
--- Table `mydb_test`.`revisions`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb_test`.`revisions` (
-  `timestamp` DATETIME NOT NULL,
-  `documents_name` VARCHAR(256) NOT NULL,
-  `documents_models_name` VARCHAR(128) NOT NULL,
-  `revisions_number` INT NOT NULL,
-  `contentPDF` LONGBLOB NOT NULL,
-  `changeOrderPDF` LONGBLOB NULL DEFAULT NULL,
-  `users_username` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`timestamp`, `documents_name`, `documents_models_name`),
-  INDEX `fk_revisions_documents1` (`documents_name` ASC, `documents_models_name` ASC) VISIBLE,
-  INDEX `fk_revisions_users1` (`users_username` ASC) VISIBLE,
-  CONSTRAINT `fk_revisions_documents1`
-    FOREIGN KEY (`documents_name` , `documents_models_name`)
-    REFERENCES `mydb_test`.`documents` (`name` , `models_name`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_revisions_users1`
-    FOREIGN KEY (`users_username`)
-    REFERENCES `mydb_test`.`users` (`username`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `mydb_test`.`revisioncapacityintervals`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb_test`.`revisioncapacityintervals` (
-  `applicableCapacity` INT NOT NULL,
-  `revisions_timestamp` DATETIME NOT NULL,
-  `revisions_documents_name` VARCHAR(256) NOT NULL,
-  `revisions_documents_models_name` VARCHAR(128) NOT NULL,
-  `revisions_number` INT NOT NULL,
-  PRIMARY KEY (`revisions_timestamp`, `revisions_documents_name`, `revisions_documents_models_name`, `applicableCapacity`),
-  CONSTRAINT `fk_revisionCapacityIntervals_revisions1`
-    FOREIGN KEY (`revisions_timestamp` , `revisions_documents_name` , `revisions_documents_models_name`)
-    REFERENCES `mydb_test`.`revisions` (`timestamp` , `documents_name` , `documents_models_name`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------

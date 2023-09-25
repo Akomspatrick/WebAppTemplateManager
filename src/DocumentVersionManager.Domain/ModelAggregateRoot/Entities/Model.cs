@@ -14,7 +14,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         private  List<CapacitySpecification> _capacitySpecifications = Enumerable.Empty<CapacitySpecification>().ToList();
 
 
-        public IReadOnlyCollection<Document> Documentsv => _documents.AsReadOnly();
+        public IReadOnlyCollection<Document> Documents => _documents.AsReadOnly();
         public IReadOnlyCollection<CapacityDocument> CapacityDocumentsv => _capacityDocuments.AsReadOnly();
         public IReadOnlyCollection<CapacitySpecification> CapacitySpecificationsv => _capacitySpecifications.AsReadOnly();
 
