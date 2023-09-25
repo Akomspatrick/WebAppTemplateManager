@@ -134,7 +134,6 @@ C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\obj\Debug\
 C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\obj\Debug\net7.0\DocumentVersionManager.Api.AssemblyInfoInputs.cache
 C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\obj\Debug\net7.0\DocumentVersionManager.Api.AssemblyInfo.cs
 C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\obj\Debug\net7.0\DocumentVersionManager.Api.csproj.CoreCompileInputs.cache
-C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\obj\Debug\net7.0\DocumentVersionManager.Api.MvcApplicationPartsAssemblyInfo.cs
 C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\obj\Debug\net7.0\DocumentVersionManager.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\obj\Debug\net7.0\staticwebassets\msbuild.DocumentVersionManager.Api.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\obj\Debug\net7.0\staticwebassets\msbuild.build.DocumentVersionManager.Api.props

@@ -45,15 +45,6 @@ DEFAULT CHARACTER SET = latin1;
 
 
 
--- -----------------------------------------------------
--- Table `mydb_test`.`shellmaterials`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb_test`.`shellmaterials` (
-  `name` VARCHAR(45) NOT NULL,
-  `alloy` TINYINT(1) NOT NULL,
-  PRIMARY KEY (`name`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -72,24 +63,6 @@ DEFAULT CHARACTER SET = latin1;
 
 
 
-
--- -----------------------------------------------------
--- Table `mydb_test`.`capacitytestpoints`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb_test`.`capacitytestpoints` (
-  `model` VARCHAR(128) NOT NULL,
-  `capacity` INT NOT NULL,
-  `weight` INT NOT NULL,
-  `test_id` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`test_id`),
-  INDEX `fk_capacityTestPoints_modelCapacitySpecifications1` (`model` ASC, `capacity` ASC) VISIBLE,
-  CONSTRAINT `fk_capacityTestPoints_modelCapacitySpecifications1`
-    FOREIGN KEY (`model` , `capacity`)
-    REFERENCES `mydb_test`.`modelcapacityspecifications` (`models_name` , `capacity`)
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 1547
-DEFAULT CHARACTER SET = latin1;
 
 
 
@@ -146,28 +119,6 @@ AUTO_INCREMENT = 12
 DEFAULT CHARACTER SET = latin1;
 
 
--- -----------------------------------------------------
--- Table `mydb_test`.`products`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb_test`.`products` (
-  `serial` INT NOT NULL,
-  `modelCapacitySpecifications_models_name` VARCHAR(128) NOT NULL,
-  `modelCapacitySpecifications_capacity` INT NOT NULL,
-  `modelCapacitySpecifications_timestamp` DATETIME NOT NULL,
-  `stage` VARCHAR(128) NOT NULL,
-  `subStage` VARCHAR(128) NULL DEFAULT NULL,
-  `invoiceId` VARCHAR(256) NULL DEFAULT NULL,
-  `salesOrderId` VARCHAR(256) NULL DEFAULT NULL,
-  `cableLength` INT NULL DEFAULT '0',
-  `troubled` TINYINT(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`serial`),
-  INDEX `fk_products_modelCapacitySpecifications1` (`modelCapacitySpecifications_models_name` ASC, `modelCapacitySpecifications_capacity` ASC, `modelCapacitySpecifications_timestamp` ASC) VISIBLE,
-  CONSTRAINT `fk_products_modelCapacitySpecifications1`
-    FOREIGN KEY (`modelCapacitySpecifications_models_name` , `modelCapacitySpecifications_capacity` , `modelCapacitySpecifications_timestamp`)
-    REFERENCES `mydb_test`.`modelcapacityspecifications` (`models_name` , `capacity` , `timestamp`)
-    ON DELETE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
