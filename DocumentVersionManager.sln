@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentVersionManager.Doma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentVersionManager.Infrastructure", "src\DocumentVersionManager.Infrastructure\DocumentVersionManager.Infrastructure.csproj", "{1D483F0E-2993-4138-A1BE-6C59255A6B29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentVersionManager.Contracts", "src\DocumentVersionManager.Contracts\DocumentVersionManager.Contracts.csproj", "{64FAFC91-256A-4115-9ABB-BD9ECEDF0342}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,11 +40,16 @@ Global
 		{1D483F0E-2993-4138-A1BE-6C59255A6B29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D483F0E-2993-4138-A1BE-6C59255A6B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D483F0E-2993-4138-A1BE-6C59255A6B29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64FAFC91-256A-4115-9ABB-BD9ECEDF0342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64FAFC91-256A-4115-9ABB-BD9ECEDF0342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64FAFC91-256A-4115-9ABB-BD9ECEDF0342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64FAFC91-256A-4115-9ABB-BD9ECEDF0342}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{47038C88-17D5-4091-B50A-44FF276938FB} = {C3B2A5BC-8985-4298-A764-B35D892CD5A5}
 		{712CB2F4-BF7B-42B9-957A-21507EDE0C53} = {C3B2A5BC-8985-4298-A764-B35D892CD5A5}
 		{29F81B48-B687-4BD2-8C3C-77FAC951A480} = {C3B2A5BC-8985-4298-A764-B35D892CD5A5}
 		{1D483F0E-2993-4138-A1BE-6C59255A6B29} = {C3B2A5BC-8985-4298-A764-B35D892CD5A5}
+		{64FAFC91-256A-4115-9ABB-BD9ECEDF0342} = {C3B2A5BC-8985-4298-A764-B35D892CD5A5}
 	EndGlobalSection
 EndGlobal

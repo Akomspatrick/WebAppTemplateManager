@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 
-    public class ModelTypes : BaseEntity<string>
-{
+    public class ModelType : BaseEntity<string>
+    {
         public required string ModelTypeName { get; init; }
     }

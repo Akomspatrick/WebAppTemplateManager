@@ -108,18 +108,6 @@
           }
         }
       },
-      "MediatR.Extensions.Microsoft.DependencyInjection/11.0.0": {
-        "dependencies": {
-          "MediatR": "12.1.1",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0"
-        },
-        "runtime": {
-          "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll": {
-            "assemblyVersion": "11.0.0.0",
-            "fileVersion": "11.0.0.0"
-          }
-        }
-      },
       "Microsoft.CSharp/4.7.0": {},
       "Microsoft.EntityFrameworkCore/7.0.11": {
         "dependencies": {
@@ -573,12 +561,21 @@
       },
       "DocumentVersionManager.Application/1.0.0": {
         "dependencies": {
+          "DocumentVersionManager.Contracts": "1.0.0",
           "DocumentVersionManager.Domain": "1.0.0",
-          "MediatR.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "MediatR": "12.1.1",
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0"
         },
         "runtime": {
           "DocumentVersionManager.Application.dll": {}
+        }
+      },
+      "DocumentVersionManager.Contracts/1.0.0": {
+        "dependencies": {
+          "DocumentVersionManager.Domain": "1.0.0"
+        },
+        "runtime": {
+          "DocumentVersionManager.Contracts.dll": {}
         }
       },
       "DocumentVersionManager.Domain/1.0.0": {
@@ -659,13 +656,6 @@
       "sha512": "sha512-FYv95bNT4UwcNA+G/J1oX5OpRiSUxteXaUt2BJbRSdRNiIUNbggJF69wy6mnk2wYToaanpdXZdCwVylt96MpwQ==",
       "path": "mediatr.contracts/2.0.1",
       "hashPath": "mediatr.contracts.2.0.1.nupkg.sha512"
-    },
-    "MediatR.Extensions.Microsoft.DependencyInjection/11.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-jfD2NBYvP+HiUil2DWfM4bn+bCLp4H2xvoc9aorcnn2Jpgz7Ey8RyYMpgqeF3bs6CP6t8pzb6WkF5NFF/1RLHA==",
-      "path": "mediatr.extensions.microsoft.dependencyinjection/11.0.0",
-      "hashPath": "mediatr.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512"
     },
     "Microsoft.CSharp/4.7.0": {
       "type": "package",
@@ -1004,6 +994,11 @@
       "hashPath": "zstdsharp.port.0.7.1.nupkg.sha512"
     },
     "DocumentVersionManager.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DocumentVersionManager.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

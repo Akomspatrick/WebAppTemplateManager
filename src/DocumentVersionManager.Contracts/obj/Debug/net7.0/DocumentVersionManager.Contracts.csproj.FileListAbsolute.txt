@@ -1,0 +1,15 @@
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\bin\Debug\net7.0\DocumentVersionManager.Contracts.deps.json
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\bin\Debug\net7.0\DocumentVersionManager.Contracts.dll
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\bin\Debug\net7.0\DocumentVersionManager.Contracts.pdb
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\bin\Debug\net7.0\DocumentVersionManager.Domain.dll
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\bin\Debug\net7.0\DocumentVersionManager.Domain.pdb
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\obj\Debug\net7.0\DocumentVersionManager.Contracts.csproj.AssemblyReference.cache
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\obj\Debug\net7.0\DocumentVersionManager.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\obj\Debug\net7.0\DocumentVersionManager.Contracts.AssemblyInfoInputs.cache
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\obj\Debug\net7.0\DocumentVersionManager.Contracts.AssemblyInfo.cs
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\obj\Debug\net7.0\DocumentVersionManager.Contracts.csproj.CoreCompileInputs.cache
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\obj\Debug\net7.0\DocumentVersionManager.Contracts.csproj.CopyComplete
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\obj\Debug\net7.0\DocumentVersionManager.Contracts.dll
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\obj\Debug\net7.0\refint\DocumentVersionManager.Contracts.dll
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\obj\Debug\net7.0\DocumentVersionManager.Contracts.pdb
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Contracts\obj\Debug\net7.0\ref\DocumentVersionManager.Contracts.dll

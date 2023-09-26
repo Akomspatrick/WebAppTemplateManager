@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "I3im3Ja3DMDZEO9407VKV4+I+qWm67nin8vgWoVllRlt5b+RCwbp+7OA1OQxfhUTl3jFNCc1FueZSUek1sEQFg==",
+  "dgSpecHash": "4qbJHr2NNVFr8XHsHoPvLWYpGtLd9HFuUiiccjEM0rpcAScv5igf+LoBgas6jDAdvw8X4/jMzH6WW6k1cQoehQ==",
   "success": true,
   "projectFilePath": "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Api\\DocumentVersionManager.Api.csproj",
   "expectedPackageFiles": [
@@ -13,7 +13,6 @@
     "C:\\Users\\sweng\\.nuget\\packages\\k4os.hash.xxhash\\1.0.8\\k4os.hash.xxhash.1.0.8.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
-    "C:\\Users\\sweng\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.0.0\\mediatr.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.10\\microsoft.aspnetcore.openapi.7.0.10.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.11\\microsoft.entityframeworkcore.7.0.11.nupkg.sha512",

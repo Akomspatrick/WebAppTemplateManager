@@ -23,10 +23,11 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             return  (entity);
         }
 
-        public Task<T> AddAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<T> AddAsync(T entity)
+        //{
+        //    _dbSet.Add(entity);
+        //    return Task.FromResult(entity);
+        //}
 
         public Task<T> DeleteAsync(T entity)
         {

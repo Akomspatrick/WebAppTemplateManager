@@ -1,3 +1,5 @@
+using DocumentVersionManager.Api;
+using DocumentVersionManager.Application;
 using DocumentVersionManager.Infrastructure;
 using DocumentVersionManager.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -11,8 +13,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
+builder.Services.AddAPIServices();
 builder.Services.AddInfrastructure(builder.Configuration);
-
+builder.Services.AddApplicationServices(builder.Configuration);
 //builder.Services.AddDbContextPool<DocumentVersionManagerContext>(option => option.UseMySQL(builder.Configuration.GetConnectionString("constr")));
 
 

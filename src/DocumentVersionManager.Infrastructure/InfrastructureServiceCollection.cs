@@ -19,9 +19,10 @@ namespace DocumentVersionManager.Infrastructure
             var applicationAssembly = typeof(InfrastructureServiceCollection).Assembly; 
 
             services.AddAutoMapper(applicationAssembly);
-            services.AddScoped<IModelRepository, IModelRepository>();   
-            services.AddScoped<IModelTypesRepository, IModelTypesRepository>(); 
-            services.AddScoped( typeof(IGenericRepository<>) , typeof(IGenericRepository<>));
+            //services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<ModelTypesRepository>());
+            services.AddScoped<IModelRepository, ModelRepository>();   
+            services.AddScoped<IModelTypesRepository, ModelTypesRepository>(); 
+            services.AddScoped( typeof(IGenericRepository<>) , typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySQL(configuration.GetConnectionString("constr")));
 

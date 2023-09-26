@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "jxU8QNTgUfFNJ4Inn9azXpFX04tZDSumNpd//rWNLSRBDhdHr9iH8yxOSaP1WB8RTWAMENZntr9P5xaTBDEs6g==",
+  "success": true,
+  "projectFilePath": "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Contracts\\DocumentVersionManager.Contracts.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sweng\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\sweng\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\sweng\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

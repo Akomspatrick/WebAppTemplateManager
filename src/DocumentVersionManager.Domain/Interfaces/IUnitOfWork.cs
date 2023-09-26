@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Domain.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork:IDisposable
     {
-        Task<int> CommitAllChanges();
-        IGenericRepository<T> asyncRepository<T>() where T :BaseEntity;
-       // IModelRepository modelRepository();
+        Task<int> CommitAllChanges( CancellationToken cancellationToken);
+        //IGenericRepository<T> asyncRepository<T>() where T :BaseEntity;
+        IModelRepository modelRepository { get; }
+        IModelTypesRepository modelTypesRepository { get; }
     }
 }

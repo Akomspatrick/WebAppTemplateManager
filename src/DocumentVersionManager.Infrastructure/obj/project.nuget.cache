@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yKlyca+Qoqo+rx3V6rtBADtjtjWmR2wrH0G+PDdD/PNbpBhMJ2J+n4TwOh9lTeRVQUiquipOUMj5LJICVwnoAA==",
+  "dgSpecHash": "mXBBIRNeTXEWbLW4TiA6vK4kasY935+wlqDw074J84msp0fI+Ta0xAltZ8sl9khhYgrhbLn65TK9EPLLFKJObQ==",
   "success": true,
   "projectFilePath": "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Infrastructure\\DocumentVersionManager.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -13,7 +13,6 @@
     "C:\\Users\\sweng\\.nuget\\packages\\k4os.hash.xxhash\\1.0.8\\k4os.hash.xxhash.1.0.8.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
-    "C:\\Users\\sweng\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.0.0\\mediatr.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.11\\microsoft.entityframeworkcore.7.0.11.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.11\\microsoft.entityframeworkcore.abstractions.7.0.11.nupkg.sha512",

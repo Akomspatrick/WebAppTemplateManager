@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using DocumentVersionManager.Domain.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace DocumentVersionManager.Application;
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             var applicationAssembly = typeof(ApplicationServiceCollection).Assembly;
-
-            return services;    
+        services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Class1>()); 
+        
+        return services;    
         }
     }

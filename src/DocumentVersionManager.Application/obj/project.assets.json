@@ -32,19 +32,6 @@
           }
         }
       },
-      "MediatR.Extensions.Microsoft.DependencyInjection/11.0.0": {
-        "type": "package",
-        "dependencies": {
-          "MediatR": "11.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
-        },
-        "compile": {
-          "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
-        }
-      },
       "Microsoft.Extensions.Configuration.Abstractions/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -96,6 +83,19 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "DocumentVersionManager.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "DocumentVersionManager.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DocumentVersionManager.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DocumentVersionManager.Contracts.dll": {}
+        }
+      },
       "DocumentVersionManager.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -140,19 +140,6 @@
         "lib/netstandard2.0/MediatR.Contracts.xml",
         "mediatr.contracts.2.0.1.nupkg.sha512",
         "mediatr.contracts.nuspec"
-      ]
-    },
-    "MediatR.Extensions.Microsoft.DependencyInjection/11.0.0": {
-      "sha512": "jfD2NBYvP+HiUil2DWfM4bn+bCLp4H2xvoc9aorcnn2Jpgz7Ey8RyYMpgqeF3bs6CP6t8pzb6WkF5NFF/1RLHA==",
-      "type": "package",
-      "path": "mediatr.extensions.microsoft.dependencyinjection/11.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "gradient_128x128.png",
-        "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll",
-        "mediatr.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
-        "mediatr.extensions.microsoft.dependencyinjection.nuspec"
       ]
     },
     "Microsoft.Extensions.Configuration.Abstractions/7.0.0": {
@@ -234,6 +221,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "DocumentVersionManager.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../DocumentVersionManager.Contracts/DocumentVersionManager.Contracts.csproj",
+      "msbuildProject": "../DocumentVersionManager.Contracts/DocumentVersionManager.Contracts.csproj"
+    },
     "DocumentVersionManager.Domain/1.0.0": {
       "type": "project",
       "path": "../DocumentVersionManager.Domain/DocumentVersionManager.Domain.csproj",
@@ -242,8 +234,9 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "DocumentVersionManager.Contracts >= 1.0.0",
       "DocumentVersionManager.Domain >= 1.0.0",
-      "MediatR.Extensions.Microsoft.DependencyInjection >= 11.0.0",
+      "MediatR >= 12.1.1",
       "Microsoft.Extensions.Configuration.Abstractions >= 7.0.0"
     ]
   },
@@ -274,6 +267,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+            "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Contracts\\DocumentVersionManager.Contracts.csproj": {
+              "projectPath": "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Contracts\\DocumentVersionManager.Contracts.csproj"
+            },
             "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Domain\\DocumentVersionManager.Domain.csproj": {
               "projectPath": "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Domain\\DocumentVersionManager.Domain.csproj"
             }
@@ -290,9 +286,9 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
-          "MediatR.Extensions.Microsoft.DependencyInjection": {
+          "MediatR": {
             "target": "Package",
-            "version": "[11.0.0, )"
+            "version": "[12.1.1, )"
           },
           "Microsoft.Extensions.Configuration.Abstractions": {
             "target": "Package",

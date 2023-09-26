@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Domain.Interfaces
 {
-    public interface IModelTypesRepository : IGenericRepository<ModelTypes>
+    public interface IModelTypesRepository : IGenericRepository<ModelType>
     {
     }
+
+
 }

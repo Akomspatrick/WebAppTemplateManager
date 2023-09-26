@@ -14,7 +14,8 @@ namespace DocumentVersionManager.Infrastructure.Persistence
     {
         private readonly IConfiguration _configuration;
 
-        public DbSet<Model> Model { get; private set; }
+        public DbSet<Model> ProductModel { get; private set; }
+        public DbSet<ModelType> ModelType { get; private set; }
         public DbSet<CapacityDocument> CapacityDocument { get; private set; }
         public DbSet<CapacitySpecification> CapacitySpecification { get; private set; }
 
@@ -32,6 +33,13 @@ namespace DocumentVersionManager.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.Entity<ModelType>(entity =>
+            {
+                entity.HasKey(e => e.ModelName);
+               
+            });
 
             modelBuilder.Entity<Model>(entity =>
             {

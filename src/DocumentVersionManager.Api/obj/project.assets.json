@@ -131,19 +131,6 @@
           }
         }
       },
-      "MediatR.Extensions.Microsoft.DependencyInjection/11.0.0": {
-        "type": "package",
-        "dependencies": {
-          "MediatR": "11.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
-        },
-        "compile": {
-          "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
-        }
-      },
       "Microsoft.AspNetCore.OpenApi/7.0.10": {
         "type": "package",
         "dependencies": {
@@ -1067,8 +1054,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
+          "DocumentVersionManager.Contracts": "1.0.0",
           "DocumentVersionManager.Domain": "1.0.0",
-          "MediatR.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "MediatR": "12.1.1",
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0"
         },
         "compile": {
@@ -1076,6 +1064,19 @@
         },
         "runtime": {
           "bin/placeholder/DocumentVersionManager.Application.dll": {}
+        }
+      },
+      "DocumentVersionManager.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "DocumentVersionManager.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DocumentVersionManager.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DocumentVersionManager.Contracts.dll": {}
         }
       },
       "DocumentVersionManager.Domain/1.0.0": {
@@ -1272,19 +1273,6 @@
         "lib/netstandard2.0/MediatR.Contracts.xml",
         "mediatr.contracts.2.0.1.nupkg.sha512",
         "mediatr.contracts.nuspec"
-      ]
-    },
-    "MediatR.Extensions.Microsoft.DependencyInjection/11.0.0": {
-      "sha512": "jfD2NBYvP+HiUil2DWfM4bn+bCLp4H2xvoc9aorcnn2Jpgz7Ey8RyYMpgqeF3bs6CP6t8pzb6WkF5NFF/1RLHA==",
-      "type": "package",
-      "path": "mediatr.extensions.microsoft.dependencyinjection/11.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "gradient_128x128.png",
-        "lib/netstandard2.1/MediatR.Extensions.Microsoft.DependencyInjection.dll",
-        "mediatr.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
-        "mediatr.extensions.microsoft.dependencyinjection.nuspec"
       ]
     },
     "Microsoft.AspNetCore.OpenApi/7.0.10": {
@@ -3325,6 +3313,11 @@
       "path": "../DocumentVersionManager.Application/DocumentVersionManager.Application.csproj",
       "msbuildProject": "../DocumentVersionManager.Application/DocumentVersionManager.Application.csproj"
     },
+    "DocumentVersionManager.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../DocumentVersionManager.Contracts/DocumentVersionManager.Contracts.csproj",
+      "msbuildProject": "../DocumentVersionManager.Contracts/DocumentVersionManager.Contracts.csproj"
+    },
     "DocumentVersionManager.Domain/1.0.0": {
       "type": "project",
       "path": "../DocumentVersionManager.Domain/DocumentVersionManager.Domain.csproj",
@@ -3340,9 +3333,11 @@
     "net7.0": [
       "DocumentVersionManager.Application >= 1.0.0",
       "DocumentVersionManager.Infrastructure >= 1.0.0",
+      "MediatR >= 12.1.1",
       "Microsoft.AspNetCore.OpenApi >= 7.0.10",
       "Microsoft.EntityFrameworkCore >= 7.0.11",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.11",
+      "Microsoft.Extensions.DependencyInjection.Abstractions >= 7.0.0",
       "MySql.EntityFrameworkCore >= 7.0.5",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
@@ -3393,6 +3388,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "MediatR": {
+            "target": "Package",
+            "version": "[12.1.1, )"
+          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[7.0.10, )"
@@ -3406,6 +3405,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[7.0.11, )"
+          },
+          "Microsoft.Extensions.DependencyInjection.Abstractions": {
+            "target": "Package",
+            "version": "[7.0.0, )"
           },
           "MySql.EntityFrameworkCore": {
             "target": "Package",

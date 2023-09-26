@@ -173,7 +173,17 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
                     b.HasKey("ModelName");
 
-                    b.ToTable("Model");
+                    b.ToTable("ProductModel");
+                });
+
+            modelBuilder.Entity("DocumentVersionManager.Infrastructure.Persistence.Repositories.Models.ModelType", b =>
+                {
+                    b.Property<string>("ModelName")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("ModelName");
+
+                    b.ToTable("ModelType");
                 });
 #pragma warning restore 612, 618
         }

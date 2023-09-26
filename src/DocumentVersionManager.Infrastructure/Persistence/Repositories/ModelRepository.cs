@@ -9,7 +9,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentVersionManager.Infrastructure.Persistence
+namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
     public  class ModelRepository: GenericRepository<Model> ,IModelRepository
     {
@@ -18,7 +18,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence
                 
         }
 
-        public Task<Domain.ModelAggregateRoot.Entities.Model> AddAsync(Domain.ModelAggregateRoot.Entities.Model entity)
+        public Task<Domain.ModelAggregateRoot.Entities.Model> AddAsync(Domain.ModelAggregateRoot.Entities.Model entity, CancellationToken  cancellationToken)
         {
             throw new NotImplementedException();
         }

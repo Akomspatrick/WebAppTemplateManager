@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories.Models;
 
-    public class ModelTypes:BaseEntity
+    public class ModelType:BaseEntity
     {
         public required string ModelName { get; init; }
     }
