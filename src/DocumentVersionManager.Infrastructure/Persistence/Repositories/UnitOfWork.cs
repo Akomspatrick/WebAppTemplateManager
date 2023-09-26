@@ -15,16 +15,16 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         public readonly DocumentVersionManagerContext _ctx;
         private ModelRepository _modelRepository;
         private ModelTypesRepository _modelTypesRepository;
-        private readonly IMapper _mapper;
-        public UnitOfWork(DocumentVersionManagerContext ctx, IMapper mapper)
+       // private readonly IMapper _mapper;
+        public UnitOfWork(DocumentVersionManagerContext ctx)
         {
                 _ctx = ctx;
-                 _mapper = mapper;  
+              //   _mapper = mapper;  
         }
 
         public IModelRepository modelRepository => _modelRepository ??= new ModelRepository(_ctx);
 
-        public IModelTypesRepository modelTypesRepository => _modelTypesRepository ??= new ModelTypesRepository(_ctx, _mapper);
+        public IModelTypesRepository modelTypesRepository => _modelTypesRepository ??= new ModelTypesRepository(_ctx);
 
         //public IGenericRepository<T> asyncRepository<T>() where T : BaseEntity
         //{

@@ -17,7 +17,7 @@ builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Progra
 builder.Services.AddAPIServices();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
-//builder.Services.AddDbContextPool<DocumentVersionManagerContext>(option => option.UseMySQL(builder.Configuration.GetConnectionString("constr")));
+builder.Services.AddDbContextPool<DocumentVersionManagerContext>(option => option.UseMySQL(builder.Configuration.GetConnectionString("constr")));
 
 
 //builder.Services.AddTransient<MySqlConnection>(_ =>

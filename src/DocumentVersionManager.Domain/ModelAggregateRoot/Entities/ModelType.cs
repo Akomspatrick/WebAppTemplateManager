@@ -7,7 +7,15 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 
-    public class ModelType : BaseEntity<string>
+public class ModelType : BaseEntity<string>
+{
+    public string ModelTypeName { get; private set; } = string.Empty;
+    // public required string ModelTypeName { get; init; }
+
+    public static ModelType Create(string modelTypeName)
     {
-        public required string ModelTypeName { get; init; }
+        var modelType = new ModelType() { ModelTypeName = modelTypeName };
+        // do some heavy lifting.
+        return modelType;
     }
+}

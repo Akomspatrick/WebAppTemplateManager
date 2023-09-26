@@ -23,7 +23,7 @@ namespace DocumentVersionManager.Application.Handlers
         {
             try
             {
-                var entity = new ModelType { ModelTypeName= request.modelType.ModelTypeName};
+                var entity =  ModelType.Create(request.modelType.ModelTypeName);
                 await _unitOfWork.modelTypesRepository.AddAsync(entity, cancellationToken);
                 var x= await _unitOfWork.CommitAllChanges(cancellationToken);
                 return x;

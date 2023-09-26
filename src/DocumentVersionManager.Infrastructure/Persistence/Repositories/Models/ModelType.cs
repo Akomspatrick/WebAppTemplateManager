@@ -9,5 +9,5 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories.Models;
 
     public class ModelType:BaseEntity
     {
-        public required string ModelName { get; init; }
+        public required string ModelTypeName { get; init; }
     }

@@ -37,7 +37,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence
 
             modelBuilder.Entity<ModelType>(entity =>
             {
-                entity.HasKey(e => e.ModelName);
+                entity.HasKey(e => e.ModelTypeName);
                
             });
 
