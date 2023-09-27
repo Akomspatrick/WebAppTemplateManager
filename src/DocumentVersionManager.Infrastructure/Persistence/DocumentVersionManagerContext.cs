@@ -13,15 +13,16 @@ namespace DocumentVersionManager.Infrastructure.Persistence
     public class DocumentVersionManagerContext:DbContext
     {
         private readonly IConfiguration _configuration;
-
-        public DbSet<Model> ProductModel { get; private set; }
         public DbSet<ModelType> ModelType { get; private set; }
-        public DbSet<CapacityDocument> CapacityDocument { get; private set; }
-        public DbSet<CapacitySpecification> CapacitySpecification { get; private set; }
+        //public DbSet<Model> ProductModel { get; private set; }
+        
+        //public DbSet<CapacityDocument> CapacityDocument { get; private set; }
+        //public DbSet<CapacitySpecification> CapacitySpecification { get; private set; }
 
         public DocumentVersionManagerContext(DbContextOptions<DocumentVersionManagerContext> options, IConfiguration configuration) : base(options) 
         {
             _configuration =configuration;
+            Database.EnsureCreated();
                 
         }
 
@@ -33,35 +34,32 @@ namespace DocumentVersionManager.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            // instead of calling the configure method of each entity configuration file we can use the methos below
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentVersionManagerContext).Assembly);
 
 
-            modelBuilder.Entity<ModelType>(entity =>
-            {
-                entity.HasKey(e => e.ModelTypeName);
-               
-            });
 
-            modelBuilder.Entity<Model>(entity =>
-            {
-                entity.HasKey(e => e.ModelName);
-                entity.Property(e => e.ModelTypeName).IsRequired();
-            });
+            //modelBuilder.Entity<Model>(entity =>
+            //{
+            //    entity.HasKey(e => e.ModelName);
+            //    entity.Property(e => e.ModelTypeName).IsRequired();
+            //});
 
-            modelBuilder.Entity<CapacityDocument>(entity =>
-            {
-                entity.HasKey(e => e.Capacity);
-                // entity.Property(e => e.).IsRequired();
-             //   entity.HasOne(d => d.ModelName);
-                 // .WithMany(p => p.Books);
-            });
+            //modelBuilder.Entity<CapacityDocument>(entity =>
+            //{
+            //    entity.HasKey(e => e.Capacity);
+            //    // entity.Property(e => e.).IsRequired();
+            // //   entity.HasOne(d => d.ModelName);
+            //     // .WithMany(p => p.Books);
+            //});
 
-            modelBuilder.Entity<CapacitySpecification>(entity =>
-            {
-                entity.HasKey(e => e.Capacity);
-               // entity.Property(e => e.).IsRequired();
-              //  entity.HasOne(d => d.ModelName)
-                 // .WithMany(p => p.Books);
-            });
+            //modelBuilder.Entity<CapacitySpecification>(entity =>
+            //{
+            //    entity.HasKey(e => e.Capacity);
+            //   // entity.Property(e => e.).IsRequired();
+            //  //  entity.HasOne(d => d.ModelName)
+            //     // .WithMany(p => p.Books);
+            //});
         }
     }
 }

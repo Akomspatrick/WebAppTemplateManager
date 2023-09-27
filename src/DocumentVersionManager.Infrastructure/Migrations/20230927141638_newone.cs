@@ -5,7 +5,7 @@
 namespace DocumentVersionManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class test : Migration
+    public partial class newone : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,15 +14,14 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Model",
+                name: "ModelType",
                 columns: table => new
                 {
-                    ModelName = table.Column<string>(type: "varchar(255)", nullable: false),
-                    ModelTypeName = table.Column<string>(type: "longtext", nullable: false)
+                    ModelTypeName = table.Column<string>(type: "varchar(255)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Model", x => x.ModelName);
+                    table.PrimaryKey("PK_ModelType", x => x.ModelTypeName);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
         }
@@ -31,7 +30,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Model");
+                name: "ModelType");
         }
     }
 }

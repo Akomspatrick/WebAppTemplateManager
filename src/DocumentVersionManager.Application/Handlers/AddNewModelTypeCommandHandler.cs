@@ -23,7 +23,7 @@ namespace DocumentVersionManager.Application.Handlers
         {
             try
             {
-                var entity =  ModelType.Create(request.modelType.ModelTypeName);
+                var entity =  ModelType.Create(request.modelTypeName.ModelTypeName);
                 await _unitOfWork.modelTypesRepository.AddAsync(entity, cancellationToken);
                 var x= await _unitOfWork.CommitAllChanges(cancellationToken);
                 return x;
@@ -31,7 +31,7 @@ namespace DocumentVersionManager.Application.Handlers
             catch (Exception  ex)
             {
 
-                return 0;
+              throw new Exception("Exception from ...");
             }
         }
     }

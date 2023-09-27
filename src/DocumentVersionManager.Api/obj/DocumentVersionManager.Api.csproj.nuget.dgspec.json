@@ -73,6 +73,10 @@
               "target": "Package",
               "version": "[7.0.5, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -144,6 +148,14 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.7.1, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[12.1.1, )"

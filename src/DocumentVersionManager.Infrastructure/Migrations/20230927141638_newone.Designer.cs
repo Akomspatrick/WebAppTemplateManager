@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DocumentVersionManager.Infrastructure.Migrations
 {
     [DbContext(typeof(DocumentVersionManagerContext))]
-    [Migration("20230915211027_test")]
-    partial class test
+    [Migration("20230927141638_newone")]
+    partial class newone
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,18 +21,14 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "7.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("DocumentVersionManager.Infrastructure.Persistence.Repositories.Models.Model", b =>
+            modelBuilder.Entity("DocumentVersionManager.Infrastructure.Persistence.Repositories.Models.ModelType", b =>
                 {
-                    b.Property<string>("ModelName")
+                    b.Property<string>("ModelTypeName")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("ModelTypeName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.HasKey("ModelTypeName");
 
-                    b.HasKey("ModelName");
-
-                    b.ToTable("Model");
+                    b.ToTable("ModelType");
                 });
 #pragma warning restore 612, 618
         }

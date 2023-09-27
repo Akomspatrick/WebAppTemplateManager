@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "mXBBIRNeTXEWbLW4TiA6vK4kasY935+wlqDw074J84msp0fI+Ta0xAltZ8sl9khhYgrhbLn65TK9EPLLFKJObQ==",
+  "dgSpecHash": "/zq53qGV7BVaMBOLiQxByhDIRMQZFZZ6hID4NCRCasYhzPvydwRZ6woigkaw+qEIkBjoY82zPQnWMOCX2gZYoQ==",
   "success": true,
   "projectFilePath": "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Infrastructure\\DocumentVersionManager.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sweng\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+    "C:\\Users\\sweng\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512",
+    "C:\\Users\\sweng\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\sweng\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\k4os.compression.lz4\\1.3.5\\k4os.compression.lz4.1.3.5.nupkg.sha512",

@@ -1,4 +1,6 @@
 using DocumentVersionManager.Api;
+using DocumentVersionManager.Api.Filters;
+//using DocumentVersionManager.Api.Middleware;
 using DocumentVersionManager.Application;
 using DocumentVersionManager.Infrastructure;
 using DocumentVersionManager.Infrastructure.Persistence;
@@ -9,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(option=> option.Filters.Add<ErrorHandlingFilterAttribute>());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -17,7 +19,7 @@ builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Progra
 builder.Services.AddAPIServices();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
-builder.Services.AddDbContextPool<DocumentVersionManagerContext>(option => option.UseMySQL(builder.Configuration.GetConnectionString("constr")));
+builder.Services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySQL(builder.Configuration.GetConnectionString("constr")));
 
 
 //builder.Services.AddTransient<MySqlConnection>(_ =>
@@ -31,7 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+//app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

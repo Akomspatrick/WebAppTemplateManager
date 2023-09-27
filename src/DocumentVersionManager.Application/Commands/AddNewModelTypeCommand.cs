@@ -8,6 +8,6 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.Commands
 {
-    public record AddNewModelTypeCommand(ModelTypeDTO modelType):IRequest<int>;
+    public record AddNewModelTypeCommand(ModelTypeDTO modelTypeName):IRequest<int>;
     
 }

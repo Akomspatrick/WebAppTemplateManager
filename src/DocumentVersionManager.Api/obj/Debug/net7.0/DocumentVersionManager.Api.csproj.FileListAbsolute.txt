@@ -151,3 +151,7 @@ C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\obj\Debug\
 C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\obj\Debug\net7.0\DocumentVersionManager.Api.pdb
 C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\obj\Debug\net7.0\DocumentVersionManager.Api.genruntimeconfig.cache
 C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\obj\Debug\net7.0\ref\DocumentVersionManager.Api.dll
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\bin\Debug\net7.0\FluentValidation.dll
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Works\CSharp\DocumentVersionManager\src\DocumentVersionManager.Api\bin\Debug\net7.0\Newtonsoft.Json.dll

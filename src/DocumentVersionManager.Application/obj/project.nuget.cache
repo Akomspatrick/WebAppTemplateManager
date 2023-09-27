@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "pXAAuwl0ZpxLFOXksKLXnR3aVZW/8dGctm+Ep6iVPNLWsYebLbnJ8/Fd2RRNTgmzXTff6v9o0tQzOX14GlZctg==",
+  "dgSpecHash": "8YpHYnqgzsFGu1NaRWl3AJOVIBP8UGBDE9Kjo2MjlUdIyfbNesyZcW53CAfCAjE1H47fWvWQqcO8MPkOwYktDQ==",
   "success": true,
   "projectFilePath": "C:\\Works\\CSharp\\DocumentVersionManager\\src\\DocumentVersionManager.Application\\DocumentVersionManager.Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\sweng\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512",
+    "C:\\Users\\sweng\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\sweng\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\sweng\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
