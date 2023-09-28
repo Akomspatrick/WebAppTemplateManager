@@ -10,20 +10,17 @@ using MySql.Data.MySqlClient;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddControllers(option=> option.Filters.Add<ErrorHandlingFilterAttribute>());
+builder.Services.AddControllers();
+// if I want to use Filters fr error handling
+//builder.Services.AddControllers(option=> option.Filters.Add<ErrorHandlingFilterAttribute>());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
-builder.Services.AddAPIServices();
+
+
+builder.Services.AddAPIServices(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
-builder.Services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySQL(builder.Configuration.GetConnectionString("constr")));
-
-
-//builder.Services.AddTransient<MySqlConnection>(_ =>
-//    new MySqlConnection(builder.Configuration.GetConnectionString("Default")));
 
 var app = builder.Build();
 
@@ -33,10 +30,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
+// if i want to use middleware for error handling
 //app.UseMiddleware<ErrorHandlingMiddleware>();
+app.UseExceptionHandler("/error");
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllers();
 

@@ -19,7 +19,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
         public  async Task<T> AddAsync(T entity, CancellationToken cancellationToken)
         {
-            var x = await _dbSet.AddAsync(entity,cancellationToken);
+            await _dbSet.AddAsync(entity,cancellationToken);
             return  (entity);
         }
 

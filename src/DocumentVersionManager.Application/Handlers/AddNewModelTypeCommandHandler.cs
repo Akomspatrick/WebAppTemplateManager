@@ -21,18 +21,14 @@ namespace DocumentVersionManager.Application.Handlers
 
         public async Task<int> Handle(AddNewModelTypeCommand request, CancellationToken cancellationToken)
         {
-            try
-            {
+        
+
                 var entity =  ModelType.Create(request.modelTypeName.ModelTypeName);
                 await _unitOfWork.modelTypesRepository.AddAsync(entity, cancellationToken);
                 var x= await _unitOfWork.CommitAllChanges(cancellationToken);
                 return x;
-            }
-            catch (Exception  ex)
-            {
+        
 
-              throw new Exception("Exception from ...");
-            }
         }
     }
 }

@@ -34,10 +34,19 @@ namespace DocumentVersionManager.Api.Filters
             //    context.Result = new BadRequestObjectResult(new { error = context.Exception.Message });
             //}
                  var exception = context.Exception;
+            var problemDetails = new ProblemDetails { 
+                Detail = exception.Message,
+                Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
+                Title = "An error occured",
+                Status = (int)HttpStatusCode.InternalServerError,
+                Instance = context.HttpContext.Request.Path,
+
+            };
             
-                context.Result = new BadRequestObjectResult(new { error = "An error occured" + context.Exception.Message });
-            
-                context.ExceptionHandled = true;
+               // context.Result = new BadRequestObjectResult(new { error = "An error occured" + context.Exception.Message });
+            context.Result = new ObjectResult(problemDetails);
+
+            context.ExceptionHandled = true;
         }
     }
 }
