@@ -1,5 +1,7 @@
 ﻿using DocumentVersionManager.Domain.Base;
+using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
+using LanguageExt;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,17 +12,18 @@ using System.Threading.Tasks;
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
-    {    private readonly DbSet<T> _dbSet;
-        public GenericRepository( DocumentVersionManagerContext ctx)
+    {
+        private readonly DbSet<T> _dbSet;
+        public GenericRepository(DocumentVersionManagerContext ctx)
         {
-            _dbSet = ctx.Set<T>();     
+            _dbSet = ctx.Set<T>();
         }
-       
 
-        public  async Task<T> AddAsync(T entity, CancellationToken cancellationToken)
+
+        public async Task<T> AddAsync(T entity, CancellationToken cancellationToken)
         {
-            await _dbSet.AddAsync(entity,cancellationToken);
-            return  (entity);
+            await _dbSet.AddAsync(entity, cancellationToken);
+            return (entity);
         }
 
         //public Task<T> AddAsync(T entity)
@@ -42,6 +45,26 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         public Task<T> UpdateAsync(T entity)
         {
             throw new NotImplementedException();
+        }
+
+        async Task<Either<ModelFailures, T>> IGenericRepository<T>.AddAsync(T entity, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var result = await _dbSet.AddAsync(entity, cancellationToken);
+
+                var entityResult = result.Entity;
+
+                return (result.Entity);
+            }
+            catch (Exception ex)
+            {
+                //Log this error properly
+
+
+                return ModelFailures.ProblemAddingEntityIntoDbContext;
+            }
+
         }
     }
 }

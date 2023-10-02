@@ -1,4 +1,6 @@
 ﻿using DocumentVersionManager.Domain.Base;
+using DocumentVersionManager.Domain.Errors;
+using LanguageExt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +9,13 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Domain.Interfaces
 {
-    public interface IUnitOfWork:IDisposable
+    public interface IUnitOfWork : IDisposable
     {
-        Task<int> CommitAllChanges( CancellationToken cancellationToken);
+        // Task<int> CommitAllChanges(CancellationToken cancellationToken);
+        Task<Either<ModelFailures, int>> CommitAllChanges(CancellationToken cancellationToken);
         //IGenericRepository<T> asyncRepository<T>() where T :BaseEntity;
         IModelRepository ModelRepository { get; }
         IModelTypesRepository ModelTypesRepository { get; }
+
     }
 }

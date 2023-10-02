@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.Common.Interfaces.Authentication
 {
-    internal class IJwtTokenGenerator
+    public interface IJwtTokenGenerator
     {
+        public string GenerateToken(string username, string role);
+        public string GenerateRefreshToken();
+        public string GenerateTokenFromRefreshToken(string refreshToken);
+        public string GenerateToken(Guid userId, string username);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DocumentVersionManager.Domain.Base;
+using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
+using LanguageExt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +17,11 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         public readonly DocumentVersionManagerContext _ctx;
         private ModelRepository _modelRepository;
         private ModelTypesRepository _modelTypesRepository;
-        // private readonly IMapper _mapper;
+
         public UnitOfWork(DocumentVersionManagerContext ctx)
         {
             _ctx = ctx;
-            //   _mapper = mapper;  
+
         }
 
         public IModelRepository ModelRepository => _modelRepository ??= new ModelRepository(_ctx);
@@ -31,7 +33,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         //    return new GenericRepository<T>(_ctx);
         //}
 
-        public async Task<int> CommitAllChanges(CancellationToken cancellationToken)
+        public async Task<Either<ModelFailures, int>> CommitAllChanges(CancellationToken cancellationToken)
         {
             _ctx.SavingChanges += (s, e) =>
             {
@@ -39,7 +41,16 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
                 Console.WriteLine("Saving Changes.....");
                 Console.WriteLine("Saving Changes.....");
             };
-            return await _ctx.SaveChangesAsync(cancellationToken);
+            try
+            {
+                return await _ctx.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception)
+            {
+                //log this problem into dbase
+                return ModelFailures.ProblemAddingEntityIntoDbContext;
+            }
+
         }
 
         public void Dispose()

@@ -1,8 +1,13 @@
-﻿using DocumentVersionManager.Application.Commands;
+﻿using DocumentVersionManager.Api.Extentions;
+using DocumentVersionManager.Application.Commands;
 using DocumentVersionManager.Contracts.RequestDTO;
+using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
+using LanguageExt;
+using LanguageExt.ClassInstances.Pred;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
 
 namespace DocumentVersionManager.Api.Controllers.V1
 {
@@ -36,14 +41,74 @@ namespace DocumentVersionManager.Api.Controllers.V1
         public async Task<IEnumerable<ModelTypeDTO>> Post(ModelTypeDTO request)
         {
             // var modeltype = new ModelType { ModelTypeName = request.ModelTypeName.ToString() }; 
-            if (request == null)
+            if (request != null)
             {
+                // convert apidto to applicationdto so that api doesnt leak into application layer.
                 var modeltype = new Application.ApplicationDTO.RequestDTO.ModelTypeDTO(request.ModelTypeName);
                 var command = new AddNewModelTypeCommand(modeltype);
-                await _mediator.Send(command);
+                var result = await _mediator.Send(command);
             }
 
             return null;
         }
+        /*
+         *       [HttpPost("PostEither")]
+        public async Task<IEnumerable<ModelTypeDTO>> PostEither(ModelTypeDTO request, CancellationToken cancellationToken)
+        {
+            // var modeltype = new ModelType { ModelTypeName = request.ModelTypeName.ToString() }; 
+            if (request != null)
+            {
+                var x = request.EnsureInputIsNotNull("Input Cannot be null").Bind<Either<ModelFailures, int>>(_ => AddModelType(request, cancellationToken));
+                var y = request.EnsureInputIsNotNull("Input Cannot be null").Bind(_ => AddModelType(request, cancellationToken));
+
+
+            }
+            return null;
+        }
+
+        private Either<ModelFailures, int> AddModelType(ModelTypeDTO modelTypeDTO, CancellationToken cancellationToken)
+        {
+
+            var modelType = new Application.ApplicationDTO.RequestDTO.ModelTypeDTO(modelTypeDTO.ModelTypeName);
+            var x = _mediator.Send(new AddNewModelTypeCommand(modelType), cancellationToken);
+            return x.Result;
+        }
+          */
+        [HttpPost("PostEither")]
+        public async Task<IEnumerable<ModelTypeDTO>> PostEither(ModelTypeDTO request, CancellationToken cancellationToken)
+        {
+
+            if (request != null)
+            {
+                var x = request.EnsureInputIsNotNull("Input Cannot be null").Bind<Either<ModelFailures, int>>(request => AddModelType(request, cancellationToken).Result);
+
+
+            }
+            return null;
+        }
+
+        private async Task<Either<ModelFailures, int>> AddModelType(ModelTypeDTO modelTypeDTO, CancellationToken cancellationToken)
+        {
+
+            var modelType = new Application.ApplicationDTO.RequestDTO.ModelTypeDTO(modelTypeDTO.ModelTypeName);
+            var x = await _mediator.Send(new AddNewModelTypeCommand(modelType), cancellationToken);
+            return x;
+        }
+
+        [HttpPost("PostEither2")]
+        public async Task<IEnumerable<ModelTypeDTO>> PostEithe2r(ModelTypeDTO request, CancellationToken cancellationToken)
+        {
+            if (request != null)
+            {
+                var result = await request.EnsureInputIsNotNull("Input Cannot be null")
+                    .Bind<Either<ModelFailures, int>>(async r => await AddModelType(r, cancellationToken));
+
+                // Do something with the result...
+            }
+
+            return null;
+        }
+
+
     }
 }
