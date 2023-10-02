@@ -36,8 +36,13 @@ namespace DocumentVersionManager.Api.Controllers.V1
         public async Task<IEnumerable<ModelTypeDTO>> Post(ModelTypeDTO request)
         {
             // var modeltype = new ModelType { ModelTypeName = request.ModelTypeName.ToString() }; 
-            var command = new AddNewModelTypeCommand(request);
-            await _mediator.Send(command);
+            if (request == null)
+            {
+                var modeltype = new Application.ApplicationDTO.RequestDTO.ModelTypeDTO(request.ModelTypeName);
+                var command = new AddNewModelTypeCommand(modeltype);
+                await _mediator.Send(command);
+            }
+
             return null;
         }
     }

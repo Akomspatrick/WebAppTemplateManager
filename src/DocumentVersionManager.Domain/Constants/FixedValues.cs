@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,14 +13,18 @@ namespace DocumentVersionManager.Domain.Constants
     public static class FixedValues
     {
         //ModelType Constants
-        public static int ModelTypeNameMaxLength = 128;
+        public const int ModelTypeNameMaxLength = 128;
 
-        public static int ModelTypeNameMinLength = 2;
+        public const int ModelTypeNameMinLength = 2;
 
         //Model Constants   
-        public static int ModelNameMaxLength = 128;
+        public const int ModelNameMaxLength = 128;
 
-        public static int ModelVersionMaxLength = 128;
+        public const int ModelNameMinLength = 2;
 
+
+        public const string DBConnectionStringName = "constr";
+
+        public const string DEFAULT_DOCUMENT_PATH = "F:\\MASSLOAD\\DWG\\Load Cell - Standard\\";
     }
 }

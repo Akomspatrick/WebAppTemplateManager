@@ -4,8 +4,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 {
     public partial class Model
     {
-        public const string DEFAULT_DOCUMENT_PATH = "F:\\MASSLOAD\\DWG\\Load Cell - Standard\\";
-
+ 
         public string ModelName { get; init; } = string.Empty;
         public string ModelTypeName { get; init; } = string.Empty;
 

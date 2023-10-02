@@ -24,7 +24,7 @@ namespace DocumentVersionManager.Infrastructure
             services.AddScoped<IModelTypesRepository, ModelTypesRepository>(); 
             services.AddScoped( typeof(IGenericRepository<>) , typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySQL(configuration.GetConnectionString("constr")));
+          //  services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySQL(configuration.GetConnectionString("constr")!));
 
 
             return services;

@@ -18,7 +18,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "7.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("DocumentVersionManager.Infrastructure.Persistence.Repositories.Models.ModelType", b =>
+            modelBuilder.Entity("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.ModelType", b =>
                 {
                     b.Property<string>("ModelTypeName")
                         .HasMaxLength(128)

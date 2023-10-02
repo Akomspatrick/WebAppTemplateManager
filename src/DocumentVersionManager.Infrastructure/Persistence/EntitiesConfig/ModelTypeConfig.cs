@@ -1,5 +1,5 @@
 ﻿using DocumentVersionManager.Domain.Constants;
-using DocumentVersionManager.Infrastructure.Persistence.Repositories.Models;
+using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,9 +12,9 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
             entity.HasKey(e => e.ModelTypeName);
             entity.Property(e => e.ModelTypeName).IsRequired().HasMaxLength(FixedValues.ModelTypeNameMaxLength);
 
-            entity.HasData(new ModelType() { ModelTypeName = "FIRSTMODELTYPE" },
-                           new ModelType() { ModelTypeName = "SECONDMODELTYPE" },
-                           new ModelType() { ModelTypeName = "THIRDMODELTYPE" });
+            entity.HasData( ModelType.Create("FIRSTMODELTYPE" ),
+                            ModelType.Create("SECONDMODELTYPE" ),
+                            ModelType.Create("THIRDMODELTYPE" ));
         }
     }
 }

@@ -24,7 +24,7 @@ namespace DocumentVersionManager.Application.Handlers
         
 
                 var entity =  ModelType.Create(request.modelTypeName.ModelTypeName);
-                await _unitOfWork.modelTypesRepository.AddAsync(entity, cancellationToken);
+                await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
                 var x= await _unitOfWork.CommitAllChanges(cancellationToken);
                 return x;
         

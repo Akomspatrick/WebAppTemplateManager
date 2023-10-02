@@ -1,13 +1,8 @@
-﻿using DocumentVersionManager.Contracts.RequestDTO;
+﻿using DocumentVersionManager.Application.ApplicationDTO.RequestDTO;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.Commands
 {
-    public record AddNewModelTypeCommand(ModelTypeDTO modelTypeName):IRequest<int>;
-    
+    public record AddNewModelTypeCommand(ModelTypeDTO modelTypeName) : IRequest<int>;
+
 }

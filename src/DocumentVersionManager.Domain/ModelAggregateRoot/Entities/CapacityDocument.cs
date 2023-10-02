@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 {
 
-    public class CapacityDocument : BaseEntity<string>
+    public class CapacityDocument : BaseEntity
     {
         public string ModelName { get; init; }
         public int Capacity { get; init; }

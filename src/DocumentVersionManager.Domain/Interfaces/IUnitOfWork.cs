@@ -11,7 +11,7 @@ namespace DocumentVersionManager.Domain.Interfaces
     {
         Task<int> CommitAllChanges( CancellationToken cancellationToken);
         //IGenericRepository<T> asyncRepository<T>() where T :BaseEntity;
-        IModelRepository modelRepository { get; }
-        IModelTypesRepository modelTypesRepository { get; }
+        IModelRepository ModelRepository { get; }
+        IModelTypesRepository ModelTypesRepository { get; }
     }
 }

@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 {
-    public partial class Model:BaseEntity<string>
+    public partial class Model : BaseEntity
     {
 
         public Model(string modelName, string modelTypeName)

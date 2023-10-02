@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentVersionManager.Application
+namespace DocumentVersionManager.Application.Common.Interfaces.Authentication
 {
-    internal class Class1
+    internal class IJwtTokenGenerator
     {
     }
 }

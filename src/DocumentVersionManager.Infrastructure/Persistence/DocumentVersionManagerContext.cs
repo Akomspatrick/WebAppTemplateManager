@@ -1,34 +1,28 @@
-﻿using DocumentVersionManager.Infrastructure.Persistence.Repositories.Models;
+﻿using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Infrastructure.Persistence
 {
-    public class DocumentVersionManagerContext:DbContext
+    public class DocumentVersionManagerContext : DbContext
     {
         private readonly IConfiguration _configuration;
         public DbSet<ModelType> ModelType { get; private set; }
         //public DbSet<Model> ProductModel { get; private set; }
-        
+
         //public DbSet<CapacityDocument> CapacityDocument { get; private set; }
         //public DbSet<CapacitySpecification> CapacitySpecification { get; private set; }
 
-        public DocumentVersionManagerContext(DbContextOptions<DocumentVersionManagerContext> options, IConfiguration configuration) : base(options) 
+        public DocumentVersionManagerContext(DbContextOptions<DocumentVersionManagerContext> options, IConfiguration configuration) : base(options)
         {
-            _configuration =configuration;
-            Database.EnsureCreated();
-                
+            _configuration = configuration;
+            // Database.EnsureCreated();
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var conn = _configuration.GetConnectionString("constr");
+            var conn = _configuration.GetConnectionString(Domain.Constants.FixedValues.DBConnectionStringName);
             optionsBuilder.UseMySQL(conn!);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

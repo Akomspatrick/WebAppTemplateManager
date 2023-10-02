@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 
-public class ModelType : BaseEntity<string>
+public class ModelType : BaseEntity
 {
     public string ModelTypeName { get; private set; } = string.Empty;
     // public required string ModelTypeName { get; init; }
@@ -36,6 +36,17 @@ public class ModelType : BaseEntity<string>
         // do some heavy lifting.
 
     }
+    //public void saveModelType()
+    //{
+    //    // do some heavy lifting.
+    //    // use IModelTypesRepository to save the model type.
+    //    if (ModelTypeName == null) {
+    //        ModelType aggregateRoot =  ModelType.Create(ModelTypeName);
+    //        aggregateRoot.save();
+
+    //    }
+
+    //}
 
 
 

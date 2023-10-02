@@ -1,53 +1,45 @@
-﻿using AutoMapper;
-using DocumentVersionManager.Domain.Interfaces;
-using DocumentVersionManager.Infrastructure.Maps;
-using DocumentVersionManager.Infrastructure.Persistence.Repositories.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using DocumentVersionManager.Domain.Interfaces;
+using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
     public class ModelTypesRepository : GenericRepository<ModelType>, IModelTypesRepository
     {
-       // private readonly IMapper _mapper;
-        public ModelTypesRepository(DocumentVersionManagerContext ctx ) : base(ctx)
+        // private readonly IMapper _mapper;
+        public ModelTypesRepository(DocumentVersionManagerContext ctx) : base(ctx)
         {
-           // _mapper = mapper;
+            // _mapper = mapper;
         }
 
-        public async Task<Domain.ModelAggregateRoot.Entities.ModelType> AddAsync(Domain.ModelAggregateRoot.Entities.ModelType entity,CancellationToken cancellationToken)
-        {
+        //public async Task<ModelType> AddAsync(ModelType entity, CancellationToken cancellationToken)
+        //{
 
-            var model = entity.ToModel();
-            await base.AddAsync(model,cancellationToken);
+        //    //var model = entity.ToModel();
+        //    await base.AddAsync(entity, cancellationToken);
 
-            return entity;
-        }
+        //    return entity;
+        //}
 
-        public Task<Domain.ModelAggregateRoot.Entities.ModelType> DeleteAsync(Domain.ModelAggregateRoot.Entities.ModelType entity)
-        {
-            var model = entity.ToModel();
-            base.DeleteAsync(model);
+        //public Task<ModelType> DeleteAsync(ModelType entity)
+        //{
+        //    //  var model = entity.ToModel();
+        //    base.DeleteAsync(entity);
 
-            return Task.FromResult(entity);
-        }
+        //    return Task.FromResult(entity);
+        //}
 
-        public Task<Domain.ModelAggregateRoot.Entities.ModelType> UpdateAsync(Domain.ModelAggregateRoot.Entities.ModelType entity)
-        {
-            var model = entity.ToModel();
-            base.UpdateAsync(model);
+        //public Task<ModelType> UpdateAsync(ModelType entity)
+        //{
+        //    // var model = entity.ToModel();
+        //    base.UpdateAsync(entity);
 
-            return Task.FromResult(entity);
-        }
+        //    return Task.FromResult(entity);
+        //}
 
-        Task<IReadOnlyList<Domain.ModelAggregateRoot.Entities.ModelType>> IGenericRepository<Domain.ModelAggregateRoot.Entities.ModelType>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        //Task<IReadOnlyList<Domain.ModelAggregateRoot.Entities.ModelType>> IGenericRepository<Domain.ModelAggregateRoot.Entities.ModelType>.GetAll()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         //public async Task<IEnumerable<Domain.ModelAggregateRoot.Entities.ModelType>> IGenericRepository<Domain.ModelAggregateRoot.Entities.ModelType>GetAll()
         //{

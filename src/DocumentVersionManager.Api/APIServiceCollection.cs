@@ -16,7 +16,7 @@ public static class APIServiceCollection
     {
         //var applicationAssembly = typeof(APIServiceCollection).Assembly;
         services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
-        services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySQL(configuration.GetConnectionString("constr")));
+        services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySQL(configuration.GetConnectionString(Domain.Constants.FixedValues.DBConnectionStringName)!));
         services.AddCors();
 
         // services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());

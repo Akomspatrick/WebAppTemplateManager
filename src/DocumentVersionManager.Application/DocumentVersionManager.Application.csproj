@@ -8,8 +8,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DocumentVersionManager.Contracts\DocumentVersionManager.Contracts.csproj" />
     <ProjectReference Include="..\DocumentVersionManager.Domain\DocumentVersionManager.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ApplicationDTO\ResponseDTO\" />
   </ItemGroup>
 
   <PropertyGroup>

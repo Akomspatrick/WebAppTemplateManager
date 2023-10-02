@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocumentVersionManager.Application\DocumentVersionManager.Application.csproj" />
+    <ProjectReference Include="..\DocumentVersionManager.Contracts\DocumentVersionManager.Contracts.csproj" />
     <ProjectReference Include="..\DocumentVersionManager.Infrastructure\DocumentVersionManager.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 {
 
-    public class CapacitySpecification : BaseEntity<string>
+    public class CapacitySpecification : BaseEntity
     {
         public CapacitySpecification(string modelName, int capacity, DateTime timestamp, string username, double? nominalOutput, decimal? nominalOutputPercentage, decimal? nonlinearityPercentage, int? minimumDeadLoad, double? vMin, int? nMax, int? safeLoad, int? ultimateLoad, string shellMaterial, bool alloy, int? defaultCableLength, int? tempRangeLow, int? tempRangeHigh, int? numberOfGauges, int? resistance, string cCNumber, string @class, string application, int? numberInBasket, double? austenitizationTemperatureInF, int? austenitizationTimeInSeconds, int? austenitizationHardnessLow, int? austenitizationHardnessHigh, double? temperingTemperatureInF, int? temperingTimeInSeconds, int? temperingHardnessLow, int? temperingHardnessHigh, bool hasScrews, string nTEPCertificationId, DateTime? nTEPCertificationTimestamp, string oIMLCertificationId, DateTime? oIMLCertificationTimestamp)
         {
