@@ -18,14 +18,12 @@ namespace DocumentVersionManager.Infrastructure
         {
             var applicationAssembly = typeof(InfrastructureServiceCollection).Assembly; 
 
-            services.AddAutoMapper(applicationAssembly);
+           // services.AddAutoMapper(applicationAssembly);
             //services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<ModelTypesRepository>());
             services.AddScoped<IModelRepository, ModelRepository>();   
             services.AddScoped<IModelTypesRepository, ModelTypesRepository>(); 
             services.AddScoped( typeof(IGenericRepository<>) , typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-          //  services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySQL(configuration.GetConnectionString("constr")!));
-
 
             return services;
         }

@@ -16,6 +16,21 @@ namespace DocumentVersionManager.Application.Handlers
     {
         private readonly IUnitOfWork _unitOfWork;
 
+        //public AddNewModelTypeCommandHandler(IUnitOfWork unitOfWork)
+        //{
+        //    _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+        //}
+
+        //public async Task<Either<ModelFailures, int>> Handle(AddNewModelTypeCommand request, CancellationToken cancellationToken)
+        //{
+        //    var entity = ModelType.Create(request.modelTypeName.ModelTypeName);
+        //    await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
+        //    var x = await _unitOfWork.CommitAllChanges(cancellationToken);
+        //    return x;
+
+        //}
+
+
         public AddNewModelTypeCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
@@ -23,17 +38,17 @@ namespace DocumentVersionManager.Application.Handlers
 
         public async Task<Either<ModelFailures, int>> Handle(AddNewModelTypeCommand request, CancellationToken cancellationToken)
         {
-
-
+            //var entity = ModelType.Create(request.modelTypeName.ModelTypeName);
+            //await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
+            //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
+            //return x;
             var entity = ModelType.Create(request.modelTypeName.ModelTypeName);
-            await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
+            var repository = _unitOfWork.AsyncRepository<ModelType>();
+            await repository.AddAsync(entity, cancellationToken);
             var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             return x;
 
-
+            
         }
-
-
-
     }
 }

@@ -3,12 +3,7 @@ using DocumentVersionManager.Domain.Base;
 using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
 using LanguageExt;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ZstdSharp.Unsafe;
+
 
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
@@ -17,6 +12,9 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         public readonly DocumentVersionManagerContext _ctx;
         private ModelRepository _modelRepository;
         private ModelTypesRepository _modelTypesRepository;
+       // private GenericRepository<object> _asyncRepository;
+
+        //private GenericRepository _asyncRepository;//<T> where T : BaseEntity;
 
         public UnitOfWork(DocumentVersionManagerContext ctx)
         {
@@ -28,10 +26,11 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
         public IModelTypesRepository ModelTypesRepository => _modelTypesRepository ??= new ModelTypesRepository(_ctx);
 
-        //public IGenericRepository<T> asyncRepository<T>() where T : BaseEntity
-        //{
-        //    return new GenericRepository<T>(_ctx);
-        //}
+        public IGenericRepository<T> AsyncRepository<T>() where T : BaseEntity => new GenericRepository<T>(_ctx);
+
+
+       // public IGenericRepository<T>  AsyncRepository1<T>() where T : BaseEntity =>  _asyncRepository ??=  new GenericRepository<T>(_ctx);
+
 
         public async Task<Either<ModelFailures, int>> CommitAllChanges(CancellationToken cancellationToken)
         {

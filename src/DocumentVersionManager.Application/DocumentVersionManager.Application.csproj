@@ -13,6 +13,7 @@
 
 	<ItemGroup>
 		<Folder Include="ApplicationDTO\ResponseDTO\" />
+		<Folder Include="Queries\" />
 	</ItemGroup>
 
 	<PropertyGroup>

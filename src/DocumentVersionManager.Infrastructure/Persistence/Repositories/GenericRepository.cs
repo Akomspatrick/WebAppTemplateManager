@@ -7,24 +7,103 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        private readonly DbSet<T> _dbSet;
+        // private readonly DbSet<T> _dbSet;
+        private readonly DocumentVersionManagerContext _ctx;
         public GenericRepository(DocumentVersionManagerContext ctx)
         {
-            _dbSet = ctx.Set<T>();
+            //_dbSet = ctx.Set<T>();
+            _ctx = ctx;
         }
-
-
-        public async Task<T> AddAsync(T entity, CancellationToken cancellationToken)
+        async Task<Either<ModelFailures, int>> IGenericRepository<T>.AddAsync(T entity, CancellationToken cancellationToken)
         {
-            await _dbSet.AddAsync(entity, cancellationToken);
-            return (entity);
+            try
+            {
+                //var result = await _dbSet.AddAsync(entity, cancellationToken);
+                await _ctx.AddAsync<T>(entity, cancellationToken);
+                return await _ctx.SaveChangesAsync(cancellationToken);
+
+            }
+            catch (Exception ex)
+            {
+                //Log this error properly
+                return ModelFailures.ProblemAddingEntityIntoDbContext;
+            }
+
         }
+        async Task<Either<ModelFailures, Task<IReadOnlyList<T>>>> IGenericRepository<T>.GetAllAsync()
+        {
+
+            try
+            {
+                return await _ctx.Set<T>().ToListAsync() as Task<IReadOnlyList<T?>>;
+            }
+            catch (Exception ex)
+            {
+                //Log this error properly
+                return ModelFailures.ErrorRetrievingListDataFromRepository;
+            }
+
+        }
+        async Task<Either<ModelFailures, T>> IGenericRepository<T>.GetByIdAsync(string Id)
+        {
+
+            try
+            {
+                return await _ctx.Set<T>().FindAsync(Id);
+            }
+            catch (Exception ex)
+            {
+                //Log this error properly
+                return ModelFailures.ErrorRetrievingListDataFromRepository;
+            }
+
+        }
+
+
+
+
+
+        async Task<Either<ModelFailures, int>> IGenericRepository<T>.UpdateAsync(T entity, CancellationToken cancellationToken)
+        {
+            try
+            {
+                _ctx.Update(entity);
+                _ctx.Entry(entity).State = EntityState.Modified;
+                return await _ctx.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                //Log this error properly
+                return ModelFailures.ProblemUpdatingEntityInRepository;
+            }
+
+        }
+        async Task<Either<ModelFailures, int>> IGenericRepository<T>.DeleteAsync(T entity, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var result = _ctx.Remove(entity);
+                return await _ctx.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                //Log this error properly
+                return ModelFailures.ProblemDeletingEntityFromRepository;
+            }
+
+        }
+        //public async Task<T> AddAsync(T entity, CancellationToken cancellationToken)
+        //{
+        //    await _dbSet.AddAsync(entity, cancellationToken);
+        //    return (entity);
+        //}
 
         //public Task<T> AddAsync(T entity)
         //{
@@ -32,39 +111,35 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         //    return Task.FromResult(entity);
         //}
 
-        public Task<T> DeleteAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IReadOnlyList<T>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> UpdateAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        async Task<Either<ModelFailures, T>> IGenericRepository<T>.AddAsync(T entity, CancellationToken cancellationToken)
-        {
-            try
-            {
-                var result = await _dbSet.AddAsync(entity, cancellationToken);
-
-                var entityResult = result.Entity;
-
-                return (result.Entity);
-            }
-            catch (Exception ex)
-            {
-                //Log this error properly
+        //public Task<T> DeleteAsync(T entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 
-                return ModelFailures.ProblemAddingEntityIntoDbContext;
-            }
+        //  public    Task<IReadOnlyList<T>> GetAll()
+        //{
+        //    //await _dbSet.AddAsync(entity, cancellationToken);
+        //    //return Task.FromResult(_dbSet.ToList() as IReadOnlyList<T>);
+        //    // return Task.FromResult(_dbSet.ToList() as IReadOnlyList<T>);
+        //    throw new NotImplementedException();
+        //}
 
-        }
+        //public async Task<IReadOnlyList<T>> GetAllAsync()
+        //{           
+        //    return await _dbSet.ToListAsync() as IReadOnlyList<T>;
+        //}
+
+        //public Task<T> UpdateAsync(T entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+
+
+
+
+
+
     }
 }

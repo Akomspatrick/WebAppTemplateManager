@@ -11,9 +11,15 @@ namespace DocumentVersionManager.Domain.Errors
     {
         [Description("Model Typename already Exist in Repository")]
         DuplicateModelTypeName,
-        [Description("Model Type not found in Repository")]
-        ModelTypeNotFoundInRepository,
-        [Description("Error Adding entity  into Db context")]
+        [Description("Error Retrieving  List From  Repository")]
+        ErrorRetrievingListDataFromRepository,
+        [Description("Error Retrieving  Single Entity From  Repository")]
+        ErrorRetrievingSingleDataFromRepository,
+        [Description("Error Adding entity  into to Repository")]
         ProblemAddingEntityIntoDbContext,
+        [Description("Error Deleting entity  in Repository")]
+        ProblemDeletingEntityFromRepository,
+        [Description("Error Updating entity  in Repository")]
+        ProblemUpdatingEntityInRepository,
     }
 }

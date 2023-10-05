@@ -1,0 +1,13 @@
+//create a sample post to localhost:2341
+//'http://localhost:5007/ModelType/PostEither
+@url='http://localhost:5007
+@modeltype={
+  "modelTypeName": "string3"
+}
+###
+POST http://localhost:5007/ModelType/PostEither/
+Content-Type: application/json
+
+{
+  "modelTypeName": "string"
+}

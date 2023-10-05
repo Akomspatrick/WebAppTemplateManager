@@ -75,14 +75,14 @@ namespace DocumentVersionManager.Api.Controllers.V1
         }
           */
         [HttpPost("PostEither")]
-        public async Task<IEnumerable<ModelTypeDTO>> PostEither(ModelTypeDTO request, CancellationToken cancellationToken)
+        public async Task<IActionResult> PostEither(ModelTypeDTO request, CancellationToken cancellationToken)
         {
 
             if (request != null)
             {
                 var x = request.EnsureInputIsNotNull("Input Cannot be null").Bind<Either<ModelFailures, int>>(request => AddModelType(request, cancellationToken).Result);
-
-
+                //var result 
+                return null;
             }
             return null;
         }
@@ -96,17 +96,15 @@ namespace DocumentVersionManager.Api.Controllers.V1
         }
 
         [HttpPost("PostEither2")]
-        public async Task<IEnumerable<ModelTypeDTO>> PostEithe2r(ModelTypeDTO request, CancellationToken cancellationToken)
+        public async Task<IActionResult> PostEither2(ModelTypeDTO request, CancellationToken cancellationToken)
         {
-            if (request != null)
-            {
-                var result = await request.EnsureInputIsNotNull("Input Cannot be null")
-                    .Bind<Either<ModelFailures, int>>(async r => await AddModelType(r, cancellationToken));
 
-                // Do something with the result...
-            }
 
-            return null;
+                var x = request.EnsureInputIsNotNull("Input Cannot be null").Bind<Either<ModelFailures, int>>(request => AddModelType(request, cancellationToken).Result);
+                return x.Match<IActionResult>(
+                                       Left: errors => new BadRequestObjectResult(errors),
+                                                          Right: result => new OkObjectResult(result)
+                                                                             );
         }
 
 

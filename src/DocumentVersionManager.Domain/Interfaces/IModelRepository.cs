@@ -1,5 +1,7 @@
 ﻿using DocumentVersionManager.Domain.Base;
+using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
+using LanguageExt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +12,6 @@ namespace DocumentVersionManager.Domain.Interfaces
 {
     public interface IModelRepository :IGenericRepository<Model> 
     {
+       // Task<Either<ModelFailures, ModelType>> GetModelType(string modelTypeName);
     }
 }

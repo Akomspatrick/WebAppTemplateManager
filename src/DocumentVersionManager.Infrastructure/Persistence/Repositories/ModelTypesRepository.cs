@@ -1,15 +1,38 @@
-﻿using DocumentVersionManager.Domain.Interfaces;
+﻿using DocumentVersionManager.Domain.Errors;
+using DocumentVersionManager.Domain.Interfaces;
 using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
+using LanguageExt;
 
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
     public class ModelTypesRepository : GenericRepository<ModelType>, IModelTypesRepository
     {
         // private readonly IMapper _mapper;
+        DocumentVersionManagerContext _ctx;
         public ModelTypesRepository(DocumentVersionManagerContext ctx) : base(ctx)
         {
             // _mapper = mapper;
+            _ctx = ctx; 
         }
+
+        public async Task<Either<ModelFailures, ModelType>> GetModelType(string modelTypeName)
+        {
+            try
+            {
+                return await _ctx.ModelType.FindAsync(modelTypeName);
+            }
+            catch (Exception ex)
+            {
+                //Log this error properly
+                return ModelFailures.ErrorRetrievingListDataFromRepository;
+            }
+        }
+
+
+
+
+
+
 
         //public async Task<ModelType> AddAsync(ModelType entity, CancellationToken cancellationToken)
         //{
