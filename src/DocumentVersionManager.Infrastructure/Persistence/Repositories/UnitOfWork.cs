@@ -34,6 +34,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
         public async Task<Either<ModelFailures, int>> CommitAllChanges(CancellationToken cancellationToken)
         {
+            throw new NotImplementedException("Its not been used to commit for now");
             _ctx.SavingChanges += (s, e) =>
             {
 

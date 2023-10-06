@@ -14,10 +14,10 @@ namespace DocumentVersionManager.Domain.Interfaces
     {
         //Task<T> AddAsync(T entity,CancellationToken cancellationToken);
         Task<Either<ModelFailures, int>> AddAsync(T entity, CancellationToken cancellationToken);
-        Task<Either<ModelFailures, Task<IReadOnlyList<T>>>>  GetAllAsync();
+        Task<Either<ModelFailures, Task<IReadOnlyList<T>>>>  GetAllAsync(CancellationToken cancellationToken);
         Task<Either<ModelFailures, int>> UpdateAsync(T entity, CancellationToken cancellationToken);
         Task<Either<ModelFailures, int>> DeleteAsync(T entity, CancellationToken cancellationToken);
-         Task<Either<ModelFailures, T>> GetByIdAsync(string Id);
+         Task<Either<ModelFailures, T>> GetByIdAsync(string Id, CancellationToken cancellationToken);
       
        // Task<IReadOnlyList<T>> GetAll();
 

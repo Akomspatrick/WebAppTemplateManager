@@ -11,3 +11,11 @@ Content-Type: application/json
 {
   "modelTypeName": "string"
 }
+
+###
+POST http://localhost:5007/ModelType/PostEither2/
+Content-Type: application/json
+
+{
+  "modelTypeName": "stringxxx"
+}

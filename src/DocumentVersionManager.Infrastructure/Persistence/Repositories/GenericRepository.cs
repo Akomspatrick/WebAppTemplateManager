@@ -37,12 +37,16 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             }
 
         }
-        async Task<Either<ModelFailures, Task<IReadOnlyList<T>>>> IGenericRepository<T>.GetAllAsync()
+        async Task<Either<ModelFailures, Task<IReadOnlyList<T>>>> IGenericRepository<T>.GetAllAsync(CancellationToken cancellationToken)
         {
 
             try
             {
-                return await _ctx.Set<T>().ToListAsync() as Task<IReadOnlyList<T?>>;
+                var list =   _ctx.Set<T>().ToList();
+                var result = await _ctx.Set<T>().ToListAsync();
+                var x = result as IReadOnlyList<T>;
+                return  Task.FromResult(x) ;
+                //return await _ctx.Set<T>().ToListAsync() as Task<IReadOnlyList<T?>>;
             }
             catch (Exception ex)
             {
@@ -51,12 +55,12 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             }
 
         }
-        async Task<Either<ModelFailures, T>> IGenericRepository<T>.GetByIdAsync(string Id)
+        async Task<Either<ModelFailures, T>> IGenericRepository<T>.GetByIdAsync(string Id,CancellationToken cancellationToken)
         {
 
             try
             {
-                return await _ctx.Set<T>().FindAsync(Id);
+                return await _ctx.Set<T>().FindAsync(Id, cancellationToken);
             }
             catch (Exception ex)
             {

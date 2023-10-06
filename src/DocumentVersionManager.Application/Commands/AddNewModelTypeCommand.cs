@@ -5,6 +5,6 @@ using MediatR;
 
 namespace DocumentVersionManager.Application.Commands
 {
-    public record AddNewModelTypeCommand(ModelTypeDTO modelTypeName) : IRequest<Either<ModelFailures, int>>;
+    public record AddNewModelTypeCommand(ApplicationModelTypeRequestDTO modelTypeName) : IRequest<Either<ModelFailures, int>>;
 
 }

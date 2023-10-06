@@ -11,6 +11,6 @@ namespace DocumentVersionManager.Application.ApplicationDTO.RequestDTO
     //    public required string ModelTypeName { get; set; }
     //}
     // convert this to a record
-    public record ModelTypeDTO(string ModelTypeName);
+    public record ApplicationModelTypeRequestDTO(string ModelTypeName);
 
 }
