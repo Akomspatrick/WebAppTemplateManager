@@ -60,6 +60,8 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
             try
             {
+                var x = await _ctx.Set<T>().FindAsync(Id, cancellationToken);
+
                 return await _ctx.Set<T>().FindAsync(Id, cancellationToken);
             }
             catch (Exception ex)
