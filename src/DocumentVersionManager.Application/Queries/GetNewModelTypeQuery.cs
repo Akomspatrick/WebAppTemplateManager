@@ -11,8 +11,10 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.Queries
 {
-    public class GetNewModelTypeQuery:IRequest<Either<ModelFailures, ApplicationModelTypeResponseDTO>>
-    {
-        public ApplicationModelTypeRequestDTO ModelTypeName { get; set; }
-    }
+    //public class GetNewModelTypeQuery:IRequest<Either<ModelFailures, ApplicationModelTypeResponseDTO>>
+    //{
+    //    public ApplicationModelTypeRequestDTO ModelTypeName { get; set; }
+    //}
+    public record GetNewModelTypeQuery(ApplicationModelTypeRequestDTO ModelTypeName) : IRequest<Either<ModelFailures, ApplicationModelTypeResponseDTO>>;
+   
 }

@@ -45,44 +45,39 @@ namespace DocumentVersionManager.Api.Controllers.V1
 
 
         [HttpGet(Name = "GetEither")]
-        public async Task<IActionResult> Get(CancellationToken cancellationToken)
+        public async Task<IActionResult> Get(ModelTypeDTO request,CancellationToken cancellationToken)
         {
-
-            //return request.EnsureInputIsNotNull("Input Cannot be null")
-            //.Bind<Either<ModelFailures, int>>(request => AddModelType(request, cancellationToken).Result)
+            var x = request.EnsureInputIsNotNull("Input Cannot be null");
+            //var xp = request.EnsureInputIsNotNull("Input Cannot be null")
+            //.Bind<Either<ModelFailures, Application.ApplicationDTO.RequestDTO.ApplicationModelTypeRequestDTO>>(request => GetAllNewModelT(request, cancellationToken)
             //.Match<IActionResult>(Left: errors => new OkObjectResult(errors),
             //                      Right: result => result.Match<IActionResult>(
             //                                          Left: errors2 => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors2)),
             //                                          Right: result2 => new OkObjectResult(result2)
-            //                                                                   )
-            //                               );
-
-
-            //var modelType = new Application.ApplicationDTO.RequestDTO.ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
-            var x = await _mediator.Send(new GetAllNewModelTypeQuery(), cancellationToken);
-            return x.Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+            //  )));
+            return (await _mediator.Send(new GetNewModelTypeQuery(new Application.ApplicationDTO.RequestDTO.ApplicationModelTypeRequestDTO ("xxx")), cancellationToken))
+            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                                 Right: result => new OkObjectResult(result));
-                        
-
-
-
         }
-        //[HttpPost(Name = "GetEither")]
-        //public async Task<IActionResult> GetAll(ModelTypeDTO request, CancellationToken cancellationToken)
-        //{
 
-        //    return request.EnsureInputIsNotNull("Input Cannot be null")
-        //    .Bind<Either<ModelFailures, int>>(request => AddModelType(request, cancellationToken).Result)
-        //    .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
-        //                          Right: result => result.Match<IActionResult>(
-        //                                              Left: errors2 => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors2)),
-        //                                              Right: result2 => new OkObjectResult(result2)
-        //                                                                       )
-        //                                   );
-        //    // improve on the method above
-        //    // errors2.Map(x => x.GetEnumDisplayName());
+        private Task<Either<ModelFailures, int>> GetAllNewModelT(ModelTypeDTO request, CancellationToken cancellationToken)
+        {
+            //var modelType = new Application.ApplicationDTO.RequestDTO.ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
+            //var x = await _mediator.Send(new AddNewModelTypeCommand(modelType), cancellationToken);
+            //return x;
+            return null;
+        }
 
-        //}
+        [HttpGet( template: "GetAllAsync", Name = "GetAllEither")]
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        {
+
+          
+            return (await _mediator.Send(new GetAllNewModelTypeQuery(), cancellationToken))
+            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+                                Right: result => new OkObjectResult(result));
+        }
+
         [HttpPost("PostEither")]
         public async Task<IActionResult> PostEither2(ModelTypeDTO request, CancellationToken cancellationToken)
         {
