@@ -12,7 +12,7 @@ namespace DocumentVersionManager.Domain.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         // Task<int> CommitAllChanges(CancellationToken cancellationToken);
-        Task<Either<ModelFailures, int>> CommitAllChanges(CancellationToken cancellationToken);
+        Task<Either<GeneralFailures, int>> CommitAllChanges(CancellationToken cancellationToken);
         IGenericRepository<T> AsyncRepository<T>() where T :BaseEntity;
         IModelRepository ModelRepository { get; }
         IModelTypesRepository ModelTypesRepository { get; }

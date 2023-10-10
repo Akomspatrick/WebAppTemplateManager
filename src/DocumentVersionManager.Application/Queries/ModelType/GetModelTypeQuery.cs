@@ -9,12 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentVersionManager.Application.Queries
+namespace DocumentVersionManager.Application.Queries.ModelType
 {
     //public class GetNewModelTypeQuery:IRequest<Either<ModelFailures, ApplicationModelTypeResponseDTO>>
     //{
     //    public ApplicationModelTypeRequestDTO ModelTypeName { get; set; }
     //}
-    public record GetNewModelTypeQuery(ApplicationModelTypeRequestDTO ModelTypeName) : IRequest<Either<ModelFailures, ApplicationModelTypeResponseDTO>>;
-   
+    public record GetModelTypeQuery(ApplicationModelTypeRequestDTO ModelTypeName) : IRequest<Either<GeneralFailures, ApplicationModelTypeResponseDTO>>;
+
 }

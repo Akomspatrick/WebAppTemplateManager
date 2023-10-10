@@ -13,11 +13,11 @@ namespace DocumentVersionManager.Domain.Interfaces
     public interface IGenericRepository<T> where T : BaseEntity
     {
         //Task<T> AddAsync(T entity,CancellationToken cancellationToken);
-        Task<Either<ModelFailures, int>> AddAsync(T entity, CancellationToken cancellationToken);
-        Task<Either<ModelFailures, Task<IReadOnlyList<T>>>>  GetAllAsync(CancellationToken cancellationToken);
-        Task<Either<ModelFailures, int>> UpdateAsync(T entity, CancellationToken cancellationToken);
-        Task<Either<ModelFailures, int>> DeleteAsync(T entity, CancellationToken cancellationToken);
-         Task<Either<ModelFailures, T>> GetByIdAsync(string Id, CancellationToken cancellationToken);
+        Task<Either<GeneralFailures, int>> AddAsync(T entity, CancellationToken cancellationToken);
+        Task<Either<GeneralFailures, Task<IReadOnlyList<T>>>>  GetAllAsync(CancellationToken cancellationToken);
+        Task<Either<GeneralFailures, int>> UpdateAsync(T entity, CancellationToken cancellationToken);
+        Task<Either<GeneralFailures, int>> DeleteAsync(T entity, CancellationToken cancellationToken);
+         Task<Either<GeneralFailures, T>> GetByIdAsync(string Id, CancellationToken cancellationToken);
       
        // Task<IReadOnlyList<T>> GetAll();
 

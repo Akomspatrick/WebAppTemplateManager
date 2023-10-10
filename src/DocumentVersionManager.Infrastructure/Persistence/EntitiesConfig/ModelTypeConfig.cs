@@ -17,4 +17,24 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
                             ModelType.Create("THIRDMODELTYPE" ));
         }
     }
+
+
+    public class DocumentTypeConfig : IEntityTypeConfiguration<DocumentType>
+    {
+        public void Configure(EntityTypeBuilder<DocumentType> entity)
+        {
+            entity.HasKey(e => e.TypeName);
+            entity.Property(e => e.TypeName).IsRequired().HasMaxLength(FixedValues.DocumentTypeMaxLength);
+
+            entity.HasData(DocumentType.Create("Cabling"),
+                            DocumentType.Create("Chroming"),
+                             DocumentType.Create("Sealing"),
+                               DocumentType.Create("Gauging"),
+                            DocumentType.Create("Wiring"));
+        }
+    }
 }
+
+
+
+

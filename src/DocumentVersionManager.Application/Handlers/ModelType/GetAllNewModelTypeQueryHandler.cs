@@ -1,6 +1,6 @@
 ﻿using DocumentVersionManager.Application.ApplicationDTO.RequestDTO;
 using DocumentVersionManager.Application.ApplicationDTO.ResponseDTO;
-using DocumentVersionManager.Application.Queries;
+using DocumentVersionManager.Application.Queries.ModelType;
 using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
 using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
@@ -13,9 +13,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentVersionManager.Application.Handlers
+namespace DocumentVersionManager.Application.Handlers.ModelType
 {
-    public class GetAllNewModelTypeQueryHandler : IRequestHandler<GetAllNewModelTypeQuery, Either<ModelFailures, IEnumerable<ApplicationModelTypeResponseDTO>>>
+    public class GetAllNewModelTypeQueryHandler : IRequestHandler<GetAllModelTypeQuery, Either<GeneralFailures, IEnumerable<ApplicationModelTypeResponseDTO>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<GetAllNewModelTypeQueryHandler> _logger;
@@ -23,19 +23,19 @@ namespace DocumentVersionManager.Application.Handlers
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-        }   
+        }
 
 
-        async Task<Either<ModelFailures, IEnumerable<ApplicationModelTypeResponseDTO>>> IRequestHandler<GetAllNewModelTypeQuery, Either<ModelFailures, IEnumerable<ApplicationModelTypeResponseDTO>>>.Handle(GetAllNewModelTypeQuery request, CancellationToken cancellationToken)
+        async Task<Either<GeneralFailures, IEnumerable<ApplicationModelTypeResponseDTO>>> IRequestHandler<GetAllModelTypeQuery, Either<GeneralFailures, IEnumerable<ApplicationModelTypeResponseDTO>>>.Handle(GetAllModelTypeQuery request, CancellationToken cancellationToken)
         {
             //var repository = _unitOfWork.AsyncRepository<ModelType>();
             //var x = await repository.GetAllAsync(cancellationToken);
             //return x.Map(task=> task.Result.Select(x=> new ApplicationModelTypeResponseDTO(x.ModelTypeName)));
 
-            var repository = _unitOfWork.AsyncRepository<ModelType>();
+            var repository = _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.ModelType>();
             return (await repository.GetAllAsync(cancellationToken))
              .Map(task => task.Result
-             .Select(x =>  new ApplicationModelTypeResponseDTO(x.ModelTypeName))); 
+             .Select(x => new ApplicationModelTypeResponseDTO(x.ModelTypeName)));
 
             // .Map((Task<IReadOnlyList<ModelType>> type) => type.Result.Select(x => new ApplicationModelTypeResponseDTO(x.ModelTypeName)));
             // return x.Map(task => task.Result.Select(x => new ApplicationModelTypeResponseDTO(x.ModelTypeName)));

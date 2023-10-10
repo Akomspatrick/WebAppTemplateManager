@@ -7,10 +7,10 @@ namespace DocumentVersionManager.Api.Controllers.V1
     public class EitherActionResult : IActionResult
     {
 
-      public Either<ModelFailures, int> Value { get; set; }
+      public Either<GeneralFailures, int> Value { get; set; }
       public int? StatusCode { get; set; }
         object response = null;
-        public EitherActionResult(Either<ModelFailures, int> value)
+        public EitherActionResult(Either<GeneralFailures, int> value)
         {
            // Value = value;
             object response = null;

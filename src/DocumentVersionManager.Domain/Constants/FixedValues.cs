@@ -26,5 +26,8 @@ namespace DocumentVersionManager.Domain.Constants
         public const string DBConnectionStringName = "constr";
 
         public const string DEFAULT_DOCUMENT_PATH = "F:\\MASSLOAD\\DWG\\Load Cell - Standard\\";
+        public const int DocumentTypeMaxLength = 128;
+
+        public const int DocumentTypeMinLength = 2;
     }
 }

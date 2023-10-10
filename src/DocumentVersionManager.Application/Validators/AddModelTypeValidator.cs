@@ -1,4 +1,4 @@
-﻿using DocumentVersionManager.Application.Commands;
+﻿using DocumentVersionManager.Application.Commands.ModelType;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.Validators
 {
-    public class AddNewModelTypeValidator : AbstractValidator<AddNewModelTypeCommand>
+    public class AddModelTypeValidator : AbstractValidator<AddNewModelTypeCommand>
     {
-        public AddNewModelTypeValidator()
+        public AddModelTypeValidator()
         {
             RuleFor(x => x.modelTypeName).NotNull().NotEmpty();
             // RuleFor(x=>x.modelTypeName)..NotEmpty();

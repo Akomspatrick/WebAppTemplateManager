@@ -4,6 +4,27 @@
 @modeltype={
   "modelTypeName": "string3"
 }
+///GET QUERY MODELTYPE
+
+GET http://localhost:5007/ModelType
+Content-Type: application/json
+
+{
+  "modelTypeName": "222"
+}
+###
+GET http://localhost:5007/ModelType
+Content-Type: application/json
+
+{
+  "modelTypeName": "string"
+}
+
+
+###
+GET http://localhost:5007/ModelType/GetAllAsync
+
+///POST  QUERY MODELTYPE
 ###
 POST http://localhost:5007/ModelType/PostEither/
 Content-Type: application/json
@@ -19,3 +40,23 @@ Content-Type: application/json
 {
   "modelTypeName": "stringxxx"
 }
+
+###
+###
+
+POST http://localhost:5007/DocumentType
+Content-Type: application/json
+
+{
+  "modelTypeName": "stringxxx"
+}
+
+###
+POST http://localhost:5007/DocumentType
+Content-Type: application/json
+
+{
+  "documentTypeName": "stringxxx"
+}
+
+###

@@ -21,7 +21,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             //_dbSet = ctx.Set<T>();
             _ctx = ctx;
         }
-        async Task<Either<ModelFailures, int>> IGenericRepository<T>.AddAsync(T entity, CancellationToken cancellationToken)
+        async Task<Either<GeneralFailures, int>> IGenericRepository<T>.AddAsync(T entity, CancellationToken cancellationToken)
         {
             try
             {
@@ -33,11 +33,11 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             catch (Exception ex)
             {
                 //Log this error properly
-                return ModelFailures.ProblemAddingEntityIntoDbContext;
+                return GeneralFailures.ProblemAddingEntityIntoDbContext;
             }
 
         }
-        async Task<Either<ModelFailures, Task<IReadOnlyList<T>>>> IGenericRepository<T>.GetAllAsync(CancellationToken cancellationToken)
+        async Task<Either<GeneralFailures, Task<IReadOnlyList<T>>>> IGenericRepository<T>.GetAllAsync(CancellationToken cancellationToken)
         {
 
             try
@@ -51,23 +51,24 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             catch (Exception ex)
             {
                 //Log this error properly
-                return ModelFailures.ErrorRetrievingListDataFromRepository;
+                return GeneralFailures.ErrorRetrievingListDataFromRepository;
             }
 
         }
-        async Task<Either<ModelFailures, T>> IGenericRepository<T>.GetByIdAsync(string Id,CancellationToken cancellationToken)
+        async Task<Either<GeneralFailures, T>> IGenericRepository<T>.GetByIdAsync(string Id,CancellationToken cancellationToken)
         {
 
             try
             {
-                var x = await _ctx.Set<T>().FindAsync(Id, cancellationToken);
+                var entity = await _ctx.FindAsync<T>(Id, cancellationToken);
 
-                return await _ctx.Set<T>().FindAsync(Id, cancellationToken);
+                return entity != null ? entity : GeneralFailures.DataNotFoundInRepository;                 
+
             }
             catch (Exception ex)
             {
                 //Log this error properly
-                return ModelFailures.ErrorRetrievingListDataFromRepository;
+                return GeneralFailures.ErrorRetrievingListDataFromRepository;
             }
 
         }
@@ -76,7 +77,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
 
 
-        async Task<Either<ModelFailures, int>> IGenericRepository<T>.UpdateAsync(T entity, CancellationToken cancellationToken)
+        async Task<Either<GeneralFailures, int>> IGenericRepository<T>.UpdateAsync(T entity, CancellationToken cancellationToken)
         {
             try
             {
@@ -87,11 +88,11 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             catch (Exception ex)
             {
                 //Log this error properly
-                return ModelFailures.ProblemUpdatingEntityInRepository;
+                return GeneralFailures.ProblemUpdatingEntityInRepository;
             }
 
         }
-        async Task<Either<ModelFailures, int>> IGenericRepository<T>.DeleteAsync(T entity, CancellationToken cancellationToken)
+        async Task<Either<GeneralFailures, int>> IGenericRepository<T>.DeleteAsync(T entity, CancellationToken cancellationToken)
         {
             try
             {
@@ -101,7 +102,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             catch (Exception ex)
             {
                 //Log this error properly
-                return ModelFailures.ProblemDeletingEntityFromRepository;
+                return GeneralFailures.ProblemDeletingEntityFromRepository;
             }
 
         }

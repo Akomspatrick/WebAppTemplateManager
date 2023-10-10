@@ -32,7 +32,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
        // public IGenericRepository<T>  AsyncRepository1<T>() where T : BaseEntity =>  _asyncRepository ??=  new GenericRepository<T>(_ctx);
 
 
-        public async Task<Either<ModelFailures, int>> CommitAllChanges(CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailures, int>> CommitAllChanges(CancellationToken cancellationToken)
         {
             throw new NotImplementedException("Its not been used to commit for now");
             _ctx.SavingChanges += (s, e) =>
@@ -48,7 +48,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             catch (Exception)
             {
                 //log this problem into dbase
-                return ModelFailures.ProblemAddingEntityIntoDbContext;
+                return GeneralFailures.ProblemAddingEntityIntoDbContext;
             }
 
         }

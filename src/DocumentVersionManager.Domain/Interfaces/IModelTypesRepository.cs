@@ -12,7 +12,7 @@ namespace DocumentVersionManager.Domain.Interfaces
 {
     public interface IModelTypesRepository : IGenericRepository<ModelType>
     {
-        Task<Either<ModelFailures, ModelType>> GetModelType(string modelTypeName);
+        Task<Either<GeneralFailures, ModelType>> GetModelType(string modelTypeName);
     }
 
 

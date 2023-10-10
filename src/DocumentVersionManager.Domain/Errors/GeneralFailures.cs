@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Domain.Errors
 {
-    public enum ModelFailures
+    public enum GeneralFailures
     {
-        [Description("Model Typename already Exist in Repository")]
+        [Description("Data  already Exist in Repository")]
         DuplicateModelTypeName,
         [Description("Error Retrieving  List From  Repository")]
         ErrorRetrievingListDataFromRepository,
@@ -23,6 +23,8 @@ namespace DocumentVersionManager.Domain.Errors
         ProblemDeletingEntityFromRepository,
         [Description("Error Updating entity  in Repository")]
         ProblemUpdatingEntityInRepository,
+        [Description("Data Not Found  in Repository")]
+        DataNotFoundInRepository,
     }
 
 

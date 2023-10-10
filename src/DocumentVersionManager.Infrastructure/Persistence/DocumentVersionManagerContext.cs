@@ -8,6 +8,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence
     {
         private readonly IConfiguration _configuration;
         public DbSet<ModelType> ModelType { get; private set; }
+        public DbSet<DocumentType> DocumentType { get; private set; }
         //public DbSet<Model> ProductModel { get; private set; }
 
         //public DbSet<CapacityDocument> CapacityDocument { get; private set; }

@@ -1,5 +1,5 @@
 ﻿using DocumentVersionManager.Application.Behaviours;
-using DocumentVersionManager.Application.Commands;
+using DocumentVersionManager.Application.Commands.ModelType;
 using DocumentVersionManager.Application.Validators;
 using DocumentVersionManager.Domain.Interfaces;
 using FluentValidation;
@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application;
 
-    public static class ApplicationServiceCollection
+public static class ApplicationServiceCollection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {

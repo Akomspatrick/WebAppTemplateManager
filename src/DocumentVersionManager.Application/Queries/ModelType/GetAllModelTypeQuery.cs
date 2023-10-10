@@ -9,8 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentVersionManager.Application.Queries
+namespace DocumentVersionManager.Application.Queries.ModelType
 {
-    public record  GetAllNewModelTypeQuery : IRequest<Either<ModelFailures, IEnumerable<ApplicationModelTypeResponseDTO>>>;
-    
+    public record GetAllModelTypeQuery : IRequest<Either<GeneralFailures, IEnumerable<ApplicationModelTypeResponseDTO>>>;
+
 }

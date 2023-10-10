@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             _ctx = ctx; 
         }
 
-        public async Task<Either<ModelFailures, ModelType>> GetModelType(string modelTypeName)
+        public async Task<Either<GeneralFailures, ModelType>> GetModelType(string modelTypeName)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             catch (Exception ex)
             {
                 //Log this error properly
-                return ModelFailures.ErrorRetrievingListDataFromRepository;
+                return GeneralFailures.ErrorRetrievingListDataFromRepository;
             }
         }
 
