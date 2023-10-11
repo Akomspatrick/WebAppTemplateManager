@@ -6,6 +6,7 @@ using DocumentVersionManager.Domain.Errors;
 using LanguageExt;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace DocumentVersionManager.Api.Controllers.V1
 {
@@ -38,7 +39,6 @@ namespace DocumentVersionManager.Api.Controllers.V1
 
 
         }
-
 
         [HttpGet(Name = "GetEither")]
         public async Task<IActionResult> Get([FromBody] ModelTypeDTO request, CancellationToken cancellationToken)

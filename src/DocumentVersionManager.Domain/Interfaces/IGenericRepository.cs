@@ -15,6 +15,8 @@ namespace DocumentVersionManager.Domain.Interfaces
         //Task<T> AddAsync(T entity,CancellationToken cancellationToken);
         Task<Either<GeneralFailures, int>> AddAsync(T entity, CancellationToken cancellationToken);
         Task<Either<GeneralFailures, Task<IReadOnlyList<T>>>>  GetAllAsync(CancellationToken cancellationToken);
+
+        EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>>  GetAllAsync2Async(CancellationToken cancellationToken);
         Task<Either<GeneralFailures, int>> UpdateAsync(T entity, CancellationToken cancellationToken);
         Task<Either<GeneralFailures, int>> DeleteAsync(T entity, CancellationToken cancellationToken);
          Task<Either<GeneralFailures, T>> GetByIdAsync(string Id, CancellationToken cancellationToken);

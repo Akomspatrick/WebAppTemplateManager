@@ -46,6 +46,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
                 var result = await _ctx.Set<T>().ToListAsync();
                 var x = result as IReadOnlyList<T>;
                 return  Task.FromResult(x) ;
+               // EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>> y = new EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>>(x);
                 //return await _ctx.Set<T>().ToListAsync() as Task<IReadOnlyList<T?>>;
             }
             catch (Exception ex)
@@ -103,6 +104,25 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             {
                 //Log this error properly
                 return GeneralFailures.ProblemDeletingEntityFromRepository;
+            }
+
+        }
+
+        public async Task<EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>>> GetAllAsync2Async(CancellationToken cancellationToken)
+        {
+            try
+            {
+                var list = _ctx.Set<T>().ToList();
+                var result = await _ctx.Set<T>().ToListAsync();
+                var x = result as IReadOnlyList<T>;
+                return Task.FromResult(x);
+                // EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>> y = new EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>>(x);
+                //return await _ctx.Set<T>().ToListAsync() as Task<IReadOnlyList<T?>>;
+            }
+            catch (Exception ex)
+            {
+                //Log this error properly
+                return GeneralFailures.ErrorRetrievingListDataFromRepository;
             }
 
         }
