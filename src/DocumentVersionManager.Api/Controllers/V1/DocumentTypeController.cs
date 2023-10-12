@@ -1,6 +1,6 @@
 ﻿using DocumentVersionManager.Api.Extentions;
-using DocumentVersionManager.Application.Commands.DocumentType;
-using DocumentVersionManager.Application.Commands.ModelType;
+using DocumentVersionManager.Application.Contracts.RequestDTO;
+using DocumentVersionManager.Application.CQRS.DocumentType.Commands;
 using DocumentVersionManager.Contracts.RequestDTO;
 using DocumentVersionManager.Domain.Errors;
 using LanguageExt;
@@ -40,7 +40,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
             }
 
             private async Task<Either<GeneralFailures, int>> AddDocumentType(DocumentTypeDTO request, CancellationToken cancellationToken)            
-                =>  await _mediator.Send(new AddNewDocumentTypeCommand(new Application.ApplicationDTO.RequestDTO.ApplicationDocumentTypeRequestDTO(request.DocumentTypeName)), cancellationToken);
+                =>  await _mediator.Send(new AddNewDocumentTypeCommand(new ApplicationDocumentTypeRequestDTO(request.DocumentTypeName)), cancellationToken);
 
         }
     }

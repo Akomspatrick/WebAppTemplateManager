@@ -33,6 +33,24 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
                             DocumentType.Create("Wiring"));
         }
     }
+
+    public class HigherModelConfig : IEntityTypeConfiguration<HigherModel>
+    {
+        public void Configure(EntityTypeBuilder<HigherModel> entity)
+        {
+            entity.HasKey(e => e.HigherModelName);
+            entity.Property(e => e.HigherModelName).IsRequired().HasMaxLength(FixedValues.DocumentTypeMaxLength);
+
+            entity.HasData(HigherModel.Create("HigherModel1"),
+                            HigherModel.Create("HigherModel2"),
+                             HigherModel.Create("HigherModel3"),
+                               HigherModel.Create("HigherModel4"),
+                            HigherModel.Create("HigherModel5"));
+        }
+    }
+
+
+    
 }
 
 

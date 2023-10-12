@@ -112,8 +112,10 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         {
             try
             {
-                var list = _ctx.Set<T>().ToList();
-                var result = await _ctx.Set<T>().ToListAsync();
+                // var list = _ctx.Set<T>().ToList();
+                var result = await _ctx.Set<T>().AsNoTracking().ToListAsync();// add as no tracking because we are not updating the data in this method and we want to improve performance by not tracking the data in the context 
+               
+                //var result = await _ctx.Set<T>().ToListAsync();
                 var x = result as IReadOnlyList<T>;
                 return Task.FromResult(x);
                 // EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>> y = new EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>>(x);

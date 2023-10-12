@@ -1,6 +1,7 @@
 ﻿using DocumentVersionManager.Api.Extentions;
-using DocumentVersionManager.Application.Commands.ModelType;
-using DocumentVersionManager.Application.Queries.ModelType;
+using DocumentVersionManager.Application.Contracts.RequestDTO;
+using DocumentVersionManager.Application.CQRS.ModelType.Commands;
+using DocumentVersionManager.Application.CQRS.ModelType.Queries;
 using DocumentVersionManager.Contracts.RequestDTO;
 using DocumentVersionManager.Domain.Errors;
 using LanguageExt;
@@ -51,7 +52,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
             //                                          Left: errors2 => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors2)),
             //                                          Right: result2 => new OkObjectResult(result2)
             //  )));
-            return (await _mediator.Send(new GetModelTypeQuery(new Application.ApplicationDTO.RequestDTO.ApplicationModelTypeRequestDTO (request.ModelTypeName)), cancellationToken))
+            return (await _mediator.Send(new GetModelTypeQuery(new ApplicationModelTypeRequestDTO (request.ModelTypeName)), cancellationToken))
             .Match<IActionResult>(Left: errors => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors)),
                                 Right: result => new OkObjectResult(result));
         }
@@ -70,7 +71,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
         private async Task<Either<GeneralFailures, int>> AddModelType(ModelTypeDTO modelTypeDTO, CancellationToken cancellationToken)
         {
 
-            var modelType = new Application.ApplicationDTO.RequestDTO.ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
+            var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
             var x = await _mediator.Send(new AddNewModelTypeCommand(modelType), cancellationToken);
             return x;
         }

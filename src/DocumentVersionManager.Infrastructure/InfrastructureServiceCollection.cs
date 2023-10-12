@@ -1,9 +1,12 @@
-﻿using DocumentVersionManager.Domain.Interfaces;
+﻿using DocumentVersionManager.Application.Contracts.Logging;
+using DocumentVersionManager.Domain.Interfaces;
+using DocumentVersionManager.Infrastructure.Logging;
 using DocumentVersionManager.Infrastructure.Persistence;
 using DocumentVersionManager.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +26,7 @@ namespace DocumentVersionManager.Infrastructure
             services.AddScoped<IModelRepository, ModelRepository>();   
             services.AddScoped<IModelTypesRepository, ModelTypesRepository>(); 
             services.AddScoped( typeof(IGenericRepository<>) , typeof(GenericRepository<>));
+            services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

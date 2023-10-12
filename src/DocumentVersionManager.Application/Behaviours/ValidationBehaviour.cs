@@ -1,4 +1,4 @@
-﻿using DocumentVersionManager.Application.Commands.ModelType;
+﻿using DocumentVersionManager.Application.CQRS.ModelType.Commands;
 using FluentValidation;
 using MediatR;
 using System;

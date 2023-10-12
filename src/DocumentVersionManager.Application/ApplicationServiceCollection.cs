@@ -1,5 +1,5 @@
 ﻿using DocumentVersionManager.Application.Behaviours;
-using DocumentVersionManager.Application.Commands.ModelType;
+using DocumentVersionManager.Application.CQRS.ModelType.Commands;
 using DocumentVersionManager.Application.Validators;
 using DocumentVersionManager.Domain.Interfaces;
 using FluentValidation;
