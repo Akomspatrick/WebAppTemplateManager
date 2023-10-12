@@ -45,7 +45,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             //await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             //return x;
-            var entity = Domain.ModelAggregateRoot.Entities.ModelType.Create(request.modelTypeName.ModelTypeName);
+            var entity = Domain.ModelAggregateRoot.Entities.ModelType.Create(request.modelTypeName.ModelTypeId,request.modelTypeName.ModelTypeName);
             var repository = _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.ModelType>();
             var x = await repository.AddAsync(entity, cancellationToken);
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);

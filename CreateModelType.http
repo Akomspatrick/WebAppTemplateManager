@@ -60,3 +60,13 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://localhost:5007/HigherModel/PostHigherModel
+Content-Type: application/json
+
+{
+  "higherModelName": "string1",
+  "higherModelDescription": "string1",
+  "productId": "string1",
+  "capacity": 20
+}

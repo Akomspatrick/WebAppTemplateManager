@@ -26,7 +26,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
         public async Task<Either<GeneralFailures, int>> Handle(DeleteModelTypeCommand request, CancellationToken cancellationToken)
         {
-            var entity = Domain.ModelAggregateRoot.Entities.ModelType.Create(request.ModelTypeName.ModelTypeName);
+            var entity = Domain.ModelAggregateRoot.Entities.ModelType.Create(request.ModelTypeName.ModelTypeId,request.ModelTypeName.ModelTypeName);
             var repository = _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.ModelType>();
             var x = await repository.DeleteAsync(entity, cancellationToken);
 

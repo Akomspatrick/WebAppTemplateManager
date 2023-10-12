@@ -12,10 +12,11 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
     public partial class Model : BaseEntity
     {
 
-        public Model(string modelName, string modelTypeName)
+        public Model(string modelId,string modelName, string modelTypeId)
         {
+            ModelId = modelId;
             ModelName = modelName;
-            ModelTypeName = modelTypeName;
+            ModelTypeId = modelTypeId;
         }
 
         #region Accessors

@@ -24,13 +24,38 @@ namespace DocumentVersionManager.Api.Controllers
         }
 
         [HttpPost(template: "PostHigherModel", Name = "PostEitherHigherModel")]
-        public async Task<IActionResult> Post(ModelTypeDTO request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Post(HigherModelDTO request, CancellationToken cancellationToken)
         {
 
           //  var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
-            var x = await _mediator.Send(new AddNewHigherModelCommand(request.ModelTypeName), cancellationToken);
+            var x = await _mediator.Send(new AddNewHigherModelCommand(request.HigherModelName,request.HigherModelDescription,request.ProductId, request.Capacity), cancellationToken);
             return Ok();
 
         }
+
+
+        [HttpPost(template: "PostHigherModelMany", Name = "PostEitherHigherModelMany")]
+        public async Task<IActionResult> PostEitherHigherModelMany( CancellationToken cancellationToken)
+        {
+
+            //  var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
+             HigherModelDTO request = new HigherModelDTO("string", "string", "string", 1);
+            var x = await _mediator.Send(new AddNewHigherModelCommand(request.HigherModelName, request.HigherModelDescription, request.ProductId, request.Capacity), cancellationToken);
+            return Ok();
+
+        }
+
+
+        //[HttpPost(template: "PostHigherModelMany", Name = "PostEitherHigherModelMany")]
+        //public async Task<IActionResult> PostEitherHigherModelMany(, CancellationToken cancellationToken)
+        //{
+
+        //    //  var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
+        //    HigherModelDTO request = new HigherModelDTO("string", "string", "string", 1);
+        //    var x = await _mediator.Send(new AddNewHigherModelCommand(request.HigherModelName, request.HigherModelDescription, request.ProductId, request.Capacity), cancellationToken);
+        //    return Ok();
+
+        //}
+
     }
 }

@@ -12,9 +12,9 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
             entity.HasKey(e => e.ModelTypeName);
             entity.Property(e => e.ModelTypeName).IsRequired().HasMaxLength(FixedValues.ModelTypeNameMaxLength);
 
-            entity.HasData( ModelType.Create("FIRSTMODELTYPE" ),
-                            ModelType.Create("SECONDMODELTYPE" ),
-                            ModelType.Create("THIRDMODELTYPE" ));
+            entity.HasData( ModelType.Create("FIRSTMODELTYPE","FIRSTMODELTYPE" ),
+                            ModelType.Create("SECONDMODELTYPE" ,"SECONDMODELTYPE" ),
+                            ModelType.Create("THIRDMODELTYPE","THIRDMODELTYPE" ));
         }
     }
 
@@ -41,11 +41,11 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
             entity.HasKey(e => e.HigherModelName);
             entity.Property(e => e.HigherModelName).IsRequired().HasMaxLength(FixedValues.DocumentTypeMaxLength);
 
-            entity.HasData(HigherModel.Create("HigherModel1"),
-                            HigherModel.Create("HigherModel2"),
-                             HigherModel.Create("HigherModel3"),
-                               HigherModel.Create("HigherModel4"),
-                            HigherModel.Create("HigherModel5"));
+            entity.HasData(HigherModel.Create("HigherModel1", "HigherModel1", "HigherModel1",1),
+                            HigherModel.Create("HigherModel2", "HigherModel12", "HigherModel12", 12),
+                             HigherModel.Create("HigherModel3", "HigherModel13", "HigherModel1", 13),
+                               HigherModel.Create("HigherModel4", "HigherModel14", "HigherModel14", 14),
+                            HigherModel.Create("HigherModel5", "HigherModel5", "HigherModel5", 5));
         }
     }
 

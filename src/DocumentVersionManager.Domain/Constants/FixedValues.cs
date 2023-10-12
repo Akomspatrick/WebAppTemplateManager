@@ -29,5 +29,8 @@ namespace DocumentVersionManager.Domain.Constants
         public const int DocumentTypeMaxLength = 128;
 
         public const int DocumentTypeMinLength = 2;
+        public const int ModelTypeIdMinLength = 2;
+
+        public const int ModelTypeIdMaxLength = 128;
     }
 }

@@ -6,9 +6,9 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
     {
         //if I am not using domain driven design then i can specify the detail model here eg 
         // public ModelType ModelType { get; set; }
- 
+        public string ModelId { get; init; } = string.Empty;
         public string ModelName { get; init; } = string.Empty;
-        public string ModelTypeName { get; init; } = string.Empty;
+        public string ModelTypeId { get; init; } = string.Empty;
         //if I am not using domain driven design then i can specify the detail model here eg 
         // public ModelType ModelType { get; set; }
         // Meaning that ModelTypename may evetualy become ModelTypeId

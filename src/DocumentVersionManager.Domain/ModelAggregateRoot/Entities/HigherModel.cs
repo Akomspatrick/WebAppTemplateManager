@@ -11,8 +11,12 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
     public class HigherModel : BaseEntity<string>
     {
         public string HigherModelName { get; private set; } = string.Empty;
+        public string HigherModelDescription { get; private set; } = string.Empty;
+        public  string ProductId { get; private set; } = string.Empty;
+        public int Capacity { get; private set; } =0;
 
-        public static HigherModel Create(string higherModelName)
+
+        public static HigherModel Create(string higherModelName, string productId,string higherModelDescription, int capacity)
         {
             if (string.IsNullOrWhiteSpace(higherModelName))
             {
@@ -21,16 +25,21 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             }
             if (higherModelName.Length > FixedValues.ModelTypeNameMaxLength)
             {
-                throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.ModelTypeNameMaxLength} characters {nameof(higherModelName)} ");
+                throw new ArgumentException($"HigherModelName cannot be more than {FixedValues.ModelTypeNameMaxLength} characters {nameof(higherModelName)} ");
             }
 
             if (higherModelName.Length < FixedValues.ModelTypeNameMinLength)
             {
-                throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelTypeNameMinLength} characters {nameof(higherModelName)} ");
+                throw new ArgumentException($"HigherModelName cannot be less than {FixedValues.ModelTypeNameMinLength} characters {nameof(higherModelName)} ");
             }
 
 
-            return new HigherModel() { HigherModelName  = higherModelName, Id = Guid.NewGuid().ToString() };
+            return new HigherModel() {
+                HigherModelName  = higherModelName, Id = Guid.NewGuid().ToString(),
+                HigherModelDescription = higherModelDescription,
+                ProductId= productId, Capacity = capacity
+
+              };
             // do some heavy lifting.
         }
     }

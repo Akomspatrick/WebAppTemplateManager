@@ -10,6 +10,6 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.HigherModel.Commands
 {
-  public  record AddNewHigherModelCommand  (String HigherModelName) : IRequest<ApplicationModelTypeRequestDTO>;
+  public  record AddNewHigherModelCommand  (String HigherModelName, string HigherModelDescription, string ProductId, int Capacity) : IRequest<ApplicationModelTypeRequestDTO>;
    // record AddNewHigherModelCommand(ApplicationModelTypeRequestDTO modelTypeName) : IRequest<Either<GeneralFailures, int>>;
 }

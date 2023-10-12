@@ -10,10 +10,11 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 
 public class ModelType : BaseEntity
 {
+    public string ModelTypeId { get; private set; } = string.Empty;
     public string ModelTypeName { get; private set; } = string.Empty;
     // public required string ModelTypeName { get; init; }
 
-    public static ModelType Create(string modelTypeName)
+    public static ModelType Create(string modelTypeId, string modelTypeName)
     {
 
         if (string.IsNullOrWhiteSpace(modelTypeName))
@@ -31,8 +32,28 @@ public class ModelType : BaseEntity
             throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelTypeNameMinLength} characters {nameof(modelTypeName)} ");
         }
 
+        if (string.IsNullOrWhiteSpace(modelTypeId))
+        {
+            throw new ArgumentNullException(nameof(modelTypeId));
 
-        return new ModelType() { ModelTypeName = modelTypeName };
+        }
+        if (modelTypeId.Length > FixedValues.ModelTypeIdMaxLength)
+        {
+            throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.ModelTypeIdMaxLength} characters {nameof(modelTypeId)} ");
+        }
+
+        if (modelTypeId.Length < FixedValues.ModelTypeIdMinLength)
+        {
+            throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelTypeIdMinLength} characters {nameof(modelTypeId)} ");
+        }
+
+
+        return new ModelType() { ModelTypeId = modelTypeId, ModelTypeName = modelTypeName };
+
+
+
+
+       
         // do some heavy lifting.
 
     }

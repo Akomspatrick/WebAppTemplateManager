@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requests", "Requests", "{7D
 		CreateModelType.http = CreateModelType.http
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{3C02FF95-E714-481F-9A9A-261B213DC2C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{64FAFC91-256A-4115-9ABB-BD9ECEDF0342}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64FAFC91-256A-4115-9ABB-BD9ECEDF0342}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64FAFC91-256A-4115-9ABB-BD9ECEDF0342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C02FF95-E714-481F-9A9A-261B213DC2C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C02FF95-E714-481F-9A9A-261B213DC2C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C02FF95-E714-481F-9A9A-261B213DC2C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C02FF95-E714-481F-9A9A-261B213DC2C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +69,7 @@ Global
 		{29F81B48-B687-4BD2-8C3C-77FAC951A480} = {C3B2A5BC-8985-4298-A764-B35D892CD5A5}
 		{1D483F0E-2993-4138-A1BE-6C59255A6B29} = {C3B2A5BC-8985-4298-A764-B35D892CD5A5}
 		{64FAFC91-256A-4115-9ABB-BD9ECEDF0342} = {C3B2A5BC-8985-4298-A764-B35D892CD5A5}
+		{3C02FF95-E714-481F-9A9A-261B213DC2C8} = {C3B2A5BC-8985-4298-A764-B35D892CD5A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90D4CDA1-7101-4521-8A2F-ECC4F9C92B82}
