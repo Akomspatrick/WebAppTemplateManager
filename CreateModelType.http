@@ -70,3 +70,16 @@ Content-Type: application/json
   "productId": "string1",
   "capacity": 20
 }
+
+
+
+###
+
+###
+
+GET https://localhost:7210/WeatherForecast
+Content-Type: application/json  
+
+{
+  "productId": "87902"
+}
