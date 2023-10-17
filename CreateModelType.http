@@ -41,7 +41,16 @@ Content-Type: application/json
 {
   "modelTypeId": "ML-0011"
 }
+###
+PUT {{baseUrl}}/ModelType
+Content-Type: application/json
 
+{
+  "modeltypeId": "ML-0011",
+  "modeltypeName": "MODIFIED ML2"
+}
+###
+//END OF MODEL TYPE 
 ###
 POST http://localhost:5007/DocumentType
 Content-Type: application/json
