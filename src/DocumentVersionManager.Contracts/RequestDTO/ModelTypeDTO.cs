@@ -11,6 +11,9 @@ namespace DocumentVersionManager.Contracts.RequestDTO
     //    public required string ModelTypeName { get; set; }
     //}
     // convert this to a record
-    public record ModelTypeDTO(string ModelTypeId,string ModelTypeName);
-    
+    public record ModelTypeCreateDTO(string ModelTypeId,string ModelTypeName);
+    public record ModelTypeUpdateDTO(string ModelTypeId, string ModelTypeName);
+    public record ModelTypeRequestDTO(string ModelTypeId);
+    public record ModelTypeDeleteDTO(string ModelTypeId);
+
 }

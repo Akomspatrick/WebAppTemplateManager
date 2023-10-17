@@ -81,7 +81,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel1",
                             Capacity = 1,
                             HigherModelDescription = "HigherModel1",
-                            Id = "27822737-8b18-4c5b-be06-4bfbfe72d25f",
+                            Id = "e91ad76a-eb23-43be-ad34-4ff48671a29f",
                             ProductId = "HigherModel1"
                         },
                         new
@@ -89,7 +89,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel2",
                             Capacity = 12,
                             HigherModelDescription = "HigherModel12",
-                            Id = "139833d1-f304-4840-9f7d-d5023cc3fe8c",
+                            Id = "55b0cc5e-371b-4ccf-b8c9-24d921d50594",
                             ProductId = "HigherModel12"
                         },
                         new
@@ -97,7 +97,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel3",
                             Capacity = 13,
                             HigherModelDescription = "HigherModel1",
-                            Id = "06e2729e-7ec0-46e7-a8b8-75477dad0575",
+                            Id = "da4a7dc7-3563-4cff-a8b9-c60779881292",
                             ProductId = "HigherModel13"
                         },
                         new
@@ -105,7 +105,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel4",
                             Capacity = 14,
                             HigherModelDescription = "HigherModel14",
-                            Id = "67054838-96a6-4730-9fac-829f0709408e",
+                            Id = "99d6b153-3712-4325-962a-25e49e68ca39",
                             ProductId = "HigherModel14"
                         },
                         new
@@ -113,39 +113,40 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel5",
                             Capacity = 5,
                             HigherModelDescription = "HigherModel5",
-                            Id = "47d4c3d0-caf9-40a6-a978-aa52684b72f6",
+                            Id = "18c58b0e-be3d-4a95-9bd1-c946574edf09",
                             ProductId = "HigherModel5"
                         });
                 });
 
-            modelBuilder.Entity("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.ModelType", b =>
+            modelBuilder.Entity("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.ModelTypes", b =>
                 {
+                    b.Property<string>("ModelTypeId")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
                     b.Property<string>("ModelTypeName")
                         .HasMaxLength(128)
                         .HasColumnType("varchar(128)");
 
-                    b.Property<string>("ModelTypeId")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("ModelTypeName");
+                    b.HasKey("ModelTypeId");
 
                     b.ToTable("ModelType");
 
                     b.HasData(
                         new
                         {
-                            ModelTypeName = "FIRSTMODELTYPE",
-                            ModelTypeId = "FIRSTMODELTYPE"
+                            ModelTypeId = "FIRSTMODELTYPEID",
+                            ModelTypeName = "FIRSTMODELTYPE"
                         },
                         new
                         {
-                            ModelTypeName = "SECONDMODELTYPE",
-                            ModelTypeId = "SECONDMODELTYPE"
+                            ModelTypeId = "SECONDMODELTYPEID",
+                            ModelTypeName = "SECONDMODELTYPE"
                         },
                         new
                         {
-                            ModelTypeName = "THIRDMODELTYPE",
-                            ModelTypeId = "THIRDMODELTYPE"
+                            ModelTypeId = "THIRDMODELTYPEID",
+                            ModelTypeName = "THIRDMODELTYPE"
                         });
                 });
 #pragma warning restore 612, 618

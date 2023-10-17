@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,7 +26,6 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         {
             try
             {
-                //var result = await _dbSet.AddAsync(entity, cancellationToken);
                 await _ctx.AddAsync<T>(entity, cancellationToken);
                 return await _ctx.SaveChangesAsync(cancellationToken);
 
@@ -46,8 +46,6 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
                 var result = await _ctx.Set<T>().ToListAsync();
                 var x = result as IReadOnlyList<T>;
                 return  Task.FromResult(x) ;
-               // EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>> y = new EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>>(x);
-                //return await _ctx.Set<T>().ToListAsync() as Task<IReadOnlyList<T?>>;
             }
             catch (Exception ex)
             {
@@ -56,34 +54,39 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             }
 
         }
-        async Task<Either<GeneralFailures, T>> IGenericRepository<T>.GetByIdAsync(string Id,CancellationToken cancellationToken)
-        {
+        //public async Task<T> FindAsTrackingAsync(Expression<Func<T, bool>> match)
+        //{
+        //    return await _ctx.Set<T>().FirstOrDefaultAsync(match);
+        //}
+        //public async Task<T> FindAsync(Expression<Func<T, bool>> match)
+        //{
+        //    return await _ctx.Set<T>().AsNoTracking().FirstOrDefaultAsync(match);
+        //}
 
-            try
-            {
-                var entity = await _ctx.FindAsync<T>(Id, cancellationToken);
+        //async Task<Either<GeneralFailures, T>> IGenericRepository<T>.GetByIdAsync(string Id,CancellationToken cancellationToken)
+        //{
 
-                return entity != null ? entity : GeneralFailures.DataNotFoundInRepository;                 
+        //    try
+        //    {
+        //        var entity = await _ctx.FindAsync<T>(Id, cancellationToken);
 
-            }
-            catch (Exception ex)
-            {
-                //Log this error properly
-                return GeneralFailures.ErrorRetrievingListDataFromRepository;
-            }
+        //        return entity != null ? entity : GeneralFailures.DataNotFoundInRepository;
 
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //Log this error properly
+        //        return GeneralFailures.ErrorRetrievingListDataFromRepository;
+        //    }
 
-
-
-
+        //}
 
         async Task<Either<GeneralFailures, int>> IGenericRepository<T>.UpdateAsync(T entity, CancellationToken cancellationToken)
         {
             try
             {
                 _ctx.Update(entity);
-                _ctx.Entry(entity).State = EntityState.Modified;
+              //  _ctx.Entry(entity).State = EntityState.Modified;
                 return await _ctx.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
@@ -108,18 +111,12 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
         }
 
-        public async Task<EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>>> GetAllAsync2Async(CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailures, T>> GetMatch(Expression<Func<T, bool>> match, CancellationToken cancellationToken)
         {
             try
-            {
-                // var list = _ctx.Set<T>().ToList();
-                var result = await _ctx.Set<T>().AsNoTracking().ToListAsync();// add as no tracking because we are not updating the data in this method and we want to improve performance by not tracking the data in the context 
-               
-                //var result = await _ctx.Set<T>().ToListAsync();
-                var x = result as IReadOnlyList<T>;
-                return Task.FromResult(x);
-                // EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>> y = new EitherAsync<GeneralFailures, Task<IReadOnlyList<T>>>(x);
-                //return await _ctx.Set<T>().ToListAsync() as Task<IReadOnlyList<T?>>;
+            { 
+                var entity = await _ctx.Set<T>().AsNoTracking().FirstOrDefaultAsync(match, cancellationToken);
+                return entity != null ? entity : GeneralFailures.DataNotFoundInRepository;
             }
             catch (Exception ex)
             {
@@ -128,45 +125,6 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             }
 
         }
-        //public async Task<T> AddAsync(T entity, CancellationToken cancellationToken)
-        //{
-        //    await _dbSet.AddAsync(entity, cancellationToken);
-        //    return (entity);
-        //}
-
-        //public Task<T> AddAsync(T entity)
-        //{
-        //    _dbSet.Add(entity);
-        //    return Task.FromResult(entity);
-        //}
-
-        //public Task<T> DeleteAsync(T entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
-        //  public    Task<IReadOnlyList<T>> GetAll()
-        //{
-        //    //await _dbSet.AddAsync(entity, cancellationToken);
-        //    //return Task.FromResult(_dbSet.ToList() as IReadOnlyList<T>);
-        //    // return Task.FromResult(_dbSet.ToList() as IReadOnlyList<T>);
-        //    throw new NotImplementedException();
-        //}
-
-        //public async Task<IReadOnlyList<T>> GetAllAsync()
-        //{           
-        //    return await _dbSet.ToListAsync() as IReadOnlyList<T>;
-        //}
-
-        //public Task<T> UpdateAsync(T entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
-
-
 
 
 

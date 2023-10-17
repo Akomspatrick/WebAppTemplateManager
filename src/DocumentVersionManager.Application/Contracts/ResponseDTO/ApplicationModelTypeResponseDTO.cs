@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace DocumentVersionManager.Application.Contracts.ResponseDTO
 {
 
-    public record ApplicationModelTypeResponseDTO(string ModelTypeName);
+    public record ApplicationModelTypeResponseDTO(string  ModelTypeId ,string ModelTypeName);
 }

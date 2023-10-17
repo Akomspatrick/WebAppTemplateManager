@@ -5,16 +5,17 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
 {
-    public class ModelTypeConfig : IEntityTypeConfiguration<ModelType>
+    public class ModelTypeConfig : IEntityTypeConfiguration<ModelTypes>
     {
-        public void Configure(EntityTypeBuilder<ModelType> entity)
+        public void Configure(EntityTypeBuilder<ModelTypes> entity)
         {
             entity.HasKey(e => e.ModelTypeName);
             entity.Property(e => e.ModelTypeName).IsRequired().HasMaxLength(FixedValues.ModelTypeNameMaxLength);
-
-            entity.HasData( ModelType.Create("FIRSTMODELTYPE","FIRSTMODELTYPE" ),
-                            ModelType.Create("SECONDMODELTYPE" ,"SECONDMODELTYPE" ),
-                            ModelType.Create("THIRDMODELTYPE","THIRDMODELTYPE" ));
+            entity.HasKey(e => e.ModelTypeId);
+            entity.Property(e => e.ModelTypeId).IsRequired().HasMaxLength(FixedValues.ModelTypeIdMaxLength);
+            entity.HasData( ModelTypes.Create("FIRSTMODELTYPEID","FIRSTMODELTYPE" ),
+                            ModelTypes.Create("SECONDMODELTYPEID" ,"SECONDMODELTYPE" ),
+                            ModelTypes.Create("THIRDMODELTYPEID","THIRDMODELTYPE" ));
         }
     }
 

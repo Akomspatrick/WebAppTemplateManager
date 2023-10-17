@@ -29,32 +29,12 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
         async Task<Either<GeneralFailures, IEnumerable<ApplicationModelTypeResponseDTO>>> IRequestHandler<GetAllModelTypeQuery, Either<GeneralFailures, IEnumerable<ApplicationModelTypeResponseDTO>>>.Handle(GetAllModelTypeQuery request, CancellationToken cancellationToken)
         {
-            //var repository = _unitOfWork.AsyncRepository<ModelType>();
-            //var x = await repository.GetAllAsync(cancellationToken);
-            //return x.Map(task=> task.Result.Select(x=> new ApplicationModelTypeResponseDTO(x.ModelTypeName)));
-
-            var repository = _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.ModelType>();
+            var repository = _unitOfWork.AsyncRepository<ModelTypes>();
             return (await repository.GetAllAsync(cancellationToken))
              .Map(task => task.Result
-             .Select(x => new ApplicationModelTypeResponseDTO(x.ModelTypeName)));
+             .Select(result => new ApplicationModelTypeResponseDTO(result.ModelTypeId, result.ModelTypeName)));
 
-            // .Map((Task<IReadOnlyList<ModelType>> type) => type.Result.Select(x => new ApplicationModelTypeResponseDTO(x.ModelTypeName)));
-            // return x.Map(task => task.Result.Select(x => new ApplicationModelTypeResponseDTO(x.ModelTypeName)));
         }
-        //public async Task<Either<ModelFailures, IEnumerable<ApplicationModelTypeRequestDTO>>> Handle(GetAllNewModelTypeQuery request, CancellationToken cancellationToken)
-        //{
-        //   // var entity = ModelType.Create(request.modelTypeName.ModelTypeName);
-        //    var repository = _unitOfWork.AsyncRepository<ModelType>();
-        //    var x = await repository.GetAllAsync(cancellationToken);
-        //    //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
-        //    var result = x.Map(PrepareData);
-        //    return result;
-        //}
-        //private IEnumerable<ApplicationModelTypeResponseDTO> PrepareResultData(Task<IReadOnlyList<ModelType>> task)
-        //{
-
-        //    return task.Result.Select(x => new ApplicationModelTypeResponseDTO(x.ModelTypeName));
-        //}
 
 
     }

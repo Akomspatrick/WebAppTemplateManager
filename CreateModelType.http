@@ -1,49 +1,48 @@
 //create a sample post to localhost:2341
 //'http://localhost:5007/ModelType/PostEither
-@url='http://localhost:5007
-@modeltype={
-  "modelTypeName": "string3"
-}
-///GET QUERY MODELTYPE
+@baseUrl = http://localhost:5007/api
 
-GET http://localhost:5007/ModelType
+
+///POST  :ADD QUERY MODELTYPE
+###
+POST {{baseUrl}}/ModelType
 Content-Type: application/json
 
 {
-  "modelTypeName": "222"
+  "modeltypeId": "ML-0011",
+  "modeltypeName": "ULTRA SIMPLE MODEL"
 }
+
+
 ###
-GET http://localhost:5007/ModelType
+//GET SINGLE  MODELTYPE QUERY 
+
+GET {{baseUrl}}/ModelType
 Content-Type: application/json
 
 {
-  "modelTypeName": "string"
+  "modelTypeId": "ML-0011"
 }
 
 
-###
-GET http://localhost:5007/ModelType/GetAllAsync
 
-///POST  QUERY MODELTYPE
+
 ###
-POST http://localhost:5007/ModelType/PostEither/
+///GET ALL  MODELTYPE QUERY 
+GET {{baseUrl}}/ModelType/GetAllAsync
+
+
+###
+// delete a modeltype
+
+DELETE {{baseUrl}}/ModelType
 Content-Type: application/json
 
 {
-  "modelTypeName": "string"
+  "modelTypeId": "ML-0011"
 }
 
 ###
-POST http://localhost:5007/ModelType/PostEither2/
-Content-Type: application/json
-
-{
-  "modelTypeName": "stringxxx"
-}
-
-###
-###
-
 POST http://localhost:5007/DocumentType
 Content-Type: application/json
 
@@ -77,9 +76,4 @@ Content-Type: application/json
 
 ###
 
-GET https://localhost:7210/WeatherForecast
-Content-Type: application/json  
-
-{
-  "productId": "87902"
-}
+GET https://localhost:7210/WeatherForecast?productId=12345

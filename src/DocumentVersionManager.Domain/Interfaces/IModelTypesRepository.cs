@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Domain.Interfaces
 {
-    public interface IModelTypesRepository : IGenericRepository<ModelType>
+    public interface IModelTypesRepository : IGenericRepository<ModelTypes>
     {
-        Task<Either<GeneralFailures, ModelType>> GetModelType(string modelTypeName);
+        Task<Either<GeneralFailures, ModelTypes>> GetModelTypeById(string modelTypeId);
+       // Task<Either<GeneralFailures, int>> DeleteByModelTypeById(string modelTypeId, CancellationToken cancellationToken);
     }
 
 

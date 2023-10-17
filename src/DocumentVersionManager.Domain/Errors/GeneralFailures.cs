@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Domain.Errors
         DuplicateModelTypeName,
         [Description("Error Retrieving  List From  Repository")]
         ErrorRetrievingListDataFromRepository,
-        [Description("Error Retrieving  Single Entity From  Repository")]
+        [Description("Error Retrieving  Single Entity From  Repository/Null Result")]
         ErrorRetrievingSingleDataFromRepository,
         [Description("Error Adding entity  into to Repository")]
         ProblemAddingEntityIntoDbContext,

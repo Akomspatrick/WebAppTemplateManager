@@ -29,9 +29,10 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         {
 
 
-            return (await _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.ModelType>()
-                    .GetByIdAsync(request.ModelTypeName.ModelTypeName, cancellationToken))
-                    .Map((type) => new ApplicationModelTypeResponseDTO(type.ModelTypeName));
+            return (await _unitOfWork.AsyncRepository<ModelTypes>()
+                      //.GetByIdAsync(request.ModelTypeName.ModelTypeId, cancellationToken))
+                      .GetMatch(s => (s.ModelTypeId == request.ModelTypeName.ModelTypeId), cancellationToken))
+                    .Map((result) => new ApplicationModelTypeResponseDTO(result.ModelTypeId,result.ModelTypeName));
 
         }
 

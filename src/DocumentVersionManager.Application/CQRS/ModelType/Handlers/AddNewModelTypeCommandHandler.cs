@@ -18,19 +18,6 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<AddNewModelTypeCommandHandler> _logger;
-        //public AddNewModelTypeCommandHandler(IUnitOfWork unitOfWork)
-        //{
-        //    _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-        //}
-
-        //public async Task<Either<ModelFailures, int>> Handle(AddNewModelTypeCommand request, CancellationToken cancellationToken)
-        //{
-        //    var entity = ModelType.Create(request.modelTypeName.ModelTypeName);
-        //    await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
-        //    var x = await _unitOfWork.CommitAllChanges(cancellationToken);
-        //    return x;
-
-        //}
 
 
         public AddNewModelTypeCommandHandler(IUnitOfWork unitOfWork, IAppLogger<AddNewModelTypeCommandHandler> logger)
@@ -45,8 +32,8 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             //await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             //return x;
-            var entity = Domain.ModelAggregateRoot.Entities.ModelType.Create(request.modelTypeName.ModelTypeId,request.modelTypeName.ModelTypeName);
-            var repository = _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.ModelType>();
+            var entity = ModelTypes.Create(request.modelTypeName.ModelTypeId,request.modelTypeName.ModelTypeName);
+            var repository = _unitOfWork.AsyncRepository<ModelTypes>();
             var x = await repository.AddAsync(entity, cancellationToken);
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             _logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");

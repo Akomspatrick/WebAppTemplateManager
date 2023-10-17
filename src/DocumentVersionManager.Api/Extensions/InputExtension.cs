@@ -14,6 +14,16 @@ namespace DocumentVersionManager.Api.Extentions
 
 
         }
+        public static Either<Task<L>, Task<R>> EnsureInputIsNotNullAsync<L, R>(this R theInput, L errorMsg)
+        {
+            if (theInput.IsNull())
+            {
+                return Task.FromResult(errorMsg);
+            }
+            return Task.FromResult(theInput);
+
+
+        }
         public static Either<L, R> EnsureInputIsNotEmpty<L, R>(this R theInput, L errorMsg)
         {
             if (theInput.ToString() == string.Empty)

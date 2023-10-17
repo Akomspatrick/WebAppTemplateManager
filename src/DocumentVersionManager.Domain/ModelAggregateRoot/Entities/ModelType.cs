@@ -1,5 +1,7 @@
 ﻿using DocumentVersionManager.Domain.Base;
 using DocumentVersionManager.Domain.Constants;
+using DocumentVersionManager.Domain.Errors;
+using LanguageExt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 
-public class ModelType : BaseEntity
+public class ModelTypes : BaseEntity
 {
     public string ModelTypeId { get; private set; } = string.Empty;
     public string ModelTypeName { get; private set; } = string.Empty;
     // public required string ModelTypeName { get; init; }
 
-    public static ModelType Create(string modelTypeId, string modelTypeName)
+    public static ModelTypes Create(string modelTypeId, string modelTypeName)
     {
 
         if (string.IsNullOrWhiteSpace(modelTypeName))
@@ -48,7 +50,7 @@ public class ModelType : BaseEntity
         }
 
 
-        return new ModelType() { ModelTypeId = modelTypeId, ModelTypeName = modelTypeName };
+        return new ModelTypes() { ModelTypeId = modelTypeId, ModelTypeName = modelTypeName };
 
 
 
@@ -57,6 +59,8 @@ public class ModelType : BaseEntity
         // do some heavy lifting.
 
     }
+
+
     //public void saveModelType()
     //{
     //    // do some heavy lifting.

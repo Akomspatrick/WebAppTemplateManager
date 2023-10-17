@@ -9,7 +9,7 @@ using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 namespace WebApplication1.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/Weather")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -71,8 +71,13 @@ namespace WebApplication1.Controllers
        public IActionResult PrintLabel(string  productId)
         {
 
-            string string64 = GetBarCodeIStream(productId);
+            string base64String = GetBarCodeIStream(productId);
             var path = Path.Combine(_hostingEnvironment.ContentRootPath, "Reports", "Report1.rdlc");
+            Random random = new Random();
+            string imagetype = "jpeg";
+             var ImageResult  = new ImageResult(imagetype).Create();
+            string filename = $"{productId}BarCodelabel_{ random.Next(1, 1000000).ToString()}{ImageResult.Extension}";
+            var imagesPath = Path.Combine(_hostingEnvironment.ContentRootPath, "BarcodeLabelImages", filename);
 
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
@@ -80,15 +85,24 @@ namespace WebApplication1.Controllers
                 locareport.LoadReportDefinition(stream);
                 locareport.EnableExternalImages = true;
 
-                ReportParameterCollection reportParameters = new();
-                reportParameters.Add(new ReportParameter("ProductId", productId));
-                reportParameters.Add(new ReportParameter("BarCodeImg", string64,true));
+                ReportParameterCollection reportParameters = new()
+                {
+                    new ReportParameter("ProductId", productId),
+                    new ReportParameter("ModelId", "ML002"),
+                    new ReportParameter("BarCodeImg", base64String, true)
+                };
                 locareport.SetParameters(reportParameters);
-                //var result = locareport.Render("PDF");
+                
                 var result = locareport.Render("IMAGE");
-                return File(result, "image/png", "PrintOut.png");
+
+                using (Image image = Image.FromStream(new MemoryStream(result)))
+                {
+                    image.Save(imagesPath, ImageResult.TheImageFormat);  // Or Png
+                }   
+                return PhysicalFile(imagesPath, ImageResult.ImageType, filename);
 
                 //* return File(result, "application/pdf", "PrintOut.pdf");
+                //string format = "PDF"; //Desired format goes here (PDF, Excel, or Image)
                 //•	"IMAGE"
                 //•	"WORD"/
                 //•	"EXCEL"
@@ -103,12 +117,7 @@ namespace WebApplication1.Controllers
 
         }
 
-
-
-
-
-
-
+ 
 
         private static string GetBarCodeIStream(string text)
         {
@@ -117,8 +126,13 @@ namespace WebApplication1.Controllers
                 Format = BarcodeFormat.CODE_128, // Specify the barcode format you want to generate
                 Options = new EncodingOptions
                 {
-                    Height = 200, // Specify the height of the barcode image
-                    Width = 400,
+                    Height = 40, // Specify the height of the barcode image
+                    Width = 300,
+                     GS1Format = true,
+                         Margin = 0,
+                          NoPadding = true,
+                           PureBarcode = true,
+                          
                     // Specify the width of the barcode image,
                 }
             };

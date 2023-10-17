@@ -12,7 +12,7 @@ using System.Linq;
 namespace DocumentVersionManager.Api.Controllers.V1
 {
     [ApiController]
-    [Route("[controller]")]
+    // [Route("api")]
     public class ModelTypeController : ControllerBase
     {
         private readonly ILogger<ModelTypeController> _logger;
@@ -25,58 +25,74 @@ namespace DocumentVersionManager.Api.Controllers.V1
             _mediator = mediator;
         }
 
-        [HttpPost(Name = "PostEither")]
-        public async Task<IActionResult> Post(ModelTypeDTO request, CancellationToken cancellationToken)
+        [HttpPost(template: DocumentVersionAPIEndPoints.ModelType.Create, Name = DocumentVersionAPIEndPoints.ModelType.Create)]
+        public async Task<IActionResult> Create(ModelTypeCreateDTO request, CancellationToken cancellationToken)
         {
+            var modelType = new ApplicationModelTypeCreateDTO(request.ModelTypeId, request.ModelTypeName);
 
-            return request.EnsureInputIsNotNull("Input Cannot be null")//.EnsureInputIsNotEmpty("Input Cannot be empty")
-            .Bind<Either<GeneralFailures, int>>(request => AddModelType(request, cancellationToken).Result)
-            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
-                                  Right: result => result.Match<IActionResult>(
-                                                      Left: errors2 => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors2)),
-                                                      Right: result2 => new OkObjectResult(result2)
-                                                                               )
-                                           );
-
-
+            return modelType.EnsureInputIsNotEmpty("Input Cannot be Empty")//.EnsureInputIsNotEmpty("Input Cannot be empty")
+                .Bind<Either<GeneralFailures, int>>(modelType => CreateModelType(modelType, cancellationToken).Result)
+                .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+                      Right: result => result.Match<IActionResult>(
+                      Left: errors2 => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors2)),
+                      Right: result2 => Created($"/{DocumentVersionAPIEndPoints.ModelType.Create}/{modelType.ModelTypeId}", modelType)));
         }
 
-        [HttpGet(Name = "GetEither")]
-        public async Task<IActionResult> Get([FromBody] ModelTypeDTO request, CancellationToken cancellationToken)
-        {   //var request = new ModelTypeDTO("string");
+        [HttpGet(template: DocumentVersionAPIEndPoints.ModelType.Get, Name = DocumentVersionAPIEndPoints.ModelType.Get)]
+        public async Task<IActionResult> Get([FromBody] ModelTypeRequestDTO request, CancellationToken cancellationToken)
+        {   
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
-            //var xp = request.EnsureInputIsNotNull("Input Cannot be null")
-            //.Bind<Either<ModelFailures, Application.ApplicationDTO.RequestDTO.ApplicationModelTypeRequestDTO>>(request => GetAllNewModelT(request, cancellationToken)
-            //.Match<IActionResult>(Left: errors => new OkObjectResult(errors),
-            //                      Right: result => result.Match<IActionResult>(
-            //                                          Left: errors2 => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors2)),
-            //                                          Right: result2 => new OkObjectResult(result2)
-            //  )));
-            return (await _mediator.Send(new GetModelTypeQuery(new ApplicationModelTypeRequestDTO (request.ModelTypeId,request.ModelTypeName)), cancellationToken))
+            return (await _mediator.Send(new GetModelTypeQuery(new ApplicationModelTypeRequestDTO(request.ModelTypeId)), cancellationToken))
             .Match<IActionResult>(Left: errors => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors)),
                                 Right: result => new OkObjectResult(result));
         }
 
 
-        [HttpGet( template: "GetAllAsync", Name = "GetAllEither")]
+        [HttpDelete(template: DocumentVersionAPIEndPoints.ModelType.Delete, Name = DocumentVersionAPIEndPoints.ModelType.Delete)]
+        public async Task<IActionResult> Get([FromBody] ModelTypeDeleteDTO request, CancellationToken cancellationToken)
+        {
+            var x = request.EnsureInputIsNotNull("Input Cannot be null");
+            return (await _mediator.Send(new DeleteModelTypeCommand(new ApplicationModelTypeDeleteDTO(request.ModelTypeId)), cancellationToken))
+            .Match<IActionResult>(Left: errors => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors)),
+                                Right: result => new OkObjectResult(result));
+        }
+
+        [HttpPut(template: DocumentVersionAPIEndPoints.ModelType.Update, Name = DocumentVersionAPIEndPoints.ModelType.Update)]
+        public async Task<IActionResult> Update(ModelTypeUpdateDTO request, CancellationToken cancellationToken)
+        {
+            var modelType = new ApplicationModelTypeUpdateDTO(request.ModelTypeId, request.ModelTypeName);
+
+            return modelType.EnsureInputIsNotEmpty("Input Cannot be Empty")//.EnsureInputIsNotEmpty("Input Cannot be empty")
+                .Bind<Either<GeneralFailures, int>>(modelType => UpdateModelType(modelType, cancellationToken).Result)
+                .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+                      Right: result => result.Match<IActionResult>(
+                      Left: errors2 => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors2)),
+                      Right: result2 => Created($"/{DocumentVersionAPIEndPoints.ModelType.Create}/{modelType.ModelTypeId}", modelType)));
+        }
+
+
+        [HttpGet(template: DocumentVersionAPIEndPoints.ModelType.GetAll, Name = DocumentVersionAPIEndPoints.ModelType.GetAll)]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
-
-          
             return (await _mediator.Send(new GetAllModelTypeQuery(), cancellationToken))
             .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                                 Right: result => new OkObjectResult(result));
         }
 
-        private async Task<Either<GeneralFailures, int>> AddModelType(ModelTypeDTO modelTypeDTO, CancellationToken cancellationToken)
-        {
 
-            var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeId,modelTypeDTO.ModelTypeName);
-            var x = await _mediator.Send(new AddNewModelTypeCommand(modelType), cancellationToken);
-            return x;
+
+
+        private async Task<Either<GeneralFailures, int>> CreateModelType(ApplicationModelTypeCreateDTO modelType, CancellationToken cancellationToken)
+        {
+            return await _mediator.Send(new AddNewModelTypeCommand(modelType), cancellationToken);
+            
         }
 
+        private async Task<Either<GeneralFailures, int>> UpdateModelType(ApplicationModelTypeUpdateDTO modelType, CancellationToken cancellationToken)
+        {
+            return await _mediator.Send(new UpdateModelTypeCommand(modelType), cancellationToken);
 
+        }
 
     }
 }

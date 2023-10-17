@@ -15,9 +15,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Reports\Report1 - Copy.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Reports\Report1.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BarcodeLabelImages\" />
   </ItemGroup>
 
 </Project>

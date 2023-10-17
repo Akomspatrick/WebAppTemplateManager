@@ -10,6 +10,6 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Commands
 {
-    public record DeleteModelTypeCommand(ApplicationModelTypeDeleteDTO ModelTypeId) : IRequest<Either<GeneralFailures, int>>;
+    public record UpdateModelTypeCommand (ApplicationModelTypeUpdateDTO modelTypeName) : IRequest<Either<GeneralFailures, int>>;
 
 }
