@@ -10,8 +10,8 @@ namespace DocumentVersionManager.Infrastructure.Persistence
         public DbSet<ModelTypes> ModelType { get; private set; }
         public DbSet<DocumentType> DocumentType { get; private set; }
         public DbSet<HigherModel> HigherModel { get; private set; }
-        
-        //public DbSet<Model> ProductModel { get; private set; }
+
+        public DbSet<Model> Models { get; private set; }
 
         //public DbSet<CapacityDocument> CapacityDocument { get; private set; }
         //public DbSet<CapacitySpecification> CapacitySpecification { get; private set; }

@@ -10,6 +10,6 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.DocumentType.Commands
 {
-    public record AddNewDocumentTypeCommand(ApplicationDocumentTypeRequestDTO documentTypeName) : IRequest<Either<GeneralFailures, int>>;
+    public record CreateDocumentTypeCommand(ApplicationDocumentTypeRequestDTO documentTypeName) : IRequest<Either<GeneralFailures, int>>;
 
 }

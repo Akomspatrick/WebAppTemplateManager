@@ -17,15 +17,15 @@ namespace DocumentVersionManager.Infrastructure
 {
     public static class InfrastructureServiceCollection
     {
-        public  static   IServiceCollection  AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            var applicationAssembly = typeof(InfrastructureServiceCollection).Assembly; 
+            var applicationAssembly = typeof(InfrastructureServiceCollection).Assembly;
 
-           // services.AddAutoMapper(applicationAssembly);
+            // services.AddAutoMapper(applicationAssembly);
             //services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<ModelTypesRepository>());
-            services.AddScoped<IModelRepository, ModelRepository>();   
-            services.AddScoped<IModelTypesRepository, ModelTypesRepository>(); 
-            services.AddScoped( typeof(IGenericRepository<>) , typeof(GenericRepository<>));
+            services.AddScoped<IModelRepository, ModelRepository>();
+            services.AddScoped<IModelTypesRepository, ModelTypesRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

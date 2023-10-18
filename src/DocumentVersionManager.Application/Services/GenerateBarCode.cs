@@ -10,12 +10,12 @@ namespace DocumentVersionManager.Application.Services
     {
         public GenerateBarCode(string ProductId, int height = 200, int width = 400)
         {
-            
+
         }
 
         public string Generate()
         {
             throw new NotImplementedException();
-        }   
+        }
     }
 }

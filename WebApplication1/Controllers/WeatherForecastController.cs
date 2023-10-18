@@ -22,7 +22,7 @@ namespace WebApplication1.Controllers
         public WeatherForecastController(ILogger<WeatherForecastController> logger, IHostingEnvironment hostingEnvironment)
         {
             _logger = logger;
-            _hostingEnvironment = hostingEnvironment;   
+            _hostingEnvironment = hostingEnvironment;
         }
 
         //[HttpGet(Name = "GetWeatherForecast")]
@@ -65,18 +65,18 @@ namespace WebApplication1.Controllers
 
 
         //}
-        
+
         [HttpGet(Name = "GetWeatherForecastqqq")]
-       // public IActionResult PrintLabel([FromBody] TheProduct product)
-       public IActionResult PrintLabel(string  productId)
+        // public IActionResult PrintLabel([FromBody] TheProduct product)
+        public IActionResult PrintLabel(string productId)
         {
 
             string base64String = GetBarCodeIStream(productId);
             var path = Path.Combine(_hostingEnvironment.ContentRootPath, "Reports", "Report1.rdlc");
             Random random = new Random();
             string imagetype = "jpeg";
-             var ImageResult  = new ImageResult(imagetype).Create();
-            string filename = $"{productId}BarCodelabel_{ random.Next(1, 1000000).ToString()}{ImageResult.Extension}";
+            var ImageResult = new ImageResult(imagetype).Create();
+            string filename = $"{productId}BarCodelabel_{random.Next(1, 1000000).ToString()}{ImageResult.Extension}";
             var imagesPath = Path.Combine(_hostingEnvironment.ContentRootPath, "BarcodeLabelImages", filename);
 
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
@@ -92,13 +92,13 @@ namespace WebApplication1.Controllers
                     new ReportParameter("BarCodeImg", base64String, true)
                 };
                 locareport.SetParameters(reportParameters);
-                
+
                 var result = locareport.Render("IMAGE");
 
                 using (Image image = Image.FromStream(new MemoryStream(result)))
                 {
                     image.Save(imagesPath, ImageResult.TheImageFormat);  // Or Png
-                }   
+                }
                 return PhysicalFile(imagesPath, ImageResult.ImageType, filename);
 
                 //* return File(result, "application/pdf", "PrintOut.pdf");
@@ -111,13 +111,13 @@ namespace WebApplication1.Controllers
                 //•	"HTML4.0"
                 //•	"HTML3.2"
                 //•	"MHTML" *//* }
-               // return File(result, "application/pdf", "PrintOut.pdf");
+                // return File(result, "application/pdf", "PrintOut.pdf");
             }
 
 
         }
 
- 
+
 
         private static string GetBarCodeIStream(string text)
         {
@@ -128,11 +128,11 @@ namespace WebApplication1.Controllers
                 {
                     Height = 40, // Specify the height of the barcode image
                     Width = 300,
-                     GS1Format = true,
-                         Margin = 0,
-                          NoPadding = true,
-                           PureBarcode = true,
-                          
+                    GS1Format = true,
+                    Margin = 0,
+                    NoPadding = true,
+                    PureBarcode = true,
+
                     // Specify the width of the barcode image,
                 }
             };
@@ -146,7 +146,7 @@ namespace WebApplication1.Controllers
             var byteArray = stream.ToArray();
             // return byteArray;
             return Convert.ToBase64String(byteArray);
-          
+
         }
     }
 }

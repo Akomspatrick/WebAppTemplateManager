@@ -13,7 +13,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         public ModelTypesRepository(DocumentVersionManagerContext ctx) : base(ctx)
         {
             // _mapper = mapper;
-            _ctx = ctx; 
+            _ctx = ctx;
         }
 
 

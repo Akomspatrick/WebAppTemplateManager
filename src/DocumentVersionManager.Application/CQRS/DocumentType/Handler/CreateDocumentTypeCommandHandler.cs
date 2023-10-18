@@ -15,18 +15,18 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.DocumentType.Handler
 {
-    public class AddNewDocumentTypeCommandHandler : IRequestHandler<AddNewDocumentTypeCommand, Either<GeneralFailures, int>>
+    public class CreateDocumentTypeCommandHandler : IRequestHandler<CreateDocumentTypeCommand, Either<GeneralFailures, int>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IAppLogger<AddNewModelTypeCommandHandler> _logger;
+        private readonly IAppLogger<CreateModelTypeCommandHandler> _logger;
 
-        public AddNewDocumentTypeCommandHandler(IUnitOfWork unitOfWork, IAppLogger<AddNewModelTypeCommandHandler> logger)
+        public CreateDocumentTypeCommandHandler(IUnitOfWork unitOfWork, IAppLogger<CreateModelTypeCommandHandler> logger)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, int>> Handle(AddNewDocumentTypeCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailures, int>> Handle(CreateDocumentTypeCommand request, CancellationToken cancellationToken)
         {
             var entity = Domain.ModelAggregateRoot.Entities.DocumentType.Create(request.documentTypeName.DocumentTypeName);
             var repository = _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.DocumentType>();

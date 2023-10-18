@@ -26,25 +26,15 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         }
         public async Task<Either<GeneralFailures, int>> Handle(UpdateModelTypeCommand request, CancellationToken cancellationToken)
         {
-            // return (await _unitOfWork.AsyncRepository<ModelTypes>().GetMatch(s=>(s.ModelTypeId==request.modelTypeName.ModelTypeId ),cancellationToken))
-            //.Match(Left: x => x,
-            //       Right: x => _unitOfWork
-            //                   .AsyncRepository<ModelTypes>()
-            //                   .UpdateAsync(x, cancellationToken)
-            //                   .Result);
+            var entity = ModelTypes.Create(request.modelTypeUpdateDTO.ModelTypeId, request.modelTypeUpdateDTO.ModelTypeName);
 
-            var entity = ModelTypes.Create(request.modelTypeName.ModelTypeId, request.modelTypeName.ModelTypeName);
-           
             return await _unitOfWork.AsyncRepository<ModelTypes>().UpdateAsync(entity, cancellationToken);
-            //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             //_logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
-           
-
         }
 
-        private ModelTypes modify(ModelTypes x, ApplicationModelTypeUpdateDTO modelTypeName)
+        private ModelTypes modify(ModelTypes x, ApplicationModelTypeUpdateDTO modelTypeUpdateDTO)
         {
-           return ModelTypes.Create (x.ModelTypeId,modelTypeName.ModelTypeName) ;
+            return ModelTypes.Create(x.ModelTypeId, modelTypeUpdateDTO.ModelTypeName);
         }
     }
 }

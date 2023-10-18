@@ -12,7 +12,7 @@ namespace DocumentVersionManager.Domain.Constants
     /// </summary>
     public static class FixedValues
     {    //Database Connection String Name 
-         public const string DBConnectionStringName = "constr";
+        public const string DBConnectionStringName = "Constr";
         //ModelType Constants
         public const int ModelTypeNameMaxLength = 128;
         public const int ModelTypeNameMinLength = 2;
@@ -23,16 +23,18 @@ namespace DocumentVersionManager.Domain.Constants
 
         //Model Constants   
         public const int ModelNameMaxLength = 128;
-
         public const int ModelNameMinLength = 2;
+        public const int ModelIdMaxLength = 30;
+        public const int ModelIdMinLength = 2;
 
 
-       
+        //DocumentType Constants
+
+
 
         public const string DEFAULT_DOCUMENT_PATH = "F:\\MASSLOAD\\DWG\\Load Cell - Standard\\";
         public const int DocumentTypeMaxLength = 128;
 
         public const int DocumentTypeMinLength = 2;
-
     }
 }

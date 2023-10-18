@@ -6,7 +6,7 @@ namespace DocumentVersionManager.Api.Extentions
     {
         public static Either<L, R> EnsureInputIsNotNull<L, R>(this R theInput, L errorMsg)
         {
-            if (theInput.IsNull() )
+            if (theInput.IsNull())
             {
                 return errorMsg;
             }

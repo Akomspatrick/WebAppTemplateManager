@@ -16,15 +16,15 @@ using System.Threading.Tasks;
 namespace DocumentVersionManager.Application;
 
 public static class ApplicationServiceCollection
+{
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
     {
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
-        {
-            var applicationAssembly = typeof(ApplicationServiceCollection).Assembly;
+        var applicationAssembly = typeof(ApplicationServiceCollection).Assembly;
         services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Class1>());
-        services.AddScoped<IPipelineBehavior<AddNewModelTypeCommand, int>, ValidationModelTypeBehaviour>();
+        services.AddScoped<IPipelineBehavior<CreateModelTypeCommand, int>, ValidationModelTypeBehaviour>();
         //Instead of adding individual fluent validation we can add Fluentvalidation asp.netcore package and then 
         //services.AddScoped<IValidator<AddNewModelTypeCommand>, AddNewModelTypeValidator>();
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-        return services;    
-        }
+        return services;
     }
+}

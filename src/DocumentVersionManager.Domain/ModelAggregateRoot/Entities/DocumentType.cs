@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 {
-   public  class DocumentType : BaseEntity
+    public class DocumentType : BaseEntity
     {
         public string TypeName { get; init; } = string.Empty;
 

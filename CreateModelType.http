@@ -52,6 +52,12 @@ Content-Type: application/json
 ###
 //END OF MODEL TYPE 
 ###
+// START OF MODEL
+GET {{baseUrl}}/Models/GetAllAsync
+
+
+###
+//START OF DOCUMENT TYPE
 POST http://localhost:5007/DocumentType
 Content-Type: application/json
 

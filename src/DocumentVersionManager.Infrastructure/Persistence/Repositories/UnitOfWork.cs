@@ -12,7 +12,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         public readonly DocumentVersionManagerContext _ctx;
         private ModelRepository _modelRepository;
         private ModelTypesRepository _modelTypesRepository;
-       // private GenericRepository<object> _asyncRepository;
+        // private GenericRepository<object> _asyncRepository;
 
         //private GenericRepository _asyncRepository;//<T> where T : BaseEntity;
 
@@ -29,7 +29,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         public IGenericRepository<T> AsyncRepository<T>() where T : BaseEntity => new GenericRepository<T>(_ctx);
 
 
-       // public IGenericRepository<T>  AsyncRepository1<T>() where T : BaseEntity =>  _asyncRepository ??=  new GenericRepository<T>(_ctx);
+        // public IGenericRepository<T>  AsyncRepository1<T>() where T : BaseEntity =>  _asyncRepository ??=  new GenericRepository<T>(_ctx);
 
 
         public async Task<Either<GeneralFailures, int>> CommitAllChanges(CancellationToken cancellationToken)

@@ -14,7 +14,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public string DocumentName { get; init; } = string.Empty;
         public string ModelName { get; init; } = string.Empty;
 
-         public int RevisionNumber { get; init; }
+        public int RevisionNumber { get; init; }
 
 
 

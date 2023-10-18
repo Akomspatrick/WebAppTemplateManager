@@ -24,6 +24,13 @@ namespace DocumentVersionManager.Api.Controllers.V1
             _logger = logger;
             _mediator = mediator;
         }
+        [HttpGet(template: DocumentVersionAPIEndPoints.ModelType.GetAll, Name = DocumentVersionAPIEndPoints.ModelType.GetAll)]
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        {
+            return (await _mediator.Send(new GetAllModelTypeQuery(), cancellationToken))
+            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+                                Right: result => new OkObjectResult(result));
+        }
 
         [HttpPost(template: DocumentVersionAPIEndPoints.ModelType.Create, Name = DocumentVersionAPIEndPoints.ModelType.Create)]
         public async Task<IActionResult> Create(ModelTypeCreateDTO request, CancellationToken cancellationToken)
@@ -40,7 +47,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
 
         [HttpGet(template: DocumentVersionAPIEndPoints.ModelType.Get, Name = DocumentVersionAPIEndPoints.ModelType.Get)]
         public async Task<IActionResult> Get([FromBody] ModelTypeRequestDTO request, CancellationToken cancellationToken)
-        {   
+        {
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
             return (await _mediator.Send(new GetModelTypeQuery(new ApplicationModelTypeRequestDTO(request.ModelTypeId)), cancellationToken))
             .Match<IActionResult>(Left: errors => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors)),
@@ -71,21 +78,14 @@ namespace DocumentVersionManager.Api.Controllers.V1
         }
 
 
-        [HttpGet(template: DocumentVersionAPIEndPoints.ModelType.GetAll, Name = DocumentVersionAPIEndPoints.ModelType.GetAll)]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
-        {
-            return (await _mediator.Send(new GetAllModelTypeQuery(), cancellationToken))
-            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
-                                Right: result => new OkObjectResult(result));
-        }
 
 
 
 
         private async Task<Either<GeneralFailures, int>> CreateModelType(ApplicationModelTypeCreateDTO modelType, CancellationToken cancellationToken)
         {
-            return await _mediator.Send(new AddNewModelTypeCommand(modelType), cancellationToken);
-            
+            return await _mediator.Send(new CreateModelTypeCommand(modelType), cancellationToken);
+
         }
 
         private async Task<Either<GeneralFailures, int>> UpdateModelType(ApplicationModelTypeUpdateDTO modelType, CancellationToken cancellationToken)

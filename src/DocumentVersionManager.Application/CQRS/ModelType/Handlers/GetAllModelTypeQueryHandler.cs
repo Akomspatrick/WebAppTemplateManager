@@ -16,11 +16,11 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 {
-    public class GetAllNewModelTypeQueryHandler : IRequestHandler<GetAllModelTypeQuery, Either<GeneralFailures, IEnumerable<ApplicationModelTypeResponseDTO>>>
+    public class GetAllModelTypeQueryHandler : IRequestHandler<GetAllModelTypeQuery, Either<GeneralFailures, IEnumerable<ApplicationModelTypeResponseDTO>>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IAppLogger<GetAllNewModelTypeQueryHandler> _logger;
-        public GetAllNewModelTypeQueryHandler(IUnitOfWork unitOfWork, IAppLogger<GetAllNewModelTypeQueryHandler> logger)
+        private readonly IAppLogger<GetAllModelTypeQueryHandler> _logger;
+        public GetAllModelTypeQueryHandler(IUnitOfWork unitOfWork, IAppLogger<GetAllModelTypeQueryHandler> logger)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;

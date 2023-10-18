@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Domain.Base
 {
-    public class BaseDomainEvent :INotification
+    public class BaseDomainEvent : INotification
     {
         public virtual Guid EventId { get; init; }
-        public virtual DateTime CreatedOn { get; init; }    
+        public virtual DateTime CreatedOn { get; init; }
         public virtual DateTime CreatedOnUtc { get; init; }
 
         public BaseDomainEvent()

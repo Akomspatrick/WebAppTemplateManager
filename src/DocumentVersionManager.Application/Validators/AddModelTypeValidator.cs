@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.Validators
 {
-    public class AddModelTypeValidator : AbstractValidator<AddNewModelTypeCommand>
+    public class AddModelTypeValidator : AbstractValidator<CreateModelTypeCommand>
     {
         public AddModelTypeValidator()
         {
-            RuleFor(x => x.modelTypeName).NotNull().NotEmpty();
+            RuleFor(x => x.modelTypeCreateDTO).NotNull().NotEmpty();
             // RuleFor(x=>x.modelTypeName)..NotEmpty();
         }
     }

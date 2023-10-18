@@ -13,9 +13,9 @@ namespace DocumentVersionManager.Domain.Interfaces
     public interface IGenericRepository<T> where T : BaseEntity
     {
         Task<Either<GeneralFailures, int>> AddAsync(T entity, CancellationToken cancellationToken);
-        Task<Either<GeneralFailures, Task<IReadOnlyList<T>>>>  GetAllAsync(CancellationToken cancellationToken);
+        Task<Either<GeneralFailures, Task<IReadOnlyList<T>>>> GetAllAsync(CancellationToken cancellationToken);
 
-       
+
         Task<Either<GeneralFailures, int>> UpdateAsync(T entity, CancellationToken cancellationToken);
         Task<Either<GeneralFailures, int>> DeleteAsync(T entity, CancellationToken cancellationToken);
         Task<Either<GeneralFailures, T>> GetMatch(System.Linq.Expressions.Expression<Func<T, bool>> match, CancellationToken cancellationToken);

@@ -1,4 +1,5 @@
 ﻿using DocumentVersionManager.Application.Contracts.RequestDTO;
+using DocumentVersionManager.Application.Contracts.ResponseDTO;
 using DocumentVersionManager.Domain.Errors;
 using LanguageExt;
 using MediatR;
@@ -8,8 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentVersionManager.Application.CQRS.ModelType.Commands
+namespace DocumentVersionManager.Application.CQRS.Model.Commands
 {
-    public record DeleteModelTypeCommand(ApplicationModelTypeDeleteDTO modelTypeDeleteDTO) : IRequest<Either<GeneralFailures, int>>;
-
+    public record CreateModelCommand(ApplicationModelCreateDTO ModelCreateDTO) :  IRequest<Either<GeneralFailures, int>>;
 }

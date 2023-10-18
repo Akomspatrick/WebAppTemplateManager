@@ -11,21 +11,21 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.Behaviours
 {
-    public class ValidationModelTypeBehaviour : IPipelineBehavior<AddNewModelTypeCommand, int>
+    public class ValidationModelTypeBehaviour : IPipelineBehavior<CreateModelTypeCommand, int>
     {
-        private readonly IValidator<AddNewModelTypeCommand> _validator;
+        private readonly IValidator<CreateModelTypeCommand> _validator;
 
-        public ValidationModelTypeBehaviour(IValidator<AddNewModelTypeCommand> validator)
+        public ValidationModelTypeBehaviour(IValidator<CreateModelTypeCommand> validator)
         {
             _validator = validator;
         }
 
-        public async Task<int> Handle(AddNewModelTypeCommand request, RequestHandlerDelegate<int> next, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateModelTypeCommand request, RequestHandlerDelegate<int> next, CancellationToken cancellationToken)
         {
             var validationResult = await _validator.ValidateAsync(request, cancellationToken);
             if (validationResult.IsValid)
             {
-               return  await next();
+                return await next();
             }
             var result = await next();
             return result;

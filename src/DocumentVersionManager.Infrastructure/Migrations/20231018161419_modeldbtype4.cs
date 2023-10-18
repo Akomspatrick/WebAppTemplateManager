@@ -7,7 +7,7 @@
 namespace DocumentVersionManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class modeldbtype : Migration
+    public partial class modeldbtype4 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,6 +56,26 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "Models",
+                columns: table => new
+                {
+                    ModelId = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
+                    ModelName = table.Column<string>(type: "longtext", nullable: false),
+                    ModelTypesId = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Models", x => x.ModelId);
+                    table.ForeignKey(
+                        name: "FK_Models_ModelType_ModelTypesId",
+                        column: x => x.ModelTypesId,
+                        principalTable: "ModelType",
+                        principalColumn: "ModelTypeId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
             migrationBuilder.InsertData(
                 table: "DocumentType",
                 column: "TypeName",
@@ -73,11 +93,11 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 columns: new[] { "HigherModelName", "Capacity", "HigherModelDescription", "Id", "ProductId" },
                 values: new object[,]
                 {
-                    { "HigherModel1", 1, "HigherModel1", "e91ad76a-eb23-43be-ad34-4ff48671a29f", "HigherModel1" },
-                    { "HigherModel2", 12, "HigherModel12", "55b0cc5e-371b-4ccf-b8c9-24d921d50594", "HigherModel12" },
-                    { "HigherModel3", 13, "HigherModel1", "da4a7dc7-3563-4cff-a8b9-c60779881292", "HigherModel13" },
-                    { "HigherModel4", 14, "HigherModel14", "99d6b153-3712-4325-962a-25e49e68ca39", "HigherModel14" },
-                    { "HigherModel5", 5, "HigherModel5", "18c58b0e-be3d-4a95-9bd1-c946574edf09", "HigherModel5" }
+                    { "HigherModel1", 1, "HigherModel1", "661e263b-f5b5-4458-86ec-4468b9e24d98", "HigherModel1" },
+                    { "HigherModel2", 12, "HigherModel12", "12532b43-bd99-42d8-aca0-153f27b68807", "HigherModel12" },
+                    { "HigherModel3", 13, "HigherModel1", "c85835c5-d4eb-48dd-8f09-a0aeb7c50407", "HigherModel13" },
+                    { "HigherModel4", 14, "HigherModel14", "23d0efc7-cc86-4a1e-ad60-759bca831151", "HigherModel14" },
+                    { "HigherModel5", 5, "HigherModel5", "b1a1f3ba-f977-401c-b2d1-5ab350f40fe1", "HigherModel5" }
                 });
 
             migrationBuilder.InsertData(
@@ -89,6 +109,23 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     { "SECONDMODELTYPEID", "SECONDMODELTYPE" },
                     { "THIRDMODELTYPEID", "THIRDMODELTYPE" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Models",
+                columns: new[] { "ModelId", "ModelName", "ModelTypesId" },
+                values: new object[,]
+                {
+                    { "FIRSTMODELID1", "FIRSTMODELNAME1", "FIRSTMODELTYPEID" },
+                    { "FIRSTMODELID2", "FIRSTMODELNAME2", "FIRSTMODELTYPEID" },
+                    { "FIRSTMODELID3", "FIRSTMODELNAME2", "FIRSTMODELTYPEID" },
+                    { "SECONDMODELID1", "SECONDMODELNAME1", "SECONDMODELTYPEID" },
+                    { "THIRDMODELD1", "THIRDMODELNAME1", "THIRDMODELTYPEID" }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Models_ModelTypesId",
+                table: "Models",
+                column: "ModelTypesId");
         }
 
         /// <inheritdoc />
@@ -99,6 +136,9 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "HigherModel");
+
+            migrationBuilder.DropTable(
+                name: "Models");
 
             migrationBuilder.DropTable(
                 name: "ModelType");

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DocumentVersionManager.Infrastructure.Migrations
 {
     [DbContext(typeof(DocumentVersionManagerContext))]
-    [Migration("20231017160731_modeldbtype")]
-    partial class modeldbtype
+    [Migration("20231018161419_modeldbtype4")]
+    partial class modeldbtype4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,7 +84,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel1",
                             Capacity = 1,
                             HigherModelDescription = "HigherModel1",
-                            Id = "e91ad76a-eb23-43be-ad34-4ff48671a29f",
+                            Id = "661e263b-f5b5-4458-86ec-4468b9e24d98",
                             ProductId = "HigherModel1"
                         },
                         new
@@ -92,7 +92,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel2",
                             Capacity = 12,
                             HigherModelDescription = "HigherModel12",
-                            Id = "55b0cc5e-371b-4ccf-b8c9-24d921d50594",
+                            Id = "12532b43-bd99-42d8-aca0-153f27b68807",
                             ProductId = "HigherModel12"
                         },
                         new
@@ -100,7 +100,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel3",
                             Capacity = 13,
                             HigherModelDescription = "HigherModel1",
-                            Id = "da4a7dc7-3563-4cff-a8b9-c60779881292",
+                            Id = "c85835c5-d4eb-48dd-8f09-a0aeb7c50407",
                             ProductId = "HigherModel13"
                         },
                         new
@@ -108,7 +108,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel4",
                             Capacity = 14,
                             HigherModelDescription = "HigherModel14",
-                            Id = "99d6b153-3712-4325-962a-25e49e68ca39",
+                            Id = "23d0efc7-cc86-4a1e-ad60-759bca831151",
                             ProductId = "HigherModel14"
                         },
                         new
@@ -116,8 +116,62 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel5",
                             Capacity = 5,
                             HigherModelDescription = "HigherModel5",
-                            Id = "18c58b0e-be3d-4a95-9bd1-c946574edf09",
+                            Id = "b1a1f3ba-f977-401c-b2d1-5ab350f40fe1",
                             ProductId = "HigherModel5"
+                        });
+                });
+
+            modelBuilder.Entity("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.Model", b =>
+                {
+                    b.Property<string>("ModelId")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("ModelName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ModelTypesId")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.HasKey("ModelId");
+
+                    b.HasIndex("ModelTypesId");
+
+                    b.ToTable("Models");
+
+                    b.HasData(
+                        new
+                        {
+                            ModelId = "FIRSTMODELID1",
+                            ModelName = "FIRSTMODELNAME1",
+                            ModelTypesId = "FIRSTMODELTYPEID"
+                        },
+                        new
+                        {
+                            ModelId = "FIRSTMODELID2",
+                            ModelName = "FIRSTMODELNAME2",
+                            ModelTypesId = "FIRSTMODELTYPEID"
+                        },
+                        new
+                        {
+                            ModelId = "FIRSTMODELID3",
+                            ModelName = "FIRSTMODELNAME2",
+                            ModelTypesId = "FIRSTMODELTYPEID"
+                        },
+                        new
+                        {
+                            ModelId = "SECONDMODELID1",
+                            ModelName = "SECONDMODELNAME1",
+                            ModelTypesId = "SECONDMODELTYPEID"
+                        },
+                        new
+                        {
+                            ModelId = "THIRDMODELD1",
+                            ModelName = "THIRDMODELNAME1",
+                            ModelTypesId = "THIRDMODELTYPEID"
                         });
                 });
 
@@ -151,6 +205,22 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ModelTypeId = "THIRDMODELTYPEID",
                             ModelTypeName = "THIRDMODELTYPE"
                         });
+                });
+
+            modelBuilder.Entity("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.Model", b =>
+                {
+                    b.HasOne("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.ModelTypes", "ModelTypes")
+                        .WithMany("Models")
+                        .HasForeignKey("ModelTypesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ModelTypes");
+                });
+
+            modelBuilder.Entity("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.ModelTypes", b =>
+                {
+                    b.Navigation("Models");
                 });
 #pragma warning restore 612, 618
         }

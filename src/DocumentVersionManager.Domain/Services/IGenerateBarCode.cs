@@ -8,7 +8,7 @@ namespace DocumentVersionManager.Domain.Services
 {
     public interface IGenerateBarCode
     {
-        public string GenerateBarCode(string ProductId, int height=200,int width=400);
+        public string GenerateBarCode(string ProductId, int height = 200, int width = 400);
 
 
     }

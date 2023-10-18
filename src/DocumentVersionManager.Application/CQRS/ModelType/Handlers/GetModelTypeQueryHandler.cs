@@ -16,11 +16,11 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 {
-    public class GetNewModelTypeQueryHandler : IRequestHandler<GetModelTypeQuery, Either<GeneralFailures, ApplicationModelTypeResponseDTO>>
+    public class GetModelTypeQueryHandler : IRequestHandler<GetModelTypeQuery, Either<GeneralFailures, ApplicationModelTypeResponseDTO>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IAppLogger<GetNewModelTypeQueryHandler> _logger;
-        public GetNewModelTypeQueryHandler(IUnitOfWork unitOfWork, IAppLogger<GetNewModelTypeQueryHandler> logger)
+        private readonly IAppLogger<GetModelTypeQueryHandler> _logger;
+        public GetModelTypeQueryHandler(IUnitOfWork unitOfWork, IAppLogger<GetModelTypeQueryHandler> logger)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
@@ -32,7 +32,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             return (await _unitOfWork.AsyncRepository<ModelTypes>()
                       //.GetByIdAsync(request.ModelTypeName.ModelTypeId, cancellationToken))
                       .GetMatch(s => (s.ModelTypeId == request.ModelTypeName.ModelTypeId), cancellationToken))
-                    .Map((result) => new ApplicationModelTypeResponseDTO(result.ModelTypeId,result.ModelTypeName));
+                    .Map((result) => new ApplicationModelTypeResponseDTO(result.ModelTypeId, result.ModelTypeName));
 
         }
 

@@ -12,11 +12,11 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
     {
         public string HigherModelName { get; private set; } = string.Empty;
         public string HigherModelDescription { get; private set; } = string.Empty;
-        public  string ProductId { get; private set; } = string.Empty;
-        public int Capacity { get; private set; } =0;
+        public string ProductId { get; private set; } = string.Empty;
+        public int Capacity { get; private set; } = 0;
 
 
-        public static HigherModel Create(string higherModelName, string productId,string higherModelDescription, int capacity)
+        public static HigherModel Create(string higherModelName, string productId, string higherModelDescription, int capacity)
         {
             if (string.IsNullOrWhiteSpace(higherModelName))
             {
@@ -34,12 +34,15 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             }
 
 
-            return new HigherModel() {
-                HigherModelName  = higherModelName, Id = Guid.NewGuid().ToString(),
+            return new HigherModel()
+            {
+                HigherModelName = higherModelName,
+                Id = Guid.NewGuid().ToString(),
                 HigherModelDescription = higherModelDescription,
-                ProductId= productId, Capacity = capacity
+                ProductId = productId,
+                Capacity = capacity
 
-              };
+            };
             // do some heavy lifting.
         }
     }

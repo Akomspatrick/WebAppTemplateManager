@@ -10,12 +10,12 @@ namespace DocumentVersionManager.Domain.Interfaces
     public interface IAuditableEntity
     {
         public DateTimeOffset? CreatedAt { get; set; }
-        public DateTimeOffset? UpdatedAt { get; set; }  
+        public DateTimeOffset? UpdatedAt { get; set; }
 
-        public  string CreatedBy { get; init; }  
-        public string UpdatedBy { get; init;}
+        public string CreatedBy { get; init; }
+        public string UpdatedBy { get; init; }
 
-        
+
 
     }
 }

@@ -11,7 +11,7 @@ namespace WebApplication1
         {
 
             ImageType = imagetype;
-           
+
         }
 
         private ImageResult(ImageFormat theImageFormat, string imagetype, string extension)

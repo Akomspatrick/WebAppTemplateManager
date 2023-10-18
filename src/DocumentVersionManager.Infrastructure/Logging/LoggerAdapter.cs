@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 namespace DocumentVersionManager.Infrastructure.Logging
 {
     public class LoggerAdapter<T> : IAppLogger<T>
-    {  private readonly ILogger<T> _logger;
+    {
+        private readonly ILogger<T> _logger;
         public LoggerAdapter(ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger<T>();
         }
         public void LogCritical(string message, params object[] args)
         {
-          _logger.LogCritical(message, args);
+            _logger.LogCritical(message, args);
         }
 
         public void LogDebug(string message, params object[] args)
@@ -26,17 +27,17 @@ namespace DocumentVersionManager.Infrastructure.Logging
 
         public void LogError(string message, params object[] args)
         {
-           _logger.LogError(message, args);
+            _logger.LogError(message, args);
         }
 
         public void LogInformation(string message, params object[] args)
         {
-           _logger.LogInformation(message, args);
+            _logger.LogInformation(message, args);
         }
 
         public void LogWarning(string message, params object[] args)
         {
-           _logger.LogWarning(message, args);
+            _logger.LogWarning(message, args);
         }
     }
 }

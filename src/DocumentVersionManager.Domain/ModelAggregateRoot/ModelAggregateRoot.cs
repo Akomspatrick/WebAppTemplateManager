@@ -1,4 +1,5 @@
 ﻿using DocumentVersionManager.Domain.Base;
+using DocumentVersionManager.Domain.Constants;
 using DocumentVersionManager.Domain.Enumerations;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,67 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
     public partial class Model : BaseEntity
     {
 
-        public Model(string modelId,string modelName, string modelTypeId)
+        //public Model(string modelId, string modelName, string modelTypeId)
+        //{
+        //    ModelId = modelId;
+        //    ModelName = modelName;
+        //    ModelTypeId = modelTypeId;
+        //}
+
+        public static Model Create(string modelId, string modelName, string modelTypeId)
         {
-            ModelId = modelId;
-            ModelName = modelName;
-            ModelTypeId = modelTypeId;
+
+            if (string.IsNullOrWhiteSpace(modelName))
+            {
+                throw new ArgumentNullException(nameof(modelName));
+
+            }
+            if (modelName.Length > FixedValues.ModelNameMaxLength)
+            {
+                throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.ModelNameMaxLength} characters {nameof(modelName)} ");
+            }
+
+            if (modelName.Length < FixedValues.ModelNameMinLength)
+            {
+                throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelNameMaxLength}  characters  {nameof(modelName)} ");
+            }
+
+
+            if (string.IsNullOrWhiteSpace(modelTypeId))
+            {
+                throw new ArgumentNullException(nameof(modelTypeId));
+
+            }
+            if (modelTypeId.Length > FixedValues.ModelTypeIdMaxLength)
+            {
+                throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.ModelTypeIdMaxLength} characters {nameof(modelTypeId)} ");
+            }
+
+            if (modelTypeId.Length < FixedValues.ModelTypeIdMinLength)
+            {
+                throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelTypeIdMinLength} characters {nameof(modelTypeId)} ");
+            }
+
+
+            if (string.IsNullOrWhiteSpace(modelId))
+            {
+                throw new ArgumentNullException(nameof(modelId));
+
+            }
+            if (modelId.Length > FixedValues.ModelIdMaxLength)
+            {
+                throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.ModelIdMaxLength} characters {nameof(modelId)} ");
+            }
+
+            if (modelId.Length < FixedValues.ModelIdMinLength)
+            {
+                throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelIdMinLength} characters {nameof(modelId)} ");
+            }
+
+            return new Model() {ModelId= modelId,   ModelTypesId = modelTypeId, ModelName = modelName };
+
         }
+
 
         #region Accessors
 

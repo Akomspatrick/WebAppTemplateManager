@@ -9,7 +9,7 @@ namespace DocumentVersionManager.Domain.Interfaces
 {
     public interface IDomainEvents
     {
-        IReadOnlyList<BaseDomainEvent> DomainEvents { get;  }
+        IReadOnlyList<BaseDomainEvent> DomainEvents { get; }
         void AddDomainEvent(BaseDomainEvent domainEvent);
         void RemoveDomainEvent(BaseDomainEvent domainEvent);
         void AddDomainEvents(IEnumerable<BaseDomainEvent> domainEvents);

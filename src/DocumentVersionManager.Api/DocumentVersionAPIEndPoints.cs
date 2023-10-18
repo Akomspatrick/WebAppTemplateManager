@@ -19,5 +19,16 @@
             public const string Get = APIBase + "/" + Controller;
             public const string GetAll = APIBase + "/" + Controller + "/GetAllAsync";
         }
+
+        public static class Models
+        {
+            private const string Controller = "Models";
+            public const string Create = APIBase + "/" + Controller;
+            public const string Get = APIBase + "/" + Controller;
+            public const string Delete = APIBase + "/" + Controller;
+            public const string GetAll = APIBase + "/" + Controller + "/GetAllAsync";
+            public const string Update = APIBase + "/" + Controller;
+        }
+
     }
 }

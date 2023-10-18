@@ -42,10 +42,10 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
             try
             {
-                var list =   _ctx.Set<T>().ToList();
+                var list = _ctx.Set<T>().ToList();
                 var result = await _ctx.Set<T>().ToListAsync();
                 var x = result as IReadOnlyList<T>;
-                return  Task.FromResult(x) ;
+                return Task.FromResult(x);
             }
             catch (Exception ex)
             {
@@ -86,7 +86,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             try
             {
                 _ctx.Update(entity);
-              //  _ctx.Entry(entity).State = EntityState.Modified;
+                //  _ctx.Entry(entity).State = EntityState.Modified;
                 return await _ctx.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
@@ -114,7 +114,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         public async Task<Either<GeneralFailures, T>> GetMatch(Expression<Func<T, bool>> match, CancellationToken cancellationToken)
         {
             try
-            { 
+            {
                 var entity = await _ctx.Set<T>().AsNoTracking().FirstOrDefaultAsync(match, cancellationToken);
                 return entity != null ? entity : GeneralFailures.DataNotFoundInRepository;
             }
