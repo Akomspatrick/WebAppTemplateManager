@@ -30,23 +30,11 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
 
             return (await _unitOfWork.AsyncRepository<ModelTypes>()
-                      //.GetByIdAsync(request.ModelTypeName.ModelTypeId, cancellationToken))
-                      .GetMatch(s => (s.ModelTypeId == request.ModelTypeName.ModelTypeId), cancellationToken))
+                    .GetMatch(s => (s.ModelTypeId == request.modelTypeRequestDTO.ModelTypeId), cancellationToken))
                     .Map((result) => new ApplicationModelTypeResponseDTO(result.ModelTypeId, result.ModelTypeName));
 
         }
 
-        //public async Task<Either<ModelFailures, ApplicationModelTypeResponseDTO>> Handle(GetNewModelTypeQuery request, CancellationToken cancellationToken)
-        //{
-
-        //    var repository = _unitOfWork.AsyncRepository<ModelType>();
-        //    var x = await repository.GetByIdAsync(request.ModelTypeName.ModelTypeName, cancellationToken);
-        //    var result = x.Map(PrepareData);
-        //    return result;
-
-        //}
-
-        //private ApplicationModelTypeResponseDTO PrepareData(ModelType type)=> new ApplicationModelTypeResponseDTO(type.ModelTypeName);
 
     }
 }

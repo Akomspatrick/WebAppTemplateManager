@@ -12,7 +12,7 @@ namespace DocumentVersionManager.Application.Contracts.RequestDTO
 
     public record ApplicationModelRequestDTO(string ModelId);
 
-    public record ApplicationModelCreateDTO(string ModelId, string ModelTypeId, string ModelTypeName);
-    public record ApplicationModelUpdateDTO(string ModelId, string ModelTypeId, string ModelTypeName);
+    public record ApplicationModelCreateDTO(string ModelId, string ModelTypeId, string ModelName);
+    public record ApplicationModelUpdateDTO(string ModelId, string ModelTypeId, string ModelName);
     public record ApplicationModelDeleteDTO(string ModelId);
 }

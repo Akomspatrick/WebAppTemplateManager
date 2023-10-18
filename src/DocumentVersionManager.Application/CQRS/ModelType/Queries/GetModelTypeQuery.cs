@@ -15,6 +15,6 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Queries
     //{
     //    public ApplicationModelTypeRequestDTO ModelTypeName { get; set; }
     //}
-    public record GetModelTypeQuery(ApplicationModelTypeRequestDTO ModelTypeName) : IRequest<Either<GeneralFailures, ApplicationModelTypeResponseDTO>>;
+    public record GetModelTypeQuery(ApplicationModelTypeRequestDTO modelTypeRequestDTO) : IRequest<Either<GeneralFailures, ApplicationModelTypeResponseDTO>>;
 
 }

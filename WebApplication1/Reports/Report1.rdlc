@@ -14,7 +14,9 @@
                   <TextRun>
                     <Value>MASSFUSSION LOADCELL</Value>
                     <Style>
+                      <FontFamily>Tahoma</FontFamily>
                       <FontSize>6pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -95,6 +97,7 @@
                   <TextRun>
                     <Value>MODEL</Value>
                     <Style>
+                      <FontFamily>Calibri</FontFamily>
                       <FontSize>6pt</FontSize>
                     </Style>
                   </TextRun>
@@ -129,7 +132,9 @@
                   <TextRun>
                     <Value>S/N</Value>
                     <Style>
+                      <FontFamily>Calibri</FontFamily>
                       <FontSize>6pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -163,7 +168,8 @@
                   <TextRun>
                     <Value>=Parameters!ModelId.Value</Value>
                     <Style>
-                      <FontSize>6pt</FontSize>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>

@@ -24,31 +24,14 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }
-   
-
-
-
-
-
-
-
-
+        }  
 
         public async Task<Either<GeneralFailures, int>> Handle(CreateModelCommand request, CancellationToken cancellationToken)
         {
-            //var entity = ModelType.Create(request.modelTypeName.ModelTypeName);
-            //await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
-            //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
-            //return x;
-            var entity = Domain.ModelAggregateRoot.Entities.Model.Create(request.ModelCreateDTO.ModelId, request.ModelCreateDTO.ModelTypeName,request.ModelCreateDTO.ModelTypeName);
-            var repository = _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.Model>();
-            var x = await repository.AddAsync(entity, cancellationToken);
-            //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             _logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
-            return x;
-
-
+            var entity = Domain.ModelAggregateRoot.Entities.Model.Create(request.ModelCreateDTO.ModelId,request.ModelCreateDTO.ModelName, request.ModelCreateDTO.ModelTypeId);
+           
+            return await _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.Model>().AddAsync(entity, cancellationToken);
         }
     }
 }

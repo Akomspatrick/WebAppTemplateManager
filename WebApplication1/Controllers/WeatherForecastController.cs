@@ -127,8 +127,8 @@ namespace WebApplication1.Controllers
                 Options = new EncodingOptions
                 {
                     Height = 40, // Specify the height of the barcode image
-                    Width = 300,
-                    GS1Format = true,
+                    Width = 250,
+                    //GS1Format = true,
                     Margin = 0,
                     NoPadding = true,
                     PureBarcode = true,

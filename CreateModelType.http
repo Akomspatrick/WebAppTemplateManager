@@ -3,7 +3,7 @@
 @baseUrl = http://localhost:5007/api
 
 
-///POST  :ADD QUERY MODELTYPE
+///POST  :CREATE QUERY MODELTYPE
 ###
 POST {{baseUrl}}/ModelType
 Content-Type: application/json
@@ -53,8 +53,53 @@ Content-Type: application/json
 //END OF MODEL TYPE 
 ###
 // START OF MODEL
-GET {{baseUrl}}/Models/GetAllAsync
+GET {{baseUrl}}/Model/GetAllAsync
+###
+//GET SINGLE  MODELTYPE QUERY 
 
+GET {{baseUrl}}/Model
+Content-Type: application/json
+
+{
+  "modelId": "FIRSTMODELID22"
+}
+
+
+
+///POST  :CREATE QUERY MODEL
+###
+POST {{baseUrl}}/Model
+Content-Type: application/json
+
+{
+   "modelId": "FIRSTMODELID14",
+    "modelTypeId": "FIRSTMODELTYPEID",
+    "modelName": "FIRSTMODELNAME14"
+}
+
+###
+// delete a modeltype
+
+DELETE {{baseUrl}}/Model
+Content-Type: application/json
+
+{
+  "modelId": "FIRSTMODELID14"
+}
+###
+PUT {{baseUrl}}/Model
+Content-Type: application/json
+
+{
+  "modelId": "SECONDMODELID1",
+    "modelTypeId": "SECONDMODELTYPEID",
+    "modelName": "WHAT A FUCK"
+}
+
+
+
+
+###
 
 ###
 //START OF DOCUMENT TYPE

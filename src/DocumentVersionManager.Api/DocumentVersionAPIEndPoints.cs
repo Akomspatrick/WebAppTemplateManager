@@ -20,9 +20,9 @@
             public const string GetAll = APIBase + "/" + Controller + "/GetAllAsync";
         }
 
-        public static class Models
+        public static class Model
         {
-            private const string Controller = "Models";
+            private const string Controller = "Model";
             public const string Create = APIBase + "/" + Controller;
             public const string Get = APIBase + "/" + Controller;
             public const string Delete = APIBase + "/" + Controller;
