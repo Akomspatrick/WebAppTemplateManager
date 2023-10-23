@@ -15,13 +15,13 @@ namespace DocumentVersionManager.Api.Controllers.V1
     public class DocumentTypeController : ControllerBase
     {
         private readonly ILogger<DocumentTypeController> _logger;
-        //private readonly IMediator _mediator;
-        private readonly ISender _mediator;
+        //private readonly IMediator _sender;
+        private readonly ISender _sender;
 
-        public DocumentTypeController(ILogger<DocumentTypeController> logger, ISender mediator)
+        public DocumentTypeController(ILogger<DocumentTypeController> logger, ISender sender)
         {
             _logger = logger;
-            _mediator = mediator;
+            _sender = sender;
         }
 
         [HttpPost(Name = "PostEitherDocumentType")]
@@ -40,7 +40,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
         }
 
         private async Task<Either<GeneralFailures, int>> AddDocumentType(DocumentTypeDTO request, CancellationToken cancellationToken)
-            => await _mediator.Send(new CreateDocumentTypeCommand(new ApplicationDocumentTypeRequestDTO(request.DocumentTypeName)), cancellationToken);
+            => await _sender.Send(new CreateDocumentTypeCommand(new ApplicationDocumentTypeRequestDTO(request.DocumentTypeName)), cancellationToken);
 
     }
 }

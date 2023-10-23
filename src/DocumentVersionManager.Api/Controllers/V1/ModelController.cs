@@ -18,20 +18,21 @@ namespace DocumentVersionManager.Api.Controllers.V1
     public class ModelController : ControllerBase
     {
         private readonly ILogger<ModelController> _logger;
-        //private readonly IMediator _mediator;
-        private readonly ISender _mediator;
+        //private readonly IMediator _sender;
+        private readonly ISender _sender;
 
-        public ModelController(ILogger<ModelController> logger, ISender mediator)
+        public ModelController(ILogger<ModelController> logger, ISender sender)
         {
             _logger = logger;
-            _mediator = mediator;
+           
+            _sender = sender;
         }
 
         [HttpGet(template: DocumentVersionAPIEndPoints.Model.Get, Name = DocumentVersionAPIEndPoints.Model.Get)]
         public async Task<IActionResult> Get([FromBody] ModelRequestDTO request, CancellationToken cancellationToken)
         {
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
-            return (await _mediator.Send(new GetModelsQuery(new ApplicationModelRequestDTO(request.ModelId)), cancellationToken))
+            return (await _sender.Send(new GetModelsQuery(new ApplicationModelRequestDTO(request.ModelId)), cancellationToken))
             .Match<IActionResult>(Left: errors => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors)),
                                 Right: result => new OkObjectResult(result));
         }
@@ -39,7 +40,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
         [HttpGet(template: DocumentVersionAPIEndPoints.Model.GetAll, Name = DocumentVersionAPIEndPoints.Model.GetAll)]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
-            return (await _mediator.Send(new GetAllModelsQuery(), cancellationToken))
+            return (await _sender.Send(new GetAllModelsQuery(), cancellationToken))
             .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                                 Right: result => new OkObjectResult(result));
         }
@@ -63,7 +64,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
         public async Task<IActionResult> Get([FromBody] ModelDeleteDTO request, CancellationToken cancellationToken)
         {
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
-            return (await _mediator.Send(new DeleteModelCommand(new ApplicationModelDeleteDTO(request.ModelId)), cancellationToken))
+            return (await _sender.Send(new DeleteModelCommand(new ApplicationModelDeleteDTO(request.ModelId)), cancellationToken))
             .Match<IActionResult>(Left: errors => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors)),
                                 Right: result => new OkObjectResult(result));
         }
@@ -82,7 +83,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
         }
 
         private async Task<Either<GeneralFailures, int>> UpdateModelType(ApplicationModelUpdateDTO modelType, CancellationToken cancellationToken)
-       => await _mediator.Send(new UpdateModelCommand(modelType), cancellationToken);
+       => await _sender.Send(new UpdateModelCommand(modelType), cancellationToken);
 
 
 
@@ -94,7 +95,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
 
 
         private async Task<Either<GeneralFailures, int>> CreateModel(ApplicationModelCreateDTO modelType, CancellationToken cancellationToken)
-           => await _mediator.Send(new CreateModelCommand(modelType), cancellationToken);
+           => await _sender.Send(new CreateModelCommand(modelType), cancellationToken);
 
     }
 }

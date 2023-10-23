@@ -14,13 +14,13 @@ namespace DocumentVersionManager.Api.Controllers
     public class HigherModelController : ControllerBase
     {
         private readonly ILogger<HigherModelController> _logger;
-        //private readonly IMediator _mediator;
-        private readonly ISender _mediator;
+        //private readonly IMediator _sender;
+        private readonly ISender _sender;
 
-        public HigherModelController(ILogger<HigherModelController> logger, ISender mediator)
+        public HigherModelController(ILogger<HigherModelController> logger, ISender sender)
         {
             _logger = logger;
-            _mediator = mediator;
+            _sender = sender;
         }
 
         [HttpPost(template: "PostHigherModel", Name = "PostEitherHigherModel")]
@@ -28,7 +28,7 @@ namespace DocumentVersionManager.Api.Controllers
         {
 
             //  var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
-            var x = await _mediator.Send(new AddNewHigherModelCommand(request.HigherModelName, request.HigherModelDescription, request.ProductId, request.Capacity), cancellationToken);
+            var x = await _sender.Send(new AddNewHigherModelCommand(request.HigherModelName, request.HigherModelDescription, request.ProductId, request.Capacity), cancellationToken);
             return Ok();
 
         }
@@ -40,7 +40,7 @@ namespace DocumentVersionManager.Api.Controllers
 
             //  var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
             HigherModelDTO request = new HigherModelDTO("string", "string", "string", 1);
-            var x = await _mediator.Send(new AddNewHigherModelCommand(request.HigherModelName, request.HigherModelDescription, request.ProductId, request.Capacity), cancellationToken);
+            var x = await _sender.Send(new AddNewHigherModelCommand(request.HigherModelName, request.HigherModelDescription, request.ProductId, request.Capacity), cancellationToken);
             return Ok();
 
         }
@@ -52,7 +52,7 @@ namespace DocumentVersionManager.Api.Controllers
 
         //    //  var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
         //    HigherModelDTO request = new HigherModelDTO("string", "string", "string", 1);
-        //    var x = await _mediator.Send(new AddNewHigherModelCommand(request.HigherModelName, request.HigherModelDescription, request.ProductId, request.Capacity), cancellationToken);
+        //    var x = await _sender.Send(new AddNewHigherModelCommand(request.HigherModelName, request.HigherModelDescription, request.ProductId, request.Capacity), cancellationToken);
         //    return Ok();
 
         //}

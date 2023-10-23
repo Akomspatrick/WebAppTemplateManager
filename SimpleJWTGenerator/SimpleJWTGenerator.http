@@ -1,0 +1,13 @@
+@SimpleJWTGenerator_HostAddress = https://localhost:7050/WeatherForecast
+@SimpleJWTGenerator_Token = eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjk4MDk0OTU1LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDUwIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzA1MCJ9.dLaD-HM_LdriVHoJ9AkSimr-DzVLudz1FwSMpphO8Zk
+GET {{SimpleJWTGenerator_HostAddress}}/logout
+Accept: application/json
+
+###
+GET {{SimpleJWTGenerator_HostAddress}}/login
+Accept: application/json
+Authorization: Bearer {{SimpleJWTGenerator_Token}}
+
+###
+
+GET https://localhost:7050/WeatherForecast?username=admin&password=admin
