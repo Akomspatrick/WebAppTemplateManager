@@ -27,12 +27,12 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             }
             if (modelTypeName.Length > FixedValues.ModelTypeNameMaxLength)
             {
-                throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.ModelTypeNameMaxLength} characters {nameof(modelTypeName)} ");
+                throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.ModelTypeNameMaxLength} characters {nameof(modelTypeName)} but it is  {modelTypeName.Length}");
             }
 
             if (modelTypeName.Length < FixedValues.ModelTypeNameMinLength)
             {
-                throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelTypeNameMinLength} characters {nameof(modelTypeName)} ");
+                throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelTypeNameMinLength} characters {nameof(modelTypeName)} but it is {modelTypeName.Length}");
             }
 
             if (string.IsNullOrWhiteSpace(modelTypeId))
@@ -42,12 +42,12 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             }
             if (modelTypeId.Length > FixedValues.ModelTypeIdMaxLength)
             {
-                throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.ModelTypeIdMaxLength} characters {nameof(modelTypeId)} ");
+                throw new ArgumentException($"Model Type Id cannot be more than {FixedValues.ModelTypeIdMaxLength} characters {nameof(modelTypeId)} but it is {modelTypeId.Length}");
             }
 
             if (modelTypeId.Length < FixedValues.ModelTypeIdMinLength)
             {
-                throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelTypeIdMinLength} characters {nameof(modelTypeId)} ");
+                throw new ArgumentException($"Model Type Id cannot be less than {FixedValues.ModelTypeIdMinLength} characters {nameof(modelTypeId)}  but it is {modelTypeId.Length}");
             }
 
             return new ModelTypes() { ModelTypeId = modelTypeId, ModelTypeName = modelTypeName };

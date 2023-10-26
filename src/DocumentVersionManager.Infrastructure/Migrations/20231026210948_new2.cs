@@ -7,7 +7,7 @@
 namespace DocumentVersionManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class modeldbtype4 : Migration
+    public partial class new2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -47,7 +47,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 name: "ModelType",
                 columns: table => new
                 {
-                    ModelTypeId = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
+                    ModelTypeId = table.Column<string>(type: "varchar(68)", maxLength: 68, nullable: false),
                     ModelTypeName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: true)
                 },
                 constraints: table =>
@@ -62,7 +62,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 {
                     ModelId = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false),
                     ModelName = table.Column<string>(type: "longtext", nullable: false),
-                    ModelTypesId = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
+                    ModelTypesId = table.Column<string>(type: "varchar(68)", maxLength: 68, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -93,11 +93,11 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 columns: new[] { "HigherModelName", "Capacity", "HigherModelDescription", "Id", "ProductId" },
                 values: new object[,]
                 {
-                    { "HigherModel1", 1, "HigherModel1", "661e263b-f5b5-4458-86ec-4468b9e24d98", "HigherModel1" },
-                    { "HigherModel2", 12, "HigherModel12", "12532b43-bd99-42d8-aca0-153f27b68807", "HigherModel12" },
-                    { "HigherModel3", 13, "HigherModel1", "c85835c5-d4eb-48dd-8f09-a0aeb7c50407", "HigherModel13" },
-                    { "HigherModel4", 14, "HigherModel14", "23d0efc7-cc86-4a1e-ad60-759bca831151", "HigherModel14" },
-                    { "HigherModel5", 5, "HigherModel5", "b1a1f3ba-f977-401c-b2d1-5ab350f40fe1", "HigherModel5" }
+                    { "HigherModel1", 1, "HigherModel1", "ab82ec7a-521b-413e-8963-b8ede089be0c", "HigherModel1" },
+                    { "HigherModel2", 12, "HigherModel12", "7eb659b1-c967-4f20-bf86-e035f80b342f", "HigherModel12" },
+                    { "HigherModel3", 13, "HigherModel1", "dae2a838-7ea4-4ba1-893b-ac365863a066", "HigherModel13" },
+                    { "HigherModel4", 14, "HigherModel14", "13c57cb9-26a7-457f-a454-9a5d49c357e3", "HigherModel14" },
+                    { "HigherModel5", 5, "HigherModel5", "661216e5-a65f-4ef4-998e-f1f9f2a3ed86", "HigherModel5" }
                 });
 
             migrationBuilder.InsertData(
@@ -105,21 +105,9 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 columns: new[] { "ModelTypeId", "ModelTypeName" },
                 values: new object[,]
                 {
-                    { "FIRSTMODELTYPEID", "FIRSTMODELTYPE" },
-                    { "SECONDMODELTYPEID", "SECONDMODELTYPE" },
-                    { "THIRDMODELTYPEID", "THIRDMODELTYPE" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Models",
-                columns: new[] { "ModelId", "ModelName", "ModelTypesId" },
-                values: new object[,]
-                {
-                    { "FIRSTMODELID1", "FIRSTMODELNAME1", "FIRSTMODELTYPEID" },
-                    { "FIRSTMODELID2", "FIRSTMODELNAME2", "FIRSTMODELTYPEID" },
-                    { "FIRSTMODELID3", "FIRSTMODELNAME2", "FIRSTMODELTYPEID" },
-                    { "SECONDMODELID1", "SECONDMODELNAME1", "SECONDMODELTYPEID" },
-                    { "THIRDMODELD1", "THIRDMODELNAME1", "THIRDMODELTYPEID" }
+                    { "123456789012345678901234567890123413", "THIRDMODELTYPE" },
+                    { "123456789012345678901234567890123451", "FIRSTMODELTYPE" },
+                    { "123456789012345678901234567890123462", "SECONDMODELTYPE" }
                 });
 
             migrationBuilder.CreateIndex(

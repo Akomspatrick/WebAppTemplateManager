@@ -13,9 +13,9 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
             entity.Property(e => e.ModelTypeName).IsRequired().HasMaxLength(FixedValues.ModelTypeNameMaxLength);
             entity.HasKey(e => e.ModelTypeId);
             entity.Property(e => e.ModelTypeId).IsRequired().HasMaxLength(FixedValues.ModelTypeIdMaxLength);
-            entity.HasData(ModelTypes.Create("FIRSTMODELTYPEID", "FIRSTMODELTYPE"),
-                            ModelTypes.Create("SECONDMODELTYPEID", "SECONDMODELTYPE"),
-                            ModelTypes.Create("THIRDMODELTYPEID", "THIRDMODELTYPE"));
+             entity.HasData(ModelTypes.Create("123456789012345678901234567890123451", "FIRSTMODELTYPE"),
+                            ModelTypes.Create("123456789012345678901234567890123462", "SECONDMODELTYPE"),
+                            ModelTypes.Create("123456789012345678901234567890123413", "THIRDMODELTYPE"));
         }
     }
 
@@ -57,11 +57,11 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
             entity.Property(e => e.ModelId).HasMaxLength(FixedValues.ModelIdMaxLength);
             entity.Property(e => e.ModelTypesId).IsRequired().HasMaxLength(FixedValues.ModelTypeIdMaxLength);//This has specified the foreign key
 
-            entity.HasData(Model.Create("FIRSTMODELID1", "FIRSTMODELNAME1", "FIRSTMODELTYPEID"),
-                            Model.Create("FIRSTMODELID2", "FIRSTMODELNAME2", "FIRSTMODELTYPEID"),
-                             Model.Create("FIRSTMODELID3", "FIRSTMODELNAME2", "FIRSTMODELTYPEID"),
-                               Model.Create("SECONDMODELID1", "SECONDMODELNAME1", "SECONDMODELTYPEID"),
-                            Model.Create("THIRDMODELD1", "THIRDMODELNAME1", "THIRDMODELTYPEID"));
+            entity.HasData(Model.Create("FIRSTMODELID1", "FIRSTMODELNAME1", "123456789012345678901234567890123451"),
+                            Model.Create("FIRSTMODELID2", "FIRSTMODELNAME2", "123456789012345678901234567890123451"),
+                             Model.Create("FIRSTMODELID3", "FIRSTMODELNAME2", "123456789012345678901234567890123451"),
+                               Model.Create("SECONDMODELID1", "SECONDMODELNAME1", "123456789012345678901234567890123462"),
+                            Model.Create("THIRDMODELD1", "THIRDMODELNAME1", "123456789012345678901234567890123473"));
         }
     }
 

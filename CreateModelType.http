@@ -46,7 +46,7 @@ PUT {{baseUrl}}/ModelType
 Content-Type: application/json
 
 {
-  "modeltypeId": "ML-0011",
+  "modeltypeId": "THIRDMODELTYPEID",
   "modeltypeName": "MODIFIED ML2"
 }
 ###

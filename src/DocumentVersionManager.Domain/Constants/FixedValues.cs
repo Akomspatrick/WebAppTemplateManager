@@ -16,8 +16,8 @@ namespace DocumentVersionManager.Domain.Constants
         //ModelType Constants
         public const int ModelTypeNameMaxLength = 128;
         public const int ModelTypeNameMinLength = 2;
-        public const int ModelTypeIdMinLength = 2;
-        public const int ModelTypeIdMaxLength = 30;
+        public const int ModelTypeIdMinLength = 36;
+        public const int ModelTypeIdMaxLength = 68;
 
 
 

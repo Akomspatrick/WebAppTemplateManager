@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DocumentVersionManager.Infrastructure.Migrations
 {
     [DbContext(typeof(DocumentVersionManagerContext))]
-    [Migration("20231018161419_modeldbtype4")]
-    partial class modeldbtype4
+    [Migration("20231026210948_new2")]
+    partial class new2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,7 +84,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel1",
                             Capacity = 1,
                             HigherModelDescription = "HigherModel1",
-                            Id = "661e263b-f5b5-4458-86ec-4468b9e24d98",
+                            Id = "ab82ec7a-521b-413e-8963-b8ede089be0c",
                             ProductId = "HigherModel1"
                         },
                         new
@@ -92,7 +92,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel2",
                             Capacity = 12,
                             HigherModelDescription = "HigherModel12",
-                            Id = "12532b43-bd99-42d8-aca0-153f27b68807",
+                            Id = "7eb659b1-c967-4f20-bf86-e035f80b342f",
                             ProductId = "HigherModel12"
                         },
                         new
@@ -100,7 +100,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel3",
                             Capacity = 13,
                             HigherModelDescription = "HigherModel1",
-                            Id = "c85835c5-d4eb-48dd-8f09-a0aeb7c50407",
+                            Id = "dae2a838-7ea4-4ba1-893b-ac365863a066",
                             ProductId = "HigherModel13"
                         },
                         new
@@ -108,7 +108,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel4",
                             Capacity = 14,
                             HigherModelDescription = "HigherModel14",
-                            Id = "23d0efc7-cc86-4a1e-ad60-759bca831151",
+                            Id = "13c57cb9-26a7-457f-a454-9a5d49c357e3",
                             ProductId = "HigherModel14"
                         },
                         new
@@ -116,7 +116,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel5",
                             Capacity = 5,
                             HigherModelDescription = "HigherModel5",
-                            Id = "b1a1f3ba-f977-401c-b2d1-5ab350f40fe1",
+                            Id = "661216e5-a65f-4ef4-998e-f1f9f2a3ed86",
                             ProductId = "HigherModel5"
                         });
                 });
@@ -133,53 +133,21 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
                     b.Property<string>("ModelTypesId")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasMaxLength(68)
+                        .HasColumnType("varchar(68)");
 
                     b.HasKey("ModelId");
 
                     b.HasIndex("ModelTypesId");
 
                     b.ToTable("Models");
-
-                    b.HasData(
-                        new
-                        {
-                            ModelId = "FIRSTMODELID1",
-                            ModelName = "FIRSTMODELNAME1",
-                            ModelTypesId = "FIRSTMODELTYPEID"
-                        },
-                        new
-                        {
-                            ModelId = "FIRSTMODELID2",
-                            ModelName = "FIRSTMODELNAME2",
-                            ModelTypesId = "FIRSTMODELTYPEID"
-                        },
-                        new
-                        {
-                            ModelId = "FIRSTMODELID3",
-                            ModelName = "FIRSTMODELNAME2",
-                            ModelTypesId = "FIRSTMODELTYPEID"
-                        },
-                        new
-                        {
-                            ModelId = "SECONDMODELID1",
-                            ModelName = "SECONDMODELNAME1",
-                            ModelTypesId = "SECONDMODELTYPEID"
-                        },
-                        new
-                        {
-                            ModelId = "THIRDMODELD1",
-                            ModelName = "THIRDMODELNAME1",
-                            ModelTypesId = "THIRDMODELTYPEID"
-                        });
                 });
 
             modelBuilder.Entity("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.ModelTypes", b =>
                 {
                     b.Property<string>("ModelTypeId")
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasMaxLength(68)
+                        .HasColumnType("varchar(68)");
 
                     b.Property<string>("ModelTypeName")
                         .HasMaxLength(128)
@@ -192,17 +160,17 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            ModelTypeId = "FIRSTMODELTYPEID",
+                            ModelTypeId = "123456789012345678901234567890123451",
                             ModelTypeName = "FIRSTMODELTYPE"
                         },
                         new
                         {
-                            ModelTypeId = "SECONDMODELTYPEID",
+                            ModelTypeId = "123456789012345678901234567890123462",
                             ModelTypeName = "SECONDMODELTYPE"
                         },
                         new
                         {
-                            ModelTypeId = "THIRDMODELTYPEID",
+                            ModelTypeId = "123456789012345678901234567890123413",
                             ModelTypeName = "THIRDMODELTYPE"
                         });
                 });
