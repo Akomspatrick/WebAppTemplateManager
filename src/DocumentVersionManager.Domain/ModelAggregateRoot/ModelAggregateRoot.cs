@@ -10,71 +10,35 @@ using System.Xml.Linq;
 
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 {
-    public partial class Model : BaseEntity
+    public partial class ModelAggregateRoot : BaseEntity
     {
 
-        //public Model(string modelId, string modelName, string modelTypeId)
+        //public Model(string modelId, string modelName, string modelTypesId)
         //{
         //    ModelId = modelId;
         //    ModelName = modelName;
-        //    ModelTypeId = modelTypeId;
+        //    modelTypesId = modelTypesId;
         //}
 
-        public static Model Create(string modelId, string modelName, string modelTypeId)
-        {
 
-            if (string.IsNullOrWhiteSpace(modelName))
-            {
-                throw new ArgumentNullException(nameof(modelName));
+        // Meaning that modelTypesName may evetualy become modelTypesId
+        private List<Document> _documents = Enumerable.Empty<Document>().ToList();
+        private List<CapacityDocument> _capacityDocuments = Enumerable.Empty<CapacityDocument>().ToList();
+        private List<CapacitySpecification> _capacitySpecifications = Enumerable.Empty<CapacitySpecification>().ToList();
 
-            }
-            if (modelName.Length > FixedValues.ModelNameMaxLength)
-            {
-                throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.ModelNameMaxLength} characters {nameof(modelName)} ");
-            }
+        //These 3 were commented out for now  entity framework wants them created while cretating model table
+        // public IReadOnlyCollection<Document> Documents => _documents.AsReadOnly();
+        // public IReadOnlyCollection<CapacityDocument> CapacityDocumentsv => _capacityDocuments.AsReadOnly();
+        // public IReadOnlyCollection<CapacitySpecification> CapacitySpecificationsv => _capacitySpecifications.AsReadOnly();
 
-            if (modelName.Length < FixedValues.ModelNameMinLength)
-            {
-                throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelNameMaxLength}  characters  {nameof(modelName)} ");
-            }
+        private delegate void ModelDataUpdatedEventHandler(Dictionary<string, List<int>> models);
 
 
-            if (string.IsNullOrWhiteSpace(modelTypeId))
-            {
-                throw new ArgumentNullException(nameof(modelTypeId));
 
-            }
-            if (modelTypeId.Length > FixedValues.ModelTypeIdMaxLength)
-            {
-                throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.ModelTypeIdMaxLength} characters {nameof(modelTypeId)} ");
-            }
+        private static ModelDataUpdatedEventHandler DataUpdated;
 
-            if (modelTypeId.Length < FixedValues.ModelTypeIdMinLength)
-            {
-                throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelTypeIdMinLength} characters {nameof(modelTypeId)} ");
-            }
-
-
-            if (string.IsNullOrWhiteSpace(modelId))
-            {
-                throw new ArgumentNullException(nameof(modelId));
-
-            }
-            if (modelId.Length > FixedValues.ModelIdMaxLength)
-            {
-                throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.ModelIdMaxLength} characters {nameof(modelId)} ");
-            }
-
-            if (modelId.Length < FixedValues.ModelIdMinLength)
-            {
-                throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelIdMinLength} characters {nameof(modelId)} ");
-            }
-
-            return new Model() {ModelId= modelId,   ModelTypesId = modelTypeId, ModelName = modelName };
-
-        }
-
-
+        private static object pollingLock = new object();
+        private static bool polling = false;
         #region Accessors
 
         public List<int> GetUniqueCapacities()

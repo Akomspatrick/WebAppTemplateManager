@@ -13,7 +13,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Queries
 {
     //public class GetNewModelTypeQuery:IRequest<Either<ModelFailures, ApplicationModelTypeResponseDTO>>
     //{
-    //    public ApplicationModelTypeRequestDTO ModelTypeName { get; set; }
+    //    public ApplicationModelTypeRequestDTO modelTypesName { get; set; }
     //}
     public record GetModelTypeQuery(ApplicationModelTypeRequestDTO modelTypeRequestDTO) : IRequest<Either<GeneralFailures, ApplicationModelTypeResponseDTO>>;
 

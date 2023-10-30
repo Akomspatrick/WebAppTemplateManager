@@ -23,14 +23,14 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
                 throw new ArgumentNullException(nameof(higherModelName));
 
             }
-            if (higherModelName.Length > FixedValues.ModelTypeNameMaxLength)
+            if (higherModelName.Length > FixedValues.modelTypesNameMaxLength)
             {
-                throw new ArgumentException($"HigherModelName cannot be more than {FixedValues.ModelTypeNameMaxLength} characters {nameof(higherModelName)} ");
+                throw new ArgumentException($"HigherModelName cannot be more than {FixedValues.modelTypesNameMaxLength} characters {nameof(higherModelName)} ");
             }
 
-            if (higherModelName.Length < FixedValues.ModelTypeNameMinLength)
+            if (higherModelName.Length < FixedValues.modelTypesNameMinLength)
             {
-                throw new ArgumentException($"HigherModelName cannot be less than {FixedValues.ModelTypeNameMinLength} characters {nameof(higherModelName)} ");
+                throw new ArgumentException($"HigherModelName cannot be less than {FixedValues.modelTypesNameMinLength} characters {nameof(higherModelName)} ");
             }
 
 

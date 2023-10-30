@@ -28,11 +28,11 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
         public async Task<Either<GeneralFailures, int>> Handle(CreateModelTypeCommand request, CancellationToken cancellationToken)
         {
-            //var entity = ModelType.Create(request.modelTypeName.ModelTypeName);
+            //var entity = ModelType.Create(request.modelTypesName.modelTypesName);
             //await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             //return x;
-            var entity = ModelTypes.Create(request.modelTypeCreateDTO.ModelTypeId, request.modelTypeCreateDTO.ModelTypeName);
+            var entity = ModelTypes.Create(Guid.NewGuid(), request.modelTypeCreateDTO.modelTypesName);
             var repository = _unitOfWork.AsyncRepository<ModelTypes>();
             var x = await repository.AddAsync(entity, cancellationToken);
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);

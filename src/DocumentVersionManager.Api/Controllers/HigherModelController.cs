@@ -27,7 +27,7 @@ namespace DocumentVersionManager.Api.Controllers
         public async Task<IActionResult> Post(HigherModelDTO request, CancellationToken cancellationToken)
         {
 
-            //  var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
+            //  var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.modelTypesName);
             var x = await _sender.Send(new AddNewHigherModelCommand(request.HigherModelName, request.HigherModelDescription, request.ProductId, request.Capacity), cancellationToken);
             return Ok();
 
@@ -38,7 +38,7 @@ namespace DocumentVersionManager.Api.Controllers
         public async Task<IActionResult> PostEitherHigherModelMany(CancellationToken cancellationToken)
         {
 
-            //  var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
+            //  var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.modelTypesName);
             HigherModelDTO request = new HigherModelDTO("string", "string", "string", 1);
             var x = await _sender.Send(new AddNewHigherModelCommand(request.HigherModelName, request.HigherModelDescription, request.ProductId, request.Capacity), cancellationToken);
             return Ok();
@@ -50,7 +50,7 @@ namespace DocumentVersionManager.Api.Controllers
         //public async Task<IActionResult> PostEitherHigherModelMany(, CancellationToken cancellationToken)
         //{
 
-        //    //  var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.ModelTypeName);
+        //    //  var modelType = new ApplicationModelTypeRequestDTO(modelTypeDTO.modelTypesName);
         //    HigherModelDTO request = new HigherModelDTO("string", "string", "string", 1);
         //    var x = await _sender.Send(new AddNewHigherModelCommand(request.HigherModelName, request.HigherModelDescription, request.ProductId, request.Capacity), cancellationToken);
         //    return Ok();

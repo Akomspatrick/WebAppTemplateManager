@@ -9,16 +9,32 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
     {
         public void Configure(EntityTypeBuilder<ModelTypes> entity)
         {
-            entity.HasKey(e => e.ModelTypeName);
-            entity.Property(e => e.ModelTypeName).IsRequired().HasMaxLength(FixedValues.ModelTypeNameMaxLength);
-            entity.HasKey(e => e.ModelTypeId);
-            entity.Property(e => e.ModelTypeId).IsRequired().HasMaxLength(FixedValues.ModelTypeIdMaxLength);
-             entity.HasData(ModelTypes.Create("123456789012345678901234567890123451", "FIRSTMODELTYPE"),
-                            ModelTypes.Create("123456789012345678901234567890123462", "SECONDMODELTYPE"),
-                            ModelTypes.Create("123456789012345678901234567890123413", "THIRDMODELTYPE"));
+            entity.HasKey(e => e.ModelTypesName);
+            entity.Property(e => e.ModelTypesName).IsRequired().HasMaxLength(FixedValues.modelTypesNameMaxLength);
+          
+           //
+           
+             entity.HasData(ModelTypes.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELTYPE"),
+                            ModelTypes.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "SECONDMODELTYPE"),
+                            ModelTypes.Create(Guid.Parse("3c69923e-a68e-4348-b06c-7007f527355d"), "THIRDMODELTYPE"));
         }
     }
+    public class ModelConfig : IEntityTypeConfiguration<Model>
+    {
+        public void Configure(EntityTypeBuilder<Model> entity)
+        {
+            entity.HasKey(e => e.ModelName);
+            entity.Property(e => e.ModelName).HasMaxLength(FixedValues.ModelNameMaxLength);
 
+            entity.Property(e => e.ModelName).IsRequired().HasMaxLength(FixedValues.ModelNameMaxLength);//This has specified the foreign key
+            entity.HasOne<ModelTypes>(e => e.ModelTypes).WithMany(ad => ad.Models).HasForeignKey(e => e.ModelTypesName);
+            entity.HasData(Model.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),"FIRSTMODELNAME", "FIRSTMODELTYPE"),
+            //                //Model.Create(Guid.Parse("FIRSTMODELID2", "FIRSTMODELNAME2", Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
+            //                // Model.Create(Guid.Parse("FIRSTMODELID3", "FIRSTMODELNAME2", Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
+                            Model.Create(Guid.Parse("7808711f-544a-423d-8d99-f00c31e35be5"), "SECONDMODELNAME", "FIRSTMODELTYPE"),
+                           Model.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "THIRDMODELNAME", "SECONDMODELTYPE"));
+        }
+    }
 
     public class DocumentTypeConfig : IEntityTypeConfiguration<DocumentType>
     {
@@ -49,21 +65,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
                             HigherModel.Create("HigherModel5", "HigherModel5", "HigherModel5", 5));
         }
     }
-    public class ModelConfig : IEntityTypeConfiguration<Model>
-    {
-        public void Configure(EntityTypeBuilder<Model> entity)
-        {
-            entity.HasKey(e => e.ModelId);
-            entity.Property(e => e.ModelId).HasMaxLength(FixedValues.ModelIdMaxLength);
-            entity.Property(e => e.ModelTypesId).IsRequired().HasMaxLength(FixedValues.ModelTypeIdMaxLength);//This has specified the foreign key
 
-            entity.HasData(Model.Create("FIRSTMODELID1", "FIRSTMODELNAME1", "123456789012345678901234567890123451"),
-                            Model.Create("FIRSTMODELID2", "FIRSTMODELNAME2", "123456789012345678901234567890123451"),
-                             Model.Create("FIRSTMODELID3", "FIRSTMODELNAME2", "123456789012345678901234567890123451"),
-                               Model.Create("SECONDMODELID1", "SECONDMODELNAME1", "123456789012345678901234567890123462"),
-                            Model.Create("THIRDMODELD1", "THIRDMODELNAME1", "123456789012345678901234567890123473"));
-        }
-    }
 
 
 

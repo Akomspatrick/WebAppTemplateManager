@@ -12,8 +12,8 @@ namespace DocumentVersionManager.Domain.Interfaces
 {
     public interface IModelTypesRepository : IGenericRepository<ModelTypes>
     {
-        Task<Either<GeneralFailures, ModelTypes>> GetModelTypeById(string modelTypeId);
-        // Task<Either<GeneralFailures, int>> DeleteByModelTypeById(string modelTypeId, CancellationToken cancellationToken);
+        Task<Either<GeneralFailures, ModelTypes>> GetModelTypeById(string modelTypesId);
+        // Task<Either<GeneralFailures, int>> DeleteByModelTypeById(string modelTypesId, CancellationToken cancellationToken);
     }
 
 

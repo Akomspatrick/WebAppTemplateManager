@@ -1,4 +1,5 @@
 ﻿using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
+using LanguageExt;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -33,8 +34,6 @@ namespace DocumentVersionManager.Infrastructure.Persistence
             base.OnModelCreating(modelBuilder);
             // instead of calling the configure method of each entity configuration file we can use the methos below
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentVersionManagerContext).Assembly);
-
-
 
             //modelBuilder.Entity<Model>(entity =>
             //{

@@ -12,7 +12,7 @@ namespace DocumentVersionManager.Domain.Errors
     public enum GeneralFailures
     {
         [Description("Data  already Exist in Repository")]
-        DuplicateModelTypeName,
+        DuplicatemodelTypesName,
         [Description("Error Retrieving  List From  Repository")]
         ErrorRetrievingListDataFromRepository,
         [Description("Error Retrieving  Single Entity From  Repository/Null Result")]

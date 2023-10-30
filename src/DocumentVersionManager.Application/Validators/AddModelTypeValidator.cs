@@ -13,7 +13,7 @@ namespace DocumentVersionManager.Application.Validators
         public AddModelTypeValidator()
         {
             RuleFor(x => x.modelTypeCreateDTO).NotNull().NotEmpty();
-            // RuleFor(x=>x.modelTypeName)..NotEmpty();
+            // RuleFor(x=>x.modelTypesName)..NotEmpty();
         }
     }
 }

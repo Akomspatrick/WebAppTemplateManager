@@ -12,7 +12,7 @@ namespace DocumentVersionManager.Domain.Interfaces
 {
     public interface IHigherModelRepository : IGenericRepository<HigherModel>
     {
-        Task<Either<GeneralFailures, HigherModel>> GetHigherModel(string modelTypeName);
+        Task<Either<GeneralFailures, HigherModel>> GetHigherModel(string modelTypesName);
     }
 
 

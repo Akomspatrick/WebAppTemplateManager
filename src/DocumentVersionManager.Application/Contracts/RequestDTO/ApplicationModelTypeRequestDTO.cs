@@ -8,13 +8,13 @@ namespace DocumentVersionManager.Application.Contracts.RequestDTO
 {
     //public class ModelTypeDTO
     //{
-    //    public required string ModelTypeName { get; set; }
+    //    public required string modelTypesName { get; set; }
     //}
     // convert this to a record
-    public record ApplicationModelTypeRequestDTO(string ModelTypeId);
-
-    public record ApplicationModelTypeCreateDTO(string ModelTypeId, string ModelTypeName);
-    public record ApplicationModelTypeUpdateDTO(string ModelTypeId, string ModelTypeName);
-    public record ApplicationModelTypeDeleteDTO(string ModelTypeId);
+    public record ApplicationModelTypeRequestDTOById(Guid modelTypesId);
+    public record ApplicationModelTypeRequestDTO(string modelTypesName);
+    public record ApplicationModelTypeCreateDTO(string modelTypesName);
+    public record ApplicationModelTypeUpdateDTO(Guid modelTypesId, string modelTypesName);
+    public record ApplicationModelTypeDeleteDTO(Guid modelTypesId);
 
 }

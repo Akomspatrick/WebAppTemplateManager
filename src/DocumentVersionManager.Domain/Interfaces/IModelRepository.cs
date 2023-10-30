@@ -12,6 +12,6 @@ namespace DocumentVersionManager.Domain.Interfaces
 {
     public interface IModelRepository : IGenericRepository<Model>
     {
-        // Task<Either<ModelFailures, ModelType>> GetModelType(string modelTypeName);
+        // Task<Either<ModelFailures, ModelType>> GetModelType(string modelTypesName);
     }
 }

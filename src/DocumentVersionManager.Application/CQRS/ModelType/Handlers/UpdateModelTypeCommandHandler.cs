@@ -26,7 +26,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         }
         public async Task<Either<GeneralFailures, int>> Handle(UpdateModelTypeCommand request, CancellationToken cancellationToken)
         {
-            var entity = ModelTypes.Create(request.modelTypeUpdateDTO.ModelTypeId, request.modelTypeUpdateDTO.ModelTypeName);
+            var entity = ModelTypes.Create(request.modelTypeUpdateDTO.modelTypesId, request.modelTypeUpdateDTO.modelTypesName);
 
             return await _unitOfWork.AsyncRepository<ModelTypes>().UpdateAsync(entity, cancellationToken);
             //_logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
@@ -34,7 +34,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
         private ModelTypes modify(ModelTypes x, ApplicationModelTypeUpdateDTO modelTypeUpdateDTO)
         {
-            return ModelTypes.Create(x.ModelTypeId, modelTypeUpdateDTO.ModelTypeName);
+            return ModelTypes.Create(x.ModelTypesId, modelTypeUpdateDTO.modelTypesName);
         }
     }
 }

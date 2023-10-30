@@ -14,10 +14,10 @@ namespace DocumentVersionManager.Domain.Constants
     {    //Database Connection String Name 
         public const string DBConnectionStringName = "Constr";
         //ModelType Constants
-        public const int ModelTypeNameMaxLength = 128;
-        public const int ModelTypeNameMinLength = 2;
-        public const int ModelTypeIdMinLength = 36;
-        public const int ModelTypeIdMaxLength = 68;
+        public const int modelTypesNameMaxLength = 128;
+        public const int modelTypesNameMinLength = 2;
+        public const int modelTypesIdMinLength = 36;
+        public const int modelTypesIdMaxLength = 68;
 
 
 

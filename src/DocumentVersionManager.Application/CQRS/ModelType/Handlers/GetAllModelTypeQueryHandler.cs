@@ -32,7 +32,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             var repository = _unitOfWork.AsyncRepository<ModelTypes>();
             return (await repository.GetAllAsync(cancellationToken))
              .Map(task => task.Result
-             .Select(result => new ApplicationModelTypeResponseDTO(result.ModelTypeId, result.ModelTypeName)));
+             .Select(result => new ApplicationModelTypeResponseDTO(result.ModelTypesId, result.ModelTypesName)));
 
         }
 
