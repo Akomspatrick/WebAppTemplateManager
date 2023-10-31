@@ -17,5 +17,8 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 
         public string Username { get; init; } = string.Empty;
 
+
+
+
     }
 }

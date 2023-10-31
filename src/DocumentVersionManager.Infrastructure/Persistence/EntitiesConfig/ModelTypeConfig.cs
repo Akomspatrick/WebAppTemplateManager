@@ -36,6 +36,48 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
         }
     }
 
+
+    public class ModelVersionConfig : IEntityTypeConfiguration<ModelVersion>
+    {
+        public void Configure(EntityTypeBuilder<ModelVersion> entity)
+        {
+            entity.HasKey(e =>new { e.ModelName,e.ModelVersionId });
+            entity.Property(e => e.ModelName).HasMaxLength(FixedValues.ModelNameMaxLength);
+
+            //entity.Property(e => e.ModelName).IsRequired().HasMaxLength(FixedValues.ModelNameMaxLength);//This has specified the foreign key
+            entity.HasOne<Model>(e => e.Models).WithMany(ad => ad.ModelVersions).HasForeignKey(e => e.ModelName);
+            entity.HasData(ModelVersion.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRST_VERSION_FIRSTMODEL_NAME", 1, "SPECIAL DESIGN", "FIRSTMODELNAME", "OLADEJI", DateTime.UtcNow),
+                  ModelVersion.Create(Guid.Parse("7808711f-544a-423d-8d99-f00c31e35be5"), "SECOND_VERSION_FIRSTMODELNAME", 2, "AUTO DESIGN TO COMBAT SPLIILING", "FIRSTMODELNAME", "OLADEJI", DateTime.UtcNow),
+                  ModelVersion.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRST_VERSION_SECONDMODELNAME", 1, "INITIAL DESIGN", "SECONDMODELNAME", "OLADEJI", DateTime.UtcNow));
+
+
+        }
+    }
+
+
+    public class DocumentConfig : IEntityTypeConfiguration<Document>
+    {
+        public void Configure(EntityTypeBuilder<Document> entity)
+        {
+            entity.HasKey(e => new {e.DocumentName, e.ModelName, e.ModelVersionId });
+            entity.Property(e => e.ModelName).HasMaxLength(FixedValues.ModelNameMaxLength);
+
+            //entity.Property(e => e.ModelName).IsRequired().HasMaxLength(FixedValues.ModelNameMaxLength);//This has specified the foreign key
+            entity.HasOne<ModelVersion>(e => e.ModelVersion).WithMany(e => e.Documents).HasForeignKey(e => new { e.ModelName, e.ModelVersionId } );
+            entity.HasData(Document.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME ver1 DOc", 1, "FIRSTMODELNAME", "CONTENT PDF PATH", "CHANGE ORDER PATH", "SIMPLE DESCRITION OF DOCUMENT", DateTime.UtcNow),
+                Document.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME ver1 DOc A", 1, "FIRSTMODELNAME", "CONTENT PDF PATH", "CHANGE ORDER PATH", "SIMPLE DESCRITION OF DOCUMENT", DateTime.UtcNow),
+                Document.Create(Guid.Parse("7808711f-544a-423d-8d99-f00c31e35be5"), "FIRSTMODELNAME ver1 DOc B", 1, "FIRSTMODELNAME", "CONTENT PDF PATH", "CHANGE ORDER PATH", "SIMPLE DESCRITION OF DOCUMENT", DateTime.UtcNow),
+                Document.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME ver2 DOc A", 2, "FIRSTMODELNAME", "CONTENT PDF PATH", "CHANGE ORDER PATH", "SIMPLE DESCRITION OF DOCUMENT", DateTime.UtcNow));
+
+
+
+
+        }
+    }
+
+
+
+
     public class DocumentTypeConfig : IEntityTypeConfiguration<DocumentType>
     {
         public void Configure(EntityTypeBuilder<DocumentType> entity)
