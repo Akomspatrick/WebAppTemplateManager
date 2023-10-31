@@ -26,6 +26,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 
 
         public ICollection<Document> Documents;
+        public ICollection<CapacitySpecification> CapacitySpecifications;
 
         public static ModelVersion Create(Guid modelVersionGUID, string modelVersionName, int modelVersionId, string versionDescription, string modelName,string username, DateTime timestamp)
         {

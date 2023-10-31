@@ -14,7 +14,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public string DocumentName { get; init; } = string.Empty;
         public string ModelName { get; init; } = string.Empty;
         public int ModelVersionId { get; init; }
-        public Guid DocumentNameGuid { get; init; }
+        public Guid DocumentGuid { get; init; }
         public string ContentPDFPath { get; init; } = string.Empty;
         public string ChangeOrderPDFPath { get; init; } = string.Empty;
 
@@ -22,7 +22,10 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public DateTime Timestamp { get; init; }
 
         public ModelVersion ModelVersion;
-        public static Document Create(Guid documentNameGuid, string documentName, int modelVersionId, string modelName, string contentPDFPath, string changeOrderPDFPath, string documentDescription, DateTime timestamp)
+
+        public ICollection<DocumentDocumentType> DocumentDocumentTypes { get; set; }
+
+        public static Document Create(Guid documentGuid, string documentName, int modelVersionId, string modelName, string contentPDFPath, string changeOrderPDFPath, string documentDescription, DateTime timestamp)
         {
             if ((modelVersionId < 0))
             {
@@ -52,7 +55,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             {
                DocumentDescription = documentDescription,
                DocumentName = documentName,
-               DocumentNameGuid = documentNameGuid,
+               DocumentGuid = documentGuid,
                ModelName = modelName,
                ModelVersionId = modelVersionId,
                ContentPDFPath = contentPDFPath,

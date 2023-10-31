@@ -2,6 +2,7 @@
 using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MySql.EntityFrameworkCore.Extensions;
 
 namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
 {
@@ -92,6 +93,91 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
                             DocumentType.Create("Wiring"));
         }
     }
+
+
+    public class CapacitySpecificationConfig : IEntityTypeConfiguration<CapacitySpecification>
+    {
+        public void Configure(EntityTypeBuilder<CapacitySpecification> entity)
+        {
+            entity.HasKey(e => new { e.Capacity, e.ModelName, e.ModelVersionId });
+            entity.Property(e => e.Capacity).IsRequired();
+
+            entity.HasOne<ModelVersion>(e => e.ModelVersion).WithMany(e=>e.CapacitySpecifications)
+                .HasForeignKey(e => new { e.ModelName, e.ModelVersionId });
+           
+            entity.HasData(
+                CapacitySpecification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),  "FIRSTMODELNAME", 1,
+                100,DateTime.UtcNow,"OLADEJI",1,1,1,1,1,1,1,1,"SHELLMATERIAL1",true,20,1,1,1,1,"CCNUMBER","CLASS","APPLICATION",1,1,1
+                ,1,1,1,1,1,1,true,"NTEPCERTIFICATIONID",DateTime.UtcNow,"OIMLCERTIFICATIONID1",DateTime.UtcNow),
+
+                      CapacitySpecification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 2,
+                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", true, 20, 1, 1, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1, 1, 1
+                , 1, 1, 1, 1, 1, 1, true, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
+
+
+                CapacitySpecification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "SECONDMODELNAME", 1,
+                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL3", true, 20, 1, 1, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1, 1, 1
+                , 1, 1, 1, 1, 1, 1, true, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID3", DateTime.UtcNow)                  );
+        }
+    }
+
+
+
+
+
+    public class DocumentDocumentTypeConfig : IEntityTypeConfiguration<DocumentDocumentType>
+    {
+        public void Configure(EntityTypeBuilder<DocumentDocumentType> entity)
+        {
+            entity.HasKey(e => new { e.DocumentName, e.ModelName, e.ModelVersionId, e.DocumentTypeName });
+            entity.Property(e => e.ModelName).HasMaxLength(FixedValues.ModelNameMaxLength);
+
+            //entity.Property(e => e.ModelName).IsRequired().HasMaxLength(FixedValues.ModelNameMaxLength);//This has specified the foreign key
+            entity.HasOne<Document>(e => e.Document).WithMany(e => e.DocumentDocumentTypes).HasForeignKey(e => new { e.DocumentName, e.ModelName, e.ModelVersionId });
+            entity.HasData(
+                       DocumentDocumentType.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME ver1 DOc A", 1, "FIRSTMODELNAME", "Cabling"),
+                       DocumentDocumentType.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME ver1 DOc A", 1, "FIRSTMODELNAME", "Chroming"),
+                       DocumentDocumentType.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME ver1 DOc A", 1, "FIRSTMODELNAME", "Sealing"),
+                       DocumentDocumentType.Create(Guid.Parse("7808711f-544a-423d-8d99-f00c31e35be5"), "FIRSTMODELNAME ver1 DOc B", 1, "FIRSTMODELNAME", "Cabling"),
+                       DocumentDocumentType.Create(Guid.Parse("7808711f-544a-423d-8d99-f00c31e35be5"), "FIRSTMODELNAME ver1 DOc B", 1, "FIRSTMODELNAME", "Chroming"),
+                       DocumentDocumentType.Create(Guid.Parse("7808711f-544a-423d-8d99-f00c31e35be5"), "FIRSTMODELNAME ver1 DOc B", 1, "FIRSTMODELNAME", "Sealing")
+
+                );
+
+
+
+        }
+    }
+
+    public class CapacityTestPointConfig : IEntityTypeConfiguration<CapacityTestPoint>
+    {
+        public void Configure(EntityTypeBuilder<CapacityTestPoint> entity)
+        {
+            entity.HasKey(e => new { e.ModelVersionId, e.ModelName, e.TestId });
+            entity.HasOne<CapacitySpecification>(e=>e.CapacitySpecification).WithMany(e=>e.CapacityTestPoints)
+                .HasForeignKey(e=>new { e.Capacity, e.ModelName, e.ModelVersionId });
+            entity.Property(e => e.TestId).ValueGeneratedNever().UseMySQLAutoIncrementColumn("TestId");
+            entity.HasData( CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1,100,1),
+                CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 2,100,1),
+                CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "SECONDMODELNAME", 1,100,1));
+          
+        }
+    }
+    public class ShellMaterialConfig : IEntityTypeConfiguration<ShellMaterial>
+    {
+        public void Configure(EntityTypeBuilder<ShellMaterial> entity)
+        {
+            entity.HasKey(e => new { e.Name, e.Alloy });
+            entity.HasData(ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMAterial1", 1),
+                            ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMAterial1", 2),
+                             ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMAterial2", 1),
+                               ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMAterial2", 2));
+
+
+        }
+    }
+
+    
 
     public class HigherModelConfig : IEntityTypeConfiguration<HigherModel>
     {

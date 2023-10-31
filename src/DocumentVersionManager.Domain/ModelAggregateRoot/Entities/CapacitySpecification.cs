@@ -10,47 +10,50 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 
     public class CapacitySpecification : BaseEntity
     {
-        public CapacitySpecification(string modelName, int capacity, DateTime timestamp, string username, double? nominalOutput, decimal? nominalOutputPercentage, decimal? nonlinearityPercentage, int? minimumDeadLoad, double? vMin, int? nMax, int? safeLoad, int? ultimateLoad, string shellMaterial, bool alloy, int? defaultCableLength, int? tempRangeLow, int? tempRangeHigh, int? numberOfGauges, int? resistance, string cCNumber, string @class, string application, int? numberInBasket, double? austenitizationTemperatureInF, int? austenitizationTimeInSeconds, int? austenitizationHardnessLow, int? austenitizationHardnessHigh, double? temperingTemperatureInF, int? temperingTimeInSeconds, int? temperingHardnessLow, int? temperingHardnessHigh, bool hasScrews, string nTEPCertificationId, DateTime? nTEPCertificationTimestamp, string oIMLCertificationId, DateTime? oIMLCertificationTimestamp)
-        {
-            ModelName = modelName;
-            Capacity = capacity;
-            Timestamp = timestamp;
-            Username = username;
-            NominalOutput = nominalOutput;
-            NominalOutputPercentage = nominalOutputPercentage;
-            NonlinearityPercentage = nonlinearityPercentage;
-            MinimumDeadLoad = minimumDeadLoad;
-            this.vMin = vMin;
-            this.nMax = nMax;
-            SafeLoad = safeLoad;
-            UltimateLoad = ultimateLoad;
-            ShellMaterial = shellMaterial;
-            Alloy = alloy;
-            DefaultCableLength = defaultCableLength;
-            TempRangeLow = tempRangeLow;
-            TempRangeHigh = tempRangeHigh;
-            NumberOfGauges = numberOfGauges;
-            Resistance = resistance;
-            CCNumber = cCNumber;
-            Class = @class;
-            Application = application;
-            NumberInBasket = numberInBasket;
-            AustenitizationTemperatureInF = austenitizationTemperatureInF;
-            AustenitizationTimeInSeconds = austenitizationTimeInSeconds;
-            AustenitizationHardnessLow = austenitizationHardnessLow;
-            AustenitizationHardnessHigh = austenitizationHardnessHigh;
-            TemperingTemperatureInF = temperingTemperatureInF;
-            TemperingTimeInSeconds = temperingTimeInSeconds;
-            TemperingHardnessLow = temperingHardnessLow;
-            TemperingHardnessHigh = temperingHardnessHigh;
-            HasScrews = hasScrews;
-            NTEPCertificationId = nTEPCertificationId;
-            NTEPCertificationTimestamp = nTEPCertificationTimestamp;
-            OIMLCertificationId = oIMLCertificationId;
-            OIMLCertificationTimestamp = oIMLCertificationTimestamp;
-        }
 
+        //public CapacitySpecification(string modelName, int modelVersionId,  int capacity, DateTime timestamp, string username, double? nominalOutput, decimal? nominalOutputPercentage, decimal? nonlinearityPercentage, int? minimumDeadLoad, double? vMin, int? nMax, int? safeLoad, int? ultimateLoad, string shellMaterial, bool alloy, int? defaultCableLength, int? tempRangeLow, int? tempRangeHigh, int? numberOfGauges, int? resistance, string cCNumber, string @class, string application, int? numberInBasket, double? austenitizationTemperatureInF, int? austenitizationTimeInSeconds, int? austenitizationHardnessLow, int? austenitizationHardnessHigh, double? temperingTemperatureInF, int? temperingTimeInSeconds, int? temperingHardnessLow, int? temperingHardnessHigh, bool hasScrews, string nTEPCertificationId, DateTime? nTEPCertificationTimestamp, string oIMLCertificationId, DateTime? oIMLCertificationTimestamp)
+        //{
+        //    ModelName = modelName;
+        //    ModelVersionId = modelVersionId;
+        //    Capacity = capacity;
+        //    Timestamp = timestamp;
+        //    Username = username;
+        //    NominalOutput = nominalOutput;
+        //    NominalOutputPercentage = nominalOutputPercentage;
+        //    NonlinearityPercentage = nonlinearityPercentage;
+        //    MinimumDeadLoad = minimumDeadLoad;
+        //    this.vMin = vMin;
+        //    this.nMax = nMax;
+        //    SafeLoad = safeLoad;
+        //    UltimateLoad = ultimateLoad;
+        //    ShellMaterial = shellMaterial;
+        //    Alloy = alloy;
+        //    DefaultCableLength = defaultCableLength;
+        //    TempRangeLow = tempRangeLow;
+        //    TempRangeHigh = tempRangeHigh;
+        //    NumberOfGauges = numberOfGauges;
+        //    Resistance = resistance;
+        //    CCNumber = cCNumber;
+        //    Class = @class;
+        //    Application = application;
+        //    NumberInBasket = numberInBasket;
+        //    AustenitizationTemperatureInF = austenitizationTemperatureInF;
+        //    AustenitizationTimeInSeconds = austenitizationTimeInSeconds;
+        //    AustenitizationHardnessLow = austenitizationHardnessLow;
+        //    AustenitizationHardnessHigh = austenitizationHardnessHigh;
+        //    TemperingTemperatureInF = temperingTemperatureInF;
+        //    TemperingTimeInSeconds = temperingTimeInSeconds;
+        //    TemperingHardnessLow = temperingHardnessLow;
+        //    TemperingHardnessHigh = temperingHardnessHigh;
+        //    HasScrews = hasScrews;
+        //    NTEPCertificationId = nTEPCertificationId;
+        //    NTEPCertificationTimestamp = nTEPCertificationTimestamp;
+        //    OIMLCertificationId = oIMLCertificationId;
+        //    OIMLCertificationTimestamp = oIMLCertificationTimestamp;
+        //}
+    
         public string ModelName { get; init; } = string.Empty;
+        public int ModelVersionId { get; init; }
         public int Capacity { get; init; }
         public DateTime Timestamp { get; init; }
         public string Username { get; init; } = string.Empty;
@@ -62,7 +65,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public int? nMax { get; init; }
         public int? SafeLoad { get; init; }
         public int? UltimateLoad { get; init; }
-        public string ShellMaterial { get; init; } = string.Empty;
+        public string ShellMaterialName { get; init; } = string.Empty;
         public bool Alloy { get; init; }
         public int? DefaultCableLength { get; init; }
         public int? TempRangeLow { get; init; }
@@ -86,14 +89,61 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public DateTime? NTEPCertificationTimestamp { get; init; }
         public string OIMLCertificationId { get; init; } = string.Empty;
         public DateTime? OIMLCertificationTimestamp { get; init; }
+        public Guid CapacitySpecificationGuid { get; init; }
+        public ModelVersion ModelVersion { get; init; }
+       // public ShellMaterial ShellMaterial { get; init; }
+        public ICollection<CapacityTestPoint> CapacityTestPoints { get; set; }// = new List<CapacityTestPoint>();
 
-
-
-
+        public static CapacitySpecification Create(Guid capacitySpecificationGuid, string modelName, int modelVersionId, int capacity, DateTime timestamp, string username, double? nominalOutput, decimal? nominalOutputPercentage, decimal? nonlinearityPercentage, int? minimumDeadLoad, double? vMin, int? nMax, int? safeLoad, int? ultimateLoad, string shellMaterialName, bool alloy, int? defaultCableLength, int? tempRangeLow, int? tempRangeHigh, int? numberOfGauges, int? resistance, string cCNumber, string @class, string application, int? numberInBasket, double? austenitizationTemperatureInF, int? austenitizationTimeInSeconds, int? austenitizationHardnessLow, int? austenitizationHardnessHigh, double? temperingTemperatureInF, int? temperingTimeInSeconds, int? temperingHardnessLow, int? temperingHardnessHigh, bool hasScrews, string nTEPCertificationId, DateTime? nTEPCertificationTimestamp, string oIMLCertificationId, DateTime? oIMLCertificationTimestamp)
+        {
+            return new CapacitySpecification()
+            {
+                CapacitySpecificationGuid = capacitySpecificationGuid,
+                ModelName = modelName,
+                ModelVersionId = modelVersionId,
+                Capacity = capacity,
+                Timestamp = timestamp,
+                Username = username,
+                NominalOutput = nominalOutput,
+                NominalOutputPercentage = nominalOutputPercentage,
+                NonlinearityPercentage = nonlinearityPercentage,
+                MinimumDeadLoad = minimumDeadLoad,
+                vMin = vMin,
+                nMax = nMax,
+                SafeLoad = safeLoad,
+                UltimateLoad = ultimateLoad,
+                ShellMaterialName = shellMaterialName,
+                Alloy = alloy,
+                DefaultCableLength = defaultCableLength,
+                TempRangeLow = tempRangeLow,
+                TempRangeHigh = tempRangeHigh,
+                NumberOfGauges = numberOfGauges,
+                Resistance = resistance,
+                CCNumber = cCNumber,
+                Class = @class,
+                Application = application,
+                NumberInBasket = numberInBasket,
+                AustenitizationTemperatureInF = austenitizationTemperatureInF,
+                AustenitizationTimeInSeconds = austenitizationTimeInSeconds,
+                AustenitizationHardnessLow = austenitizationHardnessLow,
+                AustenitizationHardnessHigh = austenitizationHardnessHigh,
+                TemperingTemperatureInF = temperingTemperatureInF,
+                TemperingTimeInSeconds = temperingTimeInSeconds,
+                TemperingHardnessLow = temperingHardnessLow,
+                TemperingHardnessHigh = temperingHardnessHigh,
+                HasScrews = hasScrews,
+                NTEPCertificationId = nTEPCertificationId,
+                NTEPCertificationTimestamp = nTEPCertificationTimestamp,
+                OIMLCertificationId = oIMLCertificationId,
+                OIMLCertificationTimestamp = oIMLCertificationTimestamp
+            };
+        }
         public static CapacitySpecification Duplicate(CapacitySpecification oldCS, string authUser)
 
-             => new CapacitySpecification(
+             =>  Create(
+                oldCS.CapacitySpecificationGuid,
              oldCS.ModelName,
+             oldCS.ModelVersionId,
              oldCS.Capacity,
              DateTime.Now,
              authUser,// MassloadQMS.AuthenticatedUser.ToString(),
@@ -105,7 +155,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
              oldCS.nMax,
              oldCS.SafeLoad,
              oldCS.UltimateLoad,
-             oldCS.ShellMaterial,
+             oldCS.ShellMaterialName,
              oldCS.Alloy,
              oldCS.DefaultCableLength,
              oldCS.TempRangeLow,

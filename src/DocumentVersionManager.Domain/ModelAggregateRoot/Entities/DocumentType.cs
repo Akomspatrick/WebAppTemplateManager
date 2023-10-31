@@ -11,6 +11,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
     public class DocumentType : BaseEntity
     {
         public string TypeName { get; init; } = string.Empty;
+        public Guid DocumentTypeGuid { get; init; }
 
         public static DocumentType Create(string documentTypeName)
         {
