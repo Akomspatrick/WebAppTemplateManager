@@ -26,8 +26,8 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         }
         public async Task<Either<GeneralFailures, int>> Handle(UpdateModelTypeCommand request, CancellationToken cancellationToken)
         {
+            throw new NotImplementedException("Operation Not Allowed ");
             var entity = ModelTypes.Create(request.modelTypeUpdateDTO.modelTypesId, request.modelTypeUpdateDTO.modelTypesName);
-
             return await _unitOfWork.AsyncRepository<ModelTypes>().UpdateAsync(entity, cancellationToken);
             //_logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
         }

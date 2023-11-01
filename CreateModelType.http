@@ -21,7 +21,7 @@ GET {{baseUrl}}/ModelType
 Content-Type: application/json
 
 {
-  "modelTypesId": "ML-0011"
+  "modelTypesName": "FIRSTMODELTYPE"
 }
 
 
@@ -29,7 +29,7 @@ Content-Type: application/json
 
 ###
 ///GET ALL  MODELTYPE QUERY 
-GET {{baseUrl}}/ModelType/GetAllAsync
+GET http://localhost:5007/api/ModelType/GetAllAsync
 
 
 ###
