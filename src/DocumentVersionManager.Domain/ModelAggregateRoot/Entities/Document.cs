@@ -14,7 +14,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public string DocumentName { get; init; } = string.Empty;
         public string ModelName { get; init; } = string.Empty;
         public int ModelVersionId { get; init; }
-        public Guid DocumentGuid { get; init; }
+        //public Guid DocumentGuid { get; init; }
         public string ContentPDFPath { get; init; } = string.Empty;
         public string ChangeOrderPDFPath { get; init; } = string.Empty;
 
@@ -55,7 +55,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             {
                DocumentDescription = documentDescription,
                DocumentName = documentName,
-               DocumentGuid = documentGuid,
+                GuidId = documentGuid,
                ModelName = modelName,
                ModelVersionId = modelVersionId,
                ContentPDFPath = contentPDFPath,

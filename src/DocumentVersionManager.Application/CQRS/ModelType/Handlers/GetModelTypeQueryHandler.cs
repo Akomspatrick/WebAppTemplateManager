@@ -31,7 +31,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
             return (await _unitOfWork.AsyncRepository<ModelTypes>()
                     .GetMatch(s => (s.ModelTypesName == request.modelTypeRequestDTO.modelTypesName), cancellationToken))
-                    .Map((result) => new ApplicationModelTypeResponseDTO(result.ModelTypesId, result.ModelTypesName));
+                    .Map((result) => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypesName));
 
         }
 

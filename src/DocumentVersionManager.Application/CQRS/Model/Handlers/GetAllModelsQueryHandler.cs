@@ -30,7 +30,7 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
             var repository = _unitOfWork.AsyncRepository<DocumentVersionManager.Domain.ModelAggregateRoot.Entities.Model>();
             return (await repository.GetAllAsync(cancellationToken))
              .Map(task => task.Result
-             .Select(result => new ApplicationModelResponseDTO(result.ModelId, result.ModelName,result.ModelTypesName)));
+             .Select(result => new ApplicationModelResponseDTO(result.GuidId, result.ModelName,result.ModelTypesName)));
         }
     }
 

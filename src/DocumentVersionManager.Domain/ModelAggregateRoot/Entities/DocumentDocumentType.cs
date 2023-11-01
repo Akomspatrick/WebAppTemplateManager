@@ -16,10 +16,10 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public string DocumentTypeName { get; init; } = string.Empty;//documentTypes_name
         public Document Document;
         public DocumentType DocumentType;
-        public Guid DocumentDocumentTypeGuid
-        {
-            get; init;
-        }
+        //public Guid DocumentDocumentTypeGuid
+        //{
+        //    get; init;
+        //}
 
         //public ModelVersion ModelVersion;
         public static DocumentDocumentType Create(Guid documentDocumentTypeGuid, string documentName, int modelVersionId, string modelName, string documentTypeName)
@@ -41,7 +41,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 
             return new DocumentDocumentType()
             {
-               DocumentDocumentTypeGuid = documentDocumentTypeGuid,
+                GuidId = documentDocumentTypeGuid,
                DocumentName = documentName,
                ModelName = modelName,
                ModelVersionId = modelVersionId,

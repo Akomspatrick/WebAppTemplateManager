@@ -31,7 +31,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         {
             return (
                 await _unitOfWork.AsyncRepository<ModelTypes>()
-                .GetMatch(s => (s.ModelTypesId.Equals( request.modelTypeDeleteDTO.modelTypesId)), cancellationToken))
+                .GetMatch(s => (s.GuidId.Equals( request.modelTypeDeleteDTO.modelTypesId)), cancellationToken))
                 .Match(Left: x => x, Right: x => _unitOfWork
                 .AsyncRepository<ModelTypes>()
                 .DeleteAsync(x, cancellationToken)

@@ -34,7 +34,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
         private ModelTypes modify(ModelTypes x, ApplicationModelTypeUpdateDTO modelTypeUpdateDTO)
         {
-            return ModelTypes.Create(x.ModelTypesId, modelTypeUpdateDTO.modelTypesName);
+            return ModelTypes.Create(x.GuidId, modelTypeUpdateDTO.modelTypesName);
         }
     }
 }

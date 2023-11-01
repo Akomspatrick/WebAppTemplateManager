@@ -10,7 +10,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         //if I am not using domain driven design then i can specify the detail model here eg 
         // public ModelType ModelType { get; set; }
        // public string ModelId { get; init; } = string.Empty;
-        public Guid ModelId { get; private set; }
+       // public Guid ModelId { get; private set; }
 
         public string ModelName { get; init; } = string.Empty;
 
@@ -73,7 +73,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             //    throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelIdMinLength} characters {nameof(modelId)} ");
             //}
 
-            return new Model() { ModelId = modelId, ModelTypesName = modelTypesName, ModelName = modelName };
+            return new Model() { GuidId = modelId, ModelTypesName = modelTypesName, ModelName = modelName };
 
         }
 

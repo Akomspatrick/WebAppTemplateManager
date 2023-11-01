@@ -11,9 +11,9 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
     public class DocumentType : BaseEntity
     {
         public string TypeName { get; init; } = string.Empty;
-        public Guid DocumentTypeGuid { get; init; }
+        //public Guid DocumentTypeGuid { get; init; }
         public ICollection<DocumentDocumentType> DocumentDocumentTypes { get; set; }
-        public static DocumentType Create(string documentTypeName)
+        public static DocumentType Create(Guid documentGuid, string documentTypeName)
         {
 
             if (string.IsNullOrWhiteSpace(documentTypeName))
@@ -32,7 +32,9 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             }
 
 
-            return new DocumentType() { TypeName = documentTypeName };
+            return new DocumentType() {
+                GuidId=documentGuid,
+                TypeName = documentTypeName };
             // do some heavy lifting.
 
         }

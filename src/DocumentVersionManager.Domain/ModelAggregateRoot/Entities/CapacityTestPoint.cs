@@ -19,7 +19,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
                 Capacity = capacity,
                 Weight = weight,
                TestId = testId,
-                CapacityTestPointGuid = capacityTestPointGuid
+                GuidId = capacityTestPointGuid
             };
         }
 
@@ -31,7 +31,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
                 ModelVersionId = modelVersionId,
                 Capacity = capacity,
                 Weight = weight,
-                CapacityTestPointGuid = capacityTestPointGuid
+                GuidId = capacityTestPointGuid
             };
         }
         public string ModelName { get; init; } = string.Empty;
@@ -39,7 +39,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public int Capacity { get; init; }
         public int Weight { get; init; }
         public int TestId { get; init; } // should auto increase
-        public Guid CapacityTestPointGuid { get; init; }
+       // public Guid CapacityTestPointGuid { get; init; }
         public CapacitySpecification CapacitySpecification { get; set; }
 
 

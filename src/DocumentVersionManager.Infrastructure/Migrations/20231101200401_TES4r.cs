@@ -22,7 +22,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 columns: table => new
                 {
                     TypeName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    DocumentTypeGuid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,6 +38,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     HigherModelDescription = table.Column<string>(type: "longtext", nullable: false),
                     ProductId = table.Column<string>(type: "longtext", nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false),
                     Id = table.Column<string>(type: "longtext", nullable: true)
                 },
                 constraints: table =>
@@ -51,7 +52,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 columns: table => new
                 {
                     ModelTypesName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    ModelTypesId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,7 +66,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 {
                     ShellMaterialName = table.Column<string>(type: "varchar(255)", nullable: false),
                     Alloy = table.Column<int>(type: "int", nullable: false),
-                    ShellMaterialGuid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,8 +79,8 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 columns: table => new
                 {
                     ModelName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    ModelId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    ModelTypesName = table.Column<string>(type: "varchar(128)", nullable: false)
+                    ModelTypesName = table.Column<string>(type: "varchar(128)", nullable: false),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -101,9 +102,9 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     ModelName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
                     VersionDescription = table.Column<string>(type: "longtext", nullable: false),
                     ModelVersionName = table.Column<string>(type: "longtext", nullable: false),
-                    ModelVersionGuid = table.Column<Guid>(type: "char(36)", nullable: false),
                     Timestamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Username = table.Column<string>(type: "longtext", nullable: false)
+                    Username = table.Column<string>(type: "longtext", nullable: false),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -158,7 +159,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     NTEPCertificationTimestamp = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     OIMLCertificationId = table.Column<string>(type: "longtext", nullable: false),
                     OIMLCertificationTimestamp = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    CapacitySpecificationGuid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -185,11 +186,11 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     DocumentName = table.Column<string>(type: "varchar(255)", nullable: false),
                     ModelName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
                     ModelVersionId = table.Column<int>(type: "int", nullable: false),
-                    DocumentGuid = table.Column<Guid>(type: "char(36)", nullable: false),
                     ContentPDFPath = table.Column<string>(type: "longtext", nullable: false),
                     ChangeOrderPDFPath = table.Column<string>(type: "longtext", nullable: false),
                     DocumentDescription = table.Column<string>(type: "longtext", nullable: false),
-                    Timestamp = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    Timestamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -213,7 +214,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     ModelVersionId = table.Column<int>(type: "int", nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     Weight = table.Column<int>(type: "int", nullable: false),
-                    CapacityTestPointGuid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -235,8 +236,8 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     ModelName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
                     ModelVersionId = table.Column<int>(type: "int", nullable: false),
                     DocumentTypeName = table.Column<string>(type: "varchar(255)", nullable: false),
-                    DocumentDocumentTypeGuid = table.Column<Guid>(type: "char(36)", nullable: false),
-                    DocumentTypeTypeName = table.Column<string>(type: "varchar(128)", nullable: true)
+                    DocumentTypeTypeName = table.Column<string>(type: "varchar(128)", nullable: true),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -257,31 +258,31 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "DocumentType",
-                columns: new[] { "TypeName", "DocumentTypeGuid" },
+                columns: new[] { "TypeName", "GuidId" },
                 values: new object[,]
                 {
-                    { "Cabling", new Guid("00000000-0000-0000-0000-000000000000") },
-                    { "Chroming", new Guid("00000000-0000-0000-0000-000000000000") },
-                    { "Gauging", new Guid("00000000-0000-0000-0000-000000000000") },
-                    { "Sealing", new Guid("00000000-0000-0000-0000-000000000000") },
-                    { "Wiring", new Guid("00000000-0000-0000-0000-000000000000") }
+                    { "Cabling", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
+                    { "Chroming", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
+                    { "Gauging", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
+                    { "Sealing", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
+                    { "Wiring", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") }
                 });
 
             migrationBuilder.InsertData(
                 table: "HigherModel",
-                columns: new[] { "HigherModelName", "Capacity", "HigherModelDescription", "Id", "ProductId" },
+                columns: new[] { "HigherModelName", "Capacity", "GuidId", "HigherModelDescription", "Id", "ProductId" },
                 values: new object[,]
                 {
-                    { "HigherModel1", 1, "HigherModel1", "4af1c5e7-7dcd-46fd-8d2a-789ecd4d5bd0", "HigherModel1" },
-                    { "HigherModel2", 12, "HigherModel12", "07ff4fb5-ae0c-4fe8-abb2-83cc6a3c4d0d", "HigherModel12" },
-                    { "HigherModel3", 13, "HigherModel1", "89d33294-b9d8-41e8-a9ca-7d04702488a5", "HigherModel13" },
-                    { "HigherModel4", 14, "HigherModel14", "c65b1089-ca91-442e-971b-f4e8d1413ce1", "HigherModel14" },
-                    { "HigherModel5", 5, "HigherModel5", "50b56d15-3b79-4ace-89dc-f7cd92db1e3a", "HigherModel5" }
+                    { "HigherModel1", 1, new Guid("00000000-0000-0000-0000-000000000000"), "HigherModel1", "e210a518-65eb-41d2-a1b4-d5a48c6f5eba", "HigherModel1" },
+                    { "HigherModel2", 12, new Guid("00000000-0000-0000-0000-000000000000"), "HigherModel12", "bf84410a-b2b2-4aa8-b07e-e8cd16409437", "HigherModel12" },
+                    { "HigherModel3", 13, new Guid("00000000-0000-0000-0000-000000000000"), "HigherModel1", "40037c58-2d3e-4337-b6f1-f8c9608649b3", "HigherModel13" },
+                    { "HigherModel4", 14, new Guid("00000000-0000-0000-0000-000000000000"), "HigherModel14", "5b9e830b-9290-4d70-848a-a4020086049d", "HigherModel14" },
+                    { "HigherModel5", 5, new Guid("00000000-0000-0000-0000-000000000000"), "HigherModel5", "37cd997d-1c2f-4b25-9743-83f0165f8474", "HigherModel5" }
                 });
 
             migrationBuilder.InsertData(
                 table: "ModelType",
-                columns: new[] { "ModelTypesName", "ModelTypesId" },
+                columns: new[] { "ModelTypesName", "GuidId" },
                 values: new object[,]
                 {
                     { "FIRSTMODELTYPE", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
@@ -291,7 +292,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "ShellMaterial",
-                columns: new[] { "ShellMaterialName", "Alloy", "ShellMaterialGuid" },
+                columns: new[] { "ShellMaterialName", "Alloy", "GuidId" },
                 values: new object[,]
                 {
                     { "ShellMaterial1", 1, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
@@ -302,7 +303,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Models",
-                columns: new[] { "ModelName", "ModelId", "ModelTypesName" },
+                columns: new[] { "ModelName", "GuidId", "ModelTypesName" },
                 values: new object[,]
                 {
                     { "FIRSTMODELNAME", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELTYPE" },
@@ -312,40 +313,40 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "ModelVersion",
-                columns: new[] { "ModelName", "ModelVersionId", "ModelVersionGuid", "ModelVersionName", "Timestamp", "Username", "VersionDescription" },
+                columns: new[] { "ModelName", "ModelVersionId", "GuidId", "ModelVersionName", "Timestamp", "Username", "VersionDescription" },
                 values: new object[,]
                 {
-                    { "FIRSTMODELNAME", 1, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRST_VERSION_FIRSTMODEL_NAME", new DateTime(2023, 11, 1, 18, 19, 59, 82, DateTimeKind.Utc).AddTicks(7166), "OLADEJI", "SPECIAL DESIGN" },
-                    { "FIRSTMODELNAME", 2, new Guid("7808711f-544a-423d-8d99-f00c31e35be5"), "SECOND_VERSION_FIRSTMODELNAME", new DateTime(2023, 11, 1, 18, 19, 59, 82, DateTimeKind.Utc).AddTicks(7177), "OLADEJI", "AUTO DESIGN TO COMBAT SPLIILING" },
-                    { "SECONDMODELNAME", 1, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRST_VERSION_SECONDMODELNAME", new DateTime(2023, 11, 1, 18, 19, 59, 82, DateTimeKind.Utc).AddTicks(7180), "OLADEJI", "INITIAL DESIGN" }
+                    { "FIRSTMODELNAME", 1, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRST_VERSION_FIRSTMODEL_NAME", new DateTime(2023, 11, 1, 20, 4, 0, 949, DateTimeKind.Utc).AddTicks(4419), "OLADEJI", "SPECIAL DESIGN" },
+                    { "FIRSTMODELNAME", 2, new Guid("7808711f-544a-423d-8d99-f00c31e35be5"), "SECOND_VERSION_FIRSTMODELNAME", new DateTime(2023, 11, 1, 20, 4, 0, 949, DateTimeKind.Utc).AddTicks(4428), "OLADEJI", "AUTO DESIGN TO COMBAT SPLIILING" },
+                    { "SECONDMODELNAME", 1, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRST_VERSION_SECONDMODELNAME", new DateTime(2023, 11, 1, 20, 4, 0, 949, DateTimeKind.Utc).AddTicks(4430), "OLADEJI", "INITIAL DESIGN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "CapacitySpecification",
-                columns: new[] { "Capacity", "ModelName", "ModelVersionId", "Alloy", "Application", "AustenitizationHardnessHigh", "AustenitizationHardnessLow", "AustenitizationTemperatureInF", "AustenitizationTimeInSeconds", "CCNumber", "CapacitySpecificationGuid", "Class", "DefaultCableLength", "HasScrews", "MinimumDeadLoad", "NTEPCertificationId", "NTEPCertificationTimestamp", "NominalOutput", "NominalOutputPercentage", "NonlinearityPercentage", "NumberInBasket", "NumberOfGauges", "OIMLCertificationId", "OIMLCertificationTimestamp", "Resistance", "SafeLoad", "ShellMaterialName", "TempRangeHigh", "TempRangeLow", "TemperingHardnessHigh", "TemperingHardnessLow", "TemperingTemperatureInF", "TemperingTimeInSeconds", "Timestamp", "UltimateLoad", "Username", "nMax", "vMin" },
+                columns: new[] { "Capacity", "ModelName", "ModelVersionId", "Alloy", "Application", "AustenitizationHardnessHigh", "AustenitizationHardnessLow", "AustenitizationTemperatureInF", "AustenitizationTimeInSeconds", "CCNumber", "Class", "DefaultCableLength", "GuidId", "HasScrews", "MinimumDeadLoad", "NTEPCertificationId", "NTEPCertificationTimestamp", "NominalOutput", "NominalOutputPercentage", "NonlinearityPercentage", "NumberInBasket", "NumberOfGauges", "OIMLCertificationId", "OIMLCertificationTimestamp", "Resistance", "SafeLoad", "ShellMaterialName", "TempRangeHigh", "TempRangeLow", "TemperingHardnessHigh", "TemperingHardnessLow", "TemperingTemperatureInF", "TemperingTimeInSeconds", "Timestamp", "UltimateLoad", "Username", "nMax", "vMin" },
                 values: new object[,]
                 {
-                    { 100, "FIRSTMODELNAME", 1, true, "APPLICATION", 1, 1, 1.0, 1, "CCNUMBER", new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "CLASS", 20, true, 1, "NTEPCERTIFICATIONID", new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8148), 1.0, 1m, 1m, 1, 1, "OIMLCERTIFICATIONID1", new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8150), 1, 1, "SHELLMATERIAL1", 1, 1, 1, 1, 1.0, 1, new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8132), 1, "OLADEJI", 1, 1.0 },
-                    { 100, "FIRSTMODELNAME", 2, true, "APPLICATION", 1, 1, 1.0, 1, "CCNUMBER", new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "CLASS", 20, true, 1, "NTEPCERTIFICATIONID", new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8184), 1.0, 1m, 1m, 1, 1, "OIMLCERTIFICATIONID2", new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8185), 1, 1, "SHELLMATERIAL2", 1, 1, 1, 1, 1.0, 1, new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8182), 1, "OLADEJI", 1, 1.0 },
-                    { 100, "SECONDMODELNAME", 1, true, "APPLICATION", 1, 1, 1.0, 1, "CCNUMBER", new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "CLASS", 20, true, 1, "NTEPCERTIFICATIONID", new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8195), 1.0, 1m, 1m, 1, 1, "OIMLCERTIFICATIONID3", new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8195), 1, 1, "SHELLMATERIAL3", 1, 1, 1, 1, 1.0, 1, new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8193), 1, "OLADEJI", 1, 1.0 },
-                    { 101, "FIRSTMODELNAME", 1, true, "APPLICATION", 1, 1, 1.0, 1, "CCNUMBER", new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "CLASS", 20, true, 1, "NTEPCERTIFICATIONID", new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8171), 1.0, 1m, 1m, 1, 1, "OIMLCERTIFICATIONID2", new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8171), 1, 1, "SHELLMATERIAL2", 1, 1, 1, 1, 1.0, 1, new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8168), 1, "OLADEJI", 1, 1.0 },
-                    { 102, "FIRSTMODELNAME", 1, true, "APPLICATION", 1, 1, 1.0, 1, "CCNUMBER", new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "CLASS", 20, true, 1, "NTEPCERTIFICATIONID", new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8178), 1.0, 1m, 1m, 1, 1, "OIMLCERTIFICATIONID2", new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8179), 1, 1, "SHELLMATERIAL2", 1, 1, 1, 1, 1.0, 1, new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8176), 1, "OLADEJI", 1, 1.0 }
+                    { 100, "FIRSTMODELNAME", 1, true, "APPLICATION", 1, 1, 1.0, 1, "CCNUMBER", "CLASS", 20, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), true, 1, "NTEPCERTIFICATIONID", new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4194), 1.0, 1m, 1m, 1, 1, "OIMLCERTIFICATIONID1", new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4196), 1, 1, "SHELLMATERIAL1", 1, 1, 1, 1, 1.0, 1, new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4185), 1, "OLADEJI", 1, 1.0 },
+                    { 100, "FIRSTMODELNAME", 2, true, "APPLICATION", 1, 1, 1.0, 1, "CCNUMBER", "CLASS", 20, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), true, 1, "NTEPCERTIFICATIONID", new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4229), 1.0, 1m, 1m, 1, 1, "OIMLCERTIFICATIONID2", new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4229), 1, 1, "SHELLMATERIAL2", 1, 1, 1, 1, 1.0, 1, new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4226), 1, "OLADEJI", 1, 1.0 },
+                    { 100, "SECONDMODELNAME", 1, true, "APPLICATION", 1, 1, 1.0, 1, "CCNUMBER", "CLASS", 20, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), true, 1, "NTEPCERTIFICATIONID", new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4234), 1.0, 1m, 1m, 1, 1, "OIMLCERTIFICATIONID3", new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4234), 1, 1, "SHELLMATERIAL3", 1, 1, 1, 1, 1.0, 1, new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4232), 1, "OLADEJI", 1, 1.0 },
+                    { 101, "FIRSTMODELNAME", 1, true, "APPLICATION", 1, 1, 1.0, 1, "CCNUMBER", "CLASS", 20, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), true, 1, "NTEPCERTIFICATIONID", new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4217), 1.0, 1m, 1m, 1, 1, "OIMLCERTIFICATIONID2", new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4218), 1, 1, "SHELLMATERIAL2", 1, 1, 1, 1, 1.0, 1, new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4215), 1, "OLADEJI", 1, 1.0 },
+                    { 102, "FIRSTMODELNAME", 1, true, "APPLICATION", 1, 1, 1.0, 1, "CCNUMBER", "CLASS", 20, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), true, 1, "NTEPCERTIFICATIONID", new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4223), 1.0, 1m, 1m, 1, 1, "OIMLCERTIFICATIONID2", new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4224), 1, 1, "SHELLMATERIAL2", 1, 1, 1, 1, 1.0, 1, new DateTime(2023, 11, 1, 20, 4, 0, 944, DateTimeKind.Utc).AddTicks(4221), 1, "OLADEJI", 1, 1.0 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Document",
-                columns: new[] { "DocumentName", "ModelName", "ModelVersionId", "ChangeOrderPDFPath", "ContentPDFPath", "DocumentDescription", "DocumentGuid", "Timestamp" },
+                columns: new[] { "DocumentName", "ModelName", "ModelVersionId", "ChangeOrderPDFPath", "ContentPDFPath", "DocumentDescription", "GuidId", "Timestamp" },
                 values: new object[,]
                 {
-                    { "FIRSTMODELNAME ver1 DOc", "FIRSTMODELNAME", 1, "CHANGE ORDER PATH", "CONTENT PDF PATH", "SIMPLE DESCRITION OF DOCUMENT", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), new DateTime(2023, 11, 1, 18, 19, 59, 79, DateTimeKind.Utc).AddTicks(4312) },
-                    { "FIRSTMODELNAME ver1 DOc A", "FIRSTMODELNAME", 1, "CHANGE ORDER PATH", "CONTENT PDF PATH", "SIMPLE DESCRITION OF DOCUMENT", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), new DateTime(2023, 11, 1, 18, 19, 59, 79, DateTimeKind.Utc).AddTicks(4324) },
-                    { "FIRSTMODELNAME ver1 DOc B", "FIRSTMODELNAME", 1, "CHANGE ORDER PATH", "CONTENT PDF PATH", "SIMPLE DESCRITION OF DOCUMENT", new Guid("7808711f-544a-423d-8d99-f00c31e35be5"), new DateTime(2023, 11, 1, 18, 19, 59, 79, DateTimeKind.Utc).AddTicks(4329) },
-                    { "FIRSTMODELNAME ver2 DOc A", "FIRSTMODELNAME", 2, "CHANGE ORDER PATH", "CONTENT PDF PATH", "SIMPLE DESCRITION OF DOCUMENT", new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), new DateTime(2023, 11, 1, 18, 19, 59, 79, DateTimeKind.Utc).AddTicks(4332) }
+                    { "FIRSTMODELNAME ver1 DOc", "FIRSTMODELNAME", 1, "CHANGE ORDER PATH", "CONTENT PDF PATH", "SIMPLE DESCRITION OF DOCUMENT", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), new DateTime(2023, 11, 1, 20, 4, 0, 945, DateTimeKind.Utc).AddTicks(9941) },
+                    { "FIRSTMODELNAME ver1 DOc A", "FIRSTMODELNAME", 1, "CHANGE ORDER PATH", "CONTENT PDF PATH", "SIMPLE DESCRITION OF DOCUMENT", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), new DateTime(2023, 11, 1, 20, 4, 0, 945, DateTimeKind.Utc).AddTicks(9952) },
+                    { "FIRSTMODELNAME ver1 DOc B", "FIRSTMODELNAME", 1, "CHANGE ORDER PATH", "CONTENT PDF PATH", "SIMPLE DESCRITION OF DOCUMENT", new Guid("7808711f-544a-423d-8d99-f00c31e35be5"), new DateTime(2023, 11, 1, 20, 4, 0, 945, DateTimeKind.Utc).AddTicks(9954) },
+                    { "FIRSTMODELNAME ver2 DOc A", "FIRSTMODELNAME", 2, "CHANGE ORDER PATH", "CONTENT PDF PATH", "SIMPLE DESCRITION OF DOCUMENT", new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), new DateTime(2023, 11, 1, 20, 4, 0, 945, DateTimeKind.Utc).AddTicks(9956) }
                 });
 
             migrationBuilder.InsertData(
                 table: "CapacityTestPoint",
-                columns: new[] { "TestId", "Capacity", "CapacityTestPointGuid", "ModelName", "ModelVersionId", "Weight" },
+                columns: new[] { "TestId", "Capacity", "GuidId", "ModelName", "ModelVersionId", "Weight" },
                 values: new object[,]
                 {
                     { 1, 100, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 1 },
@@ -356,15 +357,15 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "DocumentDocumentType",
-                columns: new[] { "DocumentName", "DocumentTypeName", "ModelName", "ModelVersionId", "DocumentDocumentTypeGuid", "DocumentTypeTypeName" },
+                columns: new[] { "DocumentName", "DocumentTypeName", "ModelName", "ModelVersionId", "DocumentTypeTypeName", "GuidId" },
                 values: new object[,]
                 {
-                    { "FIRSTMODELNAME ver1 DOc A", "Cabling", "FIRSTMODELNAME", 1, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), null },
-                    { "FIRSTMODELNAME ver1 DOc A", "Chroming", "FIRSTMODELNAME", 1, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), null },
-                    { "FIRSTMODELNAME ver1 DOc A", "Sealing", "FIRSTMODELNAME", 1, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), null },
-                    { "FIRSTMODELNAME ver1 DOc B", "Cabling", "FIRSTMODELNAME", 1, new Guid("7808711f-544a-423d-8d99-f00c31e35be5"), null },
-                    { "FIRSTMODELNAME ver1 DOc B", "Chroming", "FIRSTMODELNAME", 1, new Guid("7808711f-544a-423d-8d99-f00c31e35be5"), null },
-                    { "FIRSTMODELNAME ver1 DOc B", "Sealing", "FIRSTMODELNAME", 1, new Guid("7808711f-544a-423d-8d99-f00c31e35be5"), null }
+                    { "FIRSTMODELNAME ver1 DOc A", "Cabling", "FIRSTMODELNAME", 1, null, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
+                    { "FIRSTMODELNAME ver1 DOc A", "Chroming", "FIRSTMODELNAME", 1, null, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
+                    { "FIRSTMODELNAME ver1 DOc A", "Sealing", "FIRSTMODELNAME", 1, null, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
+                    { "FIRSTMODELNAME ver1 DOc B", "Cabling", "FIRSTMODELNAME", 1, null, new Guid("7808711f-544a-423d-8d99-f00c31e35be5") },
+                    { "FIRSTMODELNAME ver1 DOc B", "Chroming", "FIRSTMODELNAME", 1, null, new Guid("7808711f-544a-423d-8d99-f00c31e35be5") },
+                    { "FIRSTMODELNAME ver1 DOc B", "Sealing", "FIRSTMODELNAME", 1, null, new Guid("7808711f-544a-423d-8d99-f00c31e35be5") }
                 });
 
             migrationBuilder.CreateIndex(

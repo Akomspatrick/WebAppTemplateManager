@@ -88,11 +88,11 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
         {
             entity.HasKey(e => e.TypeName);
             entity.Property(e => e.TypeName).IsRequired().HasMaxLength(FixedValues.DocumentTypeMaxLength);
-                     entity.HasData(DocumentType.Create("Cabling"),
-                            DocumentType.Create("Chroming"),
-                             DocumentType.Create("Sealing"),
-                               DocumentType.Create("Gauging"),
-                            DocumentType.Create("Wiring"));
+                     entity.HasData(DocumentType.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),"Cabling"),
+                            DocumentType.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "Chroming"),
+                             DocumentType.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "Sealing"),
+                               DocumentType.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),"Gauging"),
+                            DocumentType.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "Wiring"));
         }
     }
 

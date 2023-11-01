@@ -89,7 +89,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public DateTime? NTEPCertificationTimestamp { get; init; }
         public string OIMLCertificationId { get; init; } = string.Empty;
         public DateTime? OIMLCertificationTimestamp { get; init; }
-        public Guid CapacitySpecificationGuid { get; init; }
+       // public Guid CapacitySpecificationGuid { get; init; }
         public ModelVersion ModelVersion { get; init; }
         public ShellMaterial ShellMaterial { get; init; }
         public ICollection<CapacityTestPoint> CapacityTestPoints { get; set; }// = new List<CapacityTestPoint>();
@@ -98,7 +98,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         {
             return new CapacitySpecification()
             {
-                CapacitySpecificationGuid = capacitySpecificationGuid,
+                GuidId = capacitySpecificationGuid,
                 ModelName = modelName,
                 ModelVersionId = modelVersionId,
                 Capacity = capacity,
@@ -141,7 +141,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public static CapacitySpecification Duplicate(CapacitySpecification oldCS, string authUser)
 
              =>  Create(
-                oldCS.CapacitySpecificationGuid,
+                oldCS.GuidId,
              oldCS.ModelName,
              oldCS.ModelVersionId,
              oldCS.Capacity,

@@ -17,7 +17,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 
         public Model Models;
         public string ModelName { get; init; } = string.Empty;
-        public Guid ModelVersionGuid { get; init; }
+       // public Guid ModelVersionGuid { get; init; }
    
         
         public DateTime Timestamp { get; init; }
@@ -55,7 +55,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 
 
             return new ModelVersion() {
-            ModelVersionGuid = modelVersionGUID,
+            GuidId = modelVersionGUID,
             ModelVersionName = modelVersionName,
             ModelVersionId = modelVersionId,
             VersionDescription = versionDescription,
