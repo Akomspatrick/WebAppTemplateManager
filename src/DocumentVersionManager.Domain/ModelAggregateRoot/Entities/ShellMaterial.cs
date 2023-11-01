@@ -10,16 +10,16 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 {
     public class ShellMaterial:BaseEntity
     {
-        public string Name { get; init; } = string.Empty;
+        public string ShellMaterialName { get; init; } = string.Empty;
         public int Alloy { get; init; }
         public Guid ShellMaterialGuid { get; init; }
-       // public ICollection<CapacitySpecification> CapacitySpecifications { get; set; }
+        public ICollection<CapacitySpecification> CapacitySpecifications { get; set; }
 
         public static ShellMaterial Create( Guid shellMaterialGuid,string name, int alloy)
         {
             return new ShellMaterial()
             {
-                Name = name,
+                ShellMaterialName = name,
                 Alloy = alloy,
                 ShellMaterialGuid = shellMaterialGuid,
 

@@ -91,7 +91,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public DateTime? OIMLCertificationTimestamp { get; init; }
         public Guid CapacitySpecificationGuid { get; init; }
         public ModelVersion ModelVersion { get; init; }
-       // public ShellMaterial ShellMaterial { get; init; }
+        public ShellMaterial ShellMaterial { get; init; }
         public ICollection<CapacityTestPoint> CapacityTestPoints { get; set; }// = new List<CapacityTestPoint>();
 
         public static CapacitySpecification Create(Guid capacitySpecificationGuid, string modelName, int modelVersionId, int capacity, DateTime timestamp, string username, double? nominalOutput, decimal? nominalOutputPercentage, decimal? nonlinearityPercentage, int? minimumDeadLoad, double? vMin, int? nMax, int? safeLoad, int? ultimateLoad, string shellMaterialName, bool alloy, int? defaultCableLength, int? tempRangeLow, int? tempRangeHigh, int? numberOfGauges, int? resistance, string cCNumber, string @class, string application, int? numberInBasket, double? austenitizationTemperatureInF, int? austenitizationTimeInSeconds, int? austenitizationHardnessLow, int? austenitizationHardnessHigh, double? temperingTemperatureInF, int? temperingTimeInSeconds, int? temperingHardnessLow, int? temperingHardnessHigh, bool hasScrews, string nTEPCertificationId, DateTime? nTEPCertificationTimestamp, string oIMLCertificationId, DateTime? oIMLCertificationTimestamp)

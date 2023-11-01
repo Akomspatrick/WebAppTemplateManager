@@ -10,6 +10,9 @@ namespace DocumentVersionManager.Domain.Base
 {
     public abstract class BaseEntity : IDomainEvents
     {
+
+        public Guid  GuidId { get; set; } = default;
+
         private readonly List<BaseDomainEvent> _domainEvents = new();
         [NotMapped]
 

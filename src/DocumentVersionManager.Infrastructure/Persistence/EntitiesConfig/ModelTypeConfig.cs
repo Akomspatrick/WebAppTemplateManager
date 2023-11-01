@@ -104,6 +104,9 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
             entity.HasKey(e => new { e.Capacity, e.ModelName, e.ModelVersionId });
             entity.Property(e => e.Capacity).IsRequired();
 
+
+            entity.HasOne<ShellMaterial>(e => e.ShellMaterial).WithMany(e => e.CapacitySpecifications)
+                .HasForeignKey(e => new { e.ShellMaterialName });
             entity.HasOne<ModelVersion>(e => e.ModelVersion).WithMany(e=>e.CapacitySpecifications)
                 .HasForeignKey(e => new { e.ModelName, e.ModelVersionId });
            
@@ -195,11 +198,11 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
     {
         public void Configure(EntityTypeBuilder<ShellMaterial> entity)
         {
-            entity.HasKey(e => new { e.Name, e.Alloy });
-            entity.HasData(ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMAterial1", 1),
-                            ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMAterial1", 2),
-                             ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMAterial2", 1),
-                               ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMAterial2", 2));
+            entity.HasKey(e => new { e.ShellMaterialName });
+            entity.HasData(ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial1", 1),
+                            ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial2", 2),
+                             ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial3", 1),
+                               ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial4", 2));
 
 
         }

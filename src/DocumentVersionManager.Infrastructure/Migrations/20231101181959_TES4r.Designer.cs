@@ -12,8 +12,8 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace DocumentVersionManager.Infrastructure.Migrations
 {
     [DbContext(typeof(DocumentVersionManagerContext))]
-    [Migration("20231101180304_TES4")]
-    partial class TES4
+    [Migration("20231101181959_TES4r")]
+    partial class TES4r
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,7 +110,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
                     b.Property<string>("ShellMaterialName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int?>("TempRangeHigh")
                         .HasColumnType("int");
@@ -148,6 +148,8 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
                     b.HasKey("Capacity", "ModelName", "ModelVersionId");
 
+                    b.HasIndex("ShellMaterialName");
+
                     b.HasIndex("ModelName", "ModelVersionId");
 
                     b.ToTable("CapacitySpecification");
@@ -171,14 +173,14 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HasScrews = true,
                             MinimumDeadLoad = 1,
                             NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1848),
+                            NTEPCertificationTimestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8148),
                             NominalOutput = 1.0,
                             NominalOutputPercentage = 1m,
                             NonlinearityPercentage = 1m,
                             NumberInBasket = 1,
                             NumberOfGauges = 1,
                             OIMLCertificationId = "OIMLCERTIFICATIONID1",
-                            OIMLCertificationTimestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1850),
+                            OIMLCertificationTimestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8150),
                             Resistance = 1,
                             SafeLoad = 1,
                             ShellMaterialName = "SHELLMATERIAL1",
@@ -188,7 +190,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             TemperingHardnessLow = 1,
                             TemperingTemperatureInF = 1.0,
                             TemperingTimeInSeconds = 1,
-                            Timestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1837),
+                            Timestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8132),
                             UltimateLoad = 1,
                             Username = "OLADEJI",
                             nMax = 1,
@@ -212,14 +214,14 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HasScrews = true,
                             MinimumDeadLoad = 1,
                             NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1920),
+                            NTEPCertificationTimestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8171),
                             NominalOutput = 1.0,
                             NominalOutputPercentage = 1m,
                             NonlinearityPercentage = 1m,
                             NumberInBasket = 1,
                             NumberOfGauges = 1,
                             OIMLCertificationId = "OIMLCERTIFICATIONID2",
-                            OIMLCertificationTimestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1921),
+                            OIMLCertificationTimestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8171),
                             Resistance = 1,
                             SafeLoad = 1,
                             ShellMaterialName = "SHELLMATERIAL2",
@@ -229,7 +231,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             TemperingHardnessLow = 1,
                             TemperingTemperatureInF = 1.0,
                             TemperingTimeInSeconds = 1,
-                            Timestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1917),
+                            Timestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8168),
                             UltimateLoad = 1,
                             Username = "OLADEJI",
                             nMax = 1,
@@ -253,14 +255,14 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HasScrews = true,
                             MinimumDeadLoad = 1,
                             NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1932),
+                            NTEPCertificationTimestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8178),
                             NominalOutput = 1.0,
                             NominalOutputPercentage = 1m,
                             NonlinearityPercentage = 1m,
                             NumberInBasket = 1,
                             NumberOfGauges = 1,
                             OIMLCertificationId = "OIMLCERTIFICATIONID2",
-                            OIMLCertificationTimestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1932),
+                            OIMLCertificationTimestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8179),
                             Resistance = 1,
                             SafeLoad = 1,
                             ShellMaterialName = "SHELLMATERIAL2",
@@ -270,7 +272,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             TemperingHardnessLow = 1,
                             TemperingTemperatureInF = 1.0,
                             TemperingTimeInSeconds = 1,
-                            Timestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1928),
+                            Timestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8176),
                             UltimateLoad = 1,
                             Username = "OLADEJI",
                             nMax = 1,
@@ -294,14 +296,14 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HasScrews = true,
                             MinimumDeadLoad = 1,
                             NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1941),
+                            NTEPCertificationTimestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8184),
                             NominalOutput = 1.0,
                             NominalOutputPercentage = 1m,
                             NonlinearityPercentage = 1m,
                             NumberInBasket = 1,
                             NumberOfGauges = 1,
                             OIMLCertificationId = "OIMLCERTIFICATIONID2",
-                            OIMLCertificationTimestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1945),
+                            OIMLCertificationTimestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8185),
                             Resistance = 1,
                             SafeLoad = 1,
                             ShellMaterialName = "SHELLMATERIAL2",
@@ -311,7 +313,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             TemperingHardnessLow = 1,
                             TemperingTemperatureInF = 1.0,
                             TemperingTimeInSeconds = 1,
-                            Timestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1937),
+                            Timestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8182),
                             UltimateLoad = 1,
                             Username = "OLADEJI",
                             nMax = 1,
@@ -335,14 +337,14 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HasScrews = true,
                             MinimumDeadLoad = 1,
                             NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1954),
+                            NTEPCertificationTimestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8195),
                             NominalOutput = 1.0,
                             NominalOutputPercentage = 1m,
                             NonlinearityPercentage = 1m,
                             NumberInBasket = 1,
                             NumberOfGauges = 1,
                             OIMLCertificationId = "OIMLCERTIFICATIONID3",
-                            OIMLCertificationTimestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1954),
+                            OIMLCertificationTimestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8195),
                             Resistance = 1,
                             SafeLoad = 1,
                             ShellMaterialName = "SHELLMATERIAL3",
@@ -352,7 +354,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             TemperingHardnessLow = 1,
                             TemperingTemperatureInF = 1.0,
                             TemperingTimeInSeconds = 1,
-                            Timestamp = new DateTime(2023, 11, 1, 18, 3, 3, 857, DateTimeKind.Utc).AddTicks(1951),
+                            Timestamp = new DateTime(2023, 11, 1, 18, 19, 59, 77, DateTimeKind.Utc).AddTicks(8193),
                             UltimateLoad = 1,
                             Username = "OLADEJI",
                             nMax = 1,
@@ -474,7 +476,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ContentPDFPath = "CONTENT PDF PATH",
                             DocumentDescription = "SIMPLE DESCRITION OF DOCUMENT",
                             DocumentGuid = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
-                            Timestamp = new DateTime(2023, 11, 1, 18, 3, 3, 858, DateTimeKind.Utc).AddTicks(8889)
+                            Timestamp = new DateTime(2023, 11, 1, 18, 19, 59, 79, DateTimeKind.Utc).AddTicks(4312)
                         },
                         new
                         {
@@ -485,7 +487,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ContentPDFPath = "CONTENT PDF PATH",
                             DocumentDescription = "SIMPLE DESCRITION OF DOCUMENT",
                             DocumentGuid = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
-                            Timestamp = new DateTime(2023, 11, 1, 18, 3, 3, 858, DateTimeKind.Utc).AddTicks(8899)
+                            Timestamp = new DateTime(2023, 11, 1, 18, 19, 59, 79, DateTimeKind.Utc).AddTicks(4324)
                         },
                         new
                         {
@@ -496,7 +498,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ContentPDFPath = "CONTENT PDF PATH",
                             DocumentDescription = "SIMPLE DESCRITION OF DOCUMENT",
                             DocumentGuid = new Guid("7808711f-544a-423d-8d99-f00c31e35be5"),
-                            Timestamp = new DateTime(2023, 11, 1, 18, 3, 3, 858, DateTimeKind.Utc).AddTicks(8902)
+                            Timestamp = new DateTime(2023, 11, 1, 18, 19, 59, 79, DateTimeKind.Utc).AddTicks(4329)
                         },
                         new
                         {
@@ -507,7 +509,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ContentPDFPath = "CONTENT PDF PATH",
                             DocumentDescription = "SIMPLE DESCRITION OF DOCUMENT",
                             DocumentGuid = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
-                            Timestamp = new DateTime(2023, 11, 1, 18, 3, 3, 858, DateTimeKind.Utc).AddTicks(8904)
+                            Timestamp = new DateTime(2023, 11, 1, 18, 19, 59, 79, DateTimeKind.Utc).AddTicks(4332)
                         });
                 });
 
@@ -660,7 +662,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel1",
                             Capacity = 1,
                             HigherModelDescription = "HigherModel1",
-                            Id = "b6b502de-cdd9-412d-98d0-f5deb82de738",
+                            Id = "4af1c5e7-7dcd-46fd-8d2a-789ecd4d5bd0",
                             ProductId = "HigherModel1"
                         },
                         new
@@ -668,7 +670,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel2",
                             Capacity = 12,
                             HigherModelDescription = "HigherModel12",
-                            Id = "115070fb-9bda-4366-84f6-47a43684db58",
+                            Id = "07ff4fb5-ae0c-4fe8-abb2-83cc6a3c4d0d",
                             ProductId = "HigherModel12"
                         },
                         new
@@ -676,7 +678,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel3",
                             Capacity = 13,
                             HigherModelDescription = "HigherModel1",
-                            Id = "89c90b92-222b-4ffb-ab03-167286788ef0",
+                            Id = "89d33294-b9d8-41e8-a9ca-7d04702488a5",
                             ProductId = "HigherModel13"
                         },
                         new
@@ -684,7 +686,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel4",
                             Capacity = 14,
                             HigherModelDescription = "HigherModel14",
-                            Id = "64d1b73c-5e14-4a4b-b980-456d1bbab189",
+                            Id = "c65b1089-ca91-442e-971b-f4e8d1413ce1",
                             ProductId = "HigherModel14"
                         },
                         new
@@ -692,7 +694,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             HigherModelName = "HigherModel5",
                             Capacity = 5,
                             HigherModelDescription = "HigherModel5",
-                            Id = "79ca4abb-01d1-4c27-aa27-e8a3800dec5d",
+                            Id = "50b56d15-3b79-4ace-89dc-f7cd92db1e3a",
                             ProductId = "HigherModel5"
                         });
                 });
@@ -806,7 +808,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ModelVersionId = 1,
                             ModelVersionGuid = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
                             ModelVersionName = "FIRST_VERSION_FIRSTMODEL_NAME",
-                            Timestamp = new DateTime(2023, 11, 1, 18, 3, 3, 862, DateTimeKind.Utc).AddTicks(2569),
+                            Timestamp = new DateTime(2023, 11, 1, 18, 19, 59, 82, DateTimeKind.Utc).AddTicks(7166),
                             Username = "OLADEJI",
                             VersionDescription = "SPECIAL DESIGN"
                         },
@@ -816,7 +818,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ModelVersionId = 2,
                             ModelVersionGuid = new Guid("7808711f-544a-423d-8d99-f00c31e35be5"),
                             ModelVersionName = "SECOND_VERSION_FIRSTMODELNAME",
-                            Timestamp = new DateTime(2023, 11, 1, 18, 3, 3, 862, DateTimeKind.Utc).AddTicks(2578),
+                            Timestamp = new DateTime(2023, 11, 1, 18, 19, 59, 82, DateTimeKind.Utc).AddTicks(7177),
                             Username = "OLADEJI",
                             VersionDescription = "AUTO DESIGN TO COMBAT SPLIILING"
                         },
@@ -826,7 +828,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ModelVersionId = 1,
                             ModelVersionGuid = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
                             ModelVersionName = "FIRST_VERSION_SECONDMODELNAME",
-                            Timestamp = new DateTime(2023, 11, 1, 18, 3, 3, 862, DateTimeKind.Utc).AddTicks(2580),
+                            Timestamp = new DateTime(2023, 11, 1, 18, 19, 59, 82, DateTimeKind.Utc).AddTicks(7180),
                             Username = "OLADEJI",
                             VersionDescription = "INITIAL DESIGN"
                         });
@@ -834,7 +836,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
             modelBuilder.Entity("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.ShellMaterial", b =>
                 {
-                    b.Property<string>("Name")
+                    b.Property<string>("ShellMaterialName")
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("Alloy")
@@ -843,32 +845,32 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     b.Property<Guid>("ShellMaterialGuid")
                         .HasColumnType("char(36)");
 
-                    b.HasKey("Name", "Alloy");
+                    b.HasKey("ShellMaterialName");
 
                     b.ToTable("ShellMaterial");
 
                     b.HasData(
                         new
                         {
-                            Name = "ShellMAterial1",
+                            ShellMaterialName = "ShellMaterial1",
                             Alloy = 1,
                             ShellMaterialGuid = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63")
                         },
                         new
                         {
-                            Name = "ShellMAterial1",
+                            ShellMaterialName = "ShellMaterial2",
                             Alloy = 2,
                             ShellMaterialGuid = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63")
                         },
                         new
                         {
-                            Name = "ShellMAterial2",
+                            ShellMaterialName = "ShellMaterial3",
                             Alloy = 1,
                             ShellMaterialGuid = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63")
                         },
                         new
                         {
-                            Name = "ShellMAterial2",
+                            ShellMaterialName = "ShellMaterial4",
                             Alloy = 2,
                             ShellMaterialGuid = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63")
                         });
@@ -876,6 +878,12 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
             modelBuilder.Entity("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.CapacitySpecification", b =>
                 {
+                    b.HasOne("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.ShellMaterial", "ShellMaterial")
+                        .WithMany("CapacitySpecifications")
+                        .HasForeignKey("ShellMaterialName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.ModelVersion", "ModelVersion")
                         .WithMany("CapacitySpecifications")
                         .HasForeignKey("ModelName", "ModelVersionId")
@@ -883,6 +891,8 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("ModelVersion");
+
+                    b.Navigation("ShellMaterial");
                 });
 
             modelBuilder.Entity("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.CapacityTestPoint", b =>
@@ -976,6 +986,11 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     b.Navigation("CapacitySpecifications");
 
                     b.Navigation("Documents");
+                });
+
+            modelBuilder.Entity("DocumentVersionManager.Domain.ModelAggregateRoot.Entities.ShellMaterial", b =>
+                {
+                    b.Navigation("CapacitySpecifications");
                 });
 #pragma warning restore 612, 618
         }
