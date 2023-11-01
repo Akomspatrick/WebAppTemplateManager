@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         public int ModelVersionId { get; init; }
         public string DocumentTypeName { get; init; } = string.Empty;//documentTypes_name
         public Document Document;
-
+        public DocumentType DocumentType;
         public Guid DocumentDocumentTypeGuid
         {
             get; init;

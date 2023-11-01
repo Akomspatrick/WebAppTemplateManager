@@ -12,7 +12,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
     {
         public string TypeName { get; init; } = string.Empty;
         public Guid DocumentTypeGuid { get; init; }
-
+        public ICollection<DocumentDocumentType> DocumentDocumentTypes { get; set; }
         public static DocumentType Create(string documentTypeName)
         {
 

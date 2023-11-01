@@ -2,7 +2,10 @@
 using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Migrations;
 using MySql.EntityFrameworkCore.Extensions;
+using MySql.EntityFrameworkCore.Metadata;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
 {
@@ -85,8 +88,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
         {
             entity.HasKey(e => e.TypeName);
             entity.Property(e => e.TypeName).IsRequired().HasMaxLength(FixedValues.DocumentTypeMaxLength);
-
-            entity.HasData(DocumentType.Create("Cabling"),
+                     entity.HasData(DocumentType.Create("Cabling"),
                             DocumentType.Create("Chroming"),
                              DocumentType.Create("Sealing"),
                                DocumentType.Create("Gauging"),
@@ -110,6 +112,14 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
                 100,DateTime.UtcNow,"OLADEJI",1,1,1,1,1,1,1,1,"SHELLMATERIAL1",true,20,1,1,1,1,"CCNUMBER","CLASS","APPLICATION",1,1,1
                 ,1,1,1,1,1,1,true,"NTEPCERTIFICATIONID",DateTime.UtcNow,"OIMLCERTIFICATIONID1",DateTime.UtcNow),
 
+                      CapacitySpecification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 1,
+                101, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", true, 20, 1, 1, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1, 1, 1
+                , 1, 1, 1, 1, 1, 1, true, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
+
+                      CapacitySpecification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 1,
+                102, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", true, 20, 1, 1, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1, 1, 1
+                , 1, 1, 1, 1, 1, 1, true, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
+
                       CapacitySpecification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 2,
                 100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", true, 20, 1, 1, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1, 1, 1
                 , 1, 1, 1, 1, 1, 1, true, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
@@ -131,8 +141,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
         {
             entity.HasKey(e => new { e.DocumentName, e.ModelName, e.ModelVersionId, e.DocumentTypeName });
             entity.Property(e => e.ModelName).HasMaxLength(FixedValues.ModelNameMaxLength);
-
-            //entity.Property(e => e.ModelName).IsRequired().HasMaxLength(FixedValues.ModelNameMaxLength);//This has specified the foreign key
+            entity.HasOne<DocumentType>(e => e.DocumentType).WithMany(e => e.DocumentDocumentTypes);
             entity.HasOne<Document>(e => e.Document).WithMany(e => e.DocumentDocumentTypes).HasForeignKey(e => new { e.DocumentName, e.ModelName, e.ModelVersionId });
             entity.HasData(
                        DocumentDocumentType.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME ver1 DOc A", 1, "FIRSTMODELNAME", "Cabling"),
@@ -153,14 +162,33 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
     {
         public void Configure(EntityTypeBuilder<CapacityTestPoint> entity)
         {
-            entity.HasKey(e => new { e.ModelVersionId, e.ModelName, e.TestId });
+            /// below comments to be removed not needed anymore
+            /// Add thito the migration query after creating the migration EVERYTIME YOU CREATE A NEW MIGRATION
+            /// BEFORE UPDATE
+            /// 
+            /*
+             * 
+            migrationBuilder.Sql("ALTER TABLE `CapacityTestPoint` DROP COLUMN `TestId`");
+            migrationBuilder.Sql("ALTER TABLE `CapacityTestPoint` ADD `TestId` int AUTO_INCREMENT UNIQUE;");
+            migrationBuilder.Sql("ALTER TABLE `CapacityTestPoint` ADD  PRIMARY KEY(ModelVersionId, ModelName, TestId);");
+           
+             */
+            /// THIS IS THE WORK AROUND TO CREATE IDENTITY FIELD FOR TESTID, MAY BE FIXED IN THE FUTURE
+
+          
+            entity.HasKey(e => new { e.TestId });
+            entity.Property(e => e.TestId)
+             .HasAnnotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn);
+
             entity.HasOne<CapacitySpecification>(e=>e.CapacitySpecification).WithMany(e=>e.CapacityTestPoints)
                 .HasForeignKey(e=>new { e.Capacity, e.ModelName, e.ModelVersionId });
-            entity.Property(e => e.TestId).ValueGeneratedNever().UseMySQLAutoIncrementColumn("TestId");
-            entity.HasData( CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1,100,1),
-                CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 2,100,1),
-                CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "SECONDMODELNAME", 1,100,1));
-          
+
+            entity.HasData( CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME",1, 100,1,1),
+                 CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME",1,101,9,1),
+                 CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 102, 39, 1),
+                 CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "SECONDMODELNAME",1, 100,49,1));
+
+  
         }
     }
     public class ShellMaterialConfig : IEntityTypeConfiguration<ShellMaterial>

@@ -1,0 +1,6 @@
+@SimpleCRUDMySqlDbContext_HostAddress = http://localhost:5104
+
+GET {{SimpleCRUDMySqlDbContext_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
