@@ -29,7 +29,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
         }
 
         [HttpGet(template: DocumentVersionAPIEndPoints.Model.Get, Name = DocumentVersionAPIEndPoints.Model.Get)]
-        public async Task<IActionResult> Get([FromBody] ModelRequestDTO request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Get([FromBody] ModelDTO request, CancellationToken cancellationToken)
         {
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
             return (await _sender.Send(new GetModelsQuery(new ApplicationModelRequestDTO(request.ModelName)), cancellationToken))

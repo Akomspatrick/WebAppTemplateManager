@@ -11,9 +11,9 @@ namespace DocumentVersionManager.Contracts.RequestDTO
     //public record ModelTypeUpdateDTO(string modelTypesId, string modelTypesName);
     //public record ModelTypeRequestDTO(string modelTypesId);
     //public record ModelTypeDeleteDTO(string modelTypesId);
-    public record ModelTypeCreateDTO(string modelTypesName);
-    public record ModelTypeUpdateDTO(Guid modelTypesId, string modelTypesName);
-    public record ModelTypeRequestDTOById(Guid modelTypesId);
-    public record ModelTypeRequestDTO(string modelTypesName);
-    public record ModelTypeDeleteDTO(Guid modelTypesId);
+    public record ModelTypeCreateDTO(string ModelTypesName);
+    public record ModelTypeUpdateDTO(Guid ModelTypesId, string ModelTypesName);
+    public record ModelTypeRequestDTOById(Guid ModelTypesId);
+    public record ModelTypeRequestDTO(string ModelTypesName);
+    public record ModelTypeDeleteDTO(Guid ModelTypesId);
 }
