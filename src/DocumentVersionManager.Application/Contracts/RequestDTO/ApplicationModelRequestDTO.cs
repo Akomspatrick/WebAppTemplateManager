@@ -17,7 +17,7 @@ namespace DocumentVersionManager.Application.Contracts.RequestDTO
     //    public record ApplicationModelDeleteDTO(string ModelId);
     //
 
-    public record ApplicationModelRequestDTOById(Guid ModelId);
+    public record ApplicationModelRequestDTOByGuidId(Guid ModelId);
     public record ApplicationModelRequestDTO(string ModelName);
     public record ApplicationModelCreateDTO( Guid ModelId, string ModelName, string ModelTypesName);
     public record ApplicationModelUpdateDTO(Guid ModelId,  string ModelName, string ModelTypesName);

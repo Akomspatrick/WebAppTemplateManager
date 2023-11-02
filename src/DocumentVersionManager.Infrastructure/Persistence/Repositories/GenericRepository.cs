@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         public GenericRepository(DocumentVersionManagerContext ctx)
         {
             //_dbSet = ctx.Set<T>();
+            Guid guid = Guid.NewGuid();
             _ctx = ctx;
         }
         async Task<Either<GeneralFailures, int>> IGenericRepository<T>.AddAsync(T entity, CancellationToken cancellationToken)
@@ -126,7 +128,18 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
         }
 
-
-
+        public async Task<Either<GeneralFailures, T>> GetByGuidAsync(Guid guid, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var entity = await _ctx.Set<T>().AsNoTracking().FirstOrDefaultAsync(s => (s.GuidId.Equals(guid)), cancellationToken);
+                return entity != null ? entity : GeneralFailures.DataNotFoundInRepository;
+            }
+            catch (Exception ex)
+            {
+                //Log this error properly
+                return GeneralFailures.ErrorRetrievingListDataFromRepository;
+            }
+        }
     }
 }

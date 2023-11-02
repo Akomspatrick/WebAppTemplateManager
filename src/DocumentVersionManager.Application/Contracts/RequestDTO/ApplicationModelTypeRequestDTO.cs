@@ -11,7 +11,7 @@ namespace DocumentVersionManager.Application.Contracts.RequestDTO
     //    public required string modelTypesName { get; set; }
     //}
     // convert this to a record
-    public record ApplicationModelTypeRequestDTOById(Guid modelTypesId);
+    public record ApplicationModelTypeRequestDTOByGuidId(Guid modelTypesId);
     public record ApplicationModelTypeRequestDTO(string modelTypesName);
     public record ApplicationModelTypeCreateDTO(string modelTypesName);
     public record ApplicationModelTypeUpdateDTO(Guid modelTypesId, string modelTypesName);

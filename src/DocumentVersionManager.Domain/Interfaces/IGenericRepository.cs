@@ -19,6 +19,11 @@ namespace DocumentVersionManager.Domain.Interfaces
         Task<Either<GeneralFailures, int>> UpdateAsync(T entity, CancellationToken cancellationToken);
         Task<Either<GeneralFailures, int>> DeleteAsync(T entity, CancellationToken cancellationToken);
         Task<Either<GeneralFailures, T>> GetMatch(System.Linq.Expressions.Expression<Func<T, bool>> match, CancellationToken cancellationToken);
+        Task<Either<GeneralFailures, T>> GetByGuidAsync(Guid guid, CancellationToken cancellationToken);
+
+
+
+
 
         //  Task<Either<GeneralFailures, int>> DeleteByGuidAsync(Guid Id, CancellationToken cancellationToken);
         //  Task<Either<GeneralFailures, int>> DeleteByIdAsync(string Id, CancellationToken cancellationToken);

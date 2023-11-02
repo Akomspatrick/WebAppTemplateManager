@@ -13,7 +13,7 @@ namespace DocumentVersionManager.Contracts.RequestDTO
     //public record ModelTypeDeleteDTO(string modelTypesId);
     public record ModelTypeCreateDTO(string ModelTypesName);
     public record ModelTypeUpdateDTO(Guid ModelTypesId, string ModelTypesName);
-    public record ModelTypeRequestDTOById(Guid ModelTypesId);
+    public record ModelTypeRequestDTOByGuidId(Guid ModelTypesId);
     public record ModelTypeRequestDTO(string ModelTypesName);
     public record ModelTypeDeleteDTO(Guid ModelTypesId);
 }
