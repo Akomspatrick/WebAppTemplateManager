@@ -29,13 +29,17 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
         async Task<Either<GeneralFailures, IEnumerable<ApplicationModelTypeResponseDTO>>> IRequestHandler<GetAllModelTypeQuery, Either<GeneralFailures, IEnumerable<ApplicationModelTypeResponseDTO>>>.Handle(GetAllModelTypeQuery request, CancellationToken cancellationToken)
         {
-            var repository = _unitOfWork.AsyncRepository<ModelTypes>();
-            return (await repository.GetAllAsync(cancellationToken))
-             .Map(task => task.Result
-             .Select(result => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypesName)));
-
+            
+          return (await _unitOfWork.ModelTypesRepository.GetAllWithIncludes( cancellationToken))
+           .Map(task => task
+           .Select(result => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypesName, ConvertTo(result.Models))));
+            
         }
 
-
+        private ICollection<ApplicationModelResponseDTO> ConvertTo(ICollection<Domain.ModelAggregateRoot.Entities.Model> models)
+        {
+          
+            return models.Select(x => new ApplicationModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypesName)).ToList();   
+        }
     }
 }

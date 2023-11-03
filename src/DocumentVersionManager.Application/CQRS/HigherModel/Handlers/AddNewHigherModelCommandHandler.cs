@@ -28,10 +28,11 @@ namespace DocumentVersionManager.Application.CQRS.HigherModel.Handlers
         public async Task<ApplicationModelTypeRequestDTO> Handle(AddNewHigherModelCommand request, CancellationToken cancellationToken)
         {
 
-            var entity = Domain.ModelAggregateRoot.Entities.HigherModel.Create(request.HigherModelName, request.ProductId, request.HigherModelDescription, request.Capacity);
-            var repository = _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.HigherModel>();
-            var x = await repository.AddAsync(entity, cancellationToken);
-            return null;
+            //var entity = Domain.ModelAggregateRoot.Entities.HigherModel.Create(request.HigherModelName, request.ProductId, request.HigherModelDescription, request.Capacity);
+            //var repository = _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.HigherModel>();
+            //var x = await repository.AddAsync(entity, cancellationToken);
+          throw new NotImplementedException("Operation Not Allowed ");
+            //return new ApplicationModelTypeRequestDTO(x.ModelId);
         }
     }
 

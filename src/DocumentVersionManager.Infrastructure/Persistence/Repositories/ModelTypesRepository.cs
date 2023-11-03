@@ -2,17 +2,18 @@
 using DocumentVersionManager.Domain.Interfaces;
 using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 using LanguageExt;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
     public class ModelTypesRepository : GenericRepository<ModelTypes>, IModelTypesRepository
     {
-        // private readonly IMapper _mapper;
+
         DocumentVersionManagerContext _ctx;
         public ModelTypesRepository(DocumentVersionManagerContext ctx) : base(ctx)
         {
-            // _mapper = mapper;
+
             _ctx = ctx;
         }
 
@@ -24,31 +25,22 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        //public async Task<Either<GeneralFailures, ModelTypes>> GetModelTypeByGuidId(Guid modelTypesId)
-        //{
-        //    try
-        //    {
-        //        return await _ctx.ModelType.F(modelTypeId);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //Log this error properly
-        //        return GeneralFailures.ErrorRetrievingListDataFromRepository;
-        //    }
-        //}
-
-        public async Task<Either<GeneralFailures, ModelTypes>> GetModelTypeById(string modelTypeId)
+        public async Task<Either<GeneralFailures, List<ModelTypes>>> GetAllWithIncludes(CancellationToken cancellationToken)
         {
             try
             {
-                return await _ctx.ModelType.FindAsync(modelTypeId);
+                var result = await _ctx.ModelType.Include(model => model.Models).AsNoTracking().ToListAsync(cancellationToken);
+
+                return result;
+
+
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //Log this error properly
                 return GeneralFailures.ErrorRetrievingListDataFromRepository;
             }
         }
+
 
 
     }

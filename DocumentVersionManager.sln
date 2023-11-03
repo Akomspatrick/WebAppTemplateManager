@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCRUDMySqlDbContext", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastTestingConsoleApp", "FastTestingConsoleApp\FastTestingConsoleApp.csproj", "{AFB99A02-7037-4773-B7C2-5FC964B04B94}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "postmancollectionsaved", "postmancollectionsaved", "{F6CF5582-CE71-4E2C-9647-E338E4AF3281}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,4 +1,5 @@
-﻿using DocumentVersionManager.Infrastructure.Persistence;
+﻿using Asp.Versioning;
+using DocumentVersionManager.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,8 +19,22 @@ public static class APIServiceCollection
         services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
         services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySQL(configuration.GetConnectionString(Domain.Constants.FixedValues.DBConnectionStringName)!));
         services.AddCors();
+        services.AddApiVersioning(
+            option =>
+            {
+                option.ReportApiVersions = true;
+                option.AssumeDefaultVersionWhenUnspecified = true;
+                option.DefaultApiVersion = new ApiVersion(2, 0);
+                option.ApiVersionReader = ApiVersionReader.Combine(
+                    new QueryStringApiVersionReader("api-version"),
+                    new HeaderApiVersionReader("api-version"),
+                    new MediaTypeApiVersionReader("version")
+                    );
+               
 
-        // services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
+            });
+  
+                  // services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
         return services;
     }
 }

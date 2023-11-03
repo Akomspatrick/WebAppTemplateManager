@@ -32,7 +32,7 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
         {
             var entity = Domain.ModelAggregateRoot.Entities. Model.Create( Guid.NewGuid(), request.modelUpdateDTO.ModelName,request.modelUpdateDTO.ModelTypesName);
 
-            return await _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.Model>().UpdateAsync(entity, cancellationToken);
+            return await _unitOfWork.ModelRepository.UpdateAsync(entity, cancellationToken);
         }
 
 

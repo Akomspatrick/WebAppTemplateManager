@@ -32,9 +32,9 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             //await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             //return x;
-            var entity = ModelTypes.Create(Guid.NewGuid(), request.modelTypeCreateDTO.modelTypesName);
-            var repository = _unitOfWork.AsyncRepository<ModelTypes>();
-            var x = await repository.AddAsync(entity, cancellationToken);
+            var entity = ModelTypes.Create(Guid.NewGuid(), request.modelTypeCreateDTO.ModelTypesName);
+          
+            var x = await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             _logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
             return x;

@@ -31,7 +31,7 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
             _logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
             var entity = Domain.ModelAggregateRoot.Entities.Model.Create(Guid.NewGuid(),request.ModelCreateDTO.ModelName, request.ModelCreateDTO.ModelTypesName);
            
-            return await _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.Model>().AddAsync(entity, cancellationToken);
+            return await _unitOfWork.ModelRepository.AddAsync(entity, cancellationToken);
         }
     }
 }

@@ -13,5 +13,7 @@ namespace DocumentVersionManager.Domain.Interfaces
     public interface IModelRepository : IGenericRepository<Model>
     {
         // Task<Either<ModelFailures, ModelType>> GetModelType(string modelTypesName);
+       
+       Task<Either<GeneralFailures, List<Model>>> GetAllWithIncludes(CancellationToken cancellationToken);
     }
 }

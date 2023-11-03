@@ -29,12 +29,15 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         {
 
 
-            return (await _unitOfWork.AsyncRepository<ModelTypes>()
-                    .GetMatch(s => (s.ModelTypesName == request.modelTypeRequestDTO.modelTypesName), cancellationToken))
-                    .Map((result) => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypesName));
+            return (await _unitOfWork.ModelTypesRepository
+                    .GetMatch(s => (s.ModelTypesName == request.modelTypeRequestDTO.ModelTypesName), null, cancellationToken))
+                    .Map((result) => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypesName, convertToModelDto(result.Models))); 
 
         }
 
-
+        private ICollection<ApplicationModelResponseDTO> convertToModelDto(ICollection<Domain.ModelAggregateRoot.Entities.Model> models)
+        {
+             return models.Select(x => new ApplicationModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypesName)).ToList();
+        }
     }
 }

@@ -15,40 +15,46 @@ using System.Linq;
 
 namespace DocumentVersionManager.Api.Controllers.V1
 {
-    [ApiController]
-    // [Route("api")]
-    public class ModelTypeController : ControllerBase
-    {
-        private readonly ILogger<ModelTypeController> _logger;
-        //private readonly IMediator _sender;
-        private readonly ISender _sender;
 
-        public ModelTypeController(ILogger<ModelTypeController> logger, ISender sender)
+    public class ModelTypeController :DVBaseController<ModelTypeController>
+    {
+        public ModelTypeController(ILogger<ModelTypeController> logger, ISender sender) : base(logger, sender)
         {
-            _logger = logger;
-            _sender = sender;
         }
 
-        [ProducesResponseType(typeof(ModelTypeResponseDTO), 200)]
+        [ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionAPIEndPoints.ModelType.Get, Name = DocumentVersionAPIEndPoints.ModelType.Get)]
         public async Task<IActionResult> Get([FromBody] ModelTypeRequestDTO request, CancellationToken cancellationToken)
         {
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
             return (await _sender.Send(new GetModelTypeQuery(new ApplicationModelTypeRequestDTO(request.ModelTypesName)), cancellationToken))
             .Match<IActionResult>(Left: errors => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors)),
-                                Right: result => new OkObjectResult(new ModelTypeResponseDTO(result.ModelTypesId, result.ModelTypesName)));
+                                Right: result => new OkObjectResult(new ModelTypeResponseDTO(result.ModelTypesId, result.ModelTypesName, CovertToModelTypeResponse(result.Models)
+                                )));
         }
 
-        [ProducesResponseType(typeof(IEnumerable<ModelTypeResponseDTO>), 200)]
+        [ProducesResponseType(typeof(IEnumerable<ModelTypeResponseDTO>), StatusCodes.Status200OK)]
       
         [HttpGet(template: DocumentVersionAPIEndPoints.ModelType.GetAll, Name = DocumentVersionAPIEndPoints.ModelType.GetAll)]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
-            return (await _sender.Send(new GetAllModelTypeQuery(), cancellationToken))
+            return ( await _sender.Send(new GetAllModelTypeQuery(), cancellationToken))
             .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
-                                Right: result => new OkObjectResult(result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName))));
+                                Right: result => new OkObjectResult(result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName,CovertToModelTypeResponse(x.Models)))));
+                              // Right: result => new OkObjectResult(getresult(result)));
         }
 
+        private ICollection<ModelResponseDTO> CovertToModelTypeResponse(ICollection<ApplicationModelResponseDTO> models)
+        {
+           return models.Select(x => new ModelResponseDTO(x.ModelId, x.ModelName, x.ModelTypesName)).ToList();
+        }
+
+        //private object? getresult(IEnumerable<ApplicationModelTypeResponseDTO> result)
+        //{
+        //    var p = result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, x.Models));
+        //    var r= p.ToArray();
+        //    return r;
+        //}
 
         [HttpPost(template: DocumentVersionAPIEndPoints.ModelType.Create, Name = DocumentVersionAPIEndPoints.ModelType.Create)]
         public async Task<IActionResult> Create(ModelTypeCreateDTO request, CancellationToken cancellationToken)
@@ -60,7 +66,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
                 .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                       Right: result => result.Match<IActionResult>(
                       Left: errors2 => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors2)),
-                      Right: result2 => Created($"/{DocumentVersionAPIEndPoints.ModelType.Create}/{modelType.modelTypesName}", modelType)));
+                      Right: result2 => Created($"/{DocumentVersionAPIEndPoints.ModelType.Create}/{modelType.ModelTypesName}", modelType)));
         }
 
 
@@ -84,7 +90,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
                 .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                       Right: result => result.Match<IActionResult>(
                       Left: errors2 => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors2)),
-                      Right: result2 => Created($"/{DocumentVersionAPIEndPoints.ModelType.Create}/{modelType.modelTypesId}", modelType)));
+                      Right: result2 => Created($"/{DocumentVersionAPIEndPoints.ModelType.Create}/{modelType.ModelTypesId}", modelType)));
         }
 
         private async Task<Either<GeneralFailures, int>> CreateModelType(ApplicationModelTypeCreateDTO modelType, CancellationToken cancellationToken)

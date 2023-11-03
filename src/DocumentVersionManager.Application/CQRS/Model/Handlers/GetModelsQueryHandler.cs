@@ -28,8 +28,9 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
         }
         public async Task<Either<GeneralFailures, ApplicationModelResponseDTO>> Handle(GetModelsQuery request, CancellationToken cancellationToken)
         {
-            return (await _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.Model>()
-                    .GetMatch(s => (s.ModelName == request.modelRequestDTO.ModelName), cancellationToken))
+          
+            return (await _unitOfWork.ModelRepository
+                    .GetMatch(s => (s.ModelName == request.modelRequestDTO.ModelName),null, cancellationToken))
                     .Map((result) => new ApplicationModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypesName));
         }
      

@@ -1,4 +1,5 @@
-﻿using DocumentVersionManager.Api.Extentions;
+﻿using Asp.Versioning;
+using DocumentVersionManager.Api.Extentions;
 using DocumentVersionManager.Application.Contracts.RequestDTO;
 using DocumentVersionManager.Application.CQRS.Model.Commands;
 using DocumentVersionManager.Application.CQRS.Model.Queries;
@@ -13,20 +14,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DocumentVersionManager.Api.Controllers.V1
 {
-   // [Route("api/[controller]")]
-    [ApiController]
-    public class ModelController : ControllerBase
-    {
-        private readonly ILogger<ModelController> _logger;
-        //private readonly IMediator _sender;
-        private readonly ISender _sender;
 
-        public ModelController(ILogger<ModelController> logger, ISender sender)
+    public class ModelController : DVBaseController<ModelController>
+    {
+        public ModelController(ILogger<ModelController> logger, ISender sender) : base(logger, sender)
         {
-            _logger = logger;
-           
-            _sender = sender;
         }
+
+
 
         [HttpGet(template: DocumentVersionAPIEndPoints.Model.Get, Name = DocumentVersionAPIEndPoints.Model.Get)]
         public async Task<IActionResult> Get([FromBody] ModelDTO request, CancellationToken cancellationToken)

@@ -20,10 +20,10 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
         public async Task<Either<GeneralFailures, int>> Handle(DeleteModelCommand request, CancellationToken cancellationToken)
         {
             return (
-                  await _unitOfWork.AsyncRepository<Domain.ModelAggregateRoot.Entities.Model>()
-                  .GetMatch(s => (s.GuidId == request.modelDeleteDTO.ModelId), cancellationToken))
+                  await _unitOfWork.ModelRepository
+                  .GetMatch(s => (s.GuidId == request.modelDeleteDTO.ModelId),null, cancellationToken))
                   .Match(Left: x => x, Right: x => _unitOfWork
-                  .AsyncRepository<Domain.ModelAggregateRoot.Entities.Model>()
+                  .ModelRepository
                   .DeleteAsync(x, cancellationToken)
                   .Result);
         }

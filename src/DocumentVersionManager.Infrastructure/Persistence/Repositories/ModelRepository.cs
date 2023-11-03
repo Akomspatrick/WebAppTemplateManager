@@ -2,36 +2,34 @@
 using DocumentVersionManager.Domain.Interfaces;
 using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 using LanguageExt;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
-    public class ModelRepository : GenericRepository<Model>, IModelRepository
+    public class ModelRepository : GenericRepository<Model>, IModelRepository 
     {
+        DocumentVersionManagerContext _ctx;
         public ModelRepository(DocumentVersionManagerContext ctx) : base(ctx)
         {
+            _ctx = ctx;
+        }
 
+        public async Task<Either<GeneralFailures,List<Model>>> GetAllWithIncludes(CancellationToken cancellationToken)
+        {
+            try
+            {
+                var result = await _ctx.Models.Include(model => model.ModelVersions).AsNoTracking().ToListAsync(cancellationToken);
+                return result ;
+             
+            }
+            catch (Exception)
+            {
+                return GeneralFailures.ErrorRetrievingListDataFromRepository;
+            }
         }
 
 
-        //public Task<Model> AddAsync(Model entity, CancellationToken cancellationToken)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public Task<Model> DeleteAsync(Model entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public Task<Model> UpdateAsync(Model entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //Task<IReadOnlyList<Model>> IGenericRepository<Model>.GetAll()
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 
 }
