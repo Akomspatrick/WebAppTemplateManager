@@ -9,7 +9,7 @@
         public string DocumentContentPath { get; init; } = string.Empty;//contentPDF
         public string ChangeOrderDocumentPath { get; init; } = string.Empty;
 
-        public string Username { get; init; } = string.Empty;
+        public string UserName { get; init; } = string.Empty;
 
 
 

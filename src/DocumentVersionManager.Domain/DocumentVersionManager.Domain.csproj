@@ -17,8 +17,4 @@
 	  <ProjectReference Include="..\DocumentVersionManager.DomainBase\DocumentVersionManager.DomainBase.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Automate\" />
-	</ItemGroup>
-
 </Project>

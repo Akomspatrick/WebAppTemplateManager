@@ -28,7 +28,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
         {
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
             return (await _sender.Send(new GetModelsQuery(new ApplicationModelRequestDTO(request.ModelName)), cancellationToken))
-            .Match<IActionResult>(Left: errors => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors)),
+            .Match<IActionResult>(Left: errors => new OkObjectResult(GeneralFailuresFailuresExtensions.GetEnumDescription(errors)),
                                 Right: result => new OkObjectResult(result));
         }
 
@@ -49,7 +49,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
                 .Bind<Either<GeneralFailures, int>>(modelType => CreateModel(model, cancellationToken).Result)
                 .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                       Right: result => result.Match<IActionResult>(
-                      Left: errors2 => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors2)),
+                      Left: errors2 => new OkObjectResult(GeneralFailuresFailuresExtensions.GetEnumDescription(errors2)),
                       Right: result2 => Created($"/{DocumentVersionAPIEndPoints.ModelType.Create}/{model.ModelId}", model)));
         }
 
@@ -60,7 +60,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
         {
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
             return (await _sender.Send(new DeleteModelCommand(new ApplicationModelDeleteDTO(request.ModelId)), cancellationToken))
-            .Match<IActionResult>(Left: errors => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors)),
+            .Match<IActionResult>(Left: errors => new OkObjectResult(GeneralFailuresFailuresExtensions.GetEnumDescription(errors)),
                                 Right: result => new OkObjectResult(result));
         }
 
@@ -73,7 +73,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
                 .Bind<Either<GeneralFailures, int>>(modelType => UpdateModelType(modelType, cancellationToken).Result)
                 .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                       Right: result => result.Match<IActionResult>(
-                      Left: errors2 => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors2)),
+                      Left: errors2 => new OkObjectResult(GeneralFailuresFailuresExtensions.GetEnumDescription(errors2)),
                       Right: result2 => Created($"/{DocumentVersionAPIEndPoints.ModelType.Create}/{modelType.ModelId}", modelType)));
         }
 

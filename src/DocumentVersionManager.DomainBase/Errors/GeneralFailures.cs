@@ -28,7 +28,7 @@ namespace DocumentVersionManager.Domain.Errors
     }
 
 
-    public static class ModelFailuresExtensions
+    public static class GeneralFailuresFailuresExtensions
     {
 
         public static string GetEnumDisplayName(this Enum value)

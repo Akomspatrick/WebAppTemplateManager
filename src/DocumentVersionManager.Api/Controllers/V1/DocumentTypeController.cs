@@ -32,7 +32,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
             .Bind<Either<GeneralFailures, int>>(request => AddDocumentType(request, cancellationToken).Result)
         .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                               Right: result => result.Match<IActionResult>(
-                                                  Left: errors2 => new OkObjectResult(ModelFailuresExtensions.GetEnumDescription(errors2)),
+                                                  Left: errors2 => new OkObjectResult(GeneralFailuresFailuresExtensions.GetEnumDescription(errors2)),
                                                   Right: result2 => new OkObjectResult(result2)
                                                                            )
                                        );
