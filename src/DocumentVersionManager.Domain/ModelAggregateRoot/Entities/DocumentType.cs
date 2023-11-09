@@ -1,4 +1,4 @@
-﻿using DocumentVersionManager.Domain.Base;
+﻿using DocumentVersionManager.DomainBase.Base;
 using DocumentVersionManager.Domain.Constants;
 using System;
 using System.Collections.Generic;

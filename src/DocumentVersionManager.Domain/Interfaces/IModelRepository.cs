@@ -1,4 +1,4 @@
-﻿using DocumentVersionManager.Domain.Base;
+﻿
 using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 using LanguageExt;

@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using DocumentVersionManager.Domain.Base;
-using DocumentVersionManager.Domain.Errors;
+﻿using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
 using LanguageExt;
 

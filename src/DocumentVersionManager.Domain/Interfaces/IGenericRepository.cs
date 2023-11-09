@@ -1,5 +1,6 @@
-﻿using DocumentVersionManager.Domain.Base;
+﻿
 using DocumentVersionManager.Domain.Errors;
+using DocumentVersionManager.DomainBase.Base;
 using LanguageExt;
 using System;
 using System.Collections.Generic;

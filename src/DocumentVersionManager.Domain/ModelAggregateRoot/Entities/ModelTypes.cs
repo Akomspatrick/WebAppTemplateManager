@@ -1,12 +1,5 @@
-﻿using DocumentVersionManager.Domain.Base;
-using DocumentVersionManager.Domain.Constants;
-using DocumentVersionManager.Domain.Errors;
-using LanguageExt;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DocumentVersionManager.Domain.Constants;
+using DocumentVersionManager.DomainBase.Base;
 
 namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 {

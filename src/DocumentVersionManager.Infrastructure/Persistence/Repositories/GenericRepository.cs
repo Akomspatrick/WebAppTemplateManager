@@ -1,17 +1,9 @@
-﻿using DocumentVersionManager.Domain.Base;
-using DocumentVersionManager.Domain.Errors;
+﻿using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
+using DocumentVersionManager.DomainBase.Base;
 using LanguageExt;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
