@@ -49,7 +49,7 @@
         public int ModelVersionId { get; init; }
         public int Capacity { get; init; }
         public DateTime Timestamp { get; init; }
-        public string Username { get; init; } = string.Empty;
+        public string UserName { get; init; } = string.Empty;
         public double? NominalOutput { get; init; }
         public decimal? NominalOutputPercentage { get; init; }
         public decimal? NonlinearityPercentage { get; init; }
@@ -96,7 +96,7 @@
                 ModelVersionId = modelVersionId,
                 Capacity = capacity,
                 Timestamp = timestamp,
-                Username = username,
+                UserName = username,
                 NominalOutput = nominalOutput,
                 NominalOutputPercentage = nominalOutputPercentage,
                 NonlinearityPercentage = nonlinearityPercentage,

@@ -243,3 +243,46 @@ CREATE TABLE IF NOT EXISTS `mydb_test`.`shellmaterials` (
   PRIMARY KEY (`name`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
+
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`referencestandards`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`referencestandards` (
+  `manufacturer` VARCHAR(128) NOT NULL,
+  `model` VARCHAR(128) NOT NULL,
+  `serial` VARCHAR(128) NOT NULL,
+  `capacity` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `b0` DECIMAL(20,12) NOT NULL,
+  `b1` DECIMAL(20,12) NOT NULL,
+  `b2` DECIMAL(20,12) NOT NULL,
+  `b3` DECIMAL(20,12) NOT NULL,
+  `b4` DECIMAL(20,12) NOT NULL,
+  PRIMARY KEY (`manufacturer`, `serial`, `model`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`referencecellcalibrations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`referencecellcalibrations` (
+  `weight` INT NOT NULL,
+  `refStandards_manufacturer` VARCHAR(128) NOT NULL,
+  `refStandards_model` VARCHAR(128) NOT NULL,
+  `refStandards_serial` VARCHAR(128) NOT NULL,
+  `lowMeasuredPosition` DECIMAL(30,10) NOT NULL,
+  `lowCurrent` DECIMAL(30,10) NOT NULL,
+  `highMeasuredPosition` DECIMAL(30,10) NOT NULL,
+  `highCurrent` DECIMAL(30,10) NOT NULL,
+  PRIMARY KEY (`weight`),
+  INDEX `fk_refCellCal_refStandards1` (`refStandards_manufacturer` ASC, `refStandards_serial` ASC, `refStandards_model` ASC) VISIBLE,
+  CONSTRAINT `fk_refCellCal_refStandards1`
+    FOREIGN KEY (`refStandards_manufacturer` , `refStandards_serial` , `refStandards_model`)
+    REFERENCES `mydb_test`.`referencestandards` (`manufacturer` , `serial` , `model`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+

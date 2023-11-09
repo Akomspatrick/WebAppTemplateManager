@@ -49,12 +49,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
            return models.Select(x => new ModelResponseDTO(x.ModelId, x.ModelName, x.ModelTypesName)).ToList();
         }
 
-        //private object? getresult(IEnumerable<ApplicationModelTypeResponseDTO> result)
-        //{
-        //    var p = result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, x.Models));
-        //    var r= p.ToArray();
-        //    return r;
-        //}
+
 
         [HttpPost(template: DocumentVersionAPIEndPoints.ModelType.Create, Name = DocumentVersionAPIEndPoints.ModelType.Create)]
         public async Task<IActionResult> Create(ModelTypeCreateDTO request, CancellationToken cancellationToken)
