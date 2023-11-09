@@ -286,3 +286,611 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
+-- -----------------------------------------------------
+-- Table `mydb_test`.`tests`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`tests` (
+  `timestamp` DATETIME NOT NULL,
+  `users_username` VARCHAR(45) NOT NULL,
+  `products_serial` INT NOT NULL,
+  `excitationResistance` DECIMAL(18,6) NULL DEFAULT NULL,
+  `signalResistance` DECIMAL(18,6) NULL DEFAULT NULL,
+  `referenceStandards_manufacturer` VARCHAR(128) NOT NULL,
+  `referenceStandards_serial` VARCHAR(128) NOT NULL,
+  `referenceStandards_model` VARCHAR(128) NOT NULL,
+  PRIMARY KEY (`timestamp`),
+  INDEX `fk_tests_products1` (`products_serial` ASC) VISIBLE,
+  INDEX `fk_tests_referenceStandards1` (`referenceStandards_manufacturer` ASC, `referenceStandards_serial` ASC, `referenceStandards_model` ASC) VISIBLE,
+  INDEX `fk_tests_users1` (`users_username` ASC) VISIBLE,
+  CONSTRAINT `fk_tests_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`)
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_tests_referenceStandards1`
+    FOREIGN KEY (`referenceStandards_manufacturer` , `referenceStandards_serial` , `referenceStandards_model`)
+    REFERENCES `mydb_test`.`referencestandards` (`manufacturer` , `serial` , `model`),
+  CONSTRAINT `fk_tests_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productinitialunits`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productinitialunits` (
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `input_units` VARCHAR(45) NOT NULL,
+  `output_units` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productInitialUnits_products1` (`products_serial` ASC) VISIBLE,
+  CONSTRAINT `fk_productInitialUnits_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productfinalunits`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productfinalunits` (
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `input_units` VARCHAR(45) NOT NULL,
+  `output_units` VARCHAR(45) NOT NULL,
+  `indicator_type` VARCHAR(45) NULL DEFAULT NULL,
+  `indicator_channel` INT NULL DEFAULT NULL,
+  `indicator_serial` VARCHAR(45) NULL DEFAULT NULL,
+  `grad_size` INT NULL DEFAULT '0',
+  `pin_size` DECIMAL(10,0) NULL DEFAULT '0',
+  `division` INT NULL DEFAULT NULL,
+  `low_weight` DECIMAL(10,0) NULL DEFAULT NULL,
+  `high_weight` DECIMAL(10,0) NULL DEFAULT NULL,
+  `param3` INT NULL DEFAULT NULL,
+  `param4` INT NULL DEFAULT NULL,
+  `param6` INT NULL DEFAULT NULL,
+  `param11` INT NULL DEFAULT NULL,
+  `param34` INT NULL DEFAULT NULL,
+  `paramA_name` INT NULL DEFAULT NULL,
+  `paramA` INT NULL DEFAULT NULL,
+  `paramB_name` INT NULL DEFAULT NULL,
+  `paramB` INT NULL DEFAULT NULL,
+  `paramC_name` INT NULL DEFAULT NULL,
+  `paramC` INT NULL DEFAULT NULL,
+  `paramD_name` INT NULL DEFAULT NULL,
+  `paramD` INT NULL DEFAULT NULL,
+  `cable_type` VARCHAR(45) NULL DEFAULT NULL,
+  `cable_length` INT NULL DEFAULT NULL,
+  `cable_pin_number` INT NULL DEFAULT NULL,
+  `male_connector` TINYINT(1) NULL DEFAULT NULL,
+  `sleep_switch` TINYINT(1) NULL DEFAULT NULL,
+  `notes` TEXT NULL DEFAULT NULL,
+  `comments` TEXT NULL DEFAULT NULL,
+  `loadcell1` INT NULL DEFAULT NULL,
+  `loadcell2` INT NULL DEFAULT NULL,
+  `loadcell3` INT NULL DEFAULT NULL,
+  `loadcell4` INT NULL DEFAULT NULL,
+  `loadcell5` INT NULL DEFAULT NULL,
+  `loadcell6` INT NULL DEFAULT NULL,
+  `loadcell7` INT NULL DEFAULT NULL,
+  `loadcell8` INT NULL DEFAULT NULL,
+  `paramF8` INT NULL DEFAULT NULL,
+  `paramF9` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productFinalUnits_products1` (`products_serial` ASC) VISIBLE,
+  CONSTRAINT `fk_productFinalUnits_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`testers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`testers` (
+  `tester_name` VARCHAR(128) NOT NULL,
+  `nist_traceable` TINYINT(1) NOT NULL,
+  PRIMARY KEY (`tester_name`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productfinalverificationevents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productfinalverificationevents` (
+  `points` INT NOT NULL,
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `verificationResult` TINYINT(1) NOT NULL,
+  `users_username` VARCHAR(256) NOT NULL,
+  `reference_serial` VARCHAR(128) NOT NULL,
+  `tester` VARCHAR(128) NOT NULL,
+  `calibratedOutput` DECIMAL(18,6) NULL DEFAULT NULL,
+  `percentNonlinearity` DECIMAL(18,6) NULL DEFAULT NULL,
+  `measurementType` TINYINT NOT NULL DEFAULT '0',
+  `dutZeroPoint` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint1` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint1` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint1` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint2` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint2` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint2` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint3` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint3` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint3` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint4` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint4` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint4` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint5` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint5` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint5` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint6` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint6` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint6` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint7` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint7` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint7` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint8` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint8` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint8` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint9` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint9` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint9` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint10` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint10` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint10` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint11` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint11` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint11` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint12` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint12` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint12` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint13` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint13` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint13` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint14` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint14` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint14` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint15` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint15` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint15` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint16` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint16` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint16` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint17` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint17` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint17` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint18` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint18` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint18` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint19` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint19` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint19` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint20` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint20` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint20` DECIMAL(18,6) NULL DEFAULT NULL,
+  `gradSize` INT NULL DEFAULT NULL,
+  `unit` VARCHAR(25) NULL DEFAULT NULL,
+  `pinSize` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dataTagID` VARCHAR(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productFinalVerificationEvents_products1` (`products_serial` ASC) VISIBLE,
+  INDEX `fk_productFinalVerificationEvents_users1` (`users_username` ASC) VISIBLE,
+  INDEX `fk_productFinalVerificationEvents_testers` (`tester` ASC) VISIBLE,
+  CONSTRAINT `fk_productFinalVerificationEvents_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`),
+  CONSTRAINT `fk_productFinalVerificationEvents_testers`
+    FOREIGN KEY (`tester`)
+    REFERENCES `mydb_test`.`testers` (`tester_name`),
+  CONSTRAINT `fk_productFinalVerificationEvents_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productinitialverificationevents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productinitialverificationevents` (
+  `points` INT NOT NULL,
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `verificationResult` TINYINT(1) NOT NULL,
+  `users_username` VARCHAR(256) NOT NULL,
+  `reference_serial` VARCHAR(128) NOT NULL,
+  `tester` VARCHAR(128) NOT NULL,
+  `calibratedOutput` DECIMAL(18,6) NOT NULL,
+  `percentNonlinearity` DECIMAL(18,6) NOT NULL,
+  `dutZeroPoint` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint1` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint1` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint1` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint2` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint2` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint2` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint3` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint3` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint3` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint4` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint4` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint4` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint5` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint5` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint5` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint6` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint6` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint6` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint7` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint7` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint7` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint8` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint8` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint8` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint9` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint9` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint9` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint10` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint10` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint10` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint11` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint11` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint11` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint12` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint12` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint12` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint13` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint13` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint13` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint14` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint14` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint14` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint15` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint15` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint15` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint16` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint16` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint16` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint17` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint17` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint17` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint18` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint18` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint18` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint19` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint19` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint19` DECIMAL(18,6) NULL DEFAULT NULL,
+  `refPoint20` DECIMAL(18,6) NULL DEFAULT NULL,
+  `forcePoint20` DECIMAL(18,6) NULL DEFAULT NULL,
+  `dutPoint20` DECIMAL(18,6) NULL DEFAULT NULL,
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productInitialVerificationEvents_products1` (`products_serial` ASC) VISIBLE,
+  INDEX `fk_productInitialVerificationEvents_users1` (`users_username` ASC) VISIBLE,
+  INDEX `fk_productInitialVerificationEvents_testers` (`tester` ASC) VISIBLE,
+  CONSTRAINT `fk_productInitialVerificationEvents_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`),
+  CONSTRAINT `fk_productInitialVerificationEvents_testers`
+    FOREIGN KEY (`tester`)
+    REFERENCES `mydb_test`.`testers` (`tester_name`),
+  CONSTRAINT `fk_productInitialVerificationEvents_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productcablingevents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productcablingevents` (
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `users_username` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productCablingEvents_users1` (`users_username` ASC) VISIBLE,
+  CONSTRAINT `fk_productCablingEvents_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`),
+  CONSTRAINT `fk_table1_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`)
+    ON DELETE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productgaugeinspectionevents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productgaugeinspectionevents` (
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `inspectionResult` TINYINT(1) NOT NULL,
+  `inspectionResultNotes` TEXT NOT NULL,
+  `users_username` VARCHAR(256) NOT NULL,
+  `gaugesFailed` INT NOT NULL DEFAULT '0',
+  `gaugesPassed` INT NOT NULL DEFAULT '0',
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productGaugeInspectionEvents_users1` (`users_username` ASC) VISIBLE,
+  CONSTRAINT `fk_productGaugeInspectionEvents_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`),
+  CONSTRAINT `fk_productGaugingEvents_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`)
+    ON DELETE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productgaugingevents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productgaugingevents` (
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `users_username` VARCHAR(256) NOT NULL,
+  `guage_model` VARCHAR(100) NULL DEFAULT NULL,
+  `guage_lot_no` VARCHAR(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productGaugingEvents_users1` (`users_username` ASC) VISIBLE,
+  CONSTRAINT `fk_productGaugingEvents_products2`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`)
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_productGaugingEvents_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`)
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productreceptionevents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productreceptionevents` (
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NULL DEFAULT NULL,
+  `notes` TEXT NULL DEFAULT NULL,
+  `materialCertification` VARCHAR(128) NULL DEFAULT NULL,
+  `users_username` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`products_serial`),
+  INDEX `fk_productReceptionEvents_users1` (`users_username` ASC) VISIBLE,
+  CONSTRAINT `fk_productReceptionEvents_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_productReceptionEvents_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productsealingevents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productsealingevents` (
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `users_username` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productSealingEvents_users1` (`users_username` ASC) VISIBLE,
+  CONSTRAINT `fk_productSealingEvents_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`)
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_productSealingEvents_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productwiringevents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productwiringevents` (
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `users_username` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productWiringEvents_users1` (`users_username` ASC) VISIBLE,
+  CONSTRAINT `fk_productWiringEvents_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`)
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_productWiringEvents_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productshippingevents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productshippingevents` (
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `users_username` VARCHAR(256) NOT NULL,
+  `customer` VARCHAR(256) NOT NULL,
+  `salesOrder` VARCHAR(45) NOT NULL,
+  `invoice` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productShippingEvents_users1` (`users_username` ASC) VISIBLE,
+  CONSTRAINT `fk_productShippingEvents_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`)
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_productShippingEvents_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productchromeinspectionevents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productchromeinspectionevents` (
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `inspectionResult` TINYINT(1) NOT NULL,
+  `inspectionResultNotes` TEXT NOT NULL,
+  `users_username` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productChromingEvents_users1` (`users_username` ASC) VISIBLE,
+  CONSTRAINT `fk_productChromingEvents_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`)
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_productChromingEvents_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productpackagingevents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productpackagingevents` (
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `users_username` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productPackagingEvents_products1` (`products_serial` ASC) VISIBLE,
+  INDEX `fk_productPackagingEvents_users1` (`users_username` ASC) VISIBLE,
+  CONSTRAINT `fk_productPackagingEvents_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`),
+  CONSTRAINT `fk_productPackagingEvents_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productmovingevents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productmovingevents` (
+  `products_serial` INT NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `users_username` VARCHAR(256) NOT NULL,
+  `source_stage` VARCHAR(256) NOT NULL,
+  `destination_stage` VARCHAR(256) NOT NULL,
+  `movingNotes` TEXT NULL DEFAULT NULL,
+  PRIMARY KEY (`products_serial`, `timestamp`),
+  INDEX `fk_productMovingEvents_users1` (`users_username` ASC) VISIBLE,
+  CONSTRAINT `fk_productMovingEvents_products1`
+    FOREIGN KEY (`products_serial`)
+    REFERENCES `mydb_test`.`products` (`serial`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_productMovingEvents_users1`
+    FOREIGN KEY (`users_username`)
+    REFERENCES `mydb_test`.`users` (`username`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productguagemodelandlotno`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productguagemodelandlotno` (
+  `products_serial` INT NOT NULL,
+  `model` VARCHAR(100) NOT NULL,
+  `lot_no` VARCHAR(100) NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `username` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`products_serial`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`trimmingresistors`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`trimmingresistors` (
+  `value` DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (`value`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`shuntresistors`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`shuntresistors` (
+  `value` DECIMAL(10,0) NOT NULL,
+  PRIMARY KEY (`value`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productamplifierboards`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productamplifierboards` (
+  `product_amplifier_board_id` INT NOT NULL AUTO_INCREMENT,
+  `products_serial` INT NOT NULL DEFAULT '0',
+  `brand` VARCHAR(100) NOT NULL DEFAULT '',
+  `name` VARCHAR(100) NOT NULL DEFAULT '',
+  `has_red` INT NOT NULL DEFAULT '0',
+  `red_value` VARCHAR(25) NOT NULL DEFAULT '',
+  `has_black` INT NOT NULL DEFAULT '0',
+  `black_value` VARCHAR(25) NOT NULL DEFAULT '',
+  `has_green` INT NOT NULL DEFAULT '0',
+  `green_value` VARCHAR(25) NOT NULL DEFAULT '',
+  `has_white` INT NOT NULL DEFAULT '0',
+  `white_value` VARCHAR(25) NOT NULL DEFAULT '',
+  `has_shield` INT NOT NULL DEFAULT '0',
+  `shield_value` VARCHAR(25) NOT NULL DEFAULT '',
+  PRIMARY KEY (`product_amplifier_board_id`),
+  INDEX `PRODUCTS_SERIAL` (`products_serial` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 12
+DEFAULT CHARACTER SET = latin1;
+
+
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`amplifierboards`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`amplifierboards` (
+  `amplifier_board_id` INT NOT NULL AUTO_INCREMENT,
+  `brand` VARCHAR(100) NULL DEFAULT NULL,
+  `name` VARCHAR(100) NULL DEFAULT NULL,
+  `has_red` INT NULL DEFAULT '0',
+  `red_value` VARCHAR(25) NULL DEFAULT NULL,
+  `has_black` INT NULL DEFAULT '0',
+  `black_value` VARCHAR(25) NULL DEFAULT NULL,
+  `has_green` INT NULL DEFAULT '0',
+  `green_value` VARCHAR(25) NULL DEFAULT NULL,
+  `has_white` INT NULL DEFAULT '0',
+  `white_value` VARCHAR(25) NULL DEFAULT NULL,
+  `has_shield` INT NULL DEFAULT '0',
+  `shield_value` VARCHAR(25) NULL DEFAULT NULL,
+  PRIMARY KEY (`amplifier_board_id`),
+  INDEX `BRAND` (`brand` ASC) VISIBLE,
+  INDEX `NAME` (`name` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
+-- Table `mydb_test`.`productadditionalinfo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb_test`.`productadditionalinfo` (
+  `product_additional_info_id` INT NOT NULL AUTO_INCREMENT,
+  `products_serial` INT NOT NULL DEFAULT '0',
+  `input_voltage` DECIMAL(18,6) NOT NULL DEFAULT '0.000000',
+  `cable_length` DECIMAL(18,6) NOT NULL DEFAULT '0.000000',
+  PRIMARY KEY (`product_additional_info_id`),
+  INDEX `PRODUCTS_SERIAL` (`products_serial` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 11
+DEFAULT CHARACTER SET = latin1;
