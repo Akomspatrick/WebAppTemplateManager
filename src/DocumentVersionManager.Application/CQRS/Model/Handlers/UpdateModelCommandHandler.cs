@@ -30,13 +30,21 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 
         public async Task<Either<GeneralFailures, int>> Handle(UpdateModelCommand request, CancellationToken cancellationToken)
         {
-            var entity = Domain.ModelAggregateRoot.Entities. Model.Create( Guid.NewGuid(), request.modelUpdateDTO.ModelName,request.modelUpdateDTO.ModelTypesName);
+            var entity = Domain.ModelAggregateRoot.Entities.Model.Create(Guid.NewGuid(), request.modelUpdateDTO.ModelName, request.modelUpdateDTO.ModelTypesName);
+
+
+
+
+            //entity.AddDomainEvent(new ModelUpdatedEvent(entity));
 
             return await _unitOfWork.ModelRepository.UpdateAsync(entity, cancellationToken);
+
+
+
         }
 
 
 
-  
+
     }
 }
