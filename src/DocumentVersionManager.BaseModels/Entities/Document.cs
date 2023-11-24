@@ -1,6 +1,6 @@
 ﻿namespace DocumentVersionManager.BaseModels.Entities
 {
-    public class Document: BaseEntity
+    public class Document : BaseEntity
     {
         public string DocumentName { get; init; } = string.Empty;
         public string ModelName { get; init; } = string.Empty;
@@ -12,7 +12,7 @@
         public string DocumentDescription { get; init; } = string.Empty;
         public DateTime Timestamp { get; init; }
 
-        public ModelVersion ModelVersion;
+        public ModelVersion ModelVersion { get; init; }
 
         public ICollection<DocumentDocumentType> DocumentDocumentTypes { get; set; }
 

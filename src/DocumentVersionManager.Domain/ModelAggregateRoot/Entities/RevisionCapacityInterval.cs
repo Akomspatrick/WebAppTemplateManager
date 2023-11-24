@@ -4,19 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
+namespace DocumentVersionManager.Domain.Entities
 {
-    public class RevisionCapacityInterval
+    public partial class RevisionCapacityInterval
     {
-        public int Capacity { get; init; }
-        public DateTime Timestamp { get; init; }
 
-        public string DocumentName { get; init; } = string.Empty;
-        public string ModelName { get; init; } = string.Empty;
-
-        public int RevisionNumber { get; init; }
-
-
+        public static RevisionCapacityInterval Create()
+        {
+            throw new Exception("This class is no longer needed , model version has implemeneted feature");
+        }
 
     }
 }

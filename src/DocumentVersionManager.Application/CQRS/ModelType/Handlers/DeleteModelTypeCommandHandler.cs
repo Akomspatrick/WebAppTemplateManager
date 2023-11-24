@@ -2,16 +2,8 @@
 using DocumentVersionManager.Application.CQRS.ModelType.Commands;
 using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
-using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 using LanguageExt;
 using MediatR;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 {
@@ -31,8 +23,8 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         {
             return (
                 await _unitOfWork.ModelTypesRepository
-                .GetMatch(s => (s.GuidId.Equals( request.modelTypeDeleteDTO.ModelTypesId)), null,cancellationToken))
-                .Match(Left: x => x, Right: x => _unitOfWork.ModelTypesRepository            
+                .GetMatch(s => (s.GuidId.Equals(request.modelTypeDeleteDTO.ModelTypesId)), null, cancellationToken))
+                .Match(Left: x => x, Right: x => _unitOfWork.ModelTypesRepository
                 .DeleteAsync(x, cancellationToken)
                 .Result);
 

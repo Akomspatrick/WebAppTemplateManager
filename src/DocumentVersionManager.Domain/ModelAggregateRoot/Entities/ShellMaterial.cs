@@ -1,21 +1,12 @@
 ﻿using DocumentVersionManager.DomainBase.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
-namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
+namespace DocumentVersionManager.Domain.Entities
 {
-    public class ShellMaterial:BaseEntity
+    public partial class ShellMaterial : BaseEntity
     {
-        public string ShellMaterialName { get; init; } = string.Empty;
-        public int Alloy { get; init; }
-       // public Guid ShellMaterialGuid { get; init; }
-        public ICollection<CapacitySpecification> CapacitySpecifications { get; set; }
 
-        public static ShellMaterial Create( Guid shellMaterialGuid,string name, int alloy)
+
+        public static ShellMaterial Create(Guid shellMaterialGuid, string name, int alloy)
         {
             return new ShellMaterial()
             {

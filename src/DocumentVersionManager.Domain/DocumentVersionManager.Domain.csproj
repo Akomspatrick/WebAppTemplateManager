@@ -7,6 +7,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Automate\**" />
+	  <EmbeddedResource Remove="Automate\**" />
+	  <None Remove="Automate\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="LanguageExt.Core" Version="4.4.7" />
 
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />

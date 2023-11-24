@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
+namespace DocumentVersionManager.Domain.Entities
 {
     public partial class ModelAggregateRoot : BaseEntity
     {
@@ -24,7 +24,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         // Meaning that modelTypesName may evetualy become modelTypesId
         private List<Document> _documents = Enumerable.Empty<Document>().ToList();
         private List<CapacityDocument> _capacityDocuments = Enumerable.Empty<CapacityDocument>().ToList();
-        private List<CapacitySpecification> _capacitySpecifications = Enumerable.Empty<CapacitySpecification>().ToList();
+        private List<Specification> _capacitySpecifications = Enumerable.Empty<Specification>().ToList();
 
         //These 3 were commented out for now  entity framework wants them created while cretating model table
         // public IReadOnlyCollection<Document> Documents => _documents.AsReadOnly();
@@ -45,7 +45,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
         {
             List<int> temp = new List<int>();
 
-            foreach (CapacitySpecification cs in _capacitySpecifications)
+            foreach (Specification cs in _capacitySpecifications)
             {
                 temp.Add(cs.Capacity);
             }
@@ -53,9 +53,9 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             return temp.Distinct().ToList();
         }
 
-        public List<CapacitySpecification> GetUniqueCapacitySpecifications()
+        public List<Specification> GetUniqueCapacitySpecifications()
         {
-            List<CapacitySpecification> temp = new List<CapacitySpecification>();
+            List<Specification> temp = new List<Specification>();
 
             foreach (int capacity in GetUniqueCapacities())
             {
@@ -78,11 +78,11 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             return "";
         }
 
-        public CapacitySpecification GetLatestCapacitySpecification(int capacity)
+        public Specification GetLatestCapacitySpecification(int capacity)
         {
-            CapacitySpecification result = null;
+            Specification result = null;
 
-            foreach (CapacitySpecification cs in _capacitySpecifications)
+            foreach (Specification cs in _capacitySpecifications)
             {
                 if (cs.Capacity == capacity)
                 {
@@ -96,9 +96,9 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 
         public DateTime? GetLatestCapacitySpecificationTimestamp(int capacity)
         {
-            CapacitySpecification result = null;
+            Specification result = null;
 
-            foreach (CapacitySpecification cs in _capacitySpecifications)
+            foreach (Specification cs in _capacitySpecifications)
             {
                 if (cs.Capacity == capacity)
                 {
@@ -117,11 +117,11 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             }
         }
 
-        public CapacitySpecification GetCapacitySpecificationByTimestamp(int capacity, DateTime timestamp)
+        public Specification GetCapacitySpecificationByTimestamp(int capacity, DateTime timestamp)
         {
-            CapacitySpecification result = null;
+            Specification result = null;
 
-            foreach (CapacitySpecification cs in _capacitySpecifications)
+            foreach (Specification cs in _capacitySpecifications)
             {
                 if (cs.Capacity == capacity)
                 {
@@ -134,9 +134,9 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             return result;
         }
 
-        public void UpdateCapacitySpecification(CapacitySpecification cs, string authUser)
+        public void UpdateCapacitySpecification(Specification cs, string authUser)
         {
-            CapacitySpecification result = null;
+            Specification result = null;
             int index = 0;
 
             for (int i = 0; i < _capacitySpecifications.Count; i++)
@@ -156,7 +156,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
                 }
             }
 
-            _capacitySpecifications[index] = CapacitySpecification.Duplicate(cs, authUser);
+            _capacitySpecifications[index] = Specification.Duplicate(cs, authUser);
 
         }
 

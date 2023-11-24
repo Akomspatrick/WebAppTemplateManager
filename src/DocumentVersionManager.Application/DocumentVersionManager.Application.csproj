@@ -11,10 +11,6 @@
 		<ProjectReference Include="..\DocumentVersionManager.Domain\DocumentVersionManager.Domain.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="CQRS\HigherModel\Queries\" />
-	</ItemGroup>
-
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>

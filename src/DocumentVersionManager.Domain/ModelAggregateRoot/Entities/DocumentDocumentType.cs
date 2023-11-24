@@ -1,27 +1,10 @@
 ﻿using DocumentVersionManager.DomainBase.Base;
-using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
+namespace DocumentVersionManager.Domain.Entities
 {
-    public class DocumentDocumentType:BaseEntity
+    public partial class DocumentDocumentType : BaseEntity
     {
-        public string DocumentName { get; init; } = string.Empty;//documents_name
-        public string ModelName { get; init; } = string.Empty;//documents_models_name
-        public int ModelVersionId { get; init; }
-        public string DocumentTypeName { get; init; } = string.Empty;//documentTypes_name
-        public Document Document;
-        public DocumentType DocumentType;
-        //public Guid DocumentDocumentTypeGuid
-        //{
-        //    get; init;
-        //}
 
-        //public ModelVersion ModelVersion;
         public static DocumentDocumentType Create(Guid documentDocumentTypeGuid, string documentName, int modelVersionId, string modelName, string documentTypeName)
         {
             if ((modelVersionId < 0))
@@ -42,10 +25,10 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             return new DocumentDocumentType()
             {
                 GuidId = documentDocumentTypeGuid,
-               DocumentName = documentName,
-               ModelName = modelName,
-               ModelVersionId = modelVersionId,
-               DocumentTypeName = documentTypeName
+                DocumentName = documentName,
+                ModelName = modelName,
+                ModelVersionId = modelVersionId,
+                DocumentTypeName = documentTypeName
 
 
 

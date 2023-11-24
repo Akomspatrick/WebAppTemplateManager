@@ -1,18 +1,10 @@
 ﻿using DocumentVersionManager.Application.Contracts.Logging;
-using DocumentVersionManager.Application.Contracts.RequestDTO;
 using DocumentVersionManager.Application.Contracts.ResponseDTO;
 using DocumentVersionManager.Application.CQRS.ModelType.Queries;
 using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
-using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 using LanguageExt;
 using MediatR;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 {
@@ -31,13 +23,13 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
             return (await _unitOfWork.ModelTypesRepository
                     .GetMatch(s => (s.ModelTypesName == request.modelTypeRequestDTO.ModelTypesName), null, cancellationToken))
-                    .Map((result) => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypesName, convertToModelDto(result.Models))); 
+                    .Map((result) => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypesName, convertToModelDto(result.Models)));
 
         }
 
-        private ICollection<ApplicationModelResponseDTO> convertToModelDto(ICollection<Domain.ModelAggregateRoot.Entities.Model> models)
+        private ICollection<ApplicationModelResponseDTO> convertToModelDto(ICollection<Domain.Entities.Model> models)
         {
-             return models.Select(x => new ApplicationModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypesName)).ToList();
+            return models.Select(x => new ApplicationModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypesName)).ToList();
         }
     }
 }

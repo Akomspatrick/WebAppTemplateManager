@@ -32,7 +32,7 @@
         public int Weight { get; init; }
         public int TestId { get; init; } // should auto increase
        // public Guid CapacityTestPointGuid { get; init; }
-        public CapacitySpecification CapacitySpecification { get; set; }
+        public Specification CapacitySpecification { get; set; }
 
 
     }

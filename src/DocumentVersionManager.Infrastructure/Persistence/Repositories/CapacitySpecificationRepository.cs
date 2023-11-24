@@ -1,14 +1,11 @@
-﻿using DocumentVersionManager.Domain.Interfaces;
-using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using DocumentVersionManager.Domain.Interfaces;
+using DocumentVersionManager.Domain.Entities;
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
+
 {
-    public interface CapacitySpecificationRepository : IGenericRepository<CapacitySpecification>
+    public  class  CapacitySpecificationRepository:GenericRepository<Specification>, ICapacitySpecificationRepository
     {
+        public   CapacitySpecificationRepository( DocumentVersionManagerContext ctx): base(ctx)
+        {}
     }
 }

@@ -1,5 +1,4 @@
-﻿using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
-using LanguageExt;
+﻿using DocumentVersionManager.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -14,14 +13,12 @@ namespace DocumentVersionManager.Infrastructure.Persistence
         public DbSet<Document> Document { get; private set; }
         public DbSet<DocumentType> DocumentType { get; private set; }
         public DbSet<DocumentDocumentType> DocumentDocumentType { get; private set; }
-        public DbSet<CapacitySpecification> CapacitySpecification { get; private set; }
+        public DbSet<Specification> CapacitySpecification { get; private set; }
         public DbSet<CapacityTestPoint> CapacityTestPoint { get; private set; }
-        public DbSet<ShellMaterial> ShellMaterial { get; private set; } 
+        public DbSet<ShellMaterial> ShellMaterial { get; private set; }
+        public DbSet<Product> Product { get; private set; }
 
 
-        public DbSet<HigherModel> HigherModel { get; private set; }
-
-    
 
         //public DbSet<CapacityDocument> CapacityDocument { get; private set; }
         //public DbSet<CapacitySpecification> CapacitySpecification { get; private set; }

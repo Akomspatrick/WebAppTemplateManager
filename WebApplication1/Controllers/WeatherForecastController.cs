@@ -71,6 +71,8 @@ namespace WebApplication1.Controllers
         public IActionResult PrintLabel(string productId)
         {
 
+            var value = Encrypt.EncryptDecrypt(productId, 10);
+            var value2 = Encrypt.EncryptDecrypt(value, 10);
             string base64String = GetBarCodeIStream(productId);
             var path = Path.Combine(_hostingEnvironment.ContentRootPath, "Reports", "Report1.rdlc");
             Random random = new Random();

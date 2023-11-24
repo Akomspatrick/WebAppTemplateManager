@@ -1,9 +1,4 @@
-﻿using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DocumentVersionManager.Domain.Entities;
 
 namespace DocumentVersionManager.Domain.Interfaces
 {

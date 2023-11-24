@@ -1,13 +1,14 @@
-﻿using DocumentVersionManager.Domain.Errors;
+﻿using DocumentVersionManager.Domain.Entities;
+using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
-using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
+
 using LanguageExt;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
-    public class ModelRepository : GenericRepository<Model>, IModelRepository 
+    public class ModelRepository : GenericRepository<Model>, IModelRepository
     {
         DocumentVersionManagerContext _ctx;
         public ModelRepository(DocumentVersionManagerContext ctx) : base(ctx)
@@ -15,13 +16,13 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             _ctx = ctx;
         }
 
-        public async Task<Either<GeneralFailures,List<Model>>> GetAllWithIncludes(CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailures, List<Model>>> GetAllWithIncludes(CancellationToken cancellationToken)
         {
             try
             {
                 var result = await _ctx.Models.Include(model => model.ModelVersions).AsNoTracking().ToListAsync(cancellationToken);
-                return result ;
-             
+                return result;
+
             }
             catch (Exception)
             {

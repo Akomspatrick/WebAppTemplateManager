@@ -6,13 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
+namespace DocumentVersionManager.Domain.Entities
 {
-    public class DocumentType : BaseEntity
+    public partial class DocumentType : BaseEntity
     {
-        public string TypeName { get; init; } = string.Empty;
-        //public Guid DocumentTypeGuid { get; init; }
-        public ICollection<DocumentDocumentType> DocumentDocumentTypes { get; set; }
         public static DocumentType Create(Guid documentGuid, string documentTypeName)
         {
 
@@ -32,9 +29,11 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             }
 
 
-            return new DocumentType() {
-                GuidId=documentGuid,
-                TypeName = documentTypeName };
+            return new DocumentType()
+            {
+                GuidId = documentGuid,
+                DocumentTypeName = documentTypeName
+            };
             // do some heavy lifting.
 
         }

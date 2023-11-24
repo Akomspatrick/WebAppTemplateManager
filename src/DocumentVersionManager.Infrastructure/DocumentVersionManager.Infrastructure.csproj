@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocumentVersionManager.Application\DocumentVersionManager.Application.csproj" />
+    <ProjectReference Include="..\DocumentVersionManager.BaseModels\DocumentVersionManager.BaseModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

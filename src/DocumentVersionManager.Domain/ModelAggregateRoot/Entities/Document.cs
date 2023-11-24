@@ -1,23 +1,11 @@
 ﻿using DocumentVersionManager.DomainBase.Base;
 using DocumentVersionManager.Domain.Constants;
 
-namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
+namespace DocumentVersionManager.Domain.Entities
 {
-    public class Document: BaseEntity
+    public partial class Document : BaseEntity
     {
-        public string DocumentName { get; init; } = string.Empty;
-        public string ModelName { get; init; } = string.Empty;
-        public int ModelVersionId { get; init; }
-        //public Guid DocumentGuid { get; init; }
-        public string ContentPDFPath { get; init; } = string.Empty;
-        public string ChangeOrderPDFPath { get; init; } = string.Empty;
 
-        public string DocumentDescription { get; init; } = string.Empty;
-        public DateTime Timestamp { get; init; }
-
-        public ModelVersion ModelVersion;
-
-        public ICollection<DocumentDocumentType> DocumentDocumentTypes { get; set; }
 
         public static Document Create(Guid documentGuid, string documentName, int modelVersionId, string modelName, string contentPDFPath, string changeOrderPDFPath, string documentDescription, DateTime timestamp)
         {
@@ -47,14 +35,14 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 
             return new Document()
             {
-               DocumentDescription = documentDescription,
-               DocumentName = documentName,
+                DocumentDescription = documentDescription,
+                DocumentName = documentName,
                 GuidId = documentGuid,
-               ModelName = modelName,
-               ModelVersionId = modelVersionId,
-               ContentPDFPath = contentPDFPath,
-               ChangeOrderPDFPath = changeOrderPDFPath,
-               Timestamp = timestamp
+                ModelName = modelName,
+                ModelVersionId = modelVersionId,
+                ContentPDFPath = contentPDFPath,
+                ChangeOrderPDFPath = changeOrderPDFPath,
+                Timestamp = timestamp
 
 
             };

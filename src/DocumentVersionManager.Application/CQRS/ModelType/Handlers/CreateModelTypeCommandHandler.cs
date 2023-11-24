@@ -1,16 +1,10 @@
 ﻿using DocumentVersionManager.Application.Contracts.Logging;
 using DocumentVersionManager.Application.CQRS.ModelType.Commands;
+using DocumentVersionManager.Domain.Entities;
 using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
-using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 using LanguageExt;
 using MediatR;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 {
@@ -33,7 +27,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             //return x;
             var entity = ModelTypes.Create(Guid.NewGuid(), request.modelTypeCreateDTO.ModelTypesName);
-          
+
             var x = await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             _logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");

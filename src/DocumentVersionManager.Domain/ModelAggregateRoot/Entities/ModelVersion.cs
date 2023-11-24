@@ -1,34 +1,12 @@
-﻿using DocumentVersionManager.DomainBase.Base;
-using DocumentVersionManager.Domain.Constants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DocumentVersionManager.Domain.Constants;
+using DocumentVersionManager.DomainBase.Base;
 
-namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
+namespace DocumentVersionManager.Domain.Entities
 {
-    public class ModelVersion:BaseEntity
-    {   public int ModelVersionId { get; init; }
-        
-        public string VersionDescription { get; init; } = string.Empty;
-        public string ModelVersionName { get; init; } = string.Empty;
+    public partial class ModelVersion : BaseEntity
+    {
 
-
-        public Model Models;
-        public string ModelName { get; init; } = string.Empty;
-       // public Guid ModelVersionGuid { get; init; }
-   
-        
-        public DateTime Timestamp { get; init; }
-
-        public string Username { get; init; } = string.Empty;
-
-
-        public ICollection<Document> Documents;
-        public ICollection<CapacitySpecification> CapacitySpecifications;
-
-        public static ModelVersion Create(Guid modelVersionGUID, string modelVersionName, int modelVersionId, string versionDescription, string modelName,string username, DateTime timestamp)
+        public static ModelVersion Create(Guid modelVersionGUID, string modelVersionName, int modelVersionId, string versionDescription, string modelName, string username, DateTime timestamp)
         {
             if ((modelVersionId < 0))
             {
@@ -54,14 +32,15 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
 
 
 
-            return new ModelVersion() {
-            GuidId = modelVersionGUID,
-            ModelVersionName = modelVersionName,
-            ModelVersionId = modelVersionId,
-            VersionDescription = versionDescription,
-            ModelName = modelName,
-            Username = username,
-            Timestamp = timestamp
+            return new ModelVersion()
+            {
+                GuidId = modelVersionGUID,
+                ModelVersionName = modelVersionName,
+                ModelVersionId = modelVersionId,
+                VersionDescription = versionDescription,
+                ModelName = modelName,
+                UserName = username,
+                Timestamp = timestamp
 
             };
 

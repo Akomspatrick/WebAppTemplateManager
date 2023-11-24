@@ -1,23 +1,16 @@
 ﻿using DocumentVersionManager.Domain.Constants;
 using DocumentVersionManager.DomainBase.Base;
 
-namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
+namespace DocumentVersionManager.Domain.Entities
 {
     public partial class Model : BaseEntity
     {
         //if I am not using domain driven design then i can specify the detail model here eg 
         // public ModelType ModelType { get; set; }
-       // public string ModelId { get; init; } = string.Empty;
-       // public Guid ModelId { get; private set; }
-
-        public string ModelName { get; init; } = string.Empty;
-
-       // [ForeignKey("ModelTypesName")]
-        public string ModelTypesName { get; private set; } = string.Empty;
-        public ModelTypes? ModelTypes { get; set; }
+        // public string ModelId { get; init; } = string.Empty;
+        // public Guid ModelId { get; private set; }
 
 
-        public ICollection<ModelVersion> ModelVersions;
         public static Model Create(Guid modelId, string modelName, string modelTypesName)
         {
 
@@ -37,36 +30,7 @@ namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
             }
 
 
-            //if (string.IsNullOrWhiteSpace(modelTypesId))
-            //{
-            //    throw new ArgumentNullException(nameof(modelTypesId));
 
-            //}
-            //if (modelTypesId.Length > FixedValues.modelTypesIdMaxLength)
-            //{
-            //    throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.modelTypesIdMaxLength} characters {nameof(modelTypesId)} ");
-            //}
-
-            //if (modelTypesId.Length < FixedValues.modelTypesIdMinLength)
-            //{
-            //    throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.modelTypesIdMinLength} characters {nameof(modelTypesId)} ");
-            //}
-
-
-            //if (string.IsNullOrWhiteSpace(modelId))
-            //{
-            //    throw new ArgumentNullException(nameof(modelId));
-
-            //}
-            //if (modelId.Length > FixedValues.ModelIdMaxLength)
-            //{
-            //    throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.ModelIdMaxLength} characters {nameof(modelId)} ");
-            //}
-
-            //if (modelId.Length < FixedValues.ModelIdMinLength)
-            //{
-            //    throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.ModelIdMinLength} characters {nameof(modelId)} ");
-            //}
 
             return new Model() { GuidId = modelId, ModelTypesName = modelTypesName, ModelName = modelName };
 

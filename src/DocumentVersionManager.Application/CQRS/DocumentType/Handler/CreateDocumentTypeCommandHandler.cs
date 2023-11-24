@@ -6,12 +6,6 @@ using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
 using LanguageExt;
 using MediatR;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.DocumentType.Handler
 {
@@ -28,8 +22,8 @@ namespace DocumentVersionManager.Application.CQRS.DocumentType.Handler
 
         public async Task<Either<GeneralFailures, int>> Handle(CreateDocumentTypeCommand request, CancellationToken cancellationToken)
         {
-            var entity = Domain.ModelAggregateRoot.Entities.DocumentType.Create(Guid.NewGuid(), request.documentTypeName.DocumentTypeName);
-            
+            var entity = Domain.Entities.DocumentType.Create(Guid.NewGuid(), request.documentTypeName.DocumentTypeName);
+
             return await _unitOfWork.DocumentTypeRepository.AddAsync(entity, cancellationToken);
 
         }

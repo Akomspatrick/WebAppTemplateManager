@@ -1,14 +1,11 @@
 ﻿using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.DomainBase.Base;
 
-namespace DocumentVersionManager.Domain.ModelAggregateRoot.Entities
+namespace DocumentVersionManager.Domain.Entities
 {
 
-    public class CapacityDocument : BaseEntity
+    public partial class CapacityDocument : BaseEntity
     {
-        public string ModelName { get; init; }
-        public int Capacity { get; init; }
-        public string DocumentPath { get; init; }
 
 
         public CapacityDocument(string modelName, int capacity, string documentPath)

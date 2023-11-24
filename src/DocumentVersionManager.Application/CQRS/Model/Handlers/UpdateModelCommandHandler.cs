@@ -1,18 +1,9 @@
 ﻿using DocumentVersionManager.Application.Contracts.Logging;
-using DocumentVersionManager.Application.Contracts.RequestDTO;
 using DocumentVersionManager.Application.CQRS.Model.Commands;
-using DocumentVersionManager.Application.CQRS.ModelType.Commands;
-using DocumentVersionManager.Application.CQRS.ModelType.Handlers;
 using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
-using DocumentVersionManager.Domain.ModelAggregateRoot.Entities;
 using LanguageExt;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 {
@@ -30,7 +21,7 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 
         public async Task<Either<GeneralFailures, int>> Handle(UpdateModelCommand request, CancellationToken cancellationToken)
         {
-            var entity = Domain.ModelAggregateRoot.Entities.Model.Create(Guid.NewGuid(), request.modelUpdateDTO.ModelName, request.modelUpdateDTO.ModelTypesName);
+            var entity = Domain.Entities.Model.Create(Guid.NewGuid(), request.modelUpdateDTO.ModelName, request.modelUpdateDTO.ModelTypesName);
 
 
 
