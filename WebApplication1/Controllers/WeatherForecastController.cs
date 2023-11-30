@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Reporting.NETCore;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Text;
 using ZXing;
 using ZXing.Common;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
@@ -67,7 +68,7 @@ namespace WebApplication1.Controllers
         //}
 
         [HttpGet(Name = "GetWeatherForecastqqq")]
-        // public IActionResult PrintLabel([FromBody] TheProduct product)
+
         public IActionResult PrintLabel(string productId)
         {
 
@@ -76,7 +77,43 @@ namespace WebApplication1.Controllers
             string base64String = GetBarCodeIStream(productId);
             var path = Path.Combine(_hostingEnvironment.ContentRootPath, "Reports", "Report1.rdlc");
             Random random = new Random();
-            string imagetype = "jpeg";
+            string imagetype = "pdf";
+            var ImageResult = new ImageResult(imagetype).Create();
+            string filename = $"{productId}BarCodelabel_{random.Next(1, 1000000).ToString()}{imagetype}";
+            var imagesPath = Path.Combine(_hostingEnvironment.ContentRootPath, "BarcodeLabelImages", filename);
+
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                LocalReport locareport = new();
+                locareport.LoadReportDefinition(stream);
+                locareport.EnableExternalImages = true;
+
+                ReportParameterCollection reportParameters = new()
+                {
+                    new ReportParameter("ProductId", productId),
+                    new ReportParameter("ModelId", "ML002"),
+                    new ReportParameter("BarCodeImg", base64String, true)
+                };
+                locareport.SetParameters(reportParameters);
+
+                var result = locareport.Render("PDF");
+
+                return File(result, "application/pdf", "Thefile");
+
+            }
+
+
+        }
+        [HttpPost(Name = "GetWeatherForecastqqqsss")]
+        public IActionResult PrintLabel_itisHttpGet(string productId)
+        {
+
+            var value = Encrypt.EncryptDecrypt(productId, 10);
+            var value2 = Encrypt.EncryptDecrypt(value, 10);
+            string base64String = GetBarCodeIStream(productId);
+            var path = Path.Combine(_hostingEnvironment.ContentRootPath, "Reports", "Report1.rdlc");
+            Random random = new Random();
+            string imagetype = "png";
             var ImageResult = new ImageResult(imagetype).Create();
             string filename = $"{productId}BarCodelabel_{random.Next(1, 1000000).ToString()}{ImageResult.Extension}";
             var imagesPath = Path.Combine(_hostingEnvironment.ContentRootPath, "BarcodeLabelImages", filename);
@@ -120,7 +157,6 @@ namespace WebApplication1.Controllers
         }
 
 
-
         private static string GetBarCodeIStream(string text)
         {
             ZXing.Windows.Compatibility.BarcodeWriter barcodeWriter = new ZXing.Windows.Compatibility.BarcodeWriter
@@ -129,11 +165,14 @@ namespace WebApplication1.Controllers
                 Options = new EncodingOptions
                 {
                     Height = 40, // Specify the height of the barcode image
-                    Width = 250,
-                    //GS1Format = true,
+                    Width = 300,
+                    GS1Format = true,
                     Margin = 0,
                     NoPadding = true,
                     PureBarcode = true,
+
+
+
 
                     // Specify the width of the barcode image,
                 }

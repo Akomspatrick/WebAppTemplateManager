@@ -12,7 +12,7 @@ namespace DocumentVersionManager.Domain.Entities
         public Model Models;
         public string ModelName { get; init; } = string.Empty;
 
-        public string TestingModeName { get; init; } = string.Empty; // Manual, Automatic for each product
+        public string DefaultTestingMode { get; init; } = string.Empty; // Manual, Automatic for each product
 
 
         public DateTime Timestamp { get; init; }
