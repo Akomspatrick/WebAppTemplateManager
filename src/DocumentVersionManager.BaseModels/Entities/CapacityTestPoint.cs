@@ -9,7 +9,7 @@
                 ModelName = modelName,
                 ModelVersionId = modelVersionId,
                 Capacity = capacity,
-                TestPoints = weight,
+                TestPoint = weight,
                 TestId = testId,
                 GuidId = capacityTestPointGuid
             };
@@ -22,17 +22,17 @@
                 ModelName = modelName,
                 ModelVersionId = modelVersionId,
                 Capacity = capacity,
-                TestPoints = weight,
+                TestPoint = weight,
                 GuidId = capacityTestPointGuid
             };
         }
         public string ModelName { get; init; } = string.Empty;
         public int ModelVersionId { get; init; }
         public int Capacity { get; init; }
-        public int TestPoints { get; init; }
+        public int TestPoint { get; init; }
         public int TestId { get; init; } // should auto increase
                                          // public Guid CapacityTestPointGuid { get; init; }
-        public Specification CapacitySpecification { get; set; }
+        public Specification Specification { get; set; }
 
 
     }

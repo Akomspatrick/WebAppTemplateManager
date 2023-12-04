@@ -20,345 +20,6 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "7.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("DocumentVersionManager.Domain.Entities.CapacitySpecification", b =>
-                {
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ModelName")
-                        .HasColumnType("varchar(128)");
-
-                    b.Property<int>("ModelVersionId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Alloy")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Application")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("AustenitizationHardnessHigh")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AustenitizationHardnessLow")
-                        .HasColumnType("int");
-
-                    b.Property<double>("AustenitizationTemperatureInF")
-                        .HasColumnType("double");
-
-                    b.Property<int>("AustenitizationTimeInSeconds")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CCNumber")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Class")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("DefaultCableLength")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("GuidId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<bool>("HasScrews")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int>("MinimumDeadLoad")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NTEPCertificationId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("NTEPCertificationTimestamp")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<double>("NominalOutput")
-                        .HasColumnType("double");
-
-                    b.Property<decimal>("NominalOutputPercentage")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("NonlinearityPercentage")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("NumberInBasket")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberOfGauges")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OIMLCertificationId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("OIMLCertificationTimestamp")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Resistance")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SafeLoad")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShellMaterialName")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("TempRangeHigh")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TempRangeLow")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TemperingHardnessHigh")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TemperingHardnessLow")
-                        .HasColumnType("int");
-
-                    b.Property<double>("TemperingTemperatureInF")
-                        .HasColumnType("double");
-
-                    b.Property<int>("TemperingTimeInSeconds")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("UltimateLoad")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("nMax")
-                        .HasColumnType("int");
-
-                    b.Property<double>("vMin")
-                        .HasColumnType("double");
-
-                    b.HasKey("Capacity", "ModelName", "ModelVersionId");
-
-                    b.HasIndex("ShellMaterialName");
-
-                    b.HasIndex("ModelName", "ModelVersionId");
-
-                    b.ToTable("CapacitySpecification");
-
-                    b.HasData(
-                        new
-                        {
-                            Capacity = 100,
-                            ModelName = "FIRSTMODELNAME",
-                            ModelVersionId = 1,
-                            Alloy = true,
-                            Application = "APPLICATION",
-                            AustenitizationHardnessHigh = 1,
-                            AustenitizationHardnessLow = 1,
-                            AustenitizationTemperatureInF = 1.0,
-                            AustenitizationTimeInSeconds = 1,
-                            CCNumber = "CCNUMBER",
-                            Class = "CLASS",
-                            DefaultCableLength = 20,
-                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
-                            HasScrews = true,
-                            MinimumDeadLoad = 1,
-                            NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7255),
-                            NominalOutput = 1.0,
-                            NominalOutputPercentage = 1m,
-                            NonlinearityPercentage = 1m,
-                            NumberInBasket = 1,
-                            NumberOfGauges = 1,
-                            OIMLCertificationId = "OIMLCERTIFICATIONID1",
-                            OIMLCertificationTimestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7255),
-                            Resistance = 1,
-                            SafeLoad = 1,
-                            ShellMaterialName = "SHELLMATERIAL1",
-                            TempRangeHigh = 1,
-                            TempRangeLow = 1,
-                            TemperingHardnessHigh = 1,
-                            TemperingHardnessLow = 1,
-                            TemperingTemperatureInF = 1.0,
-                            TemperingTimeInSeconds = 1,
-                            Timestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7253),
-                            UltimateLoad = 1,
-                            UserName = "OLADEJI",
-                            nMax = 1,
-                            vMin = 1.0
-                        },
-                        new
-                        {
-                            Capacity = 101,
-                            ModelName = "FIRSTMODELNAME",
-                            ModelVersionId = 1,
-                            Alloy = true,
-                            Application = "APPLICATION",
-                            AustenitizationHardnessHigh = 1,
-                            AustenitizationHardnessLow = 1,
-                            AustenitizationTemperatureInF = 1.0,
-                            AustenitizationTimeInSeconds = 1,
-                            CCNumber = "CCNUMBER",
-                            Class = "CLASS",
-                            DefaultCableLength = 20,
-                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
-                            HasScrews = true,
-                            MinimumDeadLoad = 1,
-                            NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7273),
-                            NominalOutput = 1.0,
-                            NominalOutputPercentage = 1m,
-                            NonlinearityPercentage = 1m,
-                            NumberInBasket = 1,
-                            NumberOfGauges = 1,
-                            OIMLCertificationId = "OIMLCERTIFICATIONID2",
-                            OIMLCertificationTimestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7273),
-                            Resistance = 1,
-                            SafeLoad = 1,
-                            ShellMaterialName = "SHELLMATERIAL2",
-                            TempRangeHigh = 1,
-                            TempRangeLow = 1,
-                            TemperingHardnessHigh = 1,
-                            TemperingHardnessLow = 1,
-                            TemperingTemperatureInF = 1.0,
-                            TemperingTimeInSeconds = 1,
-                            Timestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7273),
-                            UltimateLoad = 1,
-                            UserName = "OLADEJI",
-                            nMax = 1,
-                            vMin = 1.0
-                        },
-                        new
-                        {
-                            Capacity = 102,
-                            ModelName = "FIRSTMODELNAME",
-                            ModelVersionId = 1,
-                            Alloy = true,
-                            Application = "APPLICATION",
-                            AustenitizationHardnessHigh = 1,
-                            AustenitizationHardnessLow = 1,
-                            AustenitizationTemperatureInF = 1.0,
-                            AustenitizationTimeInSeconds = 1,
-                            CCNumber = "CCNUMBER",
-                            Class = "CLASS",
-                            DefaultCableLength = 20,
-                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
-                            HasScrews = true,
-                            MinimumDeadLoad = 1,
-                            NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7277),
-                            NominalOutput = 1.0,
-                            NominalOutputPercentage = 1m,
-                            NonlinearityPercentage = 1m,
-                            NumberInBasket = 1,
-                            NumberOfGauges = 1,
-                            OIMLCertificationId = "OIMLCERTIFICATIONID2",
-                            OIMLCertificationTimestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7277),
-                            Resistance = 1,
-                            SafeLoad = 1,
-                            ShellMaterialName = "SHELLMATERIAL2",
-                            TempRangeHigh = 1,
-                            TempRangeLow = 1,
-                            TemperingHardnessHigh = 1,
-                            TemperingHardnessLow = 1,
-                            TemperingTemperatureInF = 1.0,
-                            TemperingTimeInSeconds = 1,
-                            Timestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7276),
-                            UltimateLoad = 1,
-                            UserName = "OLADEJI",
-                            nMax = 1,
-                            vMin = 1.0
-                        },
-                        new
-                        {
-                            Capacity = 100,
-                            ModelName = "FIRSTMODELNAME",
-                            ModelVersionId = 2,
-                            Alloy = true,
-                            Application = "APPLICATION",
-                            AustenitizationHardnessHigh = 1,
-                            AustenitizationHardnessLow = 1,
-                            AustenitizationTemperatureInF = 1.0,
-                            AustenitizationTimeInSeconds = 1,
-                            CCNumber = "CCNUMBER",
-                            Class = "CLASS",
-                            DefaultCableLength = 20,
-                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
-                            HasScrews = true,
-                            MinimumDeadLoad = 1,
-                            NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7280),
-                            NominalOutput = 1.0,
-                            NominalOutputPercentage = 1m,
-                            NonlinearityPercentage = 1m,
-                            NumberInBasket = 1,
-                            NumberOfGauges = 1,
-                            OIMLCertificationId = "OIMLCERTIFICATIONID2",
-                            OIMLCertificationTimestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7280),
-                            Resistance = 1,
-                            SafeLoad = 1,
-                            ShellMaterialName = "SHELLMATERIAL2",
-                            TempRangeHigh = 1,
-                            TempRangeLow = 1,
-                            TemperingHardnessHigh = 1,
-                            TemperingHardnessLow = 1,
-                            TemperingTemperatureInF = 1.0,
-                            TemperingTimeInSeconds = 1,
-                            Timestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7279),
-                            UltimateLoad = 1,
-                            UserName = "OLADEJI",
-                            nMax = 1,
-                            vMin = 1.0
-                        },
-                        new
-                        {
-                            Capacity = 100,
-                            ModelName = "SECONDMODELNAME",
-                            ModelVersionId = 1,
-                            Alloy = true,
-                            Application = "APPLICATION",
-                            AustenitizationHardnessHigh = 1,
-                            AustenitizationHardnessLow = 1,
-                            AustenitizationTemperatureInF = 1.0,
-                            AustenitizationTimeInSeconds = 1,
-                            CCNumber = "CCNUMBER",
-                            Class = "CLASS",
-                            DefaultCableLength = 20,
-                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
-                            HasScrews = true,
-                            MinimumDeadLoad = 1,
-                            NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7282),
-                            NominalOutput = 1.0,
-                            NominalOutputPercentage = 1m,
-                            NonlinearityPercentage = 1m,
-                            NumberInBasket = 1,
-                            NumberOfGauges = 1,
-                            OIMLCertificationId = "OIMLCERTIFICATIONID3",
-                            OIMLCertificationTimestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7283),
-                            Resistance = 1,
-                            SafeLoad = 1,
-                            ShellMaterialName = "SHELLMATERIAL3",
-                            TempRangeHigh = 1,
-                            TempRangeLow = 1,
-                            TemperingHardnessHigh = 1,
-                            TemperingHardnessLow = 1,
-                            TemperingTemperatureInF = 1.0,
-                            TemperingTimeInSeconds = 1,
-                            Timestamp = new DateTime(2023, 11, 22, 17, 33, 36, 686, DateTimeKind.Utc).AddTicks(7282),
-                            UltimateLoad = 1,
-                            UserName = "OLADEJI",
-                            nMax = 1,
-                            vMin = 1.0
-                        });
-                });
-
             modelBuilder.Entity("DocumentVersionManager.Domain.Entities.CapacityTestPoint", b =>
                 {
                     b.Property<int>("TestId")
@@ -379,7 +40,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     b.Property<int>("ModelVersionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Weight")
+                    b.Property<int>("TestPoint")
                         .HasColumnType("int");
 
                     b.HasKey("TestId");
@@ -396,25 +57,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
                             ModelName = "FIRSTMODELNAME",
                             ModelVersionId = 1,
-                            Weight = 1
-                        },
-                        new
-                        {
-                            TestId = 9,
-                            Capacity = 101,
-                            GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
-                            ModelName = "FIRSTMODELNAME",
-                            ModelVersionId = 1,
-                            Weight = 1
-                        },
-                        new
-                        {
-                            TestId = 39,
-                            Capacity = 102,
-                            GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
-                            ModelName = "FIRSTMODELNAME",
-                            ModelVersionId = 1,
-                            Weight = 1
+                            TestPoint = 1
                         },
                         new
                         {
@@ -423,7 +66,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
                             ModelName = "SECONDMODELNAME",
                             ModelVersionId = 1,
-                            Weight = 1
+                            TestPoint = 1
                         });
                 });
 
@@ -444,6 +87,10 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("ContentPDFPath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DocumentBasePathId")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -471,9 +118,10 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ModelVersionId = 1,
                             ChangeOrderPDFPath = "CHANGE ORDER PATH",
                             ContentPDFPath = "CONTENT PDF PATH",
+                            DocumentBasePathId = "001",
                             DocumentDescription = "SIMPLE DESCRITION OF DOCUMENT",
                             GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
-                            Timestamp = new DateTime(2023, 11, 22, 17, 33, 36, 688, DateTimeKind.Utc).AddTicks(5590)
+                            Timestamp = new DateTime(2023, 12, 4, 20, 33, 48, 94, DateTimeKind.Utc).AddTicks(840)
                         },
                         new
                         {
@@ -482,9 +130,10 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ModelVersionId = 1,
                             ChangeOrderPDFPath = "CHANGE ORDER PATH",
                             ContentPDFPath = "CONTENT PDF PATH",
+                            DocumentBasePathId = "001",
                             DocumentDescription = "SIMPLE DESCRITION OF DOCUMENT",
                             GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
-                            Timestamp = new DateTime(2023, 11, 22, 17, 33, 36, 688, DateTimeKind.Utc).AddTicks(5601)
+                            Timestamp = new DateTime(2023, 12, 4, 20, 33, 48, 94, DateTimeKind.Utc).AddTicks(852)
                         },
                         new
                         {
@@ -493,9 +142,10 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ModelVersionId = 1,
                             ChangeOrderPDFPath = "CHANGE ORDER PATH",
                             ContentPDFPath = "CONTENT PDF PATH",
+                            DocumentBasePathId = "001",
                             DocumentDescription = "SIMPLE DESCRITION OF DOCUMENT",
                             GuidId = new Guid("7808711f-544a-423d-8d99-f00c31e35be5"),
-                            Timestamp = new DateTime(2023, 11, 22, 17, 33, 36, 688, DateTimeKind.Utc).AddTicks(5609)
+                            Timestamp = new DateTime(2023, 12, 4, 20, 33, 48, 94, DateTimeKind.Utc).AddTicks(855)
                         },
                         new
                         {
@@ -504,10 +154,33 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ModelVersionId = 2,
                             ChangeOrderPDFPath = "CHANGE ORDER PATH",
                             ContentPDFPath = "CONTENT PDF PATH",
+                            DocumentBasePathId = "001",
                             DocumentDescription = "SIMPLE DESCRITION OF DOCUMENT",
                             GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
-                            Timestamp = new DateTime(2023, 11, 22, 17, 33, 36, 688, DateTimeKind.Utc).AddTicks(5611)
+                            Timestamp = new DateTime(2023, 12, 4, 20, 33, 48, 94, DateTimeKind.Utc).AddTicks(873)
                         });
+                });
+
+            modelBuilder.Entity("DocumentVersionManager.Domain.Entities.DocumentBasePath", b =>
+                {
+                    b.Property<string>("DocumentBasePathId")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("GuidId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("DocumentBasePathId");
+
+                    b.ToTable("DocumentBasePath");
                 });
 
             modelBuilder.Entity("DocumentVersionManager.Domain.Entities.DocumentDocumentType", b =>
@@ -740,7 +413,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
                             ModelVersionName = "FIRST_VERSION_FIRSTMODEL_NAME",
                             TestingModeName = "",
-                            Timestamp = new DateTime(2023, 11, 22, 17, 33, 36, 692, DateTimeKind.Utc).AddTicks(4383),
+                            Timestamp = new DateTime(2023, 12, 4, 20, 33, 48, 97, DateTimeKind.Utc).AddTicks(5002),
                             UserName = "OLADEJI",
                             VersionDescription = "SPECIAL DESIGN"
                         },
@@ -751,7 +424,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             GuidId = new Guid("7808711f-544a-423d-8d99-f00c31e35be5"),
                             ModelVersionName = "SECOND_VERSION_FIRSTMODELNAME",
                             TestingModeName = "",
-                            Timestamp = new DateTime(2023, 11, 22, 17, 33, 36, 692, DateTimeKind.Utc).AddTicks(4397),
+                            Timestamp = new DateTime(2023, 12, 4, 20, 33, 48, 97, DateTimeKind.Utc).AddTicks(5013),
                             UserName = "OLADEJI",
                             VersionDescription = "AUTO DESIGN TO COMBAT SPLIILING"
                         },
@@ -762,7 +435,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
                             ModelVersionName = "FIRST_VERSION_SECONDMODELNAME",
                             TestingModeName = "",
-                            Timestamp = new DateTime(2023, 11, 22, 17, 33, 36, 692, DateTimeKind.Utc).AddTicks(4399),
+                            Timestamp = new DateTime(2023, 12, 4, 20, 33, 48, 97, DateTimeKind.Utc).AddTicks(5014),
                             UserName = "OLADEJI",
                             VersionDescription = "INITIAL DESIGN"
                         });
@@ -784,18 +457,21 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
+                    b.Property<string>("DefaultTestingMode")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<Guid>("GuidId")
                         .HasColumnType("char(36)");
+
+                    b.Property<int>("InspectionResult")
+                        .HasColumnType("int");
 
                     b.Property<string>("InvoiceId")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("MachiningPurcharseOrderNo")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("MetalCertificateNo")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -822,10 +498,6 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("TestingModeName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("ThermexPurcharseOrderNo")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -833,8 +505,9 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Troubled")
-                        .HasColumnType("int");
+                    b.Property<string>("UsedCalibrationMode")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("ProductId");
 
@@ -848,9 +521,6 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     b.Property<string>("ShellMaterialName")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("Alloy")
-                        .HasColumnType("int");
-
                     b.Property<Guid>("GuidId")
                         .HasColumnType("char(36)");
 
@@ -862,57 +532,226 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                         new
                         {
                             ShellMaterialName = "ShellMaterial1",
-                            Alloy = 1,
                             GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63")
                         },
                         new
                         {
                             ShellMaterialName = "ShellMaterial2",
-                            Alloy = 2,
                             GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63")
                         },
                         new
                         {
                             ShellMaterialName = "ShellMaterial3",
-                            Alloy = 1,
                             GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63")
                         },
                         new
                         {
                             ShellMaterialName = "ShellMaterial4",
-                            Alloy = 2,
                             GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63")
                         });
                 });
 
-            modelBuilder.Entity("DocumentVersionManager.Domain.Entities.CapacitySpecification", b =>
+            modelBuilder.Entity("DocumentVersionManager.Domain.Entities.Specification", b =>
                 {
-                    b.HasOne("DocumentVersionManager.Domain.Entities.ShellMaterial", "ShellMaterial")
-                        .WithMany("CapacitySpecifications")
-                        .HasForeignKey("ShellMaterialName")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
 
-                    b.HasOne("DocumentVersionManager.Domain.Entities.ModelVersion", "ModelVersion")
-                        .WithMany("CapacitySpecifications")
-                        .HasForeignKey("ModelName", "ModelVersionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<string>("ModelName")
+                        .HasColumnType("varchar(128)");
 
-                    b.Navigation("ModelVersion");
+                    b.Property<int>("ModelVersionId")
+                        .HasColumnType("int");
 
-                    b.Navigation("ShellMaterial");
+                    b.Property<string>("Application")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CCNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Class")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("DefaultCableLength")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("GuidId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("MinimumDeadLoad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NTEPCertificationId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("NTEPCertificationTimestamp")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<double>("NominalOutput")
+                        .HasColumnType("double");
+
+                    b.Property<decimal>("NominalOutputPercentage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("NonlinearityPercentage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("NumberOfGauges")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OIMLCertificationId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("OIMLCertificationTimestamp")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Resistance")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SafeLoad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShellMaterialName")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("TemperingHardnessHigh")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TemperingHardnessLow")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("UltimateLoad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("nMax")
+                        .HasColumnType("int");
+
+                    b.Property<double>("vMin")
+                        .HasColumnType("double");
+
+                    b.HasKey("Capacity", "ModelName", "ModelVersionId");
+
+                    b.HasIndex("ShellMaterialName");
+
+                    b.HasIndex("ModelName", "ModelVersionId")
+                        .IsUnique();
+
+                    b.ToTable("Specification");
+
+                    b.HasData(
+                        new
+                        {
+                            Capacity = 100,
+                            ModelName = "FIRSTMODELNAME",
+                            ModelVersionId = 1,
+                            Application = "APPLICATION",
+                            CCNumber = "CCNUMBER",
+                            Class = "CLASS",
+                            DefaultCableLength = 20,
+                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
+                            MinimumDeadLoad = 1,
+                            NTEPCertificationId = "NTEPCERTIFICATIONID",
+                            NTEPCertificationTimestamp = new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1618),
+                            NominalOutput = 1.0,
+                            NominalOutputPercentage = 1m,
+                            NonlinearityPercentage = 1m,
+                            NumberOfGauges = 1,
+                            OIMLCertificationId = "OIMLCERTIFICATIONID1",
+                            OIMLCertificationTimestamp = new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1618),
+                            Resistance = 1,
+                            SafeLoad = 1,
+                            ShellMaterialName = "SHELLMATERIAL1",
+                            TemperingHardnessHigh = 1,
+                            TemperingHardnessLow = 1,
+                            Timestamp = new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1616),
+                            UltimateLoad = 1,
+                            UserName = "OLADEJI",
+                            nMax = 1,
+                            vMin = 1.0
+                        },
+                        new
+                        {
+                            Capacity = 100,
+                            ModelName = "FIRSTMODELNAME",
+                            ModelVersionId = 2,
+                            Application = "APPLICATION",
+                            CCNumber = "CCNUMBER",
+                            Class = "CLASS",
+                            DefaultCableLength = 20,
+                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
+                            MinimumDeadLoad = 1,
+                            NTEPCertificationId = "NTEPCERTIFICATIONID",
+                            NTEPCertificationTimestamp = new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1630),
+                            NominalOutput = 1.0,
+                            NominalOutputPercentage = 1m,
+                            NonlinearityPercentage = 1m,
+                            NumberOfGauges = 1,
+                            OIMLCertificationId = "OIMLCERTIFICATIONID2",
+                            OIMLCertificationTimestamp = new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1630),
+                            Resistance = 1,
+                            SafeLoad = 1,
+                            ShellMaterialName = "SHELLMATERIAL2",
+                            TemperingHardnessHigh = 1,
+                            TemperingHardnessLow = 1,
+                            Timestamp = new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1630),
+                            UltimateLoad = 1,
+                            UserName = "OLADEJI",
+                            nMax = 1,
+                            vMin = 1.0
+                        },
+                        new
+                        {
+                            Capacity = 100,
+                            ModelName = "SECONDMODELNAME",
+                            ModelVersionId = 1,
+                            Application = "APPLICATION",
+                            CCNumber = "CCNUMBER",
+                            Class = "CLASS",
+                            DefaultCableLength = 20,
+                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
+                            MinimumDeadLoad = 1,
+                            NTEPCertificationId = "NTEPCERTIFICATIONID",
+                            NTEPCertificationTimestamp = new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1634),
+                            NominalOutput = 1.0,
+                            NominalOutputPercentage = 1m,
+                            NonlinearityPercentage = 1m,
+                            NumberOfGauges = 1,
+                            OIMLCertificationId = "OIMLCERTIFICATIONID3",
+                            OIMLCertificationTimestamp = new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1635),
+                            Resistance = 1,
+                            SafeLoad = 1,
+                            ShellMaterialName = "SHELLMATERIAL3",
+                            TemperingHardnessHigh = 1,
+                            TemperingHardnessLow = 1,
+                            Timestamp = new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1634),
+                            UltimateLoad = 1,
+                            UserName = "OLADEJI",
+                            nMax = 1,
+                            vMin = 1.0
+                        });
                 });
 
             modelBuilder.Entity("DocumentVersionManager.Domain.Entities.CapacityTestPoint", b =>
                 {
-                    b.HasOne("DocumentVersionManager.Domain.Entities.CapacitySpecification", "CapacitySpecification")
+                    b.HasOne("DocumentVersionManager.Domain.Entities.Specification", "Specification")
                         .WithMany("CapacityTestPoints")
                         .HasForeignKey("Capacity", "ModelName", "ModelVersionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CapacitySpecification");
+                    b.Navigation("Specification");
                 });
 
             modelBuilder.Entity("DocumentVersionManager.Domain.Entities.Document", b =>
@@ -978,9 +817,23 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     b.Navigation("ModelVersion");
                 });
 
-            modelBuilder.Entity("DocumentVersionManager.Domain.Entities.CapacitySpecification", b =>
+            modelBuilder.Entity("DocumentVersionManager.Domain.Entities.Specification", b =>
                 {
-                    b.Navigation("CapacityTestPoints");
+                    b.HasOne("DocumentVersionManager.Domain.Entities.ShellMaterial", "ShellMaterial")
+                        .WithMany("CapacitySpecifications")
+                        .HasForeignKey("ShellMaterialName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DocumentVersionManager.Domain.Entities.ModelVersion", "ModelVersion")
+                        .WithOne("Specification")
+                        .HasForeignKey("DocumentVersionManager.Domain.Entities.Specification", "ModelName", "ModelVersionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ModelVersion");
+
+                    b.Navigation("ShellMaterial");
                 });
 
             modelBuilder.Entity("DocumentVersionManager.Domain.Entities.Document", b =>
@@ -1005,16 +858,22 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
             modelBuilder.Entity("DocumentVersionManager.Domain.Entities.ModelVersion", b =>
                 {
-                    b.Navigation("CapacitySpecifications");
-
                     b.Navigation("Documents");
 
                     b.Navigation("Products");
+
+                    b.Navigation("Specification")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DocumentVersionManager.Domain.Entities.ShellMaterial", b =>
                 {
                     b.Navigation("CapacitySpecifications");
+                });
+
+            modelBuilder.Entity("DocumentVersionManager.Domain.Entities.Specification", b =>
+                {
+                    b.Navigation("CapacityTestPoints");
                 });
 #pragma warning restore 612, 618
         }

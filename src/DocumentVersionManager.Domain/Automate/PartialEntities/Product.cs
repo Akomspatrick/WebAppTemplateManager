@@ -13,12 +13,12 @@ namespace DocumentVersionManager.Domain.Entities
             public string InvoiceId    { get; init; }  = string.Empty; 
             public string SalesOrderId    { get; init; }  = string.Empty; 
             public int CableLength    { get; init; } 
-            public int Troubled    { get; init; } 
-            public string TestingModeName    { get; init; }  = string.Empty; 
+            public int InspectionResult    { get; init; } 
+            public string DefaultTestingMode    { get; init; }  = string.Empty; 
+            public string UsedCalibrationMode    { get; init; }  = string.Empty; 
             public string ThermexPurcharseOrderNo    { get; init; }  = string.Empty; 
             public string MachiningPurcharseOrderNo    { get; init; }  = string.Empty; 
             public string SteelPurcharseOrderNo    { get; init; }  = string.Empty; 
-            public string MetalCertificateNo    { get; init; }  = string.Empty; 
             public string BatcNo    { get; init; }  = string.Empty; 
             public ModelVersion ModelVersion    { get; init; } 
         }

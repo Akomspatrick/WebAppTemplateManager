@@ -42,7 +42,11 @@ namespace DocumentVersionManager.Domain.Entities
                 ModelVersionId = modelVersionId,
                 ContentPDFPath = contentPDFPath,
                 ChangeOrderPDFPath = changeOrderPDFPath,
-                Timestamp = timestamp
+                Timestamp = timestamp,
+                DocumentBasePathId = "001"
+
+
+
 
 
             };

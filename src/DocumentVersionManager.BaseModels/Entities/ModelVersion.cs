@@ -8,7 +8,7 @@
         public string ModelVersionName { get; init; } = string.Empty;
 
 
-        public Model Models;
+        public Model Models { get; init; }
         public string ModelName { get; init; } = string.Empty;
 
         public string TestingModeName { get; init; } = string.Empty; // Manual, Automatic for each product
@@ -20,7 +20,7 @@
 
 
         public ICollection<Document> Documents { get; init; }
-        public ICollection<Specification> CapacitySpecifications { get; init; }
+        public Specification Specification { get; init; }
         public ICollection<Product> Products { get; set; }
 
     }

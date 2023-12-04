@@ -12,7 +12,7 @@ namespace DocumentVersionManager.Domain.Entities
                 ModelName = modelName,
                 ModelVersionId = modelVersionId,
                 Capacity = capacity,
-                Weight = weight,
+                TestPoint = weight,
                 TestId = testId,
                 GuidId = capacityTestPointGuid
             };
@@ -25,7 +25,7 @@ namespace DocumentVersionManager.Domain.Entities
                 ModelName = modelName,
                 ModelVersionId = modelVersionId,
                 Capacity = capacity,
-                Weight = weight,
+                TestPoint = weight,
                 GuidId = capacityTestPointGuid
             };
         }

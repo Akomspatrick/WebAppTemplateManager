@@ -8,6 +8,7 @@
         //public Guid DocumentGuid { get; init; }
         public string ContentPDFPath { get; init; } = string.Empty;
         public string ChangeOrderPDFPath { get; init; } = string.Empty;
+        public string DocumentBasePathId { get; init; } = string.Empty;
 
         public string DocumentDescription { get; init; } = string.Empty;
         public DateTime Timestamp { get; init; }

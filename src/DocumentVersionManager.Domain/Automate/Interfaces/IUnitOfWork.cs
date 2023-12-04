@@ -6,9 +6,9 @@ namespace DocumentVersionManager.Domain.Interfaces
     {
         Task<Either<GeneralFailures, int>> CommitAllChanges(CancellationToken cancellationToken);
         ICapacityDocumentRepository CapacityDocumentRepository { get; }
-        ICapacitySpecificationRepository CapacitySpecificationRepository { get; }
         ICapacityTestPointRepository CapacityTestPointRepository { get; }
         IDocumentRepository DocumentRepository { get; }
+        IDocumentBasePathRepository DocumentBasePathRepository { get; }
         IDocumentDocumentTypeRepository DocumentDocumentTypeRepository { get; }
         IDocumentTypeRepository DocumentTypeRepository { get; }
         IModelRepository ModelRepository { get; }
@@ -18,5 +18,6 @@ namespace DocumentVersionManager.Domain.Interfaces
         IRevisionRepository RevisionRepository { get; }
         IRevisionCapacityIntervalRepository RevisionCapacityIntervalRepository { get; }
         IShellMaterialRepository ShellMaterialRepository { get; }
+        ISpecificationRepository SpecificationRepository { get; }
     }
 }

@@ -13,7 +13,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence
         public DbSet<Document> Document { get; private set; }
         public DbSet<DocumentType> DocumentType { get; private set; }
         public DbSet<DocumentDocumentType> DocumentDocumentType { get; private set; }
-        public DbSet<Specification> CapacitySpecification { get; private set; }
+        public DbSet<Specification> Specification { get; private set; }
         public DbSet<CapacityTestPoint> CapacityTestPoint { get; private set; }
         public DbSet<ShellMaterial> ShellMaterial { get; private set; }
         public DbSet<Product> Product { get; private set; }

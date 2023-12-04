@@ -38,6 +38,16 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
     }
 
 
+    public class DocumentBasePathConfig : IEntityTypeConfiguration<DocumentBasePath>
+    {
+        public void Configure(EntityTypeBuilder<DocumentBasePath> entity)
+        {
+            entity.HasKey(e => new { e.DocumentBasePathId });
+            entity.Property(e => e.DocumentBasePathId).HasMaxLength(10);
+
+
+        }
+    }
     public class ModelVersionConfig : IEntityTypeConfiguration<ModelVersion>
     {
         public void Configure(EntityTypeBuilder<ModelVersion> entity)
@@ -94,7 +104,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
     }
 
 
-    public class CapacitySpecificationConfig : IEntityTypeConfiguration<Specification>
+    public class SpecificationConfig : IEntityTypeConfiguration<Specification>
     {
         public void Configure(EntityTypeBuilder<Specification> entity)
         {
@@ -104,30 +114,30 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
 
             entity.HasOne<ShellMaterial>(e => e.ShellMaterial).WithMany(e => e.CapacitySpecifications)
                 .HasForeignKey(e => new { e.ShellMaterialName });
-            entity.HasOne<ModelVersion>(e => e.ModelVersion).WithMany(e => e.CapacitySpecifications)
-                .HasForeignKey(e => new { e.ModelName, e.ModelVersionId });
+            entity.HasOne<ModelVersion>(e => e.ModelVersion).WithOne(e => e.Specification).HasForeignKey<Specification>(e => new { e.ModelName, e.ModelVersionId });
+            // .HasForeignKey(e => new { e.ModelName, e.ModelVersionId });
 
             entity.HasData(
                 Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 1,
-                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL1", true, 20, 1, 1, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1, 1, 1
-                , 1, 1, 1, 1, 1, 1, true, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID1", DateTime.UtcNow),
+                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL1", 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
+                , 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID1", DateTime.UtcNow),
 
-                      Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 1,
-                101, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", true, 20, 1, 1, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1, 1, 1
-                , 1, 1, 1, 1, 1, 1, true, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
+                      //      Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 1,
+                      //101, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
+                      //, 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
 
-                      Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 1,
-                102, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", true, 20, 1, 1, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1, 1, 1
-                , 1, 1, 1, 1, 1, 1, true, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
+                      //      Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 1,
+                      //102, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
+                      //, 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
 
                       Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 2,
-                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", true, 20, 1, 1, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1, 1, 1
-                , 1, 1, 1, 1, 1, 1, true, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
+                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
+                , 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
 
 
                 Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "SECONDMODELNAME", 1,
-                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL3", true, 20, 1, 1, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1, 1, 1
-                , 1, 1, 1, 1, 1, 1, true, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID3", DateTime.UtcNow));
+                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL3", 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
+                , 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID3", DateTime.UtcNow));
         }
     }
 
@@ -187,12 +197,12 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
             entity.Property(e => e.TestId)
              .HasAnnotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn);
 
-            entity.HasOne<Specification>(e => e.CapacitySpecification).WithMany(e => e.CapacityTestPoints)
+            entity.HasOne<Specification>(e => e.Specification).WithMany(e => e.CapacityTestPoints)
                 .HasForeignKey(e => new { e.Capacity, e.ModelName, e.ModelVersionId });
 
             entity.HasData(CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 100, 1, 1),
-                 CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 101, 9, 1),
-                 CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 102, 39, 1),
+                 // CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 101, 9, 1),
+                 // CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 102, 39, 1),
                  CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "SECONDMODELNAME", 1, 100, 49, 1));
 
 
@@ -203,10 +213,10 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
         public void Configure(EntityTypeBuilder<ShellMaterial> entity)
         {
             entity.HasKey(e => new { e.ShellMaterialName });
-            entity.HasData(ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial1", 1),
-                            ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial2", 2),
-                             ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial3", 1),
-                               ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial4", 2));
+            entity.HasData(ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial1"),
+                            ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial2"),
+                             ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial3"),
+                               ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial4"));
 
 
         }

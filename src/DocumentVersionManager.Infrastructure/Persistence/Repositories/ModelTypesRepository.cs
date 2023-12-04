@@ -29,6 +29,9 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             try
             {
                 var result = await _ctx.ModelType.Include(model => model.Models).AsNoTracking().ToListAsync(cancellationToken);
+                var s = result.Select(x => x.Models).ToList();
+                var t = s[0];
+                t.Append(new Model { ModelName = "test", ModelTypesName = "test" });
 
                 return result;
 

@@ -6,12 +6,11 @@ namespace DocumentVersionManager.Domain.Entities
     {
 
 
-        public static ShellMaterial Create(Guid shellMaterialGuid, string name, int alloy)
+        public static ShellMaterial Create(Guid shellMaterialGuid, string name)
         {
             return new ShellMaterial()
             {
                 ShellMaterialName = name,
-                Alloy = alloy,
                 GuidId = shellMaterialGuid,
 
             };

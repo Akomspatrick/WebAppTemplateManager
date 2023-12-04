@@ -27,7 +27,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
         }
 
-        private ICollection<ApplicationModelResponseDTO> convertToModelDto(ICollection<Domain.Entities.Model> models)
+        private ICollection<ApplicationModelResponseDTO> convertToModelDto(IEnumerable<Domain.Entities.Model> models)
         {
             return models.Select(x => new ApplicationModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypesName)).ToList();
         }
