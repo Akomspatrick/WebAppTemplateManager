@@ -5,10 +5,11 @@ using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
 using LanguageExt;
 using MediatR;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 {
-    public class CreateModelTypeCommandHandler : IRequestHandler<CreateModelTypeCommand, Either<GeneralFailures, int>>
+    public sealed class CreateModelTypeCommandHandler : IRequestHandler<CreateModelTypeCommand, Either<GeneralFailures, int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<CreateModelTypeCommandHandler> _logger;
@@ -35,5 +36,6 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
 
         }
+
     }
 }

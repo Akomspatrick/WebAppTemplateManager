@@ -14,7 +14,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         public GenericRepository(DocumentVersionManagerContext ctx)
         {
             //_dbSet = ctx.Set<T>();
-            Guid guid = Guid.NewGuid();
+            //Guid guid = Guid.NewGuid();
             _ctx = ctx;
         }
         async Task<Either<GeneralFailures, int>> IGenericRepository<T>.AddAsync(T entity, CancellationToken cancellationToken)
@@ -71,16 +71,16 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         {
             try
             {
-              
+
 
                 _ctx.Update(entity);
-              
+
                 return await _ctx.SaveChangesAsync(cancellationToken);
 
 
                 //aternative to the above
                 //_ctx.Set<T>().Attach(entity);
-               // _ctx.Entry(entity).State = EntityState.Modified;
+                // _ctx.Entry(entity).State = EntityState.Modified;
             }
             catch (Exception ex)
             {
@@ -147,10 +147,10 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
                 }
                 if (orderBy != null)
                 {
-                   // return Task.FromResult(orderBy(query).ToListAsync(cancellationToken));
-                   query = orderBy(query);
+                    // return Task.FromResult(orderBy(query).ToListAsync(cancellationToken));
+                    query = orderBy(query);
                 }
-                var result = await query.AsNoTracking().ToListAsync( cancellationToken);
+                var result = await query.AsNoTracking().ToListAsync(cancellationToken);
                 var entity = result as IReadOnlyList<T>;
                 return Task.FromResult(entity);// != null ? entity : GeneralFailures.DataNotFoundInRepository;
 
