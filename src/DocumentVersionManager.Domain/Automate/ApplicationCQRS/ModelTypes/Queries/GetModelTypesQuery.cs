@@ -5,5 +5,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.ModelTypes.Queries
 {
-    public  record GetModelTypesQuery(ApplicationRequestModelTypesDTO  RequestModelTypesDTO) :  IRequest<Either<GeneralFailures, ApplicationResponseModelTypesDTO>>;
+    public  record GetModelTypesQuery(ApplicationRequestModelTypesDTO  RequestModelTypesDTO) :  IRequest<Either<GeneralFailure, ApplicationResponseModelTypesDTO>>;
 }

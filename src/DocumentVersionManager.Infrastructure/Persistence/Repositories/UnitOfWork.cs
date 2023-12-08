@@ -9,10 +9,10 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
     {
         public readonly DocumentVersionManagerContext _ctx;
 
-         private ModelRepository _modelRepository;
-         private ModelTypesRepository _modelTypesRepository;
-         private DocumentRepository _documentRepository;
-         private DocumentTypeRepository _documentTypeRepository;
+        private ModelRepository _modelRepository;
+        private ModelTypesRepository _modelTypesRepository;
+        private DocumentRepository _documentRepository;
+        private DocumentTypeRepository _documentTypeRepository;
 
         // private GenericRepository<object> _asyncRepository;
 
@@ -42,7 +42,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         // public IGenericRepository<T>  AsyncRepository1<T>() where T : BaseEntity =>  _asyncRepository ??=  new GenericRepository<T>(_ctx);
 
 
-        public async Task<Either<GeneralFailures, int>> CommitAllChanges(CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> CommitAllChanges(CancellationToken cancellationToken)
         {
             throw new NotImplementedException("Its not been used to commit for now individual repo implemented savechanges");
             _ctx.SavingChanges += (s, e) =>
@@ -58,7 +58,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             catch (Exception)
             {
                 //log this problem into dbase
-                return GeneralFailures.ProblemAddingEntityIntoDbContext;
+                return GeneralFailures.ProblemAddingEntityIntoDbContext("ALL");
             }
 
         }

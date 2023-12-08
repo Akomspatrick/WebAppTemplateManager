@@ -7,7 +7,7 @@ using LanguageExt;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DocumentVersionManager.Api.Controllers.V1
+namespace DocumentVersionManager.Api.Controllers.v1
 {
 
     [ApiController]
@@ -29,17 +29,17 @@ namespace DocumentVersionManager.Api.Controllers.V1
         {
 
             return request.EnsureInputIsNotNull("Input Cannot be null")//.EnsureInputIsNotEmpty("Input Cannot be empty")
-            .Bind<Either<GeneralFailures, int>>(request => AddDocumentType(request, cancellationToken).Result)
+            .Bind<Either<GeneralFailure, int>>(request => AddDocumentType(request, cancellationToken).Result)
         .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                               Right: result => result.Match<IActionResult>(
-                                                  Left: errors2 => new OkObjectResult(GeneralFailuresFailuresExtensions.GetEnumDescription(errors2)),
+                                                  Left: errors2 => new OkObjectResult(errors2),
                                                   Right: result2 => new OkObjectResult(result2)
                                                                            )
                                        );
 
         }
 
-        private async Task<Either<GeneralFailures, int>> AddDocumentType(DocumentTypeDTO request, CancellationToken cancellationToken)
+        private async Task<Either<GeneralFailure, int>> AddDocumentType(DocumentTypeDTO request, CancellationToken cancellationToken)
             => await _sender.Send(new CreateDocumentTypeCommand(new ApplicationDocumentTypeRequestDTO(request.DocumentTypeName)), cancellationToken);
 
     }

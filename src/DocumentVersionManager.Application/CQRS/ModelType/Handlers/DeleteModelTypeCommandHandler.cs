@@ -7,7 +7,7 @@ using MediatR;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 {
-    public class DeleteModelTypeCommandHandler : IRequestHandler<DeleteModelTypeCommand, Either<GeneralFailures, int>>
+    public class DeleteModelTypeCommandHandler : IRequestHandler<DeleteModelTypeCommand, Either<GeneralFailure, int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<DeleteModelTypeCommandHandler> _logger;
@@ -19,7 +19,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         }
 
 
-        public async Task<Either<GeneralFailures, int>> Handle(DeleteModelTypeCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> Handle(DeleteModelTypeCommand request, CancellationToken cancellationToken)
         {
             return (
                 await _unitOfWork.ModelTypesRepository

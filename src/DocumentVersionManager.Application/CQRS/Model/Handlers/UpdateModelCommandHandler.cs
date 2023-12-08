@@ -7,7 +7,7 @@ using MediatR;
 
 namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 {
-    public class UpdateModelCommandHandler : IRequestHandler<UpdateModelCommand, Either<GeneralFailures, int>>
+    public class UpdateModelCommandHandler : IRequestHandler<UpdateModelCommand, Either<GeneralFailure, int>>
     {
         private readonly IAppLogger<UpdateModelCommandHandler> _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -19,7 +19,7 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
         }
 
 
-        public async Task<Either<GeneralFailures, int>> Handle(UpdateModelCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> Handle(UpdateModelCommand request, CancellationToken cancellationToken)
         {
             var entity = Domain.Entities.Model.Create(Guid.NewGuid(), request.modelUpdateDTO.ModelName, request.modelUpdateDTO.ModelTypesName);
 

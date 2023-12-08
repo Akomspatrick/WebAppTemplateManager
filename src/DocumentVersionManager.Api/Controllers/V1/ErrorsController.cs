@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DocumentVersionManager.Api.Controllers.V1
+namespace DocumentVersionManager.Api.Controllers.v1
 {
 
     [Route("Error")]
@@ -17,11 +17,11 @@ namespace DocumentVersionManager.Api.Controllers.V1
             Exception exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
 
             return Problem(
-                               detail: exception?.StackTrace,
-                                              title: exception?.Message,
-                                                             statusCode: StatusCodes.Status500InternalServerError,
-                                                                            instance: HttpContext.Request.Path,
-                                                                                           type: "https://tools.ietf.org/html/rfc7231#section-6.6.1"
+                                 detail: exception?.StackTrace,
+                                 title: exception?.Message,
+                                 statusCode: StatusCodes.Status500InternalServerError,
+                                 instance: HttpContext.Request.Path,
+                                 type: "https://tools.ietf.org/html/rfc7231#section-6.6.1"
                                                                                                       );
         }
 

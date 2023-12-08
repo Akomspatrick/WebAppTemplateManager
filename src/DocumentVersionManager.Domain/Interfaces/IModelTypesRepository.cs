@@ -6,8 +6,8 @@ namespace DocumentVersionManager.Domain.Interfaces
     public interface IModelTypesRepository : IGenericRepository<ModelTypes>
     {
 
-        Task<Either<GeneralFailures, ModelTypes>> GetModelTypeByGuidId(Guid modelTypesId);
-        Task<Either<GeneralFailures, List<ModelTypes>>> GetAllWithIncludes(CancellationToken cancellationToken);
+        Task<Either<GeneralFailure, ModelTypes>> GetModelTypeByGuidId(Guid modelTypesId);
+        Task<Either<GeneralFailure, List<ModelTypes>>> GetAllWithIncludes(CancellationToken cancellationToken);
 
     }
 }

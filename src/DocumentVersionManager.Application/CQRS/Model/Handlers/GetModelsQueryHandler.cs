@@ -8,7 +8,7 @@ using MediatR;
 
 namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 {
-    public class GetModelsQueryHandler : IRequestHandler<GetModelsQuery, Either<GeneralFailures, ApplicationModelResponseDTO>>
+    public class GetModelsQueryHandler : IRequestHandler<GetModelsQuery, Either<GeneralFailure, ApplicationModelResponseDTO>>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -18,7 +18,7 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
-        public async Task<Either<GeneralFailures, ApplicationModelResponseDTO>> Handle(GetModelsQuery request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, ApplicationModelResponseDTO>> Handle(GetModelsQuery request, CancellationToken cancellationToken)
         {
 
             return (await _unitOfWork.ModelRepository

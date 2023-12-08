@@ -7,7 +7,7 @@ namespace DocumentVersionManager.Domain.Interfaces
     public interface IUnitOfWork : IDisposable
     {
 
-        Task<Either<GeneralFailures, int>> CommitAllChanges(CancellationToken cancellationToken);
+        Task<Either<GeneralFailure, int>> CommitAllChanges(CancellationToken cancellationToken);
         //  IGenericRepository<T> AsyncRepository<T>() where T : BaseEntity;
         // I ditched IGenericRepository for individual model generic so that i can use the instance in Unitofwork implementation IModelRepository and IModelTypesRepository
         IModelRepository ModelRepository { get; }

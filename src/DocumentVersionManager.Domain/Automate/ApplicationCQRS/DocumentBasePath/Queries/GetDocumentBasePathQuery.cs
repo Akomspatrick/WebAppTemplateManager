@@ -5,5 +5,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.DocumentBasePath.Queries
 {
-    public  record GetDocumentBasePathQuery(ApplicationRequestDocumentBasePathDTO  RequestDocumentBasePathDTO) :  IRequest<Either<GeneralFailures, ApplicationResponseDocumentBasePathDTO>>;
+    public  record GetDocumentBasePathQuery(ApplicationRequestDocumentBasePathDTO  RequestDocumentBasePathDTO) :  IRequest<Either<GeneralFailure, ApplicationResponseDocumentBasePathDTO>>;
 }

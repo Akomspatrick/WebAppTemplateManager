@@ -5,5 +5,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.Revision.Queries
 {
-    public  record GetRevisionQuery(ApplicationRequestRevisionDTO  RequestRevisionDTO) :  IRequest<Either<GeneralFailures, ApplicationResponseRevisionDTO>>;
+    public  record GetRevisionQuery(ApplicationRequestRevisionDTO  RequestRevisionDTO) :  IRequest<Either<GeneralFailure, ApplicationResponseRevisionDTO>>;
 }

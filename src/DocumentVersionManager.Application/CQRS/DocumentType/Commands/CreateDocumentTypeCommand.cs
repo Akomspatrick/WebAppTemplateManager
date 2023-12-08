@@ -5,6 +5,6 @@ using MediatR;
 
 namespace DocumentVersionManager.Application.CQRS.DocumentType.Commands
 {
-    public record CreateDocumentTypeCommand(ApplicationDocumentTypeRequestDTO documentTypeName) : IRequest<Either<GeneralFailures, int>>;
+    public record CreateDocumentTypeCommand(ApplicationDocumentTypeRequestDTO documentTypeName) : IRequest<Either<GeneralFailure, int>>;
 
 }

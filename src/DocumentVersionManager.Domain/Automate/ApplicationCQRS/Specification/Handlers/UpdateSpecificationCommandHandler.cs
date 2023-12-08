@@ -5,7 +5,7 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.Specification.Handlers
 {
-    public  class UpdateSpecificationCommandHandler  :  IRequestHandler<UpdateSpecificationCommand, Either<GeneralFailures, int>>
+    public  class UpdateSpecificationCommandHandler  :  IRequestHandler<UpdateSpecificationCommand, Either<GeneralFailure, int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<UpdateSpecificationCommandHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.Specification.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, int>> Handle(UpdateSpecificationCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> Handle(UpdateSpecificationCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

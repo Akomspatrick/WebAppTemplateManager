@@ -5,7 +5,7 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.Product.Handlers
 {
-    public  class GetProductQueryHandler  :  IRequestHandler<GetProductQuery, Either<GeneralFailures, ApplicationProductResponseDTO>>
+    public  class GetProductQueryHandler  :  IRequestHandler<GetProductQuery, Either<GeneralFailure, ApplicationProductResponseDTO>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<GetProductQueryHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.Product.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, ApplicationProductResponseDTO>> Handle(GetProductQuery request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, ApplicationProductResponseDTO>> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

@@ -5,7 +5,7 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.RevisionCapacityInterval.Handlers
 {
-    public  class GetAllRevisionCapacityIntervalQueryHandler  :  IRequestHandler<GetAllRevisionCapacityIntervalQuery, Either<GeneralFailures, IEnumerable<ApplicationRevisionCapacityIntervalResponseDTO>>>
+    public  class GetAllRevisionCapacityIntervalQueryHandler  :  IRequestHandler<GetAllRevisionCapacityIntervalQuery, Either<GeneralFailure, IEnumerable<ApplicationRevisionCapacityIntervalResponseDTO>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<GetAllRevisionCapacityIntervalQueryHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.RevisionCapacityInterval.Handl
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, IEnumerable<ApplicationRevisionCapacityIntervalResponseDTO>>> Handle(GetAllRevisionCapacityIntervalQuery request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, IEnumerable<ApplicationRevisionCapacityIntervalResponseDTO>>> Handle(GetAllRevisionCapacityIntervalQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

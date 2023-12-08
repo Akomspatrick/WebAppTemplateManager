@@ -17,6 +17,7 @@ namespace DocumentVersionManager.Domain.Entities
             public int SafeLoad    { get; init; } 
             public int UltimateLoad    { get; init; } 
             public string ShellMaterialName    { get; init; }  = string.Empty; 
+            public Boolean Alloy    { get; init; } 
             public int DefaultCableLength    { get; init; } 
             public int NumberOfGauges    { get; init; } 
             public int Resistance    { get; init; } 
@@ -31,8 +32,8 @@ namespace DocumentVersionManager.Domain.Entities
             public DateTime OIMLCertificationTimestamp    { get; init; } 
             public ModelVersion ModelVersion    { get; init; } 
             public ShellMaterial ShellMaterial    { get; init; } 
-            private  IList <CapacityTestPoint> _CapacityTestPoints { get;  set;}  = new List<CapacityTestPoint>();
-            public  IEnumerable<CapacityTestPoint> CapacityTestPoints => _CapacityTestPoints.AsReadOnly();
+            private  List <CapacityTestPoint> _CapacityTestPoints { get;  set;}  = new List<CapacityTestPoint>();
+            public  IReadOnlyCollection<CapacityTestPoint> CapacityTestPoints => _CapacityTestPoints;
             public Guid GuidId    { get; init; } 
         }
 }

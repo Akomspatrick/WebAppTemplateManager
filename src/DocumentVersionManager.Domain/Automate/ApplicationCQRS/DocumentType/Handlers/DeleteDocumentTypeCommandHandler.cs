@@ -5,7 +5,7 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.DocumentType.Handlers
 {
-    public  class DeleteDocumentTypeCommandHandler  :  IRequestHandler<DeleteDocumentTypeCommand, Either<GeneralFailures, int>>
+    public  class DeleteDocumentTypeCommandHandler  :  IRequestHandler<DeleteDocumentTypeCommand, Either<GeneralFailure, int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<CreateDocumentTypeCommandHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.DocumentType.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, int>> Handle(DeleteDocumentTypeCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> Handle(DeleteDocumentTypeCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

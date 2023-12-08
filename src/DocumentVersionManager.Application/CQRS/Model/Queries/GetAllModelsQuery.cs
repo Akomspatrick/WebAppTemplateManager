@@ -10,6 +10,6 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.Model.Queries
 {
-    public record GetAllModelsQuery: IRequest<Either<GeneralFailures, IEnumerable<ApplicationModelResponseDTO>>>;
+    public record GetAllModelsQuery: IRequest<Either<GeneralFailure, IEnumerable<ApplicationModelResponseDTO>>>;
     
 }

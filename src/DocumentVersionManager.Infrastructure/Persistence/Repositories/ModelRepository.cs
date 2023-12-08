@@ -16,7 +16,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             _ctx = ctx;
         }
 
-        public async Task<Either<GeneralFailures, List<Model>>> GetAllWithIncludes(CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, List<Model>>> GetAllWithIncludes(CancellationToken cancellationToken)
         {
             try
             {
@@ -24,9 +24,9 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
                 return result;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return GeneralFailures.ErrorRetrievingListDataFromRepository;
+                return GeneralFailures.ErrorRetrievingListDataFromRepository(ex.ToString());
             }
         }
 

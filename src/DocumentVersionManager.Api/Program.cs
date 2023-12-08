@@ -1,5 +1,7 @@
 using DocumentVersionManager.Api;
 using DocumentVersionManager.Api.Filters;
+using DocumentVersionManager.Api.Middleware;
+
 //using DocumentVersionManager.Api.Middleware;
 using DocumentVersionManager.Application;
 using DocumentVersionManager.Infrastructure;
@@ -17,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     //builder.Services.AddSwaggerGen();
-    builder.Services.AddSwaggerGen(options =>options.SwaggerDoc("v1", new OpenApiInfo { Title = "DocumentVersionManager.Api", Version = "v7" }));
+    builder.Services.AddSwaggerGen(options => options.SwaggerDoc("v1", new OpenApiInfo { Title = "DocumentVersionManager.Api", Version = "v7" }));
     //builder.Services.AddDbContext<DocumentVersionManagerDbContext>(options =>
     //{
     //    options.UseMySql(builder.Configuration.GetConnectionString("constr"), ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("constr")));
@@ -44,7 +46,11 @@ app.UseCors(builder =>
 });
 // if i want to use middleware for error handling
 //app.UseMiddleware<ErrorHandlingMiddleware>();
-app.UseExceptionHandler("/error");
+//if I want to use the error handling controller
+//app.UseExceptionHandler("/error");
+// this method  for the global exception handler ia same as the controllr style
+app.UseExceptionHandler();
+
 app.UseHttpsRedirection();
 //app.UseAuthorization();
 app.MapControllers();

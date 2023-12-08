@@ -12,7 +12,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DocumentVersionManager.Api.Controllers.V1
+namespace DocumentVersionManager.Api.Controllers.v1
 {
 
     public class ModelController : DVBaseController<ModelController>
@@ -28,7 +28,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
         {
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
             return (await _sender.Send(new GetModelsQuery(new ApplicationModelRequestDTO(request.ModelName)), cancellationToken))
-            .Match<IActionResult>(Left: errors => new OkObjectResult(GeneralFailuresFailuresExtensions.GetEnumDescription(errors)),
+            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                                 Right: result => new OkObjectResult(result));
         }
 
@@ -46,10 +46,10 @@ namespace DocumentVersionManager.Api.Controllers.V1
             var model = new ApplicationModelCreateDTO(request.ModelId, request.ModelName, request.ModelTypesName);
 
             return model.EnsureInputIsNotEmpty("Input Cannot be Empty")//.EnsureInputIsNotEmpty("Input Cannot be empty")
-                .Bind<Either<GeneralFailures, int>>(modelType => CreateModel(model, cancellationToken).Result)
+                .Bind<Either<GeneralFailure, int>>(modelType => CreateModel(model, cancellationToken).Result)
                 .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                       Right: result => result.Match<IActionResult>(
-                      Left: errors2 => new OkObjectResult(GeneralFailuresFailuresExtensions.GetEnumDescription(errors2)),
+                      Left: errors2 => new OkObjectResult(errors2),
                       Right: result2 => Created($"/{DocumentVersionAPIEndPoints.ModelType.Create}/{model.ModelId}", model)));
         }
 
@@ -60,24 +60,24 @@ namespace DocumentVersionManager.Api.Controllers.V1
         {
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
             return (await _sender.Send(new DeleteModelCommand(new ApplicationModelDeleteDTO(request.ModelId)), cancellationToken))
-            .Match<IActionResult>(Left: errors => new OkObjectResult(GeneralFailuresFailuresExtensions.GetEnumDescription(errors)),
+            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                                 Right: result => new OkObjectResult(result));
         }
 
         [HttpPut(template: DocumentVersionAPIEndPoints.Model.Update, Name = DocumentVersionAPIEndPoints.Model.Update)]
         public async Task<IActionResult> Update(ModelUpdateDTO request, CancellationToken cancellationToken)
         {
-            var modelType = new ApplicationModelUpdateDTO(request.ModelId,  request.ModelName, request.ModelTypesName);
+            var modelType = new ApplicationModelUpdateDTO(request.ModelId, request.ModelName, request.ModelTypesName);
 
             return modelType.EnsureInputIsNotEmpty("Input Cannot be Empty")//.EnsureInputIsNotEmpty("Input Cannot be empty")
-                .Bind<Either<GeneralFailures, int>>(modelType => UpdateModelType(modelType, cancellationToken).Result)
+                .Bind<Either<GeneralFailure, int>>(modelType => UpdateModelType(modelType, cancellationToken).Result)
                 .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                       Right: result => result.Match<IActionResult>(
-                      Left: errors2 => new OkObjectResult(GeneralFailuresFailuresExtensions.GetEnumDescription(errors2)),
+                      Left: errors2 => new OkObjectResult(errors2),
                       Right: result2 => Created($"/{DocumentVersionAPIEndPoints.ModelType.Create}/{modelType.ModelId}", modelType)));
         }
 
-        private async Task<Either<GeneralFailures, int>> UpdateModelType(ApplicationModelUpdateDTO modelType, CancellationToken cancellationToken)
+        private async Task<Either<GeneralFailure, int>> UpdateModelType(ApplicationModelUpdateDTO modelType, CancellationToken cancellationToken)
        => await _sender.Send(new UpdateModelCommand(modelType), cancellationToken);
 
 
@@ -89,7 +89,7 @@ namespace DocumentVersionManager.Api.Controllers.V1
 
 
 
-        private async Task<Either<GeneralFailures, int>> CreateModel(ApplicationModelCreateDTO modelType, CancellationToken cancellationToken)
+        private async Task<Either<GeneralFailure, int>> CreateModel(ApplicationModelCreateDTO modelType, CancellationToken cancellationToken)
            => await _sender.Send(new CreateModelCommand(modelType), cancellationToken);
 
     }

@@ -11,11 +11,11 @@ namespace DocumentVersionManager.Domain.Entities
             public string TestingModeName    { get; init; }  = string.Empty; 
             public DateTime Timestamp    { get; init; } 
             public string UserName    { get; init; }  = string.Empty; 
-            private  IList <Document> _Documents { get;  set;}  = new List<Document>();
-            public  IEnumerable<Document> Documents => _Documents.AsReadOnly();
+            private  List <Document> _Documents { get;  set;}  = new List<Document>();
+            public  IReadOnlyCollection<Document> Documents => _Documents;
             public Specification Specification    { get; init; } 
-            private  IList <Product> _Products { get;  set;}  = new List<Product>();
-            public  IEnumerable<Product> Products => _Products.AsReadOnly();
+            private  List <Product> _Products { get;  set;}  = new List<Product>();
+            public  IReadOnlyCollection<Product> Products => _Products;
             public Guid GuidId    { get; init; } 
         }
 }

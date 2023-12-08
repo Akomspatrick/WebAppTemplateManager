@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.CapacityTestPoint.Commands
 {
-    public  record UpdateCapacityTestPointCommand(ApplicationUpdateCapacityTestPointDTO  UpdateCapacityTestPointDTO) :  IRequest<Either<GeneralFailures, int>>;
+    public  record UpdateCapacityTestPointCommand(ApplicationUpdateCapacityTestPointDTO  UpdateCapacityTestPointDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

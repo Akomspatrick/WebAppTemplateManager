@@ -5,5 +5,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.Specification.Queries
 {
-    public  record GetSpecificationQuery(ApplicationRequestSpecificationDTO  RequestSpecificationDTO) :  IRequest<Either<GeneralFailures, ApplicationResponseSpecificationDTO>>;
+    public  record GetSpecificationQuery(ApplicationRequestSpecificationDTO  RequestSpecificationDTO) :  IRequest<Either<GeneralFailure, ApplicationResponseSpecificationDTO>>;
 }

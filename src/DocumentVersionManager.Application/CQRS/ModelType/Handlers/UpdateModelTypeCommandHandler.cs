@@ -9,7 +9,7 @@ using MediatR;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 {
-    public class UpdateModelTypeCommandHandler : IRequestHandler<UpdateModelTypeCommand, Either<GeneralFailures, int>>
+    public class UpdateModelTypeCommandHandler : IRequestHandler<UpdateModelTypeCommand, Either<GeneralFailure, int>>
     {
         private readonly IAppLogger<UpdateModelTypeCommandHandler> _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -19,7 +19,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
-        public async Task<Either<GeneralFailures, int>> Handle(UpdateModelTypeCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> Handle(UpdateModelTypeCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException("Operation Not Allowed ");
             var entity = ModelTypes.Create(request.modelTypeUpdateDTO.ModelTypesId, request.modelTypeUpdateDTO.modelTypesName);

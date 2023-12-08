@@ -5,7 +5,7 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.ModelVersion.Handlers
 {
-    public  class GetModelVersionQueryHandler  :  IRequestHandler<GetModelVersionQuery, Either<GeneralFailures, ApplicationModelVersionResponseDTO>>
+    public  class GetModelVersionQueryHandler  :  IRequestHandler<GetModelVersionQuery, Either<GeneralFailure, ApplicationModelVersionResponseDTO>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<GetModelVersionQueryHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelVersion.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, ApplicationModelVersionResponseDTO>> Handle(GetModelVersionQuery request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, ApplicationModelVersionResponseDTO>> Handle(GetModelVersionQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

@@ -5,7 +5,7 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.Specification.Handlers
 {
-    public  class GetAllSpecificationQueryHandler  :  IRequestHandler<GetAllSpecificationQuery, Either<GeneralFailures, IEnumerable<ApplicationSpecificationResponseDTO>>>
+    public  class GetAllSpecificationQueryHandler  :  IRequestHandler<GetAllSpecificationQuery, Either<GeneralFailure, IEnumerable<ApplicationSpecificationResponseDTO>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<GetAllSpecificationQueryHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.Specification.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, IEnumerable<ApplicationSpecificationResponseDTO>>> Handle(GetAllSpecificationQuery request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, IEnumerable<ApplicationSpecificationResponseDTO>>> Handle(GetAllSpecificationQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

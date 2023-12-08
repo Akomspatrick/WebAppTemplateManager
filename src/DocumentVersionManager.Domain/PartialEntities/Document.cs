@@ -12,8 +12,8 @@ namespace DocumentVersionManager.Domain.Entities
             public string DocumentDescription    { get; init; }  = string.Empty; 
             public DateTime Timestamp    { get; init; } 
             public ModelVersion ModelVersion    { get; init; } 
-            private  IList <DocumentDocumentType> _DocumentDocumentTypes { get;  set;}  = new List<DocumentDocumentType>();
-            public  IEnumerable<DocumentDocumentType> DocumentDocumentTypes => _DocumentDocumentTypes.AsReadOnly();
+            private  List <DocumentDocumentType> _DocumentDocumentTypes { get;  set;}  = new List<DocumentDocumentType>();
+            public  IReadOnlyCollection<DocumentDocumentType> DocumentDocumentTypes => _DocumentDocumentTypes;
             public Guid GuidId    { get; init; } 
         }
 }

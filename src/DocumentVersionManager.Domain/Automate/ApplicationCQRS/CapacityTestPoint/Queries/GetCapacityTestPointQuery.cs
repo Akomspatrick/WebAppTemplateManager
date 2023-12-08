@@ -5,5 +5,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.CapacityTestPoint.Queries
 {
-    public  record GetCapacityTestPointQuery(ApplicationRequestCapacityTestPointDTO  RequestCapacityTestPointDTO) :  IRequest<Either<GeneralFailures, ApplicationResponseCapacityTestPointDTO>>;
+    public  record GetCapacityTestPointQuery(ApplicationRequestCapacityTestPointDTO  RequestCapacityTestPointDTO) :  IRequest<Either<GeneralFailure, ApplicationResponseCapacityTestPointDTO>>;
 }

@@ -5,6 +5,6 @@ namespace DocumentVersionManager.Domain.Interfaces
 {
     public interface IModelRepository : IGenericRepository<Model>
     {
-        Task<Either<GeneralFailures, List<Model>>> GetAllWithIncludes(CancellationToken cancellationToken);
+        Task<Either<GeneralFailure, List<Model>>> GetAllWithIncludes(CancellationToken cancellationToken);
     }
 }

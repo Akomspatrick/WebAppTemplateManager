@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.Model.Commands
 {
-    public  record CreateModelCommand(ApplicationCreateModelDTO  CreateModelDTO) :  IRequest<Either<GeneralFailures, int>>;
+    public  record CreateModelCommand(ApplicationCreateModelDTO  CreateModelDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

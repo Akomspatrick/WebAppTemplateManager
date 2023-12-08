@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using DocumentVersionManager.Infrastructure.GlobalExceptionHandler;
 using DocumentVersionManager.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,9 @@ public static class APIServiceCollection
     public static IServiceCollection AddAPIServices(this IServiceCollection services, IConfiguration configuration)
     {
         //var applicationAssembly = typeof(APIServiceCollection).Assembly;
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        //services.AddExceptionHandler<GlobalExceptionHandler.GlobalExceptionHandler>();
+        services.AddProblemDetails();
         services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
         services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySQL(configuration.GetConnectionString(Domain.Constants.FixedValues.DBConnectionStringName)!));
         services.AddCors();
@@ -30,11 +34,11 @@ public static class APIServiceCollection
                     new HeaderApiVersionReader("api-version"),
                     new MediaTypeApiVersionReader("version")
                     );
-               
+
 
             });
-  
-                  // services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
+
+        // services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
         return services;
     }
 }

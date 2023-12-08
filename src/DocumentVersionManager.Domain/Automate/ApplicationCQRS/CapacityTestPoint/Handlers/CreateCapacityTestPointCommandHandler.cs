@@ -5,7 +5,7 @@ using MediatR;
 using DocumentVersionManager.Application.CQRS.Model.Commands;
 namespace DocumentVersionManager.Application.CQRS.CapacityTestPoint.Handlers
 {
-    public  class CreateCapacityTestPointCommandHandler  :  IRequestHandler<CreateCapacityTestPointCommand, Either<GeneralFailures, int>>
+    public  class CreateCapacityTestPointCommandHandler  :  IRequestHandler<CreateCapacityTestPointCommand, Either<GeneralFailure, int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<CreateCapacityTestPointCommandHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.CapacityTestPoint.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, int>> Handle(CreateCapacityTestPointCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> Handle(CreateCapacityTestPointCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

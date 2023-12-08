@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.Revision.Commands
 {
-    public  record DeleteRevisionCommand(ApplicationDeleteRevisionDTO  DeleteRevisionDTO) :  IRequest<Either<GeneralFailures, int>>;
+    public  record DeleteRevisionCommand(ApplicationDeleteRevisionDTO  DeleteRevisionDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

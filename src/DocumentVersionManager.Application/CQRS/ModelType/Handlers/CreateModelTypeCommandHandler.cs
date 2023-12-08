@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 {
-    public sealed class CreateModelTypeCommandHandler : IRequestHandler<CreateModelTypeCommand, Either<GeneralFailures, int>>
+    public sealed class CreateModelTypeCommandHandler : IRequestHandler<CreateModelTypeCommand, Either<GeneralFailure, int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<CreateModelTypeCommandHandler> _logger;
@@ -21,7 +21,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, int>> Handle(CreateModelTypeCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> Handle(CreateModelTypeCommand request, CancellationToken cancellationToken)
         {
             //var entity = ModelType.Create(request.modelTypesName.modelTypesName);
             //await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);

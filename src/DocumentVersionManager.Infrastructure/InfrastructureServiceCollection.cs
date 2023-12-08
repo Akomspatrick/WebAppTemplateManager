@@ -23,6 +23,8 @@ namespace DocumentVersionManager.Infrastructure
 
             // services.AddAutoMapper(applicationAssembly);
             //services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<ModelTypesRepository>());
+            // services.AddExceptionHandler<GlobalExceptionHandler.GlobalExceptionHandler>();
+
             services.AddScoped<IModelRepository, ModelRepository>();
             services.AddScoped<IModelTypesRepository, ModelTypesRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

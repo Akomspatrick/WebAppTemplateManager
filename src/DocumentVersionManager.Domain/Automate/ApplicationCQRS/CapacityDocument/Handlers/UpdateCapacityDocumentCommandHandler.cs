@@ -5,7 +5,7 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.CapacityDocument.Handlers
 {
-    public  class UpdateCapacityDocumentCommandHandler  :  IRequestHandler<UpdateCapacityDocumentCommand, Either<GeneralFailures, int>>
+    public  class UpdateCapacityDocumentCommandHandler  :  IRequestHandler<UpdateCapacityDocumentCommand, Either<GeneralFailure, int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<UpdateCapacityDocumentCommandHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.CapacityDocument.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, int>> Handle(UpdateCapacityDocumentCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> Handle(UpdateCapacityDocumentCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

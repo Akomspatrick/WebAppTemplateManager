@@ -2,15 +2,15 @@
 using LanguageExt;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DocumentVersionManager.Api.Controllers.V1
+namespace DocumentVersionManager.Api.Controllers.v1
 {
     public class EitherActionResult : IActionResult
     {
 
-        public Either<GeneralFailures, int> Value { get; set; }
+        public Either<GeneralFailure, int> Value { get; set; }
         public int? StatusCode { get; set; }
         object response = null;
-        public EitherActionResult(Either<GeneralFailures, int> value)
+        public EitherActionResult(Either<GeneralFailure, int> value)
         {
             // Value = value;
             object response = null;

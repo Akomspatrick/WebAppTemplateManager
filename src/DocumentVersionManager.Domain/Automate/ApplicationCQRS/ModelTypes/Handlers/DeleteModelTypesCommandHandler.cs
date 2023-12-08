@@ -5,7 +5,7 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.ModelTypes.Handlers
 {
-    public  class DeleteModelTypesCommandHandler  :  IRequestHandler<DeleteModelTypesCommand, Either<GeneralFailures, int>>
+    public  class DeleteModelTypesCommandHandler  :  IRequestHandler<DeleteModelTypesCommand, Either<GeneralFailure, int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<CreateModelTypesCommandHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelTypes.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, int>> Handle(DeleteModelTypesCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> Handle(DeleteModelTypesCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

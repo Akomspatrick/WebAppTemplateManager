@@ -4,7 +4,7 @@
     {
         public string ShellMaterialName { get; init; } = string.Empty;
 
-        // public Guid ShellMaterialGuid { get; init; }
+        public bool Alloy { get; init; }
         public ICollection<Specification> CapacitySpecifications { get; set; }
 
         public static ShellMaterial Create(Guid shellMaterialGuid, string name, int alloy)

@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.ModelTypes.Commands
 {
-    public  record DeleteModelTypesCommand(ApplicationDeleteModelTypesDTO  DeleteModelTypesDTO) :  IRequest<Either<GeneralFailures, int>>;
+    public  record DeleteModelTypesCommand(ApplicationDeleteModelTypesDTO  DeleteModelTypesDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

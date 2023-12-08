@@ -7,7 +7,7 @@ using MediatR;
 
 namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 {
-    public class CreateModelCommandHandler : IRequestHandler<CreateModelCommand, Either<GeneralFailures, int>>
+    public class CreateModelCommandHandler : IRequestHandler<CreateModelCommand, Either<GeneralFailure, int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<CreateModelCommandHandler> _logger;
@@ -18,9 +18,9 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, int>> Handle(CreateModelCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> Handle(CreateModelCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
+            _logger.LogInformation($"AddNewModelTypeCommandHandler- Attempt to   Add New Model {request.ModelCreateDTO.ModelName}");
             var entity = Domain.Entities.Model.Create(Guid.NewGuid(), request.ModelCreateDTO.ModelName, request.ModelCreateDTO.ModelTypesName);
 
             return await _unitOfWork.ModelRepository.AddAsync(entity, cancellationToken);

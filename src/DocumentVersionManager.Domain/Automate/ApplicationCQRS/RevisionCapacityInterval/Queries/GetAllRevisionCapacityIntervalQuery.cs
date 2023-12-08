@@ -5,5 +5,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.RevisionCapacityInterval.Queries
 {
-    public  record GetAllRevisionCapacityIntervalQuery(ApplicationRequestRevisionCapacityIntervalDTO  RequestRevisionCapacityIntervalDTO) :  IRequest<Either<GeneralFailures, IEnumerable<ApplicationResponseRevisionCapacityIntervalDTO>>>;
+    public  record GetAllRevisionCapacityIntervalQuery(ApplicationRequestRevisionCapacityIntervalDTO  RequestRevisionCapacityIntervalDTO) :  IRequest<Either<GeneralFailure, IEnumerable<ApplicationResponseRevisionCapacityIntervalDTO>>>;
 }

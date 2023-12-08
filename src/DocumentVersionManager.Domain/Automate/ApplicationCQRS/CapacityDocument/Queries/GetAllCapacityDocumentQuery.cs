@@ -5,5 +5,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.CapacityDocument.Queries
 {
-    public  record GetAllCapacityDocumentQuery(ApplicationRequestCapacityDocumentDTO  RequestCapacityDocumentDTO) :  IRequest<Either<GeneralFailures, IEnumerable<ApplicationResponseCapacityDocumentDTO>>>;
+    public  record GetAllCapacityDocumentQuery(ApplicationRequestCapacityDocumentDTO  RequestCapacityDocumentDTO) :  IRequest<Either<GeneralFailure, IEnumerable<ApplicationResponseCapacityDocumentDTO>>>;
 }

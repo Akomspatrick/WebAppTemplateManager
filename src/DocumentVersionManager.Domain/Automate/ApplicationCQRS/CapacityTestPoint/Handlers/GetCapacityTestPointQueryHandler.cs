@@ -5,7 +5,7 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.CapacityTestPoint.Handlers
 {
-    public  class GetCapacityTestPointQueryHandler  :  IRequestHandler<GetCapacityTestPointQuery, Either<GeneralFailures, ApplicationCapacityTestPointResponseDTO>>
+    public  class GetCapacityTestPointQueryHandler  :  IRequestHandler<GetCapacityTestPointQuery, Either<GeneralFailure, ApplicationCapacityTestPointResponseDTO>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<GetCapacityTestPointQueryHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.CapacityTestPoint.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, ApplicationCapacityTestPointResponseDTO>> Handle(GetCapacityTestPointQuery request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, ApplicationCapacityTestPointResponseDTO>> Handle(GetCapacityTestPointQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

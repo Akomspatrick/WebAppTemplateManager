@@ -5,7 +5,7 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.DocumentBasePath.Handlers
 {
-    public  class GetAllDocumentBasePathQueryHandler  :  IRequestHandler<GetAllDocumentBasePathQuery, Either<GeneralFailures, IEnumerable<ApplicationDocumentBasePathResponseDTO>>>
+    public  class GetAllDocumentBasePathQueryHandler  :  IRequestHandler<GetAllDocumentBasePathQuery, Either<GeneralFailure, IEnumerable<ApplicationDocumentBasePathResponseDTO>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<GetAllDocumentBasePathQueryHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.DocumentBasePath.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, IEnumerable<ApplicationDocumentBasePathResponseDTO>>> Handle(GetAllDocumentBasePathQuery request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, IEnumerable<ApplicationDocumentBasePathResponseDTO>>> Handle(GetAllDocumentBasePathQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

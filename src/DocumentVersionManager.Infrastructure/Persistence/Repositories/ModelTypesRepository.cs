@@ -16,7 +16,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             _ctx = ctx;
         }
 
-        public Task<Either<GeneralFailures, ModelTypes>> GetModelTypeByGuidId(Guid modelTypesId)
+        public Task<Either<GeneralFailure, ModelTypes>> GetModelTypeByGuidId(Guid modelTypesId)
         {
             //return await _ctx.ModelType
 
@@ -24,22 +24,25 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<Either<GeneralFailures, List<ModelTypes>>> GetAllWithIncludes(CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, List<ModelTypes>>> GetAllWithIncludes(CancellationToken cancellationToken)
         {
             try
             {
+
                 var result = await _ctx.ModelType.Include(model => model.Models).AsNoTracking().ToListAsync(cancellationToken);
-                var s = result.Select(x => x.Models).ToList();
-                var t = s[0];
-                t.Append(new Model { ModelName = "test", ModelTypesName = "test" });
+
 
                 return result;
 
 
             }
-            catch (Exception)
+            catch (NotSupportedException ex)
             {
-                return GeneralFailures.ErrorRetrievingListDataFromRepository;
+                return GeneralFailures.ExceptionThrown(typeof(ModelTypesRepository).Name, ex.Message, ex.StackTrace);
+            }
+            catch (Exception ex)
+            {
+                return GeneralFailures.ErrorRetrievingListDataFromRepository(ex.ToString());
             }
         }
 

@@ -1,4 +1,6 @@
-﻿namespace DocumentVersionManager.BaseModels.Entities
+﻿using LanguageExt.ClassInstances;
+
+namespace DocumentVersionManager.BaseModels.Entities
 {
 
     public class Specification : BaseEntity
@@ -59,7 +61,7 @@
         public int? SafeLoad { get; init; }
         public int? UltimateLoad { get; init; }
         public string ShellMaterialName { get; init; } = string.Empty;
-
+        public bool Alloy { get; init; }
         public int? DefaultCableLength { get; init; }
 
         public int? NumberOfGauges { get; init; }
@@ -85,7 +87,7 @@
         public static Specification Create(Guid capacitySpecificationGuid, string modelName, int modelVersionId, int capacity,
             DateTime timestamp, string username, double? nominalOutput, decimal? nominalOutputPercentage, decimal?
             nonlinearityPercentage, int? minimumDeadLoad, double? vMin, int? nMax, int? safeLoad, int? ultimateLoad, string
-            shellMaterialName, int? defaultCableLength,
+            shellMaterialName, bool alloy, int? defaultCableLength,
 
             int? numberOfGauges,
             int? resistance, string cCNumber, string @class, string application,
@@ -110,7 +112,7 @@
                 SafeLoad = safeLoad,
                 UltimateLoad = ultimateLoad,
                 ShellMaterialName = shellMaterialName,
-
+                Alloy = alloy,
                 DefaultCableLength = defaultCableLength,
 
                 NumberOfGauges = numberOfGauges,
@@ -146,7 +148,7 @@
              oldCS.SafeLoad,
              oldCS.UltimateLoad,
              oldCS.ShellMaterialName,
-
+             oldCS.Alloy,
              oldCS.DefaultCableLength,
 
              oldCS.NumberOfGauges,

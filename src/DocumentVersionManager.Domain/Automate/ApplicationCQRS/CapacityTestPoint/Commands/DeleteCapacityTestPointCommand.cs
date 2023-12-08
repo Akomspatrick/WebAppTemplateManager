@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.CapacityTestPoint.Commands
 {
-    public  record DeleteCapacityTestPointCommand(ApplicationDeleteCapacityTestPointDTO  DeleteCapacityTestPointDTO) :  IRequest<Either<GeneralFailures, int>>;
+    public  record DeleteCapacityTestPointCommand(ApplicationDeleteCapacityTestPointDTO  DeleteCapacityTestPointDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

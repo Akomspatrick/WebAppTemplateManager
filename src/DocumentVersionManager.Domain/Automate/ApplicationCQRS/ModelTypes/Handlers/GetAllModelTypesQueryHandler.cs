@@ -5,7 +5,7 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.ModelTypes.Handlers
 {
-    public  class GetAllModelTypesQueryHandler  :  IRequestHandler<GetAllModelTypesQuery, Either<GeneralFailures, IEnumerable<ApplicationModelTypesResponseDTO>>>
+    public  class GetAllModelTypesQueryHandler  :  IRequestHandler<GetAllModelTypesQuery, Either<GeneralFailure, IEnumerable<ApplicationModelTypesResponseDTO>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<GetAllModelTypesQueryHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelTypes.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, IEnumerable<ApplicationModelTypesResponseDTO>>> Handle(GetAllModelTypesQuery request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, IEnumerable<ApplicationModelTypesResponseDTO>>> Handle(GetAllModelTypesQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

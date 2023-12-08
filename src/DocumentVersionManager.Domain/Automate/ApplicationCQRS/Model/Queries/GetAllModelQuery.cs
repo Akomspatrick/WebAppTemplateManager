@@ -5,5 +5,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.Model.Queries
 {
-    public  record GetAllModelQuery(ApplicationRequestModelDTO  RequestModelDTO) :  IRequest<Either<GeneralFailures, IEnumerable<ApplicationResponseModelDTO>>>;
+    public  record GetAllModelQuery(ApplicationRequestModelDTO  RequestModelDTO) :  IRequest<Either<GeneralFailure, IEnumerable<ApplicationResponseModelDTO>>>;
 }

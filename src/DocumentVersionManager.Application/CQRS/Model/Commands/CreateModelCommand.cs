@@ -11,5 +11,5 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.Model.Commands
 {
-    public record CreateModelCommand(ApplicationModelCreateDTO ModelCreateDTO) :  IRequest<Either<GeneralFailures, int>>;
+    public record CreateModelCommand(ApplicationModelCreateDTO ModelCreateDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

@@ -5,7 +5,7 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.Revision.Handlers
 {
-    public  class UpdateRevisionCommandHandler  :  IRequestHandler<UpdateRevisionCommand, Either<GeneralFailures, int>>
+    public  class UpdateRevisionCommandHandler  :  IRequestHandler<UpdateRevisionCommand, Either<GeneralFailure, int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<UpdateRevisionCommandHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.Revision.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, int>> Handle(UpdateRevisionCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> Handle(UpdateRevisionCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

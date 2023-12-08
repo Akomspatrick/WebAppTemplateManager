@@ -4,8 +4,9 @@ namespace DocumentVersionManager.Domain.Entities
     public partial class ShellMaterial  : BaseEntity
         {
             public string ShellMaterialName    { get; init; }  = string.Empty; 
-            private  IList <Specification> _CapacitySpecifications { get;  set;}  = new List<Specification>();
-            public  IEnumerable<Specification> CapacitySpecifications => _CapacitySpecifications.AsReadOnly();
+            public Boolean Alloy    { get; init; } 
+            private  List <Specification> _CapacitySpecifications { get;  set;}  = new List<Specification>();
+            public  IReadOnlyCollection<Specification> CapacitySpecifications => _CapacitySpecifications;
             public Guid GuidId    { get; init; } 
         }
 }

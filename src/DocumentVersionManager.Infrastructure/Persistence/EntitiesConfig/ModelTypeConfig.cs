@@ -119,7 +119,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
 
             entity.HasData(
                 Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 1,
-                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL1", 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
+                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL1", true, 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
                 , 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID1", DateTime.UtcNow),
 
                       //      Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 1,
@@ -131,12 +131,12 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
                       //, 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
 
                       Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 2,
-                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
+                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", true, 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
                 , 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
 
 
                 Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "SECONDMODELNAME", 1,
-                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL3", 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
+                100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL3", true, 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
                 , 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID3", DateTime.UtcNow));
         }
     }
@@ -213,10 +213,10 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
         public void Configure(EntityTypeBuilder<ShellMaterial> entity)
         {
             entity.HasKey(e => new { e.ShellMaterialName });
-            entity.HasData(ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial1"),
-                            ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial2"),
-                             ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial3"),
-                               ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial4"));
+            entity.HasData(ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial1", true),
+                            ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial2", true),
+                             ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial3", true),
+                               ShellMaterial.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "ShellMaterial4", true));
 
 
         }

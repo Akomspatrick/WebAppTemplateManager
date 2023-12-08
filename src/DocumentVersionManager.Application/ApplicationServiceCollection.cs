@@ -2,6 +2,7 @@
 using DocumentVersionManager.Application.CQRS.ModelType.Commands;
 using DocumentVersionManager.Application.Validators;
 using DocumentVersionManager.Domain.Interfaces;
+using FluentAssertions.Common;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -19,8 +20,10 @@ public static class ApplicationServiceCollection
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
     {
+
         var applicationAssembly = typeof(ApplicationServiceCollection).Assembly;
         services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Class1>());
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehaviour<,>));
         services.AddScoped<IPipelineBehavior<CreateModelTypeCommand, int>, ValidationModelTypeBehaviour>();
         //Instead of adding individual fluent validation we can add Fluentvalidation asp.netcore package and then 
         //services.AddScoped<IValidator<AddNewModelTypeCommand>, AddNewModelTypeValidator>();

@@ -5,5 +5,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.ModelVersion.Queries
 {
-    public  record GetModelVersionQuery(ApplicationRequestModelVersionDTO  RequestModelVersionDTO) :  IRequest<Either<GeneralFailures, ApplicationResponseModelVersionDTO>>;
+    public  record GetModelVersionQuery(ApplicationRequestModelVersionDTO  RequestModelVersionDTO) :  IRequest<Either<GeneralFailure, ApplicationResponseModelVersionDTO>>;
 }

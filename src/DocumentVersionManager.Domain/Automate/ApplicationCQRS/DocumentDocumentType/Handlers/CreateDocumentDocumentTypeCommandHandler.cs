@@ -5,7 +5,7 @@ using MediatR;
 using DocumentVersionManager.Application.CQRS.Model.Commands;
 namespace DocumentVersionManager.Application.CQRS.DocumentDocumentType.Handlers
 {
-    public  class CreateDocumentDocumentTypeCommandHandler  :  IRequestHandler<CreateDocumentDocumentTypeCommand, Either<GeneralFailures, int>>
+    public  class CreateDocumentDocumentTypeCommandHandler  :  IRequestHandler<CreateDocumentDocumentTypeCommand, Either<GeneralFailure, int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<CreateDocumentDocumentTypeCommandHandler> _logger;
@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Application.CQRS.DocumentDocumentType.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailures, int>> Handle(CreateDocumentDocumentTypeCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> Handle(CreateDocumentDocumentTypeCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
