@@ -9,15 +9,26 @@ POST {{baseUrl}}/ModelType
 Content-Type: application/json
 
 {
-  "modelTypesId": "ML-0011",
-  "modelTypesName": "ULTRA SIMPLE MODEL"
+  "modelTypesName": "AXLE PADS"
 }
 
 
 ###
 //GET SINGLE  MODELTYPE QUERY 
 
-GET {{baseUrl}}/ModelType
+GET {{baseUrl}}/ModelType/ML-0011
+###
+//GET SINGLE  MODELTYPE QUERY 
+GET {{baseUrl}}/ModelType/FIRSTMODELTYPE
+
+###
+//GET SINGLE  MODELTYPE QUERY 
+GET {{baseUrl}}/ModelType/b27c2c19-522b-49d1-83bf-e80d4dde8c63
+
+###
+//GET SINGLE  MODELTYPE QUERY 
+
+GET {{baseUrl}}/ModelType/PI
 Content-Type: application/json
 
 {
@@ -29,18 +40,13 @@ Content-Type: application/json
 
 ###
 ///GET ALL  MODELTYPE QUERY 
-GET http://localhost:5007/api/ModelType/GetAllAsync
+GET http://localhost:5007/api/ModelType
 
 
 ###
 // delete a modeltype
 
-DELETE {{baseUrl}}/ModelType
-Content-Type: application/json
-
-{
-  "modelTypesId": "ML-0011"
-}
+DELETE {{baseUrl}}/ModelType/60f62f87-8cec-400e-a7bb-3988251da735
 ###
 PUT {{baseUrl}}/ModelType
 Content-Type: application/json

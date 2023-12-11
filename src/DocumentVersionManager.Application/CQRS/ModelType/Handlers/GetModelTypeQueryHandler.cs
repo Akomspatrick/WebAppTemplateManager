@@ -20,9 +20,9 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         public async Task<Either<GeneralFailure, ApplicationModelTypeResponseDTO>> Handle(GetModelTypeQuery request, CancellationToken cancellationToken)
         {
 
-
+            List<string> includes = new List<string>() { "Models" };
             return (await _unitOfWork.ModelTypesRepository
-                    .GetMatch(s => (s.ModelTypesName == request.modelTypeRequestDTO.ModelTypesName), null, cancellationToken))
+                    .GetMatch(s => (s.ModelTypesName == request.modelTypeRequestDTO.ModelTypesName), includes, cancellationToken))
                     .Map((result) => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypesName, convertToModelDto(result.Models)));
 
         }

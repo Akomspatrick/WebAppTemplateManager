@@ -42,32 +42,10 @@ namespace DocumentVersionManager.Application.Behaviours
             {
                 result.MatchUntyped(_ => CreateSuccessLog(result), error => CreateErrorLog(error));
                 _logger.LogError("Error occured in request {@RequestName}, {@DateTimeUtc} ", typeof(TRequest).Name, DateTime.UtcNow);
-                // var error = result.;
-                //if (error is GeneralFailure)
-                //{
-                //    var generalFailure = error as GeneralFailure;
-                //    _logger.LogError("Error occured in request {@RequestName}, {@DateTimeUtc} ", typeof(TRequest).Name,
-                //        DateTime.UtcNow);
-                //}
-                //else if (error is ValidationFailure)
-                //{
-                //    var validationFailure = error as ValidationFailure;
-                //    _logger.LogError("Error occured in request {@RequestName}, {@DateTimeUtc} ", typeof(TRequest).Name,
-                //        DateTime.UtcNow);
-                //}
-                //else
-                //{
-                //    _logger.LogError("Error occured in request {@RequestName}, {@DateTimeUtc} ", typeof(TRequest).Name,
-                //        DateTime.UtcNow);
-                //} 
-                _logger.LogError("Error occured in request {@RequestName}, {@DateTimeUtc} ", typeof(TRequest).Name, DateTime.UtcNow);
+
 
             }
-            //if (result != null)
-            //{
-            // you can check if result is failure here if you are using railway approch 
-            // e.g if result.failure ... log failure
-            //}
+
             _logger.LogError("Completed request {@RequestName}, {@DateTimeUtc} ", typeof(TRequest).Name, DateTime.UtcNow);
 
 

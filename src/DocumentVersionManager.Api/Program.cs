@@ -2,13 +2,10 @@ using DocumentVersionManager.Api;
 using DocumentVersionManager.Api.Filters;
 using DocumentVersionManager.Api.Middleware;
 
-//using DocumentVersionManager.Api.Middleware;
 using DocumentVersionManager.Application;
 using DocumentVersionManager.Infrastructure;
-using DocumentVersionManager.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using MySql.Data.MySqlClient;
+
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -54,4 +51,15 @@ app.UseExceptionHandler();
 app.UseHttpsRedirection();
 //app.UseAuthorization();
 app.MapControllers();
+
+
+//app.Run(async (HttpContext ctx) =>
+//{
+//    var headers = ctx.Request.Headers;
+//    var useragent = headers["User-Agent"];
+
+
+//    await ctx.Response.WriteAsync($"Hello World! from {useragent}");
+//});
+
 app.Run();

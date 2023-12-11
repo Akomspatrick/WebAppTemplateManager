@@ -6,11 +6,16 @@
         public static class ModelType
         {
             private const string Controller = "ModelType";
-            public const string Create = APIBase + "/" + Controller;
-            public const string Get = APIBase + "/" + Controller;
-            public const string Delete = APIBase + "/" + Controller;
-            public const string GetAll = APIBase + "/" + Controller + "/GetAllAsync";
-            public const string Update = APIBase + "/" + Controller;
+            public const string Create = $"{APIBase}/{Controller}";
+
+            public const string Delete = $"{APIBase}/{Controller}/{{ModelTypeGuid}}";
+            //public const string Get = APIBase + "/" + Controller;
+            //public const string GetAll = APIBase + "/" + Controller + "/GetAllAsync"
+            public const string GetById = $"{APIBase}/{Controller}/{{ModelTypeNameOrGuid}}";
+            // public const string GetByGuid = $"{APIBase}/{Controller}/{{ModelTypeNameOrGuid:guid}}";
+            public const string GetByModelTypeObj = $"{APIBase}/{Controller}/PI";
+            public const string Get = $"{APIBase}/{Controller}";
+            public const string Update = $"{APIBase}/{Controller}";
         }
         public static class DocumentType
         {

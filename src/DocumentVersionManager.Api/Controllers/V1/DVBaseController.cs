@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DocumentVersionManager.Api.Controllers.v1
 {
     // [Route("api/[controller]")]
-    [ApiVersion("2.0")]
+    // [ApiVersion("2.0")]
     [ApiController]
     // public class DVBaseController<T> : ControllerBase where T : DVBaseController<T>
 

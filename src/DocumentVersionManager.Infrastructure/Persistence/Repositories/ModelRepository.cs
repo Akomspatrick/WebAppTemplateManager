@@ -20,6 +20,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         {
             try
             {
+                // List<string> includes = new List<string>() {"ModelType"};
                 var result = await _ctx.Models.Include(model => model.ModelVersions).AsNoTracking().ToListAsync(cancellationToken);
                 return result;
 
