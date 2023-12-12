@@ -6,18 +6,18 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
 {
-    public class ModelTypeConfig : IEntityTypeConfiguration<ModelTypes>
+    public class ModelTypeConfig : IEntityTypeConfiguration<ModelType>
     {
-        public void Configure(EntityTypeBuilder<ModelTypes> entity)
+        public void Configure(EntityTypeBuilder<ModelType> entity)
         {
-            entity.HasKey(e => e.ModelTypesName);
-            entity.Property(e => e.ModelTypesName).IsRequired().HasMaxLength(FixedValues.modelTypesNameMaxLength);
+            entity.HasKey(e => e.ModelTypeName);
+            entity.Property(e => e.ModelTypeName).IsRequired().HasMaxLength(FixedValues.modelTypesNameMaxLength);
 
             //
 
-            entity.HasData(ModelTypes.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELTYPE"),
-                           ModelTypes.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "SECONDMODELTYPE"),
-                           ModelTypes.Create(Guid.Parse("3c69923e-a68e-4348-b06c-7007f527355d"), "THIRDMODELTYPE"));
+            entity.HasData(ModelType.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELTYPE"),
+                           ModelType.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "SECONDMODELTYPE"),
+                           ModelType.Create(Guid.Parse("3c69923e-a68e-4348-b06c-7007f527355d"), "THIRDMODELTYPE"));
         }
     }
     public class ModelConfig : IEntityTypeConfiguration<Model>
@@ -28,7 +28,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
             entity.Property(e => e.ModelName).HasMaxLength(FixedValues.ModelNameMaxLength);
 
             entity.Property(e => e.ModelName).IsRequired().HasMaxLength(FixedValues.ModelNameMaxLength);//This has specified the foreign key
-            entity.HasOne<ModelTypes>(e => e.ModelTypes).WithMany(ad => ad.Models).HasForeignKey(e => e.ModelTypesName);
+            entity.HasOne<ModelType>(e => e.ModelTypes).WithMany(ad => ad.Models).HasForeignKey(e => e.ModelTypesName);
             entity.HasData(Model.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", "FIRSTMODELTYPE"),
             //                //Model.Create(Guid.Parse("FIRSTMODELID2", "FIRSTMODELNAME2", Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
             //                // Model.Create(Guid.Parse("FIRSTMODELID3", "FIRSTMODELNAME2", Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),

@@ -1,6 +1,6 @@
 ﻿namespace DocumentVersionManager.Api
 {
-    public static class DocumentVersionAPIEndPoints
+    public static class DocumentVersionManagerAPIEndPoints
     {
         private const string APIBase = "api";
         public static class ModelType
@@ -11,7 +11,7 @@
             public const string Delete = $"{APIBase}/{Controller}/{{ModelTypeGuid}}";
             //public const string Get = APIBase + "/" + Controller;
             //public const string GetAll = APIBase + "/" + Controller + "/GetAllAsync"
-            public const string GetById = $"{APIBase}/{Controller}/{{ModelTypeNameOrGuid}}";
+            public const string GetById = $"{APIBase}/{Controller}/{{NameOrGuid}}";
             // public const string GetByGuid = $"{APIBase}/{Controller}/{{ModelTypeNameOrGuid:guid}}";
             public const string GetByModelTypeObj = $"{APIBase}/{Controller}/PI";
             public const string Get = $"{APIBase}/{Controller}";

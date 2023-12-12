@@ -27,7 +27,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             //await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             //return x;
-            var entity = ModelTypes.Create(Guid.NewGuid(), request.modelTypeCreateDTO.ModelTypesName);
+            var entity = Domain.Entities.ModelType.Create(Guid.NewGuid(), request.modelTypeCreateDTO.Value.ModelTypeName);
 
             var x = await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);

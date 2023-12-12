@@ -4,9 +4,9 @@ using DocumentVersionManager.DomainBase.Base;
 namespace DocumentVersionManager.Domain.Entities
 {
 
-    public partial class ModelTypes : BaseEntity
+    public partial class ModelType : BaseEntity
     {
-        public static ModelTypes Create(Guid modelTypesId, string modelTypesName)
+        public static ModelType Create(Guid modelTypesId, string modelTypesName)
         {
 
             if (string.IsNullOrWhiteSpace(modelTypesName))
@@ -39,7 +39,7 @@ namespace DocumentVersionManager.Domain.Entities
             //    throw new ArgumentException($"Model Type Id cannot be less than {FixedValues.modelTypesIdMinLength} characters {nameof(modelTypesId)}  but it is {modelTypesId.Length}");
             //}
 
-            return new ModelTypes() { GuidId = modelTypesId, ModelTypesName = modelTypesName };
+            return new ModelType() { GuidId = modelTypesId, ModelTypeName = modelTypesName };
 
         }
 

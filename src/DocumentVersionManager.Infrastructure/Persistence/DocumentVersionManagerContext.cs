@@ -7,7 +7,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence
     public class DocumentVersionManagerContext : DbContext
     {
         private readonly IConfiguration _configuration;
-        public DbSet<ModelTypes> ModelType { get; private set; }
+        public DbSet<ModelType> ModelType { get; private set; }
         public DbSet<Model> Models { get; private set; }
         public DbSet<ModelVersion> ModelVersion { get; private set; }
         public DbSet<Document> Document { get; private set; }

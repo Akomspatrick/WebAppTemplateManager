@@ -9,7 +9,7 @@ POST {{baseUrl}}/ModelType
 Content-Type: application/json
 
 {
-  "modelTypesName": "AXLE PADS"
+  "modelTypesName": "NEW AXLE PADS"
 }
 
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
-    public class ModelTypesRepository : GenericRepository<ModelTypes>, IModelTypesRepository
+    public class ModelTypesRepository : GenericRepository<ModelType>, IModelTypesRepository
     {
 
         DocumentVersionManagerContext _ctx;
@@ -16,7 +16,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             _ctx = ctx;
         }
 
-        public Task<Either<GeneralFailure, ModelTypes>> GetModelTypeByGuidId(Guid modelTypesId)
+        public Task<Either<GeneralFailure, ModelType>> GetModelTypeByGuidId(Guid modelTypesId)
         {
             //return await _ctx.ModelType
 
@@ -24,7 +24,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<Either<GeneralFailure, List<ModelTypes>>> GetAllWithIncludes(CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, List<ModelType>>> GetAllWithIncludes(CancellationToken cancellationToken)
         {
             try
             {

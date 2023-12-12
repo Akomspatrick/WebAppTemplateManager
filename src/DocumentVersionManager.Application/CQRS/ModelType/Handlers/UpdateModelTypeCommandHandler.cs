@@ -22,14 +22,14 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         public async Task<Either<GeneralFailure, int>> Handle(UpdateModelTypeCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException("Operation Not Allowed ");
-            var entity = ModelTypes.Create(request.modelTypeUpdateDTO.ModelTypesId, request.modelTypeUpdateDTO.modelTypesName);
+            var entity = Domain.Entities.ModelType.Create(request.modelTypeUpdateDTO.Value.ModelTypeId, request.modelTypeUpdateDTO.Value.ModelTypeName);
             return await _unitOfWork.ModelTypesRepository.UpdateAsync(entity, cancellationToken);
             //_logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
         }
 
-        private ModelTypes modify(ModelTypes x, ApplicationModelTypeUpdateDTO modelTypeUpdateDTO)
+        private Domain.Entities.ModelType modify(Domain.Entities.ModelType x, ApplicationModelTypeUpdateDTO modelTypeUpdateDTO)
         {
-            return ModelTypes.Create(x.GuidId, modelTypeUpdateDTO.modelTypesName);
+            return Domain.Entities.ModelType.Create(x.GuidId, modelTypeUpdateDTO.Value.ModelTypeName);
         }
     }
 }

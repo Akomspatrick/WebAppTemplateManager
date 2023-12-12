@@ -16,7 +16,8 @@ public static class APIServiceCollection
 {
     public static IServiceCollection AddAPIServices(this IServiceCollection services, IConfiguration configuration)
     {
-        //var applicationAssembly = typeof(APIServiceCollection).Assembly;
+        var applicationAssembly = typeof(APIServiceCollection).Assembly;
+        services.AddAutoMapper(applicationAssembly);
         services.AddExceptionHandler<GlobalExceptionHandler>();
         //services.AddExceptionHandler<GlobalExceptionHandler.GlobalExceptionHandler>();
         services.AddProblemDetails();

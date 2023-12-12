@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DocumentVersionManager.Api.Controllers.v1
 {
 
-    public class ModelController : DVBaseController<ModelController>
+    public class ModelController : TheBaseController<ModelController>
     {
         public ModelController(ILogger<ModelController> logger, ISender sender) : base(logger, sender)
         {
@@ -23,8 +23,8 @@ namespace DocumentVersionManager.Api.Controllers.v1
 
 
 
-        [HttpGet(template: DocumentVersionAPIEndPoints.Model.Get, Name = DocumentVersionAPIEndPoints.Model.Get)]
-        public async Task<IActionResult> Get([FromBody] ModelDTO request, CancellationToken cancellationToken)
+        [HttpGet(template: DocumentVersionManagerAPIEndPoints.Model.Get, Name = DocumentVersionManagerAPIEndPoints.Model.Get)]
+        public async Task<IActionResult> Get([FromBody] ModelRequestDTO request, CancellationToken cancellationToken)
         {
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
             return (await _sender.Send(new GetModelsQuery(new ApplicationModelRequestDTO(request.ModelName)), cancellationToken))
@@ -32,7 +32,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
                                 Right: result => new OkObjectResult(result));
         }
 
-        [HttpGet(template: DocumentVersionAPIEndPoints.Model.GetAll, Name = DocumentVersionAPIEndPoints.Model.GetAll)]
+        [HttpGet(template: DocumentVersionManagerAPIEndPoints.Model.GetAll, Name = DocumentVersionManagerAPIEndPoints.Model.GetAll)]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             return (await _sender.Send(new GetAllModelsQuery(), cancellationToken))
@@ -40,7 +40,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
                                 Right: result => new OkObjectResult(result));
         }
 
-        [HttpPost(template: DocumentVersionAPIEndPoints.Model.Create, Name = DocumentVersionAPIEndPoints.Model.Create)]
+        [HttpPost(template: DocumentVersionManagerAPIEndPoints.Model.Create, Name = DocumentVersionManagerAPIEndPoints.Model.Create)]
         public async Task<IActionResult> Create(ModelCreateDTO request, CancellationToken cancellationToken)
         {
             var model = new ApplicationModelCreateDTO(request.ModelId, request.ModelName, request.ModelTypesName);
@@ -50,12 +50,12 @@ namespace DocumentVersionManager.Api.Controllers.v1
                 .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                       Right: result => result.Match<IActionResult>(
                       Left: errors2 => new OkObjectResult(errors2),
-                      Right: result2 => Created($"/{DocumentVersionAPIEndPoints.ModelType.Create}/{model.ModelId}", model)));
+                      Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.Create}/{model.ModelId}", model)));
         }
 
 
 
-        [HttpDelete(template: DocumentVersionAPIEndPoints.Model.Delete, Name = DocumentVersionAPIEndPoints.Model.Delete)]
+        [HttpDelete(template: DocumentVersionManagerAPIEndPoints.Model.Delete, Name = DocumentVersionManagerAPIEndPoints.Model.Delete)]
         public async Task<IActionResult> Get([FromBody] ModelDeleteDTO request, CancellationToken cancellationToken)
         {
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
@@ -64,7 +64,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
                                 Right: result => new OkObjectResult(result));
         }
 
-        [HttpPut(template: DocumentVersionAPIEndPoints.Model.Update, Name = DocumentVersionAPIEndPoints.Model.Update)]
+        [HttpPut(template: DocumentVersionManagerAPIEndPoints.Model.Update, Name = DocumentVersionManagerAPIEndPoints.Model.Update)]
         public async Task<IActionResult> Update(ModelUpdateDTO request, CancellationToken cancellationToken)
         {
             var modelType = new ApplicationModelUpdateDTO(request.ModelId, request.ModelName, request.ModelTypesName);
@@ -74,7 +74,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
                 .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                       Right: result => result.Match<IActionResult>(
                       Left: errors2 => new OkObjectResult(errors2),
-                      Right: result2 => Created($"/{DocumentVersionAPIEndPoints.ModelType.Create}/{modelType.ModelId}", modelType)));
+                      Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.Create}/{modelType.ModelId}", modelType)));
         }
 
         private async Task<Either<GeneralFailure, int>> UpdateModelType(ApplicationModelUpdateDTO modelType, CancellationToken cancellationToken)

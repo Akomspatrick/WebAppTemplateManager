@@ -24,7 +24,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
             return (await _unitOfWork.ModelTypesRepository.GetAllWithIncludes(cancellationToken))
              .Map(task => task
-             .Select(result => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypesName, ConvertTo(result.Models))));
+             .Select(result => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypeName, ConvertTo(result.Models))));
 
         }
 

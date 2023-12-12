@@ -11,7 +11,7 @@
 
         // [ForeignKey("ModelTypesName")]
         public string ModelTypesName { get; private set; } = string.Empty;
-        public ModelTypes? ModelTypes { get; set; }
+        public ModelType? ModelTypes { get; set; }
 
 
         public ICollection<ModelVersion> ModelVersions { get; set; }
