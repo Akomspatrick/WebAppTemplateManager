@@ -9,7 +9,9 @@ namespace DocumentVersionManager.Domain.Entities
     {
 
 
-
+        private Specification()
+        {
+        }
         public static Specification Create(Guid capacitySpecificationGuid, string modelName, int modelVersionId, int capacity,
             DateTime timestamp, string username, double nominalOutput, decimal nominalOutputPercentage,
             decimal nonlinearityPercentage, int minimumDeadLoad, double vMin, int nMax, int safeLoad, int ultimateLoad,

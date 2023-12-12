@@ -61,17 +61,17 @@ namespace DocumentVersionManager.Api.Controllers.v1
         }
 
 
-        [ProducesResponseType(typeof(IEnumerable<ModelTypeResponseDTO>), StatusCodes.Status200OK)]
+        //[ProducesResponseType(typeof(IEnumerable<ModelTypeResponseDTO>), StatusCodes.Status200OK)]
 
 
-        [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.Get, Name = DocumentVersionManagerAPIEndPoints.ModelType.Get)]
-        public async Task<IActionResult> Getxxxx(CancellationToken cancellationToken)
-        {
-            return (await _sender.Send(new GetAllModelTypeQuery(), cancellationToken))
-            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
-                                Right: result => new OkObjectResult(result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertToModelResponse(x.Models)))));
+        //[HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.Get, Name = DocumentVersionManagerAPIEndPoints.ModelType.Get)]
+        //public async Task<IActionResult> Getxxxx(CancellationToken cancellationToken)
+        //{
+        //    return (await _sender.Send(new GetAllModelTypeQuery(), cancellationToken))
+        //    .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+        //                        Right: result => new OkObjectResult(result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertToModelResponse(x.Models)))));
 
-        }
+        //}
 
 
         [ProducesResponseType(typeof(IEnumerable<ModelTypeResponseDTO>), StatusCodes.Status200OK)]

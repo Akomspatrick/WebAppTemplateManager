@@ -9,7 +9,7 @@ POST {{baseUrl}}/ModelType
 Content-Type: application/json
 
 {
-  "modelTypesName": "NEW AXLE PADS"
+  "modelTypeName": "NEW AXLE PADS"
 }
 
 
@@ -23,7 +23,7 @@ GET {{baseUrl}}/ModelType/FIRSTMODELTYPE
 
 ###
 //GET SINGLE  MODELTYPE QUERY 
-GET {{baseUrl}}/ModelType/b27c2c19-522b-49d1-83bf-e80d4dde8c63
+GET {{baseUrl}}/ModelType/58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b
 
 ###
 //GET SINGLE  MODELTYPE QUERY 
@@ -32,7 +32,7 @@ GET {{baseUrl}}/ModelType/PI
 Content-Type: application/json
 
 {
-  "modelTypesName": "FIRSTMODELTYPE"
+  "modelTypeName": "FIRSTMODELTYPE"
 }
 
 
@@ -46,7 +46,7 @@ GET http://localhost:5007/api/ModelType
 ###
 // delete a modeltype
 
-DELETE {{baseUrl}}/ModelType/60f62f87-8cec-400e-a7bb-3988251da735
+DELETE {{baseUrl}}/ModelType/3c69923e-a68e-4348-b06c-7007f527355d
 ###
 PUT {{baseUrl}}/ModelType
 Content-Type: application/json

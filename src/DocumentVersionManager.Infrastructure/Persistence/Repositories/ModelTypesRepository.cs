@@ -16,25 +16,14 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             _ctx = ctx;
         }
 
-        public Task<Either<GeneralFailure, ModelType>> GetModelTypeByGuidId(Guid modelTypesId)
-        {
-            //return await _ctx.ModelType
 
-            //.GetMatch(s => (s.ModelName == request.modelRequestDTO.ModelName), cancellationToken))
-            throw new NotImplementedException();
-        }
 
         public async Task<Either<GeneralFailure, List<ModelType>>> GetAllWithIncludes(CancellationToken cancellationToken)
         {
             try
             {
-
-                var result = await _ctx.ModelType.Include(model => model.Models).AsNoTracking().ToListAsync(cancellationToken);
-
-
+                var result = await _ctx.ModelTypes.Include(model => model.Models).AsNoTracking().ToListAsync(cancellationToken);
                 return result;
-
-
             }
             catch (NotSupportedException ex)
             {

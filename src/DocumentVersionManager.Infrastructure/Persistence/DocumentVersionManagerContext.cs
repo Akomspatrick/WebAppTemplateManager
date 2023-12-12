@@ -7,21 +7,19 @@ namespace DocumentVersionManager.Infrastructure.Persistence
     public class DocumentVersionManagerContext : DbContext
     {
         private readonly IConfiguration _configuration;
-        public DbSet<ModelType> ModelType { get; private set; }
+        public DbSet<ModelType> ModelTypes { get; private set; }
         public DbSet<Model> Models { get; private set; }
-        public DbSet<ModelVersion> ModelVersion { get; private set; }
-        public DbSet<Document> Document { get; private set; }
-        public DbSet<DocumentType> DocumentType { get; private set; }
-        public DbSet<DocumentDocumentType> DocumentDocumentType { get; private set; }
-        public DbSet<Specification> Specification { get; private set; }
-        public DbSet<CapacityTestPoint> CapacityTestPoint { get; private set; }
-        public DbSet<ShellMaterial> ShellMaterial { get; private set; }
-        public DbSet<Product> Product { get; private set; }
+        public DbSet<ModelVersion> ModelVersions { get; private set; }
+        public DbSet<Document> Documents { get; private set; }
+        public DbSet<DocumentType> DocumentTypes { get; private set; }
+        public DbSet<DocumentDocumentType> DocumentDocumentTypes { get; private set; }
+        public DbSet<Specification> Specifications { get; private set; }
+        public DbSet<CapacityTestPoint> CapacityTestPoints { get; private set; }
+        public DbSet<ShellMaterial> ShellMaterials { get; private set; }
+        public DbSet<Product> Products { get; private set; }
+        public DbSet<DocumentBasePath> DocumentBasePaths { get; private set; }
+        public DbSet<TestFlowType> TestFlowTypes { get; private set; }
 
-
-
-        //public DbSet<CapacityDocument> CapacityDocument { get; private set; }
-        //public DbSet<CapacitySpecification> CapacitySpecification { get; private set; }
 
         public DocumentVersionManagerContext(DbContextOptions<DocumentVersionManagerContext> options, IConfiguration configuration) : base(options)
         {
@@ -37,8 +35,6 @@ namespace DocumentVersionManager.Infrastructure.Persistence
             optionsBuilder.UseMySql(conn!, new MySqlServerVersion(new Version(8, 0)));
 
 
-
-
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,27 +42,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence
             // instead of calling the configure method of each entity configuration file we can use the methos below
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentVersionManagerContext).Assembly);
 
-            //modelBuilder.Entity<Model>(entity =>
-            //{
-            //    entity.HasKey(e => e.ModelName);
-            //    entity.Property(e => e.ModelTypeName).IsRequired();
-            //});
 
-            //modelBuilder.Entity<CapacityDocument>(entity =>
-            //{
-            //    entity.HasKey(e => e.Capacity);
-            //    // entity.Property(e => e.).IsRequired();
-            // //   entity.HasOne(d => d.ModelName);
-            //     // .WithMany(p => p.Books);
-            //});
-
-            //modelBuilder.Entity<CapacitySpecification>(entity =>
-            //{
-            //    entity.HasKey(e => e.Capacity);
-            //   // entity.Property(e => e.).IsRequired();
-            //  //  entity.HasOne(d => d.ModelName)
-            //     // .WithMany(p => p.Books);
-            //});
         }
     }
 }

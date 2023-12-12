@@ -129,7 +129,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             }
         }
 
-        public async Task<Either<GeneralFailure, Task<IReadOnlyList<T>>>> GetAllAsync(Expression<Func<T, bool>> expression = null, List<string> includes = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, CancellationToken cancellationToken = default)
+        public async Task<Either<GeneralFailure, Task<IReadOnlyList<T>>>> GetAllAsyncUsingReadOnly(Expression<Func<T, bool>> expression = null, List<string> includes = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -163,12 +163,9 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             }
 
 
-
-
-
-
-
         }
+
+
 
         public async Task<Either<GeneralFailure, T>> GetMatch(Expression<Func<T, bool>> expression, List<string> includes = null, CancellationToken cancellationToken = default)
         {
@@ -198,5 +195,42 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         }
 
 
+
+        async Task<Either<GeneralFailure, List<T>>> IGenericRepository<T>.GetAllAsync(Expression<Func<T, bool>> expression, List<string> includes, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy, CancellationToken cancellationToken)
+        {
+            try
+            {
+                IQueryable<T> query = _ctx.Set<T>();
+                if (expression != null)
+                {
+                    query = query.Where(expression);
+                }
+                if (includes != null)
+                {
+                    foreach (var includeProperty in includes)
+                    {
+                        query = query.Include(includeProperty);
+                    }
+                }
+                if (orderBy != null)
+                {
+                    // return Task.FromResult(orderBy(query).ToListAsync(cancellationToken));
+                    query = orderBy(query);
+                }
+                var result = await query.AsNoTracking().ToListAsync(cancellationToken);
+
+                return result;// != null ? entity : GeneralFailure.DataNotFoundInRepository;
+
+            }
+
+            catch (Exception ex)
+            {
+
+                //Log this error properly
+                return GeneralFailures.ErrorRetrievingListDataFromRepository(ex.ToString());
+            }
+
+
+        }
     }
 }

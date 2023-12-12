@@ -10,6 +10,7 @@ namespace DocumentVersionManager.Domain.Entities
 {
     public partial class DocumentType : BaseEntity
     {
+        private DocumentType() { }
         public static DocumentType Create(Guid documentGuid, string documentTypeName)
         {
 

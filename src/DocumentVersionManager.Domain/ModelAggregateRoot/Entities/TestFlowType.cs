@@ -1,15 +1,25 @@
 using DocumentVersionManager.DomainBase.Base;
+
 namespace DocumentVersionManager.Domain.Entities
 {
     public partial class TestFlowType : BaseEntity
     {
-        public int TestingModeId { get; init; }
-        public string TestingMode { get; init; } = string.Empty;
-        public Guid GuidId { get; init; }
 
-        public static Product Create()
+
+        private TestFlowType()
         {
-            throw new Exception("Please implemenete later");
+        }
+
+        public static TestFlowType Create(Guid guidId, int testingModeId, string testingMode, string description)
+        {
+            return new TestFlowType()
+            {
+                TestingModeId = testingModeId,
+                TestingMode = testingMode,
+                GuidId = guidId,
+                Description = description
+            };
         }
     }
+
 }

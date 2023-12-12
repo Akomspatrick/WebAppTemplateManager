@@ -8,7 +8,7 @@
             private const string Controller = "ModelType";
             public const string Create = $"{APIBase}/{Controller}";
 
-            public const string Delete = $"{APIBase}/{Controller}/{{ModelTypeGuid}}";
+            public const string Delete = $"{APIBase}/{Controller}/{{request}}";
             //public const string Get = APIBase + "/" + Controller;
             //public const string GetAll = APIBase + "/" + Controller + "/GetAllAsync"
             public const string GetById = $"{APIBase}/{Controller}/{{NameOrGuid}}";

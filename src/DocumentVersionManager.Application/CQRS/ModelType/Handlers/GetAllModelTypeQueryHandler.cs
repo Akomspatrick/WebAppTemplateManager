@@ -22,9 +22,19 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         async Task<Either<GeneralFailure, IEnumerable<ApplicationModelTypeResponseDTO>>> IRequestHandler<GetAllModelTypeQuery, Either<GeneralFailure, IEnumerable<ApplicationModelTypeResponseDTO>>>.Handle(GetAllModelTypeQuery request, CancellationToken cancellationToken)
         {
 
-            return (await _unitOfWork.ModelTypesRepository.GetAllWithIncludes(cancellationToken))
-             .Map(task => task
-             .Select(result => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypeName, ConvertTo(result.Models))));
+            //return (await _unitOfWork.ModelTypesRepository.GetAllWithIncludes(cancellationToken))
+            // .Map(task => task
+            // .Select(result => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypeName, ConvertTo(result.Models))));
+
+
+            return (await _unitOfWork.ModelTypesRepository
+                  .GetAllAsync(s => true, new List<string>() { "Models" }, null, cancellationToken))
+                  .Map(task => task
+                 .Select(result => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypeName, ConvertTo(result.Models))));
+
+
+
+
 
         }
 

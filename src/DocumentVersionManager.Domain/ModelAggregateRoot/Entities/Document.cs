@@ -6,7 +6,9 @@ namespace DocumentVersionManager.Domain.Entities
     public partial class Document : BaseEntity
     {
 
-
+        private Document()
+        {
+        }
         public static Document Create(Guid documentGuid, string documentName, int modelVersionId, string modelName, string contentPDFPath, string changeOrderPDFPath, string documentDescription, DateTime timestamp)
         {
             if ((modelVersionId < 0))

@@ -5,6 +5,7 @@ using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
 using LanguageExt;
 using MediatR;
+using System.Linq.Expressions;
 
 namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 {
@@ -25,9 +26,22 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
             //return (await _unitOfWork.ModelRepository.GetAllAsync(null, includes,null,  cancellationToken))
             // .Map(task => task.Result
             // .Select(result => new ApplicationModelResponseDTO(result.GuidId, result.ModelName,result.ModelTypesName)));
-            return (await _unitOfWork.ModelRepository.GetAllWithIncludes(cancellationToken))
-          .Map(task => task
-          .Select(result => new ApplicationModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypesName)));
+
+            // 
+
+            //  return (await _unitOfWork.ModelRepository.GetAllWithIncludes(cancellationToken))
+            //.Map(task => task
+            // .Select(result => new ApplicationModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypesName)));
+            // public async Task<Either<GeneralFailure, Task<IReadOnlyList<T>>>> GetAllAsync(Expression<Func<T, bool>> expression = null, List<string> includes = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, CancellationToken cancellationToken = default)
+
+            return (await _unitOfWork.ModelRepository
+                    .GetAllAsync(s => true, new List<string>() { "ModelVersions" }, null, cancellationToken))
+                    .Map(task => task.Select(result => new ApplicationModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypesName)));
+            //.Select(result => new ApplicationModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypesName)));
+
+            //.Map((result) => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypeName, convertToModelDto(result.Models)));
+
+
         }
     }
 

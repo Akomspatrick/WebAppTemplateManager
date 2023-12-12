@@ -38,7 +38,20 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
         }
     }
 
+    public class TestFlowTypePathConfig : IEntityTypeConfiguration<TestFlowType>
+    {
+        public void Configure(EntityTypeBuilder<TestFlowType> entity)
+        {
+            entity.HasKey(e => new { e.TestingModeId });
+            entity.Property(e => e.TestingMode).IsRequired();
+            entity.HasData(TestFlowType.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), 1, "AUTOMATIC", "FLOW TYPES FOR LOADCELL"),
+                TestFlowType.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), 2, "MANUAL", "FLOW TYPES FOR TESTLINKS"),
+                TestFlowType.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), 3, "SCALES/PAD", "FLOW TYPES FOR SCALES/PAD"));
 
+
+
+        }
+    }
     public class DocumentBasePathConfig : IEntityTypeConfiguration<DocumentBasePath>
     {
         public void Configure(EntityTypeBuilder<DocumentBasePath> entity)
@@ -109,7 +122,8 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
     {
         public void Configure(EntityTypeBuilder<Specification> entity)
         {
-            entity.HasKey(e => new { e.Capacity, e.ModelName, e.ModelVersionId });
+            //entity.HasKey(e => new { e.Capacity, e.ModelName, e.ModelVersionId });
+            entity.HasKey(e => new { e.ModelName, e.ModelVersionId });
             entity.Property(e => e.Capacity).IsRequired();
 
 
@@ -200,7 +214,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
 
 
             entity.HasOne<Specification>(e => e.Specification).WithMany(e => e.CapacityTestPoints)
-                .HasForeignKey(e => new { e.Capacity, e.ModelName, e.ModelVersionId });
+                .HasForeignKey(e => new { e.ModelName, e.ModelVersionId });
 
             entity.HasData(CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 100, 1, 1),
                  // CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 101, 9, 1),

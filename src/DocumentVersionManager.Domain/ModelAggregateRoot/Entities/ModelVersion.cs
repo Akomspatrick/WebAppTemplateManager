@@ -5,7 +5,9 @@ namespace DocumentVersionManager.Domain.Entities
 {
     public partial class ModelVersion : BaseEntity
     {
-
+        private ModelVersion()
+        {
+        }
         public static ModelVersion Create(Guid modelVersionGUID, string modelVersionName, int modelVersionId, string versionDescription, string modelName, string username, DateTime timestamp)
         {
             if ((modelVersionId < 0))

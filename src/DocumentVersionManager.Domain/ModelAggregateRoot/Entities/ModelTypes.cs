@@ -6,6 +6,9 @@ namespace DocumentVersionManager.Domain.Entities
 
     public partial class ModelType : BaseEntity
     {
+        private ModelType()
+        {
+        }
         public static ModelType Create(Guid modelTypesId, string modelTypesName)
         {
 
