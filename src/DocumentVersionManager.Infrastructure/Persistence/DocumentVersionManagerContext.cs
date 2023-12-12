@@ -33,7 +33,12 @@ namespace DocumentVersionManager.Infrastructure.Persistence
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var conn = _configuration.GetConnectionString(Domain.Constants.FixedValues.DBConnectionStringName);
-            optionsBuilder.UseMySQL(conn!);
+
+            optionsBuilder.UseMySql(conn!, new MySqlServerVersion(new Version(8, 0)));
+
+
+
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

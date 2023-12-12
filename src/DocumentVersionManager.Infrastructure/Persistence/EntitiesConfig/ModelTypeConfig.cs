@@ -1,8 +1,9 @@
 ﻿using DocumentVersionManager.Domain.Constants;
 using DocumentVersionManager.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MySql.EntityFrameworkCore.Metadata;
+
 
 namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
 {
@@ -195,7 +196,8 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
 
             entity.HasKey(e => new { e.TestId });
             entity.Property(e => e.TestId)
-             .HasAnnotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn);
+             .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
 
             entity.HasOne<Specification>(e => e.Specification).WithMany(e => e.CapacityTestPoints)
                 .HasForeignKey(e => new { e.Capacity, e.ModelName, e.ModelVersionId });

@@ -15,8 +15,6 @@ namespace DocumentVersionManager.Domain.Interfaces
         IModelTypeRepository ModelTypeRepository { get; }
         IModelVersionRepository ModelVersionRepository { get; }
         IProductRepository ProductRepository { get; }
-        IRevisionRepository RevisionRepository { get; }
-        IRevisionCapacityIntervalRepository RevisionCapacityIntervalRepository { get; }
         IShellMaterialRepository ShellMaterialRepository { get; }
         ISpecificationRepository SpecificationRepository { get; }
         ITestFlowTypeRepository TestFlowTypeRepository { get; }

@@ -1,17 +1,9 @@
 ﻿using DocumentVersionManager.Application.Contracts.Logging;
 using DocumentVersionManager.Domain.Interfaces;
 using DocumentVersionManager.Infrastructure.Logging;
-using DocumentVersionManager.Infrastructure.Persistence;
 using DocumentVersionManager.Infrastructure.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Org.BouncyCastle.Asn1.X509.Qualified;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Infrastructure
 {

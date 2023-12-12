@@ -1,6 +1,6 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using MySql.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -9,75 +9,84 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace DocumentVersionManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class ddd : Migration
+    public partial class ssss : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "DocumentBasePath",
                 columns: table => new
                 {
-                    DocumentBasePathId = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    Path = table.Column<string>(type: "longtext", nullable: false),
-                    Description = table.Column<string>(type: "longtext", nullable: false),
-                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    DocumentBasePathId = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Path = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Description = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DocumentBasePath", x => x.DocumentBasePathId);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "DocumentType",
                 columns: table => new
                 {
-                    DocumentTypeName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    DocumentTypeName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DocumentType", x => x.DocumentTypeName);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "ModelType",
                 columns: table => new
                 {
-                    ModelTypesName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    ModelTypeName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ModelType", x => x.ModelTypesName);
+                    table.PrimaryKey("PK_ModelType", x => x.ModelTypeName);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "ShellMaterial",
                 columns: table => new
                 {
-                    ShellMaterialName = table.Column<string>(type: "varchar(255)", nullable: false),
-                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    ShellMaterialName = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Alloy = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ShellMaterial", x => x.ShellMaterialName);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Models",
                 columns: table => new
                 {
-                    ModelName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    ModelTypesName = table.Column<string>(type: "varchar(128)", nullable: false),
-                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    ModelName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ModelTypesName = table.Column<string>(type: "varchar(128)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
@@ -86,23 +95,28 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                         name: "FK_Models_ModelType_ModelTypesName",
                         column: x => x.ModelTypesName,
                         principalTable: "ModelType",
-                        principalColumn: "ModelTypesName",
+                        principalColumn: "ModelTypeName",
                         onDelete: ReferentialAction.Cascade);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "ModelVersion",
                 columns: table => new
                 {
                     ModelVersionId = table.Column<int>(type: "int", nullable: false),
-                    ModelName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    VersionDescription = table.Column<string>(type: "longtext", nullable: false),
-                    ModelVersionName = table.Column<string>(type: "longtext", nullable: false),
-                    TestingModeName = table.Column<string>(type: "longtext", nullable: false),
+                    ModelName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    VersionDescription = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ModelVersionName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TestingModeName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Timestamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UserName = table.Column<string>(type: "longtext", nullable: false),
-                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    UserName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
@@ -114,21 +128,27 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                         principalColumn: "ModelName",
                         onDelete: ReferentialAction.Cascade);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Document",
                 columns: table => new
                 {
-                    DocumentName = table.Column<string>(type: "varchar(255)", nullable: false),
-                    ModelName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
+                    DocumentName = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ModelName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     ModelVersionId = table.Column<int>(type: "int", nullable: false),
-                    ContentPDFPath = table.Column<string>(type: "longtext", nullable: false),
-                    ChangeOrderPDFPath = table.Column<string>(type: "longtext", nullable: false),
-                    DocumentBasePathId = table.Column<string>(type: "longtext", nullable: false),
-                    DocumentDescription = table.Column<string>(type: "longtext", nullable: false),
+                    ContentPDFPath = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ChangeOrderPDFPath = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DocumentBasePathId = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DocumentDescription = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Timestamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
@@ -140,31 +160,42 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                         principalColumns: new[] { "ModelName", "ModelVersionId" },
                         onDelete: ReferentialAction.Cascade);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Product",
                 columns: table => new
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ModelVersionId = table.Column<int>(type: "int", nullable: false),
-                    ModelName = table.Column<string>(type: "varchar(128)", nullable: false),
+                    ModelName = table.Column<string>(type: "varchar(128)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     Timestamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Stage = table.Column<string>(type: "longtext", nullable: false),
-                    SubStage = table.Column<string>(type: "longtext", nullable: false),
-                    InvoiceId = table.Column<string>(type: "longtext", nullable: false),
-                    SalesOrderId = table.Column<string>(type: "longtext", nullable: false),
+                    Stage = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SubStage = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    InvoiceId = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SalesOrderId = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     CableLength = table.Column<int>(type: "int", nullable: false),
                     InspectionResult = table.Column<int>(type: "int", nullable: false),
-                    DefaultTestingMode = table.Column<string>(type: "longtext", nullable: false),
-                    UsedCalibrationMode = table.Column<string>(type: "longtext", nullable: false),
-                    ThermexPurcharseOrderNo = table.Column<string>(type: "longtext", nullable: false),
-                    MachiningPurcharseOrderNo = table.Column<string>(type: "longtext", nullable: false),
-                    SteelPurcharseOrderNo = table.Column<string>(type: "longtext", nullable: false),
-                    BatcNo = table.Column<string>(type: "longtext", nullable: false),
-                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    DefaultTestingMode = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UsedCalibrationMode = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ThermexPurcharseOrderNo = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    MachiningPurcharseOrderNo = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SteelPurcharseOrderNo = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BatcNo = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
@@ -176,39 +207,48 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                         principalColumns: new[] { "ModelName", "ModelVersionId" },
                         onDelete: ReferentialAction.Cascade);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Specification",
                 columns: table => new
                 {
-                    ModelName = table.Column<string>(type: "varchar(128)", nullable: false),
+                    ModelName = table.Column<string>(type: "varchar(128)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     ModelVersionId = table.Column<int>(type: "int", nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     Timestamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UserName = table.Column<string>(type: "longtext", nullable: false),
+                    UserName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     NominalOutput = table.Column<double>(type: "double", nullable: false),
-                    NominalOutputPercentage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    NonlinearityPercentage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    NominalOutputPercentage = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    NonlinearityPercentage = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     MinimumDeadLoad = table.Column<int>(type: "int", nullable: false),
                     vMin = table.Column<double>(type: "double", nullable: false),
                     nMax = table.Column<int>(type: "int", nullable: false),
                     SafeLoad = table.Column<int>(type: "int", nullable: false),
                     UltimateLoad = table.Column<int>(type: "int", nullable: false),
-                    ShellMaterialName = table.Column<string>(type: "varchar(255)", nullable: false),
+                    ShellMaterialName = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Alloy = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     DefaultCableLength = table.Column<int>(type: "int", nullable: false),
                     NumberOfGauges = table.Column<int>(type: "int", nullable: false),
                     Resistance = table.Column<int>(type: "int", nullable: false),
-                    CCNumber = table.Column<string>(type: "longtext", nullable: false),
-                    Class = table.Column<string>(type: "longtext", nullable: false),
-                    Application = table.Column<string>(type: "longtext", nullable: false),
+                    CCNumber = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Class = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Application = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TemperingHardnessLow = table.Column<int>(type: "int", nullable: false),
                     TemperingHardnessHigh = table.Column<int>(type: "int", nullable: false),
-                    NTEPCertificationId = table.Column<string>(type: "longtext", nullable: false),
+                    NTEPCertificationId = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     NTEPCertificationTimestamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    OIMLCertificationId = table.Column<string>(type: "longtext", nullable: false),
+                    OIMLCertificationId = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     OIMLCertificationTimestamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
@@ -226,17 +266,20 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                         principalColumn: "ShellMaterialName",
                         onDelete: ReferentialAction.Cascade);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "DocumentDocumentType",
                 columns: table => new
                 {
-                    DocumentName = table.Column<string>(type: "varchar(255)", nullable: false),
-                    ModelName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
+                    DocumentName = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ModelName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     ModelVersionId = table.Column<int>(type: "int", nullable: false),
-                    DocumentTypeName = table.Column<string>(type: "varchar(128)", nullable: false),
-                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    DocumentTypeName = table.Column<string>(type: "varchar(128)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
@@ -254,19 +297,20 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                         principalColumns: new[] { "DocumentName", "ModelName", "ModelVersionId" },
                         onDelete: ReferentialAction.Cascade);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "CapacityTestPoint",
                 columns: table => new
                 {
                     TestId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    ModelName = table.Column<string>(type: "varchar(128)", nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ModelName = table.Column<string>(type: "varchar(128)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     ModelVersionId = table.Column<int>(type: "int", nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     TestPoint = table.Column<int>(type: "int", nullable: false),
-                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    GuidId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
@@ -278,7 +322,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                         principalColumns: new[] { "Capacity", "ModelName", "ModelVersionId" },
                         onDelete: ReferentialAction.Cascade);
                 })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.InsertData(
                 table: "DocumentType",
@@ -294,7 +338,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "ModelType",
-                columns: new[] { "ModelTypesName", "GuidId" },
+                columns: new[] { "ModelTypeName", "GuidId" },
                 values: new object[,]
                 {
                     { "FIRSTMODELTYPE", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
@@ -304,13 +348,13 @@ namespace DocumentVersionManager.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "ShellMaterial",
-                columns: new[] { "ShellMaterialName", "GuidId" },
+                columns: new[] { "ShellMaterialName", "Alloy", "GuidId" },
                 values: new object[,]
                 {
-                    { "ShellMaterial1", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
-                    { "ShellMaterial2", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
-                    { "ShellMaterial3", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
-                    { "ShellMaterial4", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") }
+                    { "ShellMaterial1", true, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
+                    { "ShellMaterial2", true, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
+                    { "ShellMaterial3", true, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") },
+                    { "ShellMaterial4", true, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63") }
                 });
 
             migrationBuilder.InsertData(
@@ -328,9 +372,9 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 columns: new[] { "ModelName", "ModelVersionId", "GuidId", "ModelVersionName", "TestingModeName", "Timestamp", "UserName", "VersionDescription" },
                 values: new object[,]
                 {
-                    { "FIRSTMODELNAME", 1, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRST_VERSION_FIRSTMODEL_NAME", "", new DateTime(2023, 12, 4, 20, 33, 48, 97, DateTimeKind.Utc).AddTicks(5002), "OLADEJI", "SPECIAL DESIGN" },
-                    { "FIRSTMODELNAME", 2, new Guid("7808711f-544a-423d-8d99-f00c31e35be5"), "SECOND_VERSION_FIRSTMODELNAME", "", new DateTime(2023, 12, 4, 20, 33, 48, 97, DateTimeKind.Utc).AddTicks(5013), "OLADEJI", "AUTO DESIGN TO COMBAT SPLIILING" },
-                    { "SECONDMODELNAME", 1, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRST_VERSION_SECONDMODELNAME", "", new DateTime(2023, 12, 4, 20, 33, 48, 97, DateTimeKind.Utc).AddTicks(5014), "OLADEJI", "INITIAL DESIGN" }
+                    { "FIRSTMODELNAME", 1, new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRST_VERSION_FIRSTMODEL_NAME", "", new DateTime(2023, 12, 12, 19, 54, 11, 97, DateTimeKind.Utc).AddTicks(342), "OLADEJI", "SPECIAL DESIGN" },
+                    { "FIRSTMODELNAME", 2, new Guid("7808711f-544a-423d-8d99-f00c31e35be5"), "SECOND_VERSION_FIRSTMODELNAME", "", new DateTime(2023, 12, 12, 19, 54, 11, 97, DateTimeKind.Utc).AddTicks(355), "OLADEJI", "AUTO DESIGN TO COMBAT SPLIILING" },
+                    { "SECONDMODELNAME", 1, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRST_VERSION_SECONDMODELNAME", "", new DateTime(2023, 12, 12, 19, 54, 11, 97, DateTimeKind.Utc).AddTicks(358), "OLADEJI", "INITIAL DESIGN" }
                 });
 
             migrationBuilder.InsertData(
@@ -338,20 +382,20 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                 columns: new[] { "DocumentName", "ModelName", "ModelVersionId", "ChangeOrderPDFPath", "ContentPDFPath", "DocumentBasePathId", "DocumentDescription", "GuidId", "Timestamp" },
                 values: new object[,]
                 {
-                    { "FIRSTMODELNAME ver1 DOc", "FIRSTMODELNAME", 1, "CHANGE ORDER PATH", "CONTENT PDF PATH", "001", "SIMPLE DESCRITION OF DOCUMENT", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), new DateTime(2023, 12, 4, 20, 33, 48, 94, DateTimeKind.Utc).AddTicks(840) },
-                    { "FIRSTMODELNAME ver1 DOc A", "FIRSTMODELNAME", 1, "CHANGE ORDER PATH", "CONTENT PDF PATH", "001", "SIMPLE DESCRITION OF DOCUMENT", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), new DateTime(2023, 12, 4, 20, 33, 48, 94, DateTimeKind.Utc).AddTicks(852) },
-                    { "FIRSTMODELNAME ver1 DOc B", "FIRSTMODELNAME", 1, "CHANGE ORDER PATH", "CONTENT PDF PATH", "001", "SIMPLE DESCRITION OF DOCUMENT", new Guid("7808711f-544a-423d-8d99-f00c31e35be5"), new DateTime(2023, 12, 4, 20, 33, 48, 94, DateTimeKind.Utc).AddTicks(855) },
-                    { "FIRSTMODELNAME ver2 DOc A", "FIRSTMODELNAME", 2, "CHANGE ORDER PATH", "CONTENT PDF PATH", "001", "SIMPLE DESCRITION OF DOCUMENT", new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), new DateTime(2023, 12, 4, 20, 33, 48, 94, DateTimeKind.Utc).AddTicks(873) }
+                    { "FIRSTMODELNAME ver1 DOc", "FIRSTMODELNAME", 1, "CHANGE ORDER PATH", "CONTENT PDF PATH", "001", "SIMPLE DESCRITION OF DOCUMENT", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), new DateTime(2023, 12, 12, 19, 54, 11, 92, DateTimeKind.Utc).AddTicks(4475) },
+                    { "FIRSTMODELNAME ver1 DOc A", "FIRSTMODELNAME", 1, "CHANGE ORDER PATH", "CONTENT PDF PATH", "001", "SIMPLE DESCRITION OF DOCUMENT", new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), new DateTime(2023, 12, 12, 19, 54, 11, 92, DateTimeKind.Utc).AddTicks(4488) },
+                    { "FIRSTMODELNAME ver1 DOc B", "FIRSTMODELNAME", 1, "CHANGE ORDER PATH", "CONTENT PDF PATH", "001", "SIMPLE DESCRITION OF DOCUMENT", new Guid("7808711f-544a-423d-8d99-f00c31e35be5"), new DateTime(2023, 12, 12, 19, 54, 11, 92, DateTimeKind.Utc).AddTicks(4496) },
+                    { "FIRSTMODELNAME ver2 DOc A", "FIRSTMODELNAME", 2, "CHANGE ORDER PATH", "CONTENT PDF PATH", "001", "SIMPLE DESCRITION OF DOCUMENT", new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), new DateTime(2023, 12, 12, 19, 54, 11, 92, DateTimeKind.Utc).AddTicks(4498) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Specification",
-                columns: new[] { "Capacity", "ModelName", "ModelVersionId", "Application", "CCNumber", "Class", "DefaultCableLength", "GuidId", "MinimumDeadLoad", "NTEPCertificationId", "NTEPCertificationTimestamp", "NominalOutput", "NominalOutputPercentage", "NonlinearityPercentage", "NumberOfGauges", "OIMLCertificationId", "OIMLCertificationTimestamp", "Resistance", "SafeLoad", "ShellMaterialName", "TemperingHardnessHigh", "TemperingHardnessLow", "Timestamp", "UltimateLoad", "UserName", "nMax", "vMin" },
+                columns: new[] { "Capacity", "ModelName", "ModelVersionId", "Alloy", "Application", "CCNumber", "Class", "DefaultCableLength", "GuidId", "MinimumDeadLoad", "NTEPCertificationId", "NTEPCertificationTimestamp", "NominalOutput", "NominalOutputPercentage", "NonlinearityPercentage", "NumberOfGauges", "OIMLCertificationId", "OIMLCertificationTimestamp", "Resistance", "SafeLoad", "ShellMaterialName", "TemperingHardnessHigh", "TemperingHardnessLow", "Timestamp", "UltimateLoad", "UserName", "nMax", "vMin" },
                 values: new object[,]
                 {
-                    { 100, "FIRSTMODELNAME", 1, "APPLICATION", "CCNUMBER", "CLASS", 20, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), 1, "NTEPCERTIFICATIONID", new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1618), 1.0, 1m, 1m, 1, "OIMLCERTIFICATIONID1", new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1618), 1, 1, "SHELLMATERIAL1", 1, 1, new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1616), 1, "OLADEJI", 1, 1.0 },
-                    { 100, "FIRSTMODELNAME", 2, "APPLICATION", "CCNUMBER", "CLASS", 20, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), 1, "NTEPCERTIFICATIONID", new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1630), 1.0, 1m, 1m, 1, "OIMLCERTIFICATIONID2", new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1630), 1, 1, "SHELLMATERIAL2", 1, 1, new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1630), 1, "OLADEJI", 1, 1.0 },
-                    { 100, "SECONDMODELNAME", 1, "APPLICATION", "CCNUMBER", "CLASS", 20, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), 1, "NTEPCERTIFICATIONID", new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1634), 1.0, 1m, 1m, 1, "OIMLCERTIFICATIONID3", new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1635), 1, 1, "SHELLMATERIAL3", 1, 1, new DateTime(2023, 12, 4, 20, 33, 48, 99, DateTimeKind.Utc).AddTicks(1634), 1, "OLADEJI", 1, 1.0 }
+                    { 100, "FIRSTMODELNAME", 1, true, "APPLICATION", "CCNUMBER", "CLASS", 20, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), 1, "NTEPCERTIFICATIONID", new DateTime(2023, 12, 12, 19, 54, 11, 99, DateTimeKind.Utc).AddTicks(5863), 1.0, 1m, 1m, 1, "OIMLCERTIFICATIONID1", new DateTime(2023, 12, 12, 19, 54, 11, 99, DateTimeKind.Utc).AddTicks(5864), 1, 1, "SHELLMATERIAL1", 1, 1, new DateTime(2023, 12, 12, 19, 54, 11, 99, DateTimeKind.Utc).AddTicks(5861), 1, "OLADEJI", 1, 1.0 },
+                    { 100, "FIRSTMODELNAME", 2, true, "APPLICATION", "CCNUMBER", "CLASS", 20, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), 1, "NTEPCERTIFICATIONID", new DateTime(2023, 12, 12, 19, 54, 11, 99, DateTimeKind.Utc).AddTicks(5881), 1.0, 1m, 1m, 1, "OIMLCERTIFICATIONID2", new DateTime(2023, 12, 12, 19, 54, 11, 99, DateTimeKind.Utc).AddTicks(5881), 1, 1, "SHELLMATERIAL2", 1, 1, new DateTime(2023, 12, 12, 19, 54, 11, 99, DateTimeKind.Utc).AddTicks(5880), 1, "OLADEJI", 1, 1.0 },
+                    { 100, "SECONDMODELNAME", 1, true, "APPLICATION", "CCNUMBER", "CLASS", 20, new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), 1, "NTEPCERTIFICATIONID", new DateTime(2023, 12, 12, 19, 54, 11, 99, DateTimeKind.Utc).AddTicks(5886), 1.0, 1m, 1m, 1, "OIMLCERTIFICATIONID3", new DateTime(2023, 12, 12, 19, 54, 11, 99, DateTimeKind.Utc).AddTicks(5886), 1, 1, "SHELLMATERIAL3", 1, 1, new DateTime(2023, 12, 12, 19, 54, 11, 99, DateTimeKind.Utc).AddTicks(5886), 1, "OLADEJI", 1, 1.0 }
                 });
 
             migrationBuilder.InsertData(

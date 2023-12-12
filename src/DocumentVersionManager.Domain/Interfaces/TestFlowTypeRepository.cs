@@ -3,9 +3,9 @@ using DocumentVersionManager.Domain.Entities;
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
 {
-    public  class  ModelTypesRepository:GenericRepository<ModelTypes>, IModelTypesRepository
+    public  class  TestFlowTypeRepository:GenericRepository<TestFlowType>, ITestFlowTypeRepository
     {
-        public   ModelTypesRepository( DocumentVersionManagerContext ctx): base(ctx)
+        public   TestFlowTypeRepository( DocumentVersionManagerContext ctx): base(ctx)
         {}
     }
 }

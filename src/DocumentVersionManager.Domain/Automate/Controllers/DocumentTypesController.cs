@@ -22,13 +22,55 @@ namespace DocumentVersionManager.Api.Controllers.v1
             var dto = new ApplicationDocumentTypeCreateDTO(request.);
 
             return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
-                .Bind<Either<GeneralFailure, int>>(_ => (  CreateModelType(dto, cancellationToken).Result   ) )
+                .Bind<Either<GeneralFailure, int>>(_ => (  CreateDocumentType(dto, cancellationToken).Result   ) )
                 .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
                     Right: result => result.Match<IActionResult>(
                     Left: errors2 => new OkObjectResult(errors2),Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.DocumentType.Create}/{dto}", dto)));
         }
 
-        private async Task<Either<GeneralFailure, int>> CreateDocumentType(ApplicationDocumentTypeCreateDTO createdDto, CancellationToken cancellationToken)
-        => await _sender.Send(new CreateDocumentTypeCommand(createdDto), cancellationToken);
+        private async Task<Either<GeneralFailure, int>> CreateDocumentType(ApplicationDocumentTypeCreateDTO createType, CancellationToken cancellationToken)
+        => await _sender.Send(new CreateDocumentTypeCommand(createType), cancellationToken);
+        [HttpDelete(template: DocumentVersionManagerAPIEndPoints.DocumentType.Delete, Name = DocumentVersionManagerAPIEndPoints.DocumentType.Delete)]
+        public async Task<IActionResult> Delete([FromRoute] Guid guid, CancellationToken cancellationToken)
+        {
+            return (await _sender.Send(new DeleteDocumentTypeCommand(new ApplicationDocumentTypeDeleteDTO(guid)), cancellationToken))
+            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+                Right: result => new OkObjectResult(result));
+        }
+        [HttpPut(template: DocumentVersionManagerAPIEndPoints.DocumentType.Update, Name = DocumentVersionManagerAPIEndPoints.DocumentType.Update)]
+        public async Task<IActionResult> Update(DocumentTypeUpdateDTO request,, CancellationToken cancellationToken)
+        {
+            var dto = new ApplicationDocumentTypeUpdateDTO(request.);
+
+            return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
+                .Bind<Either<GeneralFailure, int>>(modelType => UpdateModelType(dto, cancellationToken).Result)
+                .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+                     Right: result => result.Match<IActionResult>(
+                     Left: errors2 => new OkObjectResult(errors2),
+                     Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.DocumentType.Create}/{dto.}", dto)));
+        }
+         }
+
+        private async Task<Either<GeneralFailure, int>> UpdateDocumentType(ApplicationDocumentTypeUpdateDTO updateType, CancellationToken cancellationToken)
+        => await _sender.Send(new UpdateDocumentTypeCommand(updateType), cancellationToken);
+        [ProducesResponseType(typeof(IEnumerable<DocumentTypeResponseDTO>), StatusCodes.Status200OK)]
+        [HttpGet(template: DocumentVersionManagerAPIEndPoints.DocumentType.Get, Name = DocumentVersionManagerAPIEndPoints.DocumentType.Get)]
+        public async Task<IActionResult> Get( CancellationToken cancellationToken)
+        {
+            return (await _sender.Send(new GetAllDocumentTypeQuery(), cancellationToken))
+            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+                Right: result => new OkObjectResult(GetDocumentTypeResponseResult(result)));
+        }
+
+        private IEnumerable<DocumentTypeResponseDTO> GetDocumentTypeResponseResult(IEnumerable<ApplicationDocumentTypeResponseDTO> result)
+        { throw new NotImplementedException("Please implement like below");// return result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertToModelTypeResponse(x.Models)));
+        }
+        [ProducesResponseType(typeof(IEnumerable<DocumentTypeResponseDTO>), StatusCodes.Status200OK)]
+        [HttpGet(template: DocumentVersionManagerAPIEndPoints.DocumentType.GetById, Name = DocumentVersionManagerAPIEndPoints.DocumentType.GetById)]
+        public async Task<IActionResult> GetById([FromRoute] string NameOrGuid, CancellationToken cancellationToken)
+        {var x = NameOrGuid.EnsureInputIsNotEmpty("Input Cannot be null");var result = Guid.TryParse(NameOrGuid, out Guid guid); if (result){return (await _sender.Send(new GetModelTypeByGuidQuery(new ApplicationModelTypeRequestByGuidDTO(guid)), cancellationToken)).Match<IActionResult>(Left: errors => new OkObjectResult(errors),Right: result => new OkObjectResult(new ModelTypeResponseDTO(result.ModelTypesId, result.ModelTypesName, CovertToModelTypeResponse(result.Models)
+        [HttpGet(template: DocumentVersionManagerAPIEndPoints.DocumentType.Get, Name = DocumentVersionManagerAPIEndPoints.DocumentType.Get)]
+        public async Task<IActionResult> Get(DocumentTypeCreateDTO request, CancellationToken cancellationToken)
+        {
     }
 }

@@ -22,7 +22,9 @@ public static class APIServiceCollection
         //services.AddExceptionHandler<GlobalExceptionHandler.GlobalExceptionHandler>();
         services.AddProblemDetails();
         services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
-        services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySQL(configuration.GetConnectionString(Domain.Constants.FixedValues.DBConnectionStringName)!));
+        // services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySQL(configuration.GetConnectionString(Domain.Constants.FixedValues.DBConnectionStringName)!));
+        services.AddDbContext<DocumentVersionManagerContext>(option => option.UseMySql(configuration.GetConnectionString(Domain.Constants.FixedValues.DBConnectionStringName)!, new MySqlServerVersion(new Version(8, 0))));
+
         services.AddCors();
         services.AddApiVersioning(
             option =>
