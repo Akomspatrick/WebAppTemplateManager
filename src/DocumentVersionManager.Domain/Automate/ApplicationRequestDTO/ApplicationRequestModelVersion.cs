@@ -1,9 +1,9 @@
 namespace DocumentVersionManager.Application.Contracts.RequestDTO
 {
-    public  record ApplicationRequestModelVersionDTO();
-    public  record ApplicationRequestModelVersionByGuidDTO(Guid ModelVersionGuid);
-    public  record ApplicationRequestModelVersionByIdDTO(string ModelVersionId);
-    public  record ApplicationCreateModelVersionDTO();
-    public  record ApplicationUpdateModelVersionDTO(Guid ModelVersionGuid);
-    public  record ApplicationDeleteModelVersionDTO(Guid ModelVersionGuid);
+    public  record ApplicationModelVersionGetRequestByGuidDTO(ModelVersionGetRequestByGuidDTO Value);
+    public  record ApplicationModelVersionGetRequestByIdDTO(ModelVersionGetRequestByIdDTO Value);
+    public  record ApplicationModelVersionGetRequestDTO(ModelVersionGetRequestDTO Value);
+    public  record ApplicationModelVersionCreateRequestDTO(ModelVersionCreateRequestDTO Value );
+    public  record ApplicationModelVersionUpdateRequestDTO(ModelVersionUpdateRequestDTO Value);
+    public  record ApplicationModelVersionDeleteRequestDTO(ModelVersionDeleteRequestDTO Value);
 }

@@ -10,6 +10,6 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Commands
 {
-    public record UpdateModelTypeCommand(ApplicationModelTypeUpdateDTO modelTypeUpdateDTO) : IRequest<Either<GeneralFailure, int>>;
+    public record UpdateModelTypeCommand(ApplicationModelTypeUpdateRequestDTO modelTypeUpdateDTO) : IRequest<Either<GeneralFailure, int>>;
 
 }

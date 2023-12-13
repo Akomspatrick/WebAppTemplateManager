@@ -23,7 +23,7 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 
             return (await _unitOfWork.ModelRepository
                     .GetMatch(s => (s.ModelName == request.modelRequestDTO.ModelName), null, cancellationToken))
-                    .Map((result) => new ApplicationModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypesName));
+                    .Map((result) => new ApplicationModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypeName));
         }
 
     }

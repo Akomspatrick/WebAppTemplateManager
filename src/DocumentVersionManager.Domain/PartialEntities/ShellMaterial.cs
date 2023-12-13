@@ -5,8 +5,8 @@ namespace DocumentVersionManager.Domain.Entities
         {
             public string ShellMaterialName    { get; init; }  = string.Empty; 
             public Boolean Alloy    { get; init; } 
-            private  List <Specification> _CapacitySpecifications { get;  set;}  = new List<Specification>();
-            public  IReadOnlyCollection<Specification> CapacitySpecifications => _CapacitySpecifications;
+            private  List <ModelVersion> _ModelVersions { get;  set;}  = new List<ModelVersion>();
+            public  IReadOnlyCollection<ModelVersion> ModelVersions => _ModelVersions;
             public Guid GuidId    { get; init; } 
         }
 }

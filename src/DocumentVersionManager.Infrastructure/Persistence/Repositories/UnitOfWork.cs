@@ -46,7 +46,6 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
         public IShellMaterialRepository ShellMaterialRepository => throw new NotImplementedException();
 
-        public ISpecificationRepository SpecificationRepository => throw new NotImplementedException();
 
         public ITestFlowTypeRepository TestFlowTypeRepository => throw new NotImplementedException();
 

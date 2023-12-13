@@ -13,64 +13,94 @@ using System.Linq;
 using System.Threading;
 namespace DocumentVersionManager.Api.Controllers.v1
 {
-    public  class DocumentBasePathsController  : DVBaseController<DocumentBasePathsController>
+    public  class DocumentBasePathsController  : TheBaseController<DocumentBasePathsController>
     {
         public DocumentBasePathsController(ILogger<DocumentBasePathsController> logger, ISender sender) : base(logger, sender){}
         [HttpPost(template: DocumentVersionManagerAPIEndPoints.DocumentBasePath.Create, Name = DocumentVersionManagerAPIEndPoints.DocumentBasePath.Create)]
-        public async Task<IActionResult> Create(DocumentBasePathCreateDTO request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(DocumentBasePathCreateRequestDTO request, CancellationToken cancellationToken)
         {
-            var dto = new ApplicationDocumentBasePathCreateDTO(request.);
+            var dto = new ApplicationDocumentBasePathCreateRequestDTO(request.);
 
             return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
                 .Bind<Either<GeneralFailure, int>>(_ => (  CreateDocumentBasePath(dto, cancellationToken).Result   ) )
-                .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+                .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                     Right: result => result.Match<IActionResult>(
-                    Left: errors2 => new OkObjectResult(errors2),Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.DocumentBasePath.Create}/{dto}", dto)));
+                    Left: errors2 => new BadRequestObjectResult(errors2),Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.DocumentBasePath.Create}/{dto}", dto)));
         }
 
-        private async Task<Either<GeneralFailure, int>> CreateDocumentBasePath(ApplicationDocumentBasePathCreateDTO createType, CancellationToken cancellationToken)
+        private async Task<Either<GeneralFailure, int>> CreateDocumentBasePath(ApplicationDocumentBasePathCreateRequestDTO createType, CancellationToken cancellationToken)
         => await _sender.Send(new CreateDocumentBasePathCommand(createType), cancellationToken);
+
         [HttpDelete(template: DocumentVersionManagerAPIEndPoints.DocumentBasePath.Delete, Name = DocumentVersionManagerAPIEndPoints.DocumentBasePath.Delete)]
         public async Task<IActionResult> Delete([FromRoute] Guid guid, CancellationToken cancellationToken)
         {
-            return (await _sender.Send(new DeleteDocumentBasePathCommand(new ApplicationDocumentBasePathDeleteDTO(guid)), cancellationToken))
-            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+        var result = new DocumentBasePathDeleteRequestDTO(request);
+        var guid = new ApplicationDocumentBasePathDeleteRequestDTO(result);
+        return guid.EnsureInputIsNotEmpty("Input Cannot be null")
+            .Bind<Either<GeneralFailure, int>>(guid => DeleteDocumentBasePath(guid, cancellationToken).Result)
+            .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                 Right: result => new OkObjectResult(result));
         }
+
+        private async Task<Either<GeneralFailure, int>> DeleteDocumentBasePath(ApplicationDocumentBasePathDeleteRequestDTO dto, CancellationToken cancellationToken)
+        =>  await _sender.Send(new DeleteDocumentBasePathCommand(dto), cancellationToken);
         [HttpPut(template: DocumentVersionManagerAPIEndPoints.DocumentBasePath.Update, Name = DocumentVersionManagerAPIEndPoints.DocumentBasePath.Update)]
-        public async Task<IActionResult> Update(DocumentBasePathUpdateDTO request,, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update(DocumentBasePathUpdateRequestDTO request,, CancellationToken cancellationToken)
         {
-            var dto = new ApplicationDocumentBasePathUpdateDTO(request.);
+            var dto = new ApplicationDocumentBasePathUpdateRequestDTO(request.);
 
             return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
-                .Bind<Either<GeneralFailure, int>>(modelType => UpdateModelType(dto, cancellationToken).Result)
-                .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+                .Bind<Either<GeneralFailure, int>>(modelType => UpdateDocumentBasePath(dto, cancellationToken).Result)
+                .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                      Right: result => result.Match<IActionResult>(
-                     Left: errors2 => new OkObjectResult(errors2),
+                     Left: errors2 => new     BadRequestObjectResult(errors2),
                      Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.DocumentBasePath.Create}/{dto.}", dto)));
-        }
+
          }
 
-        private async Task<Either<GeneralFailure, int>> UpdateDocumentBasePath(ApplicationDocumentBasePathUpdateDTO updateType, CancellationToken cancellationToken)
+        private async Task<Either<GeneralFailure, int>> UpdateDocumentBasePath(ApplicationDocumentBasePathUpdateRequestDTO updateType, CancellationToken cancellationToken)
         => await _sender.Send(new UpdateDocumentBasePathCommand(updateType), cancellationToken);
         [ProducesResponseType(typeof(IEnumerable<DocumentBasePathResponseDTO>), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.DocumentBasePath.Get, Name = DocumentVersionManagerAPIEndPoints.DocumentBasePath.Get)]
         public async Task<IActionResult> Get( CancellationToken cancellationToken)
         {
-            return (await _sender.Send(new GetAllDocumentBasePathQuery(), cancellationToken))
-            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+             return (await _sender.Send<Either<GeneralFailure, IEnumerable<ApplicationDocumentBasePathResponseDTO>>>(new GetAllDocumentBasePathQuery(), cancellationToken))
+            .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                 Right: result => new OkObjectResult(GetDocumentBasePathResponseResult(result)));
         }
 
         private IEnumerable<DocumentBasePathResponseDTO> GetDocumentBasePathResponseResult(IEnumerable<ApplicationDocumentBasePathResponseDTO> result)
         { throw new NotImplementedException("Please implement like below");// return result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertToModelTypeResponse(x.Models)));
         }
-        [ProducesResponseType(typeof(IEnumerable<DocumentBasePathResponseDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(DocumentBasePathResponseDTO), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.DocumentBasePath.GetById, Name = DocumentVersionManagerAPIEndPoints.DocumentBasePath.GetById)]
         public async Task<IActionResult> GetById([FromRoute] string NameOrGuid, CancellationToken cancellationToken)
-        {var x = NameOrGuid.EnsureInputIsNotEmpty("Input Cannot be null");var result = Guid.TryParse(NameOrGuid, out Guid guid); if (result){return (await _sender.Send(new GetModelTypeByGuidQuery(new ApplicationModelTypeRequestByGuidDTO(guid)), cancellationToken)).Match<IActionResult>(Left: errors => new OkObjectResult(errors),Right: result => new OkObjectResult(new ModelTypeResponseDTO(result.ModelTypesId, result.ModelTypesName, CovertToModelTypeResponse(result.Models)
-        [HttpGet(template: DocumentVersionManagerAPIEndPoints.DocumentBasePath.Get, Name = DocumentVersionManagerAPIEndPoints.DocumentBasePath.Get)]
-        public async Task<IActionResult> Get(DocumentBasePathCreateDTO request, CancellationToken cancellationToken)
         {
+            var x = NameOrGuid.EnsureInputIsNotEmpty("Input Cannot be null");
+            var result = Guid.TryParse(NameOrGuid, out Guid guid);
+            if (result)
+            {
+                var DocumentBasePathRequestByIdDTO = new DocumentBasePathGetRequestByGuidDTO(guid);
+                return (await _sender.Send(new GetDocumentBasePathByGuidQuery(new ApplicationDocumentBasePathGetRequestByGuidDTO(DocumentBasePathRequestByIdDTO)), cancellationToken))
+                .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+                    Right: result => new OkObjectResult(MapApplicationDocumentBasePathResponseDTO_To_DocumentBasePathResponseDTO(result)));
+            }
+            else
+            {
+                var DocumentBasePathRequestByIdDTO = new DocumentBasePathGetRequestByIdDTO(NameOrGuid);
+                return (await _sender.Send<Either<GeneralFailure, ApplicationDocumentBasePathResponseDTO>>(new GetDocumentBasePathByIdQuery(new ApplicationDocumentBasePathGetRequestByIdDTO(DocumentBasePathRequestByIdDTO)), cancellationToken))
+                .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+                    Right: result => new OkObjectResult(MapApplicationDocumentBasePathResponseDTO_To_DocumentBasePathResponseDTO(result)));
+            }
+        }
+        [ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
+        [HttpGet(template: DocumentVersionManagerAPIEndPoints.DocumentBasePath.GetByJSONBody, Name = DocumentVersionManagerAPIEndPoints.DocumentBasePath.GetByJSONBody)]
+        public async Task<IActionResult> GetByJSONBody([FromBody] DocumentBasePathGetRequestDTO request, CancellationToken cancellationToken)
+        {
+            var x = request.EnsureInputIsNotNull("Input Cannot be null");
+            return (await _sender.Send(new GetDocumentBasePathQuery(new ApplicationDocumentBasePathGetRequestDTO(request)), cancellationToken))
+            .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+                Right: result => new OkObjectResult(MapApplicationDocumentBasePathResponseDTO_To_DocumentBasePathResponseDTO(result)));
+         }
     }
 }

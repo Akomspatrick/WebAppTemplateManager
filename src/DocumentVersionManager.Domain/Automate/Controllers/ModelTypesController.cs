@@ -13,64 +13,94 @@ using System.Linq;
 using System.Threading;
 namespace DocumentVersionManager.Api.Controllers.v1
 {
-    public  class ModelTypesController  : DVBaseController<ModelTypesController>
+    public  class ModelTypesController  : TheBaseController<ModelTypesController>
     {
         public ModelTypesController(ILogger<ModelTypesController> logger, ISender sender) : base(logger, sender){}
         [HttpPost(template: DocumentVersionManagerAPIEndPoints.ModelType.Create, Name = DocumentVersionManagerAPIEndPoints.ModelType.Create)]
-        public async Task<IActionResult> Create(ModelTypeCreateDTO request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(ModelTypeCreateRequestDTO request, CancellationToken cancellationToken)
         {
-            var dto = new ApplicationModelTypeCreateDTO(request.);
+            var dto = new ApplicationModelTypeCreateRequestDTO(request.);
 
             return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
                 .Bind<Either<GeneralFailure, int>>(_ => (  CreateModelType(dto, cancellationToken).Result   ) )
-                .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+                .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                     Right: result => result.Match<IActionResult>(
-                    Left: errors2 => new OkObjectResult(errors2),Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.Create}/{dto}", dto)));
+                    Left: errors2 => new BadRequestObjectResult(errors2),Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.Create}/{dto}", dto)));
         }
 
-        private async Task<Either<GeneralFailure, int>> CreateModelType(ApplicationModelTypeCreateDTO createType, CancellationToken cancellationToken)
+        private async Task<Either<GeneralFailure, int>> CreateModelType(ApplicationModelTypeCreateRequestDTO createType, CancellationToken cancellationToken)
         => await _sender.Send(new CreateModelTypeCommand(createType), cancellationToken);
+
         [HttpDelete(template: DocumentVersionManagerAPIEndPoints.ModelType.Delete, Name = DocumentVersionManagerAPIEndPoints.ModelType.Delete)]
         public async Task<IActionResult> Delete([FromRoute] Guid guid, CancellationToken cancellationToken)
         {
-            return (await _sender.Send(new DeleteModelTypeCommand(new ApplicationModelTypeDeleteDTO(guid)), cancellationToken))
-            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+        var result = new ModelTypeDeleteRequestDTO(request);
+        var guid = new ApplicationModelTypeDeleteRequestDTO(result);
+        return guid.EnsureInputIsNotEmpty("Input Cannot be null")
+            .Bind<Either<GeneralFailure, int>>(guid => DeleteModelType(guid, cancellationToken).Result)
+            .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                 Right: result => new OkObjectResult(result));
         }
+
+        private async Task<Either<GeneralFailure, int>> DeleteModelType(ApplicationModelTypeDeleteRequestDTO dto, CancellationToken cancellationToken)
+        =>  await _sender.Send(new DeleteModelTypeCommand(dto), cancellationToken);
         [HttpPut(template: DocumentVersionManagerAPIEndPoints.ModelType.Update, Name = DocumentVersionManagerAPIEndPoints.ModelType.Update)]
-        public async Task<IActionResult> Update(ModelTypeUpdateDTO request,, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update(ModelTypeUpdateRequestDTO request,, CancellationToken cancellationToken)
         {
-            var dto = new ApplicationModelTypeUpdateDTO(request.);
+            var dto = new ApplicationModelTypeUpdateRequestDTO(request.);
 
             return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
                 .Bind<Either<GeneralFailure, int>>(modelType => UpdateModelType(dto, cancellationToken).Result)
-                .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+                .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                      Right: result => result.Match<IActionResult>(
-                     Left: errors2 => new OkObjectResult(errors2),
+                     Left: errors2 => new     BadRequestObjectResult(errors2),
                      Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.Create}/{dto.}", dto)));
-        }
+
          }
 
-        private async Task<Either<GeneralFailure, int>> UpdateModelType(ApplicationModelTypeUpdateDTO updateType, CancellationToken cancellationToken)
+        private async Task<Either<GeneralFailure, int>> UpdateModelType(ApplicationModelTypeUpdateRequestDTO updateType, CancellationToken cancellationToken)
         => await _sender.Send(new UpdateModelTypeCommand(updateType), cancellationToken);
         [ProducesResponseType(typeof(IEnumerable<ModelTypeResponseDTO>), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.Get, Name = DocumentVersionManagerAPIEndPoints.ModelType.Get)]
         public async Task<IActionResult> Get( CancellationToken cancellationToken)
         {
-            return (await _sender.Send(new GetAllModelTypeQuery(), cancellationToken))
-            .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
+             return (await _sender.Send<Either<GeneralFailure, IEnumerable<ApplicationModelTypeResponseDTO>>>(new GetAllModelTypeQuery(), cancellationToken))
+            .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                 Right: result => new OkObjectResult(GetModelTypeResponseResult(result)));
         }
 
         private IEnumerable<ModelTypeResponseDTO> GetModelTypeResponseResult(IEnumerable<ApplicationModelTypeResponseDTO> result)
         { throw new NotImplementedException("Please implement like below");// return result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertToModelTypeResponse(x.Models)));
         }
-        [ProducesResponseType(typeof(IEnumerable<ModelTypeResponseDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.GetById, Name = DocumentVersionManagerAPIEndPoints.ModelType.GetById)]
         public async Task<IActionResult> GetById([FromRoute] string NameOrGuid, CancellationToken cancellationToken)
-        {var x = NameOrGuid.EnsureInputIsNotEmpty("Input Cannot be null");var result = Guid.TryParse(NameOrGuid, out Guid guid); if (result){return (await _sender.Send(new GetModelTypeByGuidQuery(new ApplicationModelTypeRequestByGuidDTO(guid)), cancellationToken)).Match<IActionResult>(Left: errors => new OkObjectResult(errors),Right: result => new OkObjectResult(new ModelTypeResponseDTO(result.ModelTypesId, result.ModelTypesName, CovertToModelTypeResponse(result.Models)
-        [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.Get, Name = DocumentVersionManagerAPIEndPoints.ModelType.Get)]
-        public async Task<IActionResult> Get(ModelTypeCreateDTO request, CancellationToken cancellationToken)
         {
+            var x = NameOrGuid.EnsureInputIsNotEmpty("Input Cannot be null");
+            var result = Guid.TryParse(NameOrGuid, out Guid guid);
+            if (result)
+            {
+                var ModelTypeRequestByIdDTO = new ModelTypeGetRequestByGuidDTO(guid);
+                return (await _sender.Send(new GetModelTypeByGuidQuery(new ApplicationModelTypeGetRequestByGuidDTO(ModelTypeRequestByIdDTO)), cancellationToken))
+                .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+                    Right: result => new OkObjectResult(MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(result)));
+            }
+            else
+            {
+                var ModelTypeRequestByIdDTO = new ModelTypeGetRequestByIdDTO(NameOrGuid);
+                return (await _sender.Send<Either<GeneralFailure, ApplicationModelTypeResponseDTO>>(new GetModelTypeByIdQuery(new ApplicationModelTypeGetRequestByIdDTO(ModelTypeRequestByIdDTO)), cancellationToken))
+                .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+                    Right: result => new OkObjectResult(MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(result)));
+            }
+        }
+        [ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
+        [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.GetByJSONBody, Name = DocumentVersionManagerAPIEndPoints.ModelType.GetByJSONBody)]
+        public async Task<IActionResult> GetByJSONBody([FromBody] ModelTypeGetRequestDTO request, CancellationToken cancellationToken)
+        {
+            var x = request.EnsureInputIsNotNull("Input Cannot be null");
+            return (await _sender.Send(new GetModelTypeQuery(new ApplicationModelTypeGetRequestDTO(request)), cancellationToken))
+            .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+                Right: result => new OkObjectResult(MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(result)));
+         }
     }
 }

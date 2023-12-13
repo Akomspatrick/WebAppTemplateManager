@@ -30,10 +30,9 @@
         public int ModelVersionId { get; init; }
         public int Capacity { get; init; }
         public int TestPointId { get; init; }
-        // public int TestId { get; init; } // should auto increase
-        // public Guid CapacityTestPointGuid { get; init; }
-        public Specification Specification { get; set; }
 
+        //public Specification Specification { get; set; }
+        public ModelVersion ModelVersion { get; set; }
 
     }
 }

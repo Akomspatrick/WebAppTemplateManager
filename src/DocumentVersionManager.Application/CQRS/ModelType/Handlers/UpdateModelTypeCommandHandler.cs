@@ -27,7 +27,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             //_logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
         }
 
-        private Domain.Entities.ModelType modify(Domain.Entities.ModelType x, ApplicationModelTypeUpdateDTO modelTypeUpdateDTO)
+        private Domain.Entities.ModelType modify(Domain.Entities.ModelType x, ApplicationModelTypeUpdateRequestDTO modelTypeUpdateDTO)
         {
             return Domain.Entities.ModelType.Create(x.GuidId, modelTypeUpdateDTO.Value.ModelTypeName);
         }

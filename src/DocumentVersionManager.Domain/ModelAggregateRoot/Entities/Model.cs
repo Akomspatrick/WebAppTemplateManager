@@ -34,7 +34,7 @@ namespace DocumentVersionManager.Domain.Entities
 
 
 
-            return new Model() { GuidId = modelId, ModelTypesName = modelTypesName, ModelName = modelName };
+            return new Model() { GuidId = modelId, ModelTypeName = modelTypesName, ModelName = modelName };
 
         }
 

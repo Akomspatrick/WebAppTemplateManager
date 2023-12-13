@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.TestFlowType.Commands
 {
-    public  record DeleteTestFlowTypeCommand(ApplicationDeleteTestFlowTypeDTO  DeleteTestFlowTypeDTO) :  IRequest<Either<GeneralFailure, int>>;
+    public  record DeleteTestFlowTypeCommand(ApplicationTestFlowTypeDeleteRequestDTO  DeleteTestFlowTypeDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

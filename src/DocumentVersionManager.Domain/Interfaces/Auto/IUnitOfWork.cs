@@ -15,7 +15,7 @@ namespace DocumentVersionManager.Domain.Interfaces
         IModelVersionRepository ModelVersionRepository { get; }
         IProductRepository ProductRepository { get; }
         IShellMaterialRepository ShellMaterialRepository { get; }
-        ISpecificationRepository SpecificationRepository { get; }
+
         ITestFlowTypeRepository TestFlowTypeRepository { get; }
         ITestPointRepository TestPointRepository { get; }
     }

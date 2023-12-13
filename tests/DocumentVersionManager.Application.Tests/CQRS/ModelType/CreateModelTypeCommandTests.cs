@@ -17,8 +17,8 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
 {
     public class CreateModelTypeCommandTests
     {
-        private static readonly ModelTypeCreateDTO modelTypeCreateDTO = new("ML101");
-        private static readonly CreateModelTypeCommand createModelTypeCommand = new(new ApplicationModelTypeCreateDTO(modelTypeCreateDTO));
+        private static readonly ModelTypeCreateRequestDTO modelTypeCreateDTO = new("ML101");
+        private static readonly CreateModelTypeCommand createModelTypeCommand = new(new ApplicationModelTypeCreateRequestDTO(modelTypeCreateDTO));
 
         private readonly CreateModelTypeCommandHandler createModelTypeCommandHandler;
 

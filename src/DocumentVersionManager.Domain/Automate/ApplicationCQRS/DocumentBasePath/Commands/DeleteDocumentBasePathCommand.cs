@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.DocumentBasePath.Commands
 {
-    public  record DeleteDocumentBasePathCommand(ApplicationDeleteDocumentBasePathDTO  DeleteDocumentBasePathDTO) :  IRequest<Either<GeneralFailure, int>>;
+    public  record DeleteDocumentBasePathCommand(ApplicationDocumentBasePathDeleteRequestDTO  DeleteDocumentBasePathDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

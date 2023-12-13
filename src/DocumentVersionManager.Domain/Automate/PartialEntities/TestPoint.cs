@@ -7,7 +7,7 @@ namespace DocumentVersionManager.Domain.Entities
             public int ModelVersionId    { get; init; } 
             public int Capacity    { get; init; } 
             public int TestPointId    { get; init; } 
-            public Specification Specification    { get; init; } 
+            public ModelVersion ModelVersion    { get; init; } 
             public Guid GuidId    { get; init; } 
         }
 }

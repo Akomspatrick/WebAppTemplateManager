@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.DocumentDocumentType.Commands
 {
-    public  record DeleteDocumentDocumentTypeCommand(ApplicationDeleteDocumentDocumentTypeDTO  DeleteDocumentDocumentTypeDTO) :  IRequest<Either<GeneralFailure, int>>;
+    public  record DeleteDocumentDocumentTypeCommand(ApplicationDocumentDocumentTypeDeleteRequestDTO  DeleteDocumentDocumentTypeDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

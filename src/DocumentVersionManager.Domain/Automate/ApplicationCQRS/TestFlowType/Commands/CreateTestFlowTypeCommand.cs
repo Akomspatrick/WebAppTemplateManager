@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.TestFlowType.Commands
 {
-    public  record CreateTestFlowTypeCommand(ApplicationCreateTestFlowTypeDTO  CreateTestFlowTypeDTO) :  IRequest<Either<GeneralFailure, int>>;
+    public  record CreateTestFlowTypeCommand(ApplicationTestFlowTypeCreateRequestDTO  CreateTestFlowTypeDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

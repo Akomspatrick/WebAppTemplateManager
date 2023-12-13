@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.DocumentDocumentType.Commands
 {
-    public  record CreateDocumentDocumentTypeCommand(ApplicationCreateDocumentDocumentTypeDTO  CreateDocumentDocumentTypeDTO) :  IRequest<Either<GeneralFailure, int>>;
+    public  record CreateDocumentDocumentTypeCommand(ApplicationDocumentDocumentTypeCreateRequestDTO  CreateDocumentDocumentTypeDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

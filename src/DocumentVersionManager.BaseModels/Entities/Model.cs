@@ -10,7 +10,7 @@
         public string ModelName { get; init; } = string.Empty;
 
         // [ForeignKey("ModelTypesName")]
-        public string ModelTypesName { get; private set; } = string.Empty;
+        public string ModelTypeName { get; private set; } = string.Empty;
         public ModelType? ModelTypes { get; set; }
 
 

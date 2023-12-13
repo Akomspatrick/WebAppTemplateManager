@@ -1,9 +1,9 @@
 namespace DocumentVersionManager.Application.Contracts.RequestDTO
 {
-    public  record ApplicationRequestTestFlowTypeDTO();
-    public  record ApplicationRequestTestFlowTypeByGuidDTO(Guid TestFlowTypeGuid);
-    public  record ApplicationRequestTestFlowTypeByIdDTO(string TestFlowTypeId);
-    public  record ApplicationCreateTestFlowTypeDTO();
-    public  record ApplicationUpdateTestFlowTypeDTO(Guid TestFlowTypeGuid);
-    public  record ApplicationDeleteTestFlowTypeDTO(Guid TestFlowTypeGuid);
+    public  record ApplicationTestFlowTypeGetRequestByGuidDTO(TestFlowTypeGetRequestByGuidDTO Value);
+    public  record ApplicationTestFlowTypeGetRequestByIdDTO(TestFlowTypeGetRequestByIdDTO Value);
+    public  record ApplicationTestFlowTypeGetRequestDTO(TestFlowTypeGetRequestDTO Value);
+    public  record ApplicationTestFlowTypeCreateRequestDTO(TestFlowTypeCreateRequestDTO Value );
+    public  record ApplicationTestFlowTypeUpdateRequestDTO(TestFlowTypeUpdateRequestDTO Value);
+    public  record ApplicationTestFlowTypeDeleteRequestDTO(TestFlowTypeDeleteRequestDTO Value);
 }

@@ -1,9 +1,9 @@
 namespace DocumentVersionManager.Application.Contracts.RequestDTO
 {
-    public  record ApplicationRequestDocumentBasePathDTO();
-    public  record ApplicationRequestDocumentBasePathByGuidDTO(Guid DocumentBasePathGuid);
-    public  record ApplicationRequestDocumentBasePathByIdDTO(string DocumentBasePathId);
-    public  record ApplicationCreateDocumentBasePathDTO();
-    public  record ApplicationUpdateDocumentBasePathDTO(Guid DocumentBasePathGuid);
-    public  record ApplicationDeleteDocumentBasePathDTO(Guid DocumentBasePathGuid);
+    public  record ApplicationDocumentBasePathGetRequestByGuidDTO(DocumentBasePathGetRequestByGuidDTO Value);
+    public  record ApplicationDocumentBasePathGetRequestByIdDTO(DocumentBasePathGetRequestByIdDTO Value);
+    public  record ApplicationDocumentBasePathGetRequestDTO(DocumentBasePathGetRequestDTO Value);
+    public  record ApplicationDocumentBasePathCreateRequestDTO(DocumentBasePathCreateRequestDTO Value );
+    public  record ApplicationDocumentBasePathUpdateRequestDTO(DocumentBasePathUpdateRequestDTO Value);
+    public  record ApplicationDocumentBasePathDeleteRequestDTO(DocumentBasePathDeleteRequestDTO Value);
 }

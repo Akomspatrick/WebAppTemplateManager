@@ -36,7 +36,7 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 
             return (await _unitOfWork.ModelRepository
                     .GetAllAsync(s => true, new List<string>() { "ModelVersions" }, null, cancellationToken))
-                    .Map(task => task.Select(result => new ApplicationModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypesName)));
+                    .Map(task => task.Select(result => new ApplicationModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypeName)));
             //.Select(result => new ApplicationModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypesName)));
 
             //.Map((result) => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypeName, convertToModelDto(result.Models)));

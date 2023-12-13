@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.TestPoint.Commands
 {
-    public  record DeleteTestPointCommand(ApplicationDeleteTestPointDTO  DeleteTestPointDTO) :  IRequest<Either<GeneralFailure, int>>;
+    public  record DeleteTestPointCommand(ApplicationTestPointDeleteRequestDTO  DeleteTestPointDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

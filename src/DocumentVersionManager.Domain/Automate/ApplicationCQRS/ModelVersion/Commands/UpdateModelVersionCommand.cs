@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.ModelVersion.Commands
 {
-    public  record UpdateModelVersionCommand(ApplicationUpdateModelVersionDTO  UpdateModelVersionDTO) :  IRequest<Either<GeneralFailure, int>>;
+    public  record UpdateModelVersionCommand(ApplicationModelVersionUpdateRequestDTO  UpdateModelVersionDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

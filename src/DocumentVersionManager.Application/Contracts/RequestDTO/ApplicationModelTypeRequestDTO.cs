@@ -21,13 +21,13 @@ namespace DocumentVersionManager.Application.Contracts.RequestDTO
     //public record ApplicationModelTypeDeleteDTO(Guid ModelTypesId);
 
 
-    public record ApplicationModelTypeRequestByGuidDTO(ModelTypeRequestByGuidDTO Value);
-    public record ApplicationModelTypeRequestByIdDTO(ModelTypeRequestByIdDTO Value);
-    public record ApplicationModelTypeRequestDTO(ModelTypeRequestDTO Value);
+    public record ApplicationModelTypeGetRequestByGuidDTO(ModelTypeGetRequestByGuidDTO Value);
+    public record ApplicationModelTypeGetRequestByIdDTO(ModelTypeGetRequestByIdDTO Value);
+    public record ApplicationModelTypeGetRequestDTO(ModelTypeGetRequestDTO Value);
 
-    public record ApplicationModelTypeCreateDTO(ModelTypeCreateDTO Value);
-    public record ApplicationModelTypeUpdateDTO(ModelTypeUpdateDTO Value);
-    public record ApplicationModelTypeDeleteDTO(ModelTypeDeleteDTO Value);
+    public record ApplicationModelTypeCreateRequestDTO(ModelTypeCreateRequestDTO Value);
+    public record ApplicationModelTypeUpdateRequestDTO(ModelTypeUpdateRequestDTO Value);
+    public record ApplicationModelTypeDeleteRequestDTO(ModelTypeDeleteRequestDTO Value);
 
 
 

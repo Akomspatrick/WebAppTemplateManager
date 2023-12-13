@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.CapacityDocument.Commands
 {
-    public  record UpdateCapacityDocumentCommand(ApplicationUpdateCapacityDocumentDTO  UpdateCapacityDocumentDTO) :  IRequest<Either<GeneralFailure, int>>;
+    public  record UpdateCapacityDocumentCommand(ApplicationCapacityDocumentUpdateRequestDTO  UpdateCapacityDocumentDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

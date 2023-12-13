@@ -9,12 +9,12 @@ namespace DocumentVersionManager.Api.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<ModelTypeRequestDTO, ApplicationModelTypeRequestDTO>();
-            CreateMap<ModelTypeCreateDTO, ApplicationModelTypeCreateDTO>();
-            CreateMap<ModelTypeUpdateDTO, ApplicationModelTypeUpdateDTO>();
-            CreateMap<ModelTypeDeleteDTO, ApplicationModelTypeDeleteDTO>();
-            CreateMap<ModelTypeRequestByGuidDTO, ApplicationModelTypeRequestByGuidDTO>();
-            CreateMap<ModelTypeRequestByIdDTO, ApplicationModelTypeRequestByIdDTO>();
+            CreateMap<ModelTypeGetRequestDTO, ApplicationModelTypeCreateRequestDTO>();
+            CreateMap<ModelTypeCreateRequestDTO, ApplicationModelTypeCreateRequestDTO>();
+            CreateMap<ModelTypeUpdateRequestDTO, ApplicationModelTypeUpdateRequestDTO>();
+            CreateMap<ModelTypeDeleteRequestDTO, ApplicationModelTypeDeleteRequestDTO>();
+            CreateMap<ModelTypeGetRequestByGuidDTO, ApplicationModelTypeGetRequestByGuidDTO>();
+            CreateMap<ModelTypeGetRequestByIdDTO, ApplicationModelTypeGetRequestByIdDTO>();
 
 
 

@@ -24,7 +24,7 @@ namespace DocumentVersionManager.Domain.Entities
         // Meaning that modelTypesName may evetualy become modelTypesId
         private List<Document> _documents = Enumerable.Empty<Document>().ToList();
         private List<CapacityDocument> _capacityDocuments = Enumerable.Empty<CapacityDocument>().ToList();
-        private List<Specification> _capacitySpecifications = Enumerable.Empty<Specification>().ToList();
+        //private List<Specification> _capacitySpecifications = Enumerable.Empty<Specification>().ToList();
 
         //These 3 were commented out for now  entity framework wants them created while cretating model table
         // public IReadOnlyCollection<Document> Documents => _documents.AsReadOnly();
@@ -41,29 +41,29 @@ namespace DocumentVersionManager.Domain.Entities
         private static bool polling = false;
         #region Accessors
 
-        public List<int> GetUniqueCapacities()
-        {
-            List<int> temp = new List<int>();
+        //public List<int> GetUniqueCapacities()
+        //{
+        //    List<int> temp = new List<int>();
 
-            foreach (Specification cs in _capacitySpecifications)
-            {
-                temp.Add(cs.Capacity);
-            }
+        //    foreach (Specification cs in _capacitySpecifications)
+        //    {
+        //        temp.Add(cs.Capacity);
+        //    }
 
-            return temp.Distinct().ToList();
-        }
+        //    return temp.Distinct().ToList();
+        //}
 
-        public List<Specification> GetUniqueCapacitySpecifications()
-        {
-            List<Specification> temp = new List<Specification>();
+        //public List<Specification> GetUniqueCapacitySpecifications()
+        //{
+        //    List<Specification> temp = new List<Specification>();
 
-            foreach (int capacity in GetUniqueCapacities())
-            {
-                temp.Add(GetLatestCapacitySpecification(capacity));
-            }
+        //    foreach (int capacity in GetUniqueCapacities())
+        //    {
+        //        temp.Add(GetLatestCapacitySpecification(capacity));
+        //    }
 
-            return temp;
-        }
+        //    return temp;
+        //}
 
         public static string GetShortCapacityString(int capacity, MassUnits units)
         {
@@ -78,87 +78,87 @@ namespace DocumentVersionManager.Domain.Entities
             return "";
         }
 
-        public Specification GetLatestCapacitySpecification(int capacity)
-        {
-            Specification result = null;
+        //public Specification GetLatestCapacitySpecification(int capacity)
+        //{
+        //    Specification result = null;
 
-            foreach (Specification cs in _capacitySpecifications)
-            {
-                if (cs.Capacity == capacity)
-                {
-                    if (result == null) { result = cs; }
-                    else if (cs.Timestamp.CompareTo(result.Timestamp) > 0) { result = cs; }
-                }
-            }
+        //    foreach (Specification cs in _capacitySpecifications)
+        //    {
+        //        if (cs.Capacity == capacity)
+        //        {
+        //            if (result == null) { result = cs; }
+        //            else if (cs.Timestamp.CompareTo(result.Timestamp) > 0) { result = cs; }
+        //        }
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        public DateTime? GetLatestCapacitySpecificationTimestamp(int capacity)
-        {
-            Specification result = null;
+        //public DateTime? GetLatestCapacitySpecificationTimestamp(int capacity)
+        //{
+        //    Specification result = null;
 
-            foreach (Specification cs in _capacitySpecifications)
-            {
-                if (cs.Capacity == capacity)
-                {
-                    if (result == null) { result = cs; }
-                    else if (cs.Timestamp.CompareTo(result.Timestamp) > 0) { result = cs; }
-                }
-            }
+        //    foreach (Specification cs in _capacitySpecifications)
+        //    {
+        //        if (cs.Capacity == capacity)
+        //        {
+        //            if (result == null) { result = cs; }
+        //            else if (cs.Timestamp.CompareTo(result.Timestamp) > 0) { result = cs; }
+        //        }
+        //    }
 
-            if (result != null)
-            {
-                return result.Timestamp;
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //    if (result != null)
+        //    {
+        //        return result.Timestamp;
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
 
-        public Specification GetCapacitySpecificationByTimestamp(int capacity, DateTime timestamp)
-        {
-            Specification result = null;
+        //public Specification GetCapacitySpecificationByTimestamp(int capacity, DateTime timestamp)
+        //{
+        //    Specification result = null;
 
-            foreach (Specification cs in _capacitySpecifications)
-            {
-                if (cs.Capacity == capacity)
-                {
-                    if (result == null) { result = cs; }
-                    else if ((timestamp.CompareTo(cs.Timestamp) >= 0) && ((cs.Timestamp.CompareTo(result.Timestamp) > 0) ||
-                        ((result.Timestamp.CompareTo(timestamp) > 0) && (cs.Timestamp.CompareTo(timestamp) >= 0)))) { result = cs; }
-                }
-            }
+        //    foreach (Specification cs in _capacitySpecifications)
+        //    {
+        //        if (cs.Capacity == capacity)
+        //        {
+        //            if (result == null) { result = cs; }
+        //            else if ((timestamp.CompareTo(cs.Timestamp) >= 0) && ((cs.Timestamp.CompareTo(result.Timestamp) > 0) ||
+        //                ((result.Timestamp.CompareTo(timestamp) > 0) && (cs.Timestamp.CompareTo(timestamp) >= 0)))) { result = cs; }
+        //        }
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        public void UpdateCapacitySpecification(Specification cs, string authUser)
-        {
-            Specification result = null;
-            int index = 0;
+        //public void UpdateCapacitySpecification(Specification cs, string authUser)
+        //{
+        //    Specification result = null;
+        //    int index = 0;
 
-            for (int i = 0; i < _capacitySpecifications.Count; i++)
-            {
-                if (_capacitySpecifications[i].Capacity == cs.Capacity)
-                {
-                    if (result == null)
-                    {
-                        result = _capacitySpecifications[i];
-                        index = i;
-                    }
-                    else if (_capacitySpecifications[i].Timestamp.CompareTo(result.Timestamp) > 0)
-                    {
-                        result = _capacitySpecifications[i];
-                        index = i;
-                    }
-                }
-            }
+        //    for (int i = 0; i < _capacitySpecifications.Count; i++)
+        //    {
+        //        if (_capacitySpecifications[i].Capacity == cs.Capacity)
+        //        {
+        //            if (result == null)
+        //            {
+        //                result = _capacitySpecifications[i];
+        //                index = i;
+        //            }
+        //            else if (_capacitySpecifications[i].Timestamp.CompareTo(result.Timestamp) > 0)
+        //            {
+        //                result = _capacitySpecifications[i];
+        //                index = i;
+        //            }
+        //        }
+        //    }
 
-            _capacitySpecifications[index] = Specification.Duplicate(cs, authUser);
+        //    _capacitySpecifications[index] = Specification.Duplicate(cs, authUser);
 
-        }
+        //}
 
         #endregion Accessors
         #region Copy

@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.Product.Commands
 {
-    public  record DeleteProductCommand(ApplicationDeleteProductDTO  DeleteProductDTO) :  IRequest<Either<GeneralFailure, int>>;
+    public  record DeleteProductCommand(ApplicationProductDeleteRequestDTO  DeleteProductDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

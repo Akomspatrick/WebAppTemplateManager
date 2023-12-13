@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.TestPoint.Commands
 {
-    public  record CreateTestPointCommand(ApplicationCreateTestPointDTO  CreateTestPointDTO) :  IRequest<Either<GeneralFailure, int>>;
+    public  record CreateTestPointCommand(ApplicationTestPointCreateRequestDTO  CreateTestPointDTO) :  IRequest<Either<GeneralFailure, int>>;
 }

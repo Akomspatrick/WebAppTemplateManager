@@ -13,7 +13,7 @@
             //public const string GetAll = APIBase + "/" + Controller + "/GetAllAsync"
             public const string GetById = $"{APIBase}/{Controller}/{{NameOrGuid}}";
             // public const string GetByGuid = $"{APIBase}/{Controller}/{{ModelTypeNameOrGuid:guid}}";
-            public const string GetByModelTypeObj = $"{APIBase}/{Controller}/PI";
+            public const string GetByJSONBody = $"{APIBase}/{Controller}/PI";
             public const string Get = $"{APIBase}/{Controller}";
             public const string Update = $"{APIBase}/{Controller}";
         }

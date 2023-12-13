@@ -1,9 +1,9 @@
 namespace DocumentVersionManager.Application.Contracts.RequestDTO
 {
-    public  record ApplicationRequestDocumentDocumentTypeDTO();
-    public  record ApplicationRequestDocumentDocumentTypeByGuidDTO(Guid DocumentDocumentTypeGuid);
-    public  record ApplicationRequestDocumentDocumentTypeByIdDTO(string DocumentDocumentTypeId);
-    public  record ApplicationCreateDocumentDocumentTypeDTO();
-    public  record ApplicationUpdateDocumentDocumentTypeDTO(Guid DocumentDocumentTypeGuid);
-    public  record ApplicationDeleteDocumentDocumentTypeDTO(Guid DocumentDocumentTypeGuid);
+    public  record ApplicationDocumentDocumentTypeGetRequestByGuidDTO(DocumentDocumentTypeGetRequestByGuidDTO Value);
+    public  record ApplicationDocumentDocumentTypeGetRequestByIdDTO(DocumentDocumentTypeGetRequestByIdDTO Value);
+    public  record ApplicationDocumentDocumentTypeGetRequestDTO(DocumentDocumentTypeGetRequestDTO Value);
+    public  record ApplicationDocumentDocumentTypeCreateRequestDTO(DocumentDocumentTypeCreateRequestDTO Value );
+    public  record ApplicationDocumentDocumentTypeUpdateRequestDTO(DocumentDocumentTypeUpdateRequestDTO Value);
+    public  record ApplicationDocumentDocumentTypeDeleteRequestDTO(DocumentDocumentTypeDeleteRequestDTO Value);
 }
