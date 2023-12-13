@@ -10,7 +10,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         public readonly DocumentVersionManagerContext _ctx;
 
         private ModelRepository _modelRepository;
-        private ModelTypesRepository _modelTypesRepository;
+        private ModelTypeRepository _modelTypeRepository;
         private DocumentRepository _documentRepository;
         private DocumentTypeRepository _documentTypeRepository;
 
@@ -26,11 +26,31 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
         public IModelRepository ModelRepository => _modelRepository ??= new ModelRepository(_ctx);
 
-        public IModelTypesRepository ModelTypesRepository => _modelTypesRepository ??= new ModelTypesRepository(_ctx);
+        public IModelTypeRepository ModelTypeRepository => _modelTypeRepository ??= new ModelTypeRepository(_ctx);
 
         public IDocumentRepository DocumentRepository => _documentRepository ??= new DocumentRepository(_ctx);
 
         public IDocumentTypeRepository DocumentTypeRepository => _documentTypeRepository ??= new DocumentTypeRepository(_ctx);
+
+
+        // Work on before 
+        public ICapacityDocumentRepository CapacityDocumentRepository => throw new NotImplementedException();
+
+        public IDocumentBasePathRepository DocumentBasePathRepository => throw new NotImplementedException();
+
+        public IDocumentDocumentTypeRepository DocumentDocumentTypeRepository => throw new NotImplementedException();
+
+        public IModelVersionRepository ModelVersionRepository => throw new NotImplementedException();
+
+        public IProductRepository ProductRepository => throw new NotImplementedException();
+
+        public IShellMaterialRepository ShellMaterialRepository => throw new NotImplementedException();
+
+        public ISpecificationRepository SpecificationRepository => throw new NotImplementedException();
+
+        public ITestFlowTypeRepository TestFlowTypeRepository => throw new NotImplementedException();
+
+        public ITestPointRepository TestPointRepository => throw new NotImplementedException();
 
         // AsyncRepository may not work as expected because it will keep generating new instance of GenericRepository for each call
         // therefore i will go back to indivial repository instance untill i figure out how to make it work

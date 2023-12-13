@@ -36,7 +36,7 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
         public async Task CreateModelTypeCommandHandler_ShouldReturnSuccess()
         {
             //Arrange
-            _unitOfWorkMock.ModelTypesRepository.AddAsync(Arg.Any<Domain.Entities.ModelType>(), Arg.Any<CancellationToken>()).Returns(1);
+            _unitOfWorkMock.ModelTypeRepository.AddAsync(Arg.Any<Domain.Entities.ModelType>(), Arg.Any<CancellationToken>()).Returns(1);
             //Act
             var result = await createModelTypeCommandHandler.Handle(createModelTypeCommand, CancellationToken.None);
             //Assert
@@ -51,7 +51,7 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
         public async Task CreateModelTypeCommandHandler_ShouldReturnFailure()
         {
             //Arrange
-            _unitOfWorkMock.ModelTypesRepository.AddAsync(Arg.Any<Domain.Entities.ModelType>(), Arg.Any<CancellationToken>()).Returns(GeneralFailures.ProblemAddingEntityIntoDbContext("2a7c336a-163c-487d-88ca-c41cc129f118"));
+            _unitOfWorkMock.ModelTypeRepository.AddAsync(Arg.Any<Domain.Entities.ModelType>(), Arg.Any<CancellationToken>()).Returns(GeneralFailures.ProblemAddingEntityIntoDbContext("2a7c336a-163c-487d-88ca-c41cc129f118"));
             //Act
             var result = await createModelTypeCommandHandler.Handle(createModelTypeCommand, CancellationToken.None);
             //Assert
@@ -79,7 +79,7 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
             //Act
             var _ = await createModelTypeCommandHandler.Handle(createModelTypeCommand, CancellationToken.None);
             //Assert
-            await _unitOfWorkMock.Received(1).ModelTypesRepository.AddAsync(Arg.Any<Domain.Entities.ModelType>(), Arg.Any<CancellationToken>());
+            await _unitOfWorkMock.Received(1).ModelTypeRepository.AddAsync(Arg.Any<Domain.Entities.ModelType>(), Arg.Any<CancellationToken>());
 
         }
     }

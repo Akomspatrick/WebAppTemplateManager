@@ -31,7 +31,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
             //       .Map((result) => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypesName, convertToModelDto(result.Models)));
             List<string> includes = new List<string>() { "Models" };
-            return (await _unitOfWork.ModelTypesRepository
+            return (await _unitOfWork.ModelTypeRepository
                             .GetMatch(s => s.GuidId == request.modelTypeRequestDTO.Value.ModelTypeId, includes, cancellationToken))
                             .Map((result) => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypeName, convertToModelDto(result.Models)));
         }

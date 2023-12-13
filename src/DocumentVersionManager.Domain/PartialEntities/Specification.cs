@@ -30,10 +30,11 @@ namespace DocumentVersionManager.Domain.Entities
             public DateTime NTEPCertificationTimestamp    { get; init; } 
             public string OIMLCertificationId    { get; init; }  = string.Empty; 
             public DateTime OIMLCertificationTimestamp    { get; init; } 
+            public Boolean TestPointDirection    { get; init; } 
             public ModelVersion ModelVersion    { get; init; } 
             public ShellMaterial ShellMaterial    { get; init; } 
-            private  List <CapacityTestPoint> _CapacityTestPoints { get;  set;}  = new List<CapacityTestPoint>();
-            public  IReadOnlyCollection<CapacityTestPoint> CapacityTestPoints => _CapacityTestPoints;
+            private  List <TestPoint> _TestPoints { get;  set;}  = new List<TestPoint>();
+            public  IReadOnlyCollection<TestPoint> TestPoints => _TestPoints;
             public Guid GuidId    { get; init; } 
         }
 }

@@ -22,9 +22,9 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         public async Task<Either<GeneralFailure, int>> Handle(DeleteModelTypeCommand request, CancellationToken cancellationToken)
         {
             return (
-                await _unitOfWork.ModelTypesRepository
+                await _unitOfWork.ModelTypeRepository
                 .GetMatch(s => (s.GuidId.Equals(request.modelTypeDeleteDTO.Value.ModelTypeId)), null, cancellationToken))
-                .Match(Left: x => x, Right: x => _unitOfWork.ModelTypesRepository
+                .Match(Left: x => x, Right: x => _unitOfWork.ModelTypeRepository
                 .DeleteAsync(x, cancellationToken)
                 .Result);
 

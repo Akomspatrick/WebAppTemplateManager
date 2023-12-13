@@ -190,9 +190,9 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
             entity.HasOne<ModelVersion>(e => e.ModelVersion).WithMany(ad => ad.Products).HasForeignKey(e => new { e.ModelName, e.ModelVersionId });
         }
     }
-    public class CapacityTestPointConfig : IEntityTypeConfiguration<CapacityTestPoint>
+    public class TestPointConfig : IEntityTypeConfiguration<TestPoint>
     {
-        public void Configure(EntityTypeBuilder<CapacityTestPoint> entity)
+        public void Configure(EntityTypeBuilder<TestPoint> entity)
         {
             /// below comments to be removed not needed anymore
             /// Add thito the migration query after creating the migration EVERYTIME YOU CREATE A NEW MIGRATION
@@ -208,18 +208,23 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
             /// THIS IS THE WORK AROUND TO CREATE IDENTITY FIELD FOR TESTID, MAY BE FIXED IN THE FUTURE
 
 
-            entity.HasKey(e => new { e.TestId });
-            entity.Property(e => e.TestId)
-             .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+            entity.HasKey(e => new { e.ModelName, e.ModelVersionId, e.Capacity, e.TestPointId });
 
 
-            entity.HasOne<Specification>(e => e.Specification).WithMany(e => e.CapacityTestPoints)
-                .HasForeignKey(e => new { e.ModelName, e.ModelVersionId });
 
-            entity.HasData(CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 100, 1, 1),
-                 // CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 101, 9, 1),
+            entity.HasOne<Specification>(e => e.Specification).WithMany(e => e.TestPoints)
+                .HasForeignKey(e => new { e.ModelName, e.ModelVersionId, e.Capacity })
+               .HasPrincipalKey(e => new { e.ModelName, e.ModelVersionId, e.Capacity });
+            //  entity.HasIndex(e => new { e.ModelName, e.ModelVersionId, e.Capacity }).IsUnique();
+
+
+
+            entity.HasData(TestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 100, 10000),
+                 TestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 100, 2000),
+                  TestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 100, 3000),
+                   TestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 100, 4000),
                  // CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 102, 39, 1),
-                 CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "SECONDMODELNAME", 1, 100, 49, 1));
+                 TestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "SECONDMODELNAME", 1, 100, 49));
 
 
         }

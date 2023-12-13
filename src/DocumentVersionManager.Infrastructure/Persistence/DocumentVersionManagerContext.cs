@@ -14,7 +14,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence
         public DbSet<DocumentType> DocumentTypes { get; private set; }
         public DbSet<DocumentDocumentType> DocumentDocumentTypes { get; private set; }
         public DbSet<Specification> Specifications { get; private set; }
-        public DbSet<CapacityTestPoint> CapacityTestPoints { get; private set; }
+        public DbSet<TestPoint> TestPoints { get; private set; }
         public DbSet<ShellMaterial> ShellMaterials { get; private set; }
         public DbSet<Product> Products { get; private set; }
         public DbSet<DocumentBasePath> DocumentBasePaths { get; private set; }

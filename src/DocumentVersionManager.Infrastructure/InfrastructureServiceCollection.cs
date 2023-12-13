@@ -18,7 +18,7 @@ namespace DocumentVersionManager.Infrastructure
             // services.AddExceptionHandler<GlobalExceptionHandler.GlobalExceptionHandler>();
 
             services.AddScoped<IModelRepository, ModelRepository>();
-            services.AddScoped<IModelTypesRepository, ModelTypesRepository>();
+            services.AddScoped<IModelTypeRepository, ModelTypeRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();

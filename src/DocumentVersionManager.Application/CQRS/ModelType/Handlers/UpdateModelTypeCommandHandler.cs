@@ -23,7 +23,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         {
             throw new NotImplementedException("Operation Not Allowed ");
             var entity = Domain.Entities.ModelType.Create(request.modelTypeUpdateDTO.Value.ModelTypeId, request.modelTypeUpdateDTO.Value.ModelTypeName);
-            return await _unitOfWork.ModelTypesRepository.UpdateAsync(entity, cancellationToken);
+            return await _unitOfWork.ModelTypeRepository.UpdateAsync(entity, cancellationToken);
             //_logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
         }
 

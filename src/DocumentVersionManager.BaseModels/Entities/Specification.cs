@@ -79,10 +79,11 @@ namespace DocumentVersionManager.BaseModels.Entities
         public DateTime? NTEPCertificationTimestamp { get; init; }
         public string OIMLCertificationId { get; init; } = string.Empty;
         public DateTime? OIMLCertificationTimestamp { get; init; }
+        public bool TestPointDirection { get; init; } = true;// true = increasing, false = decreasing
         // public Guid CapacitySpecificationGuid { get; init; }
         public ModelVersion ModelVersion { get; init; }
         public ShellMaterial ShellMaterial { get; init; }
-        public ICollection<CapacityTestPoint> CapacityTestPoints { get; set; }// = new List<CapacityTestPoint>();
+        public ICollection<TestPoint> TestPoints { get; set; }// = new List<CapacityTestPoint>();
 
         public static Specification Create(Guid capacitySpecificationGuid, string modelName, int modelVersionId, int capacity,
             DateTime timestamp, string username, double? nominalOutput, decimal? nominalOutputPercentage, decimal?
@@ -93,7 +94,7 @@ namespace DocumentVersionManager.BaseModels.Entities
             int? resistance, string cCNumber, string @class, string application,
            int? temperingHardnessLow,
             int? temperingHardnessHigh, string nTEPCertificationId, DateTime? nTEPCertificationTimestamp, string
-            oIMLCertificationId, DateTime? oIMLCertificationTimestamp)
+            oIMLCertificationId, DateTime? oIMLCertificationTimestamp, bool testPointDirection)
         {
             return new Specification()
             {
@@ -127,7 +128,8 @@ namespace DocumentVersionManager.BaseModels.Entities
                 NTEPCertificationId = nTEPCertificationId,
                 NTEPCertificationTimestamp = nTEPCertificationTimestamp,
                 OIMLCertificationId = oIMLCertificationId,
-                OIMLCertificationTimestamp = oIMLCertificationTimestamp
+                OIMLCertificationTimestamp = oIMLCertificationTimestamp,
+                TestPointDirection = testPointDirection
             };
         }
         public static Specification Duplicate(Specification oldCS, string authUser)
@@ -163,7 +165,7 @@ namespace DocumentVersionManager.BaseModels.Entities
              oldCS.NTEPCertificationId,
              oldCS.NTEPCertificationTimestamp,
              oldCS.OIMLCertificationId,
-             oldCS.OIMLCertificationTimestamp
+             oldCS.OIMLCertificationTimestamp, oldCS.TestPointDirection
  );
     }
 }

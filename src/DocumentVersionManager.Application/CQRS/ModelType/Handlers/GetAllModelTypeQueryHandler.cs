@@ -27,7 +27,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             // .Select(result => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypeName, ConvertTo(result.Models))));
 
 
-            return (await _unitOfWork.ModelTypesRepository
+            return (await _unitOfWork.ModelTypeRepository
                   .GetAllAsync(s => true, new List<string>() { "Models" }, null, cancellationToken))
                   .Map(task => task
                  .Select(result => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypeName, ConvertTo(result.Models))));

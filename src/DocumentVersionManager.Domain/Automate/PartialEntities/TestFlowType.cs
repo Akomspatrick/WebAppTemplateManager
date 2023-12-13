@@ -5,6 +5,7 @@ namespace DocumentVersionManager.Domain.Entities
         {
             public int TestingModeId    { get; init; } 
             public string TestingMode    { get; init; }  = string.Empty; 
+            public string Description    { get; init; }  = string.Empty; 
             public Guid GuidId    { get; init; } 
         }
 }
