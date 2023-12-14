@@ -42,6 +42,10 @@ Content-Type: application/json
 ///GET ALL  MODELTYPE QUERY 
 GET http://localhost:5007/api/ModelType
 
+###
+///GET ALL  MODELTYPE QUERY 
+GET http://localhost:5007/api/ModelType1
+
 
 ###
 // delete a modeltype

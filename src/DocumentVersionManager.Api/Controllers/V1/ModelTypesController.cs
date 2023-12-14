@@ -30,7 +30,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
         {
             var x = request.EnsureInputIsNotNull("Input Cannot be null");
             return (await _sender.Send(new GetModelTypeQuery(new ApplicationModelTypeGetRequestDTO(request)), cancellationToken))
-            .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+            .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
                                 Right: result => new OkObjectResult(MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(result)));
         }
 
@@ -46,32 +46,18 @@ namespace DocumentVersionManager.Api.Controllers.v1
             {
                 var ModelTypeRequestByIdDTO = new ModelTypeGetRequestByGuidDTO(guid);
                 return (await _sender.Send(new GetModelTypeByGuidQuery(new ApplicationModelTypeGetRequestByGuidDTO(ModelTypeRequestByIdDTO)), cancellationToken))
-                .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+                .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
                                     Right: result => new OkObjectResult(MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(result)));
             }
             else
             {
                 var ModelTypeRequestByIdDTO = new ModelTypeGetRequestByIdDTO(NameOrGuid);
                 return (await _sender.Send<Either<GeneralFailure, ApplicationModelTypeResponseDTO>>(new GetModelTypeByIdQuery(new ApplicationModelTypeGetRequestByIdDTO(ModelTypeRequestByIdDTO)), cancellationToken))
-              .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+              .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
                       Right: result => new OkObjectResult(MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(result)));
             }
 
         }
-
-
-        //[ProducesResponseType(typeof(IEnumerable<ModelTypeResponseDTO>), StatusCodes.Status200OK)]
-
-
-        //[HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.Get, Name = DocumentVersionManagerAPIEndPoints.ModelType.Get)]
-        //public async Task<IActionResult> Getxxxx(CancellationToken cancellationToken)
-        //{
-        //    return (await _sender.Send(new GetAllModelTypeQuery(), cancellationToken))
-        //    .Match<IActionResult>(Left: errors => new OkObjectResult(errors),
-        //                        Right: result => new OkObjectResult(result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertToModelResponse(x.Models)))));
-
-        //}
-
 
         [ProducesResponseType(typeof(IEnumerable<ModelTypeResponseDTO>), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.Get, Name = DocumentVersionManagerAPIEndPoints.ModelType.Get)]
@@ -82,20 +68,6 @@ namespace DocumentVersionManager.Api.Controllers.v1
                                 Right: result => new OkObjectResult(GetModelTypeResponseResult(result)));
 
         }
-
-
-        [ProducesResponseType(typeof(IEnumerable<ModelTypeResponseDTO>), StatusCodes.Status200OK)]
-        [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.Get, Name = DocumentVersionManagerAPIEndPoints.ModelType.Get)]
-        public async Task<IActionResult> Getd(CancellationToken cancellationToken)
-        {
-            return (await _sender.Send(new GetAllModelTypeQuery(), cancellationToken))
-            .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
-                Right: result => new OkObjectResult(GetModelTypeResponseResult(result)));
-        }
-
-
-
-
 
         private IEnumerable<ModelTypeResponseDTO> GetModelTypeResponseResult(IEnumerable<ApplicationModelTypeResponseDTO> result)
         {
@@ -111,7 +83,6 @@ namespace DocumentVersionManager.Api.Controllers.v1
         {
             return new ModelTypeResponseDTO(result.ModelTypesId, result.ModelTypesName, CovertToModelResponse(result.Models));
         }
-
 
 
         [HttpPost(template: DocumentVersionManagerAPIEndPoints.ModelType.Create, Name = DocumentVersionManagerAPIEndPoints.ModelType.Create)]
@@ -130,12 +101,6 @@ namespace DocumentVersionManager.Api.Controllers.v1
         [HttpDelete(template: DocumentVersionManagerAPIEndPoints.ModelType.Delete, Name = DocumentVersionManagerAPIEndPoints.ModelType.Delete)]
         public async Task<IActionResult> Delete([FromRoute] Guid request, CancellationToken cancellationToken)
         {
-
-            //var resultxx = guid.EnsureInputIsNotEmpty("Input Cannot be null");
-
-            //return (await _sender.Send(new DeleteModelTypeCommand(new ApplicationModelTypeDeleteDTO(new ModelTypeDeleteDTO(guid))), cancellationToken))
-            //.Match<IActionResult>(Left: errors => new OkObjectResult(errors),
-            //                    Right: result => new OkObjectResult(result));
             var result = new ModelTypeDeleteRequestDTO(request);
             var guid = new ApplicationModelTypeDeleteRequestDTO(result);
 
@@ -145,7 +110,6 @@ namespace DocumentVersionManager.Api.Controllers.v1
                  Right: result => new OkObjectResult(result));
 
         }
-
 
         private async Task<Either<GeneralFailure, int>> DeleteModelType(ApplicationModelTypeDeleteRequestDTO dto, CancellationToken cancellationToken)
         {
@@ -167,15 +131,12 @@ namespace DocumentVersionManager.Api.Controllers.v1
                       Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.Create}/{dto}", dto)));
         }
 
-
         private async Task<Either<GeneralFailure, int>> CreateModelType(ApplicationModelTypeCreateRequestDTO modelType, CancellationToken cancellationToken)
          => await _sender.Send(new CreateModelTypeCommand(modelType), cancellationToken);
 
 
         private async Task<Either<GeneralFailure, int>> UpdateModelType(ApplicationModelTypeUpdateRequestDTO modelType, CancellationToken cancellationToken)
         => await _sender.Send(new UpdateModelTypeCommand(modelType), cancellationToken);
-
-
 
     }
 }
