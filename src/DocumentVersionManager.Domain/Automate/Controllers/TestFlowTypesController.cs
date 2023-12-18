@@ -29,8 +29,8 @@ namespace DocumentVersionManager.Api.Controllers.v1
 
         private IEnumerable<TestFlowTypeResponseDTO> GetTestFlowTypeResponseResult(IEnumerable<ApplicationTestFlowTypeResponseDTO> result)
         
-        => throw new NotImplementedException("Please implement like below");//
-        => result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertTestFlowTypeResponse(x.Models)));
+        => throw new NotImplementedException("Please implement like below");
+        //=> result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertTestFlowTypeResponse(x.Models)));
         
 
         private ICollection<ModelResponseDTO> CovertModelTypeResponse(ICollection<ApplicationModelResponseDTO> models)
@@ -75,7 +75,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
             return (await _sender.Send(new GetTestFlowTypeQuery(new ApplicationTestFlowTypeGetRequestDTO(request)), cancellationToken))
             .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
                 Right: result => new OkObjectResult(MapApplicationTestFlowTypeResponseDTO_To_TestFlowTypeResponseDTO(result)));
-         }
+        }
 
         [HttpPost(template: DocumentVersionManagerAPIEndPoints.TestFlowType.Create, Name = DocumentVersionManagerAPIEndPoints.TestFlowType.Create)]
         public async Task<IActionResult> Create(TestFlowTypeCreateRequestDTO request, CancellationToken cancellationToken)

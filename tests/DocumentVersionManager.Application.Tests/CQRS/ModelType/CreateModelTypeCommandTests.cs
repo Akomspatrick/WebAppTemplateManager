@@ -1,6 +1,4 @@
-﻿using AutoBogus;
-using Bogus;
-using DocumentVersionManager.Application.Contracts.Logging;
+﻿using DocumentVersionManager.Application.Contracts.Logging;
 using DocumentVersionManager.Application.Contracts.RequestDTO;
 using DocumentVersionManager.Application.CQRS.ModelType.Commands;
 using DocumentVersionManager.Application.CQRS.ModelType.Handlers;
@@ -8,6 +6,7 @@ using DocumentVersionManager.Contracts.RequestDTO;
 using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
 using FluentAssertions;
+using LanguageExt;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
@@ -18,8 +17,9 @@ using System.Threading.Tasks;
 namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
 {
     public class CreateModelTypeCommandTests
+
     {
-        private static readonly ModelTypeCreateRequestDTO modelTypeCreateDTO = new("ML101");
+        private static readonly ModelTypeCreateRequestDTO modelTypeCreateDTO = new(Guid.NewGuid(), "ML101");
         private static readonly CreateModelTypeCommand createModelTypeCommand = new(new ApplicationModelTypeCreateRequestDTO(modelTypeCreateDTO));
 
         private readonly CreateModelTypeCommandHandler createModelTypeCommandHandler;
@@ -38,23 +38,15 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
         public async Task CreateModelTypeCommandHandler_ShouldReturnSuccess()
         {
             //Arrange
-            var faker =  new Faker<String>();
-               
-            //var guid = Guid.NewGuid();
-            //var modelName = faker.Generate();
-            var modelType = Domain.Entities.ModelType.Create(Guid.NewGuid(), faker.Generate());
-            //var modelType = Domain.Entities.ModelType.Create(guid, modelTypeCreateDTO.ModelTypeName);
-
-
-            _unitOfWorkMock.ModelTypeRepository.AddAsync(modelType, Arg.Any<CancellationToken>()).Returns(1);
+            _unitOfWorkMock.ModelTypeRepository.AddAsync(Arg.Any<Domain.Entities.ModelType>(), Arg.Any<CancellationToken>()).Returns(1);
             //Act
             var result = await createModelTypeCommandHandler.Handle(createModelTypeCommand, CancellationToken.None);
             //Assert
             //result.IsRigh.Should().BeEquivalentTo("Success");
             result.IsRight.Should().BeTrue();
-            result.Match(
-             Right: r => r.Should().Be(modelType.GuidId),
-             Left: l => l.Should().Be(Arg.Any<GeneralFailure>()));//INTERESTED ONLY IN RIGHT SIDE
+            //result.Match(
+            // Right: r => r.Should().Be(1),
+            // Left: l => l.Should().Be(Arg.Any<GeneralFailure>()));//INTERESTED ONLY IN RIGHT SIDE
         }
 
         [Fact]

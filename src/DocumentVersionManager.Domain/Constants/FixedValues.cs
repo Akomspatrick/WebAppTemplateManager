@@ -12,7 +12,12 @@ namespace DocumentVersionManager.Domain.Constants
     /// </summary>
     public static class FixedValues
     {    //Database Connection String Name 
-        public const string DBConnectionStringName = "Constr";
+        public const string DBServerConnectionStringNameServer = "ServerConstr";
+        public const string Server = "ServerMachinName";
+        public const string DBDevConnectionStringName = "Constr";
+        public const string Dev = "MASS-DSK33";
+        public const string DBClientConnectionStringName = "Constr1";
+        public const string Client = "";
         //ModelType Constants
         public const int modelTypesNameMaxLength = 128;
         public const int modelTypesNameMinLength = 2;

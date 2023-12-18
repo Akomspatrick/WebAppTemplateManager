@@ -5,5 +5,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.Product.Queries
 {
-    public  record GetProductQuery(ApplicationRequestProductDTO  RequestProductDTO) :  IRequest<Either<GeneralFailure, ApplicationResponseProductDTO>>;
+    public  record GetProductQuery(ApplicationProductGetRequestDTO  RequestProductDTO) :  IRequest<Either<GeneralFailure, ApplicationProductResponseDTO>>;
 }

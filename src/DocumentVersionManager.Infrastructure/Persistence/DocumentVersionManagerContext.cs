@@ -1,4 +1,6 @@
 ﻿using DocumentVersionManager.Domain.Entities;
+using DocumentVersionManager.Domain.Utils;
+using DocumentVersionManager.Infrastructure.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -29,16 +31,17 @@ namespace DocumentVersionManager.Infrastructure.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var conn = _configuration.GetConnectionString(Domain.Constants.FixedValues.DBConnectionStringName);
 
-            optionsBuilder.UseMySql(conn!, new MySqlServerVersion(new Version(8, 0)));
+            var constr = GetConnectionstringName.GetConnectionStrName(Environment.MachineName);
+            var conn = _configuration.GetConnectionString(constr);
+
+            optionsBuilder.UseMySql(conn!, GeneralUtils.GetMySqlVersion());
 
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // instead of calling the configure method of each entity configuration file we can use the methos below
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentVersionManagerContext).Assembly);
 
 

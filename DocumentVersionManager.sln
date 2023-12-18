@@ -47,7 +47,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentVersionManager.Base
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentVersionManager.Application.Tests", "tests\DocumentVersionManager.Application.Tests\DocumentVersionManager.Application.Tests.csproj", "{6B850D8D-56E3-4BDF-9FE7-8D3A9D7F7A3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentVersionManager.Integration.Tests", "tests\DocumentVersionManager.Integration.Tests\DocumentVersionManager.Integration.Tests.csproj", "{9CC613E8-ACFD-4B0D-8497-DF62DB9B7C14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentVersionManager.Integration.Tests", "tests\DocumentVersionManager.Integration.Tests\DocumentVersionManager.Integration.Tests.csproj", "{9CC613E8-ACFD-4B0D-8497-DF62DB9B7C14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender", "src\MailSender\MailSender.csproj", "{0D379605-2C17-4ECF-8DB6-44A9B3CC3116}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +117,10 @@ Global
 		{9CC613E8-ACFD-4B0D-8497-DF62DB9B7C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CC613E8-ACFD-4B0D-8497-DF62DB9B7C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CC613E8-ACFD-4B0D-8497-DF62DB9B7C14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D379605-2C17-4ECF-8DB6-44A9B3CC3116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D379605-2C17-4ECF-8DB6-44A9B3CC3116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D379605-2C17-4ECF-8DB6-44A9B3CC3116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D379605-2C17-4ECF-8DB6-44A9B3CC3116}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +138,7 @@ Global
 		{F4F237DF-A438-4823-ADEF-45226C8C4BC9} = {C3B2A5BC-8985-4298-A764-B35D892CD5A5}
 		{6B850D8D-56E3-4BDF-9FE7-8D3A9D7F7A3D} = {BE944756-ED7E-497B-81C5-21859258E272}
 		{9CC613E8-ACFD-4B0D-8497-DF62DB9B7C14} = {BE944756-ED7E-497B-81C5-21859258E272}
+		{0D379605-2C17-4ECF-8DB6-44A9B3CC3116} = {C3B2A5BC-8985-4298-A764-B35D892CD5A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90D4CDA1-7101-4521-8A2F-ECC4F9C92B82}

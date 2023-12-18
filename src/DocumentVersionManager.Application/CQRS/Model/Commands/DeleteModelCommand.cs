@@ -11,6 +11,6 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.Model.Commands
 {
-  public record DeleteModelCommand(ApplicationModelDeleteDTO modelDeleteDTO):IRequest<Either<GeneralFailure, int>>;
-   
+    //public record DeleteModelCommand(ApplicationModelDeleteDTO modelDeleteDTO):IRequest<Either<GeneralFailure, int>>;
+    public record DeleteModelCommand(ApplicationModelDeleteRequestDTO DeleteModelDTO) : IRequest<Either<GeneralFailure, int>>;
 }

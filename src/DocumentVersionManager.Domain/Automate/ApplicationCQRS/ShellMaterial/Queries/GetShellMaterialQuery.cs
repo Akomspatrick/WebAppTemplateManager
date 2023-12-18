@@ -5,5 +5,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.ShellMaterial.Queries
 {
-    public  record GetShellMaterialQuery(ApplicationRequestShellMaterialDTO  RequestShellMaterialDTO) :  IRequest<Either<GeneralFailure, ApplicationResponseShellMaterialDTO>>;
+    public  record GetShellMaterialQuery(ApplicationShellMaterialGetRequestDTO  RequestShellMaterialDTO) :  IRequest<Either<GeneralFailure, ApplicationShellMaterialResponseDTO>>;
 }

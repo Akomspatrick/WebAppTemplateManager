@@ -9,27 +9,47 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        // private readonly DbSet<T> _dbSet;
         private readonly DocumentVersionManagerContext _ctx;
         public GenericRepository(DocumentVersionManagerContext ctx)
         {
-            //_dbSet = ctx.Set<T>();
-            //Guid guid = Guid.NewGuid();
             _ctx = ctx;
         }
+
         async Task<Either<GeneralFailure, int>> IGenericRepository<T>.AddAsync(T entity, CancellationToken cancellationToken)
         {
+            //try
+            //{
+            //    await _ctx.AddAsync<T>(entity, cancellationToken);
+            //    return await _ctx.SaveChangesAsync(cancellationToken);
+            //}
+            //catch (Exception ex)
+            //{
+            //    //Log this error properly
+            //    return GeneralFailures.ProblemAddingEntityIntoDbContext(entity.GuidId.ToString());
+            //}
+
             try
             {
-                await _ctx.AddAsync<T>(entity, cancellationToken);
-                return await _ctx.SaveChangesAsync(cancellationToken);
-
+                var x = _ctx.Add<T>(entity);
+                var p = _ctx.SaveChanges();
+                //await _ctx.AddAsync<T>(entity, cancellationToken);
+                //return await _ctx.SaveChangesAsync(cancellationToken);
+                var t = Task.FromResult(p);
+                return await t;
+            }
+            catch (DbUpdateException ex)
+            {
+                //Log this error properly
+                throw ex;
+                return GeneralFailures.ProblemAddingEntityIntoDbContext(entity.GuidId.ToString());
             }
             catch (Exception ex)
             {
                 //Log this error properly
+                throw ex;
                 return GeneralFailures.ProblemAddingEntityIntoDbContext(entity.GuidId.ToString());
             }
+
 
         }
         //async Task<Either<GeneralFailure, Task<IReadOnlyList<T>>>> IGenericRepository<T>.GetAllAsync(CancellationToken cancellationToken)

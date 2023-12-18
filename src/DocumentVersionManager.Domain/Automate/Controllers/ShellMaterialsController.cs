@@ -29,8 +29,8 @@ namespace DocumentVersionManager.Api.Controllers.v1
 
         private IEnumerable<ShellMaterialResponseDTO> GetShellMaterialResponseResult(IEnumerable<ApplicationShellMaterialResponseDTO> result)
         
-        => throw new NotImplementedException("Please implement like below");//
-        => result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertShellMaterialResponse(x.Models)));
+        => throw new NotImplementedException("Please implement like below");
+        //=> result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertShellMaterialResponse(x.Models)));
         
 
         private ICollection<ModelResponseDTO> CovertModelTypeResponse(ICollection<ApplicationModelResponseDTO> models)
@@ -75,7 +75,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
             return (await _sender.Send(new GetShellMaterialQuery(new ApplicationShellMaterialGetRequestDTO(request)), cancellationToken))
             .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
                 Right: result => new OkObjectResult(MapApplicationShellMaterialResponseDTO_To_ShellMaterialResponseDTO(result)));
-         }
+        }
 
         [HttpPost(template: DocumentVersionManagerAPIEndPoints.ShellMaterial.Create, Name = DocumentVersionManagerAPIEndPoints.ShellMaterial.Create)]
         public async Task<IActionResult> Create(ShellMaterialCreateRequestDTO request, CancellationToken cancellationToken)

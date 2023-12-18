@@ -29,8 +29,8 @@ namespace DocumentVersionManager.Api.Controllers.v1
 
         private IEnumerable<ModelVersionResponseDTO> GetModelVersionResponseResult(IEnumerable<ApplicationModelVersionResponseDTO> result)
         
-        => throw new NotImplementedException("Please implement like below");//
-        => result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertModelVersionResponse(x.Models)));
+        => throw new NotImplementedException("Please implement like below");
+        //=> result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertModelVersionResponse(x.Models)));
         
 
         private ICollection<ModelResponseDTO> CovertModelTypeResponse(ICollection<ApplicationModelResponseDTO> models)
@@ -75,7 +75,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
             return (await _sender.Send(new GetModelVersionQuery(new ApplicationModelVersionGetRequestDTO(request)), cancellationToken))
             .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
                 Right: result => new OkObjectResult(MapApplicationModelVersionResponseDTO_To_ModelVersionResponseDTO(result)));
-         }
+        }
 
         [HttpPost(template: DocumentVersionManagerAPIEndPoints.ModelVersion.Create, Name = DocumentVersionManagerAPIEndPoints.ModelVersion.Create)]
         public async Task<IActionResult> Create(ModelVersionCreateRequestDTO request, CancellationToken cancellationToken)

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.Model.Commands
 {
-    public record  UpdateModelCommand(ApplicationModelUpdateDTO modelUpdateDTO):IRequest<Either<GeneralFailure, int>>;
-    
-    
+    //public record  UpdateModelCommand(ApplicationModelUpdateDTO modelUpdateDTO):IRequest<Either<GeneralFailure, int>>;
+    public record UpdateModelCommand(ApplicationModelUpdateRequestDTO UpdateModelDTO) : IRequest<Either<GeneralFailure, int>>;
+
 }

@@ -29,8 +29,8 @@ namespace DocumentVersionManager.Api.Controllers.v1
 
         private IEnumerable<DocumentBasePathResponseDTO> GetDocumentBasePathResponseResult(IEnumerable<ApplicationDocumentBasePathResponseDTO> result)
         
-        => throw new NotImplementedException("Please implement like below");//
-        => result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertDocumentBasePathResponse(x.Models)));
+        => throw new NotImplementedException("Please implement like below");
+        //=> result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertDocumentBasePathResponse(x.Models)));
         
 
         private ICollection<ModelResponseDTO> CovertModelTypeResponse(ICollection<ApplicationModelResponseDTO> models)
@@ -75,7 +75,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
             return (await _sender.Send(new GetDocumentBasePathQuery(new ApplicationDocumentBasePathGetRequestDTO(request)), cancellationToken))
             .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
                 Right: result => new OkObjectResult(MapApplicationDocumentBasePathResponseDTO_To_DocumentBasePathResponseDTO(result)));
-         }
+        }
 
         [HttpPost(template: DocumentVersionManagerAPIEndPoints.DocumentBasePath.Create, Name = DocumentVersionManagerAPIEndPoints.DocumentBasePath.Create)]
         public async Task<IActionResult> Create(DocumentBasePathCreateRequestDTO request, CancellationToken cancellationToken)

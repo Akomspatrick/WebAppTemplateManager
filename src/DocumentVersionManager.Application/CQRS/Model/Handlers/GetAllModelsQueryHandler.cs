@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 {
-    public class GetAllModelsQueryHandler : IRequestHandler<GetAllModelsQuery, Either<GeneralFailure, IEnumerable<ApplicationModelResponseDTO>>>
+    public class GetAllModelsQueryHandler : IRequestHandler<GetAllModelQuery, Either<GeneralFailure, IEnumerable<ApplicationModelResponseDTO>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<GetAllModelsQueryHandler> _logger;
@@ -18,7 +18,7 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
-        public async Task<Either<GeneralFailure, IEnumerable<ApplicationModelResponseDTO>>> Handle(GetAllModelsQuery request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, IEnumerable<ApplicationModelResponseDTO>>> Handle(GetAllModelQuery request, CancellationToken cancellationToken)
         {
 
             // List<string> includes = new List<string>() {"ModelType"};

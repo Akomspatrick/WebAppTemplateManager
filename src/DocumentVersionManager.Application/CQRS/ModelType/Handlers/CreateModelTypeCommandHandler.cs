@@ -40,24 +40,33 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         public async Task<Either<GeneralFailure, Guid>> Handle(CreateModelTypeCommand request, CancellationToken cancellationToken)
         {
 
-            var entity = Domain.Entities.ModelType.Create(Guid.NewGuid(), request.modelTypeCreateDTO.Value.ModelTypeName);
+            var entity = Domain.Entities.ModelType.Create(request.modelTypeCreateDTO.Value.GuidId, request.modelTypeCreateDTO.Value.ModelTypeName);
+            try
+            {
+                Either<GeneralFailure, int> px = await _unitOfWork.ModelTypeRepository.AddAsync(entity, cancellationToken);
 
-            var x = await _unitOfWork.ModelTypeRepository.AddAsync(entity, cancellationToken);
+                _logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
+                return px.Map((x) => SwapIntForGuid(x, entity));
 
-            _logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
-            return x.Map((cc)=>createit(cc,entity));
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
 
 
         }
 
-        private Guid createit(int cc, Domain.Entities.ModelType entity)
+        private Guid SwapIntForGuid(int x, Domain.Entities.ModelType entity)
         {
-           return entity.GuidId;
+            if (x < 1)
+            {
+                return Guid.Empty;
+            }
+            return entity.GuidId;
         }
 
-        private Either<GeneralFailure, Guid> TransformToGuid(int arg)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

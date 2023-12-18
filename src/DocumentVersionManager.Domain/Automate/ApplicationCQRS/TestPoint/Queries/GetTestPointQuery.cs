@@ -5,5 +5,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.TestPoint.Queries
 {
-    public  record GetTestPointQuery(ApplicationRequestTestPointDTO  RequestTestPointDTO) :  IRequest<Either<GeneralFailure, ApplicationResponseTestPointDTO>>;
+    public  record GetTestPointQuery(ApplicationTestPointGetRequestDTO  RequestTestPointDTO) :  IRequest<Either<GeneralFailure, ApplicationTestPointResponseDTO>>;
 }
