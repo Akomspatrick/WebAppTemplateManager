@@ -83,14 +83,21 @@ namespace DocumentVersionManager.Api.Controllers.v1
             var dto = new ApplicationModelTypeCreateRequestDTO(request);
 
             return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
-                .Bind<Either<GeneralFailure, int>>(_ => (CreateModelType(dto, cancellationToken).Result))
+                .Bind<Either<GeneralFailure, Guid>>(_ => (CreateModelType(dto, cancellationToken).Result))
                 .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                     Right: result => result.Match<IActionResult>(
                     Left: errors2 => new BadRequestObjectResult(errors2),
-                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.Create}/{dto}", dto)));
+                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.GetById}/{result2}", dto)));
+                    // Right: result2 => NewMethod(result2, dto)));
         }
 
-        private async Task<Either<GeneralFailure, int>> CreateModelType(ApplicationModelTypeCreateRequestDTO createType, CancellationToken cancellationToken)
+        private CreatedAtActionResult NewMethod(Guid result2, ApplicationModelTypeCreateRequestDTO dto)
+        {
+            var result = (result2);
+            return CreatedAtAction("GetById", new { result2 }, dto);
+        }
+
+        private async Task<Either<GeneralFailure, Guid>> CreateModelType(ApplicationModelTypeCreateRequestDTO createType, CancellationToken cancellationToken)
         => await _sender.Send(new CreateModelTypeCommand(createType), cancellationToken);
 
 

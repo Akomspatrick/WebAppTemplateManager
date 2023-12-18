@@ -9,7 +9,7 @@ POST {{baseUrl}}/ModelType
 Content-Type: application/json
 
 {
-  "modelTypeName": "NEW AXLE PADS"
+  "modelTypeName": "NEW AEsgxfghhi1gghu111"
 }
 
 
@@ -28,7 +28,7 @@ GET {{baseUrl}}/ModelType/58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b
 ###
 //GET SINGLE  MODELTYPE QUERY 
 
-GET {{baseUrl}}/ModelType/PI
+GET {{baseUrl}}/ModelType/JsonBody
 Content-Type: application/json
 
 {

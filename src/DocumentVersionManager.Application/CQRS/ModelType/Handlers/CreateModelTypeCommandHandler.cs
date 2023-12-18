@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 {
-    public sealed class CreateModelTypeCommandHandler : IRequestHandler<CreateModelTypeCommand, Either<GeneralFailure, int>>
+    public sealed class CreateModelTypeCommandHandler : IRequestHandler<CreateModelTypeCommand, Either<GeneralFailure, Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<CreateModelTypeCommandHandler> _logger;
@@ -21,7 +21,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailure, int>> Handle(CreateModelTypeCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, int>> HandleKeep(CreateModelTypeCommand request, CancellationToken cancellationToken)
         {
             //var entity = ModelType.Create(request.modelTypesName.modelTypesName);
             //await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
@@ -30,12 +30,34 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             var entity = Domain.Entities.ModelType.Create(Guid.NewGuid(), request.modelTypeCreateDTO.Value.ModelTypeName);
 
             var x = await _unitOfWork.ModelTypeRepository.AddAsync(entity, cancellationToken);
-            //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
+
             _logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
             return x;
 
 
         }
 
+        public async Task<Either<GeneralFailure, Guid>> Handle(CreateModelTypeCommand request, CancellationToken cancellationToken)
+        {
+
+            var entity = Domain.Entities.ModelType.Create(Guid.NewGuid(), request.modelTypeCreateDTO.Value.ModelTypeName);
+
+            var x = await _unitOfWork.ModelTypeRepository.AddAsync(entity, cancellationToken);
+
+            _logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
+            return x.Map((cc)=>createit(cc,entity));
+
+
+        }
+
+        private Guid createit(int cc, Domain.Entities.ModelType entity)
+        {
+           return entity.GuidId;
+        }
+
+        private Either<GeneralFailure, Guid> TransformToGuid(int arg)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

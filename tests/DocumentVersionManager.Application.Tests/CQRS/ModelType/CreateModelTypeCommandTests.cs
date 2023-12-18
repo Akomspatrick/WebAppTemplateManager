@@ -1,4 +1,6 @@
-﻿using DocumentVersionManager.Application.Contracts.Logging;
+﻿using AutoBogus;
+using Bogus;
+using DocumentVersionManager.Application.Contracts.Logging;
 using DocumentVersionManager.Application.Contracts.RequestDTO;
 using DocumentVersionManager.Application.CQRS.ModelType.Commands;
 using DocumentVersionManager.Application.CQRS.ModelType.Handlers;
@@ -36,14 +38,22 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
         public async Task CreateModelTypeCommandHandler_ShouldReturnSuccess()
         {
             //Arrange
-            _unitOfWorkMock.ModelTypeRepository.AddAsync(Arg.Any<Domain.Entities.ModelType>(), Arg.Any<CancellationToken>()).Returns(1);
+            var faker =  new Faker<String>();
+               
+            //var guid = Guid.NewGuid();
+            //var modelName = faker.Generate();
+            var modelType = Domain.Entities.ModelType.Create(Guid.NewGuid(), faker.Generate());
+            //var modelType = Domain.Entities.ModelType.Create(guid, modelTypeCreateDTO.ModelTypeName);
+
+
+            _unitOfWorkMock.ModelTypeRepository.AddAsync(modelType, Arg.Any<CancellationToken>()).Returns(1);
             //Act
             var result = await createModelTypeCommandHandler.Handle(createModelTypeCommand, CancellationToken.None);
             //Assert
             //result.IsRigh.Should().BeEquivalentTo("Success");
             result.IsRight.Should().BeTrue();
             result.Match(
-             Right: r => r.Should().Be(1),
+             Right: r => r.Should().Be(modelType.GuidId),
              Left: l => l.Should().Be(Arg.Any<GeneralFailure>()));//INTERESTED ONLY IN RIGHT SIDE
         }
 
@@ -57,7 +67,7 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
             //Assert
             result.IsLeft.Should().BeTrue();
             result.Match(
-                         Right: r => r.Should().Be(Arg.Any<int>()),
+                         Right: r => r.Should().Be(Arg.Any<Guid>()),
                          Left: l => l.Should().BeEquivalentTo(GeneralFailures.ProblemAddingEntityIntoDbContext("2a7c336a-163c-487d-88ca-c41cc129f118")));//INTERESTED ONLY IN LEFT SIDE
 
         }

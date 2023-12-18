@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoBogus" Version="2.13.1" />
     <PackageReference Include="FluentAssertions" Version="7.0.0-alpha.3" />
     <PackageReference Include="FluentAssertions.LanguageExt" Version="0.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0" />
