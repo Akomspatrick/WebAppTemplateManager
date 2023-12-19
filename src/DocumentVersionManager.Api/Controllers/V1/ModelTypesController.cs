@@ -35,7 +35,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
 
         private ICollection<ModelResponseDTO> CovertModelTypeResponse(ICollection<ApplicationModelResponseDTO> models)
         //=> throw new NotImplementedException("Please implement like below");
-        => models.Select(x => new ModelResponseDTO(x.ModelId, x.ModelName, x.ModelTypesName)).ToList();
+        => models.Select(x => new ModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName)).ToList();
 
         [ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.GetById, Name = DocumentVersionManagerAPIEndPoints.ModelType.GetById)]
@@ -65,7 +65,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
 
         private ICollection<ModelResponseDTO> CovertToModelResponse(ICollection<ApplicationModelResponseDTO> models)
          //=> throw new NotImplementedException("Please implement like below");
-         => models.Select(x => new ModelResponseDTO(x.ModelId, x.ModelName, x.ModelTypesName)).ToList();
+         => models.Select(x => new ModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName)).ToList();
 
         [ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.GetByJSONBody, Name = DocumentVersionManagerAPIEndPoints.ModelType.GetByJSONBody)]
@@ -88,7 +88,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
                     Right: result => result.Match<IActionResult>(
                     Left: errors2 => new BadRequestObjectResult(errors2),
                     Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.GetById}/{result2}", dto)));
-                    // Right: result2 => NewMethod(result2, dto)));
+            // Right: result2 => NewMethod(result2, dto)));
         }
 
         private CreatedAtActionResult NewMethod(Guid result2, ApplicationModelTypeCreateRequestDTO dto)

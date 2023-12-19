@@ -26,10 +26,6 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         }
         public async Task<Either<GeneralFailure, ApplicationModelTypeResponseDTO>> Handle(GetModelTypeByGuidQuery request, CancellationToken cancellationToken)
         {
-
-            //return (await _unitOfWork.ModelTypesRepository.GetByGuidAsync(request.modelTypeRequestDTO.ModelTypesId, cancellationToken))
-
-            //       .Map((result) => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypesName, convertToModelDto(result.Models)));
             List<string> includes = new List<string>() { "Models" };
             return (await _unitOfWork.ModelTypeRepository
                             .GetMatch(s => s.GuidId == request.modelTypeRequestDTO.Value.ModelTypeId, includes, cancellationToken))
@@ -38,7 +34,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 
         private ICollection<ApplicationModelResponseDTO> convertToModelDto(IReadOnlyCollection<Domain.Entities.Model> models)
         {
-            return models.Select(x => new ApplicationModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName)).ToList();
+            return models.Select(x => new ApplicationModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName, null)).ToList();
         }
     }
 }

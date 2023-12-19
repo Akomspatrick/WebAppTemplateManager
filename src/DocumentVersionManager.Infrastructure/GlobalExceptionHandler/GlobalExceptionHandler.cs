@@ -28,20 +28,20 @@ namespace DocumentVersionManager.Infrastructure.GlobalExceptionHandler
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
 
-            _logger.LogError(exception, $"Exception occured {exception.Message}");
+            _logger.LogError(exception, $"Exception occured {exception.Message} {exception.Source}");
             // var x = _exceptionHandlerFeature.Error;
             var problemDetails = new ProblemDetails
             {
                 //  Detail = exception.Message, //details are not passes to the client but are logged
                 Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
-                Title = "An error occured",
+                Title = "An error occured from " + exception.Source,
                 Status = (int)HttpStatusCode.InternalServerError,
                 Instance = httpContext.Request.Path,
 
             };
 
             httpContext.Response.ContentType = "application/json";
-            httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError; ;
+            httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError; 
             await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
             return true;
 

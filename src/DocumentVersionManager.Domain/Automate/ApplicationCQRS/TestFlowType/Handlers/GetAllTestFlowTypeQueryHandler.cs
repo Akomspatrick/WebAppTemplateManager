@@ -1,6 +1,8 @@
 using DocumentVersionManager.Domain.Interfaces;
 using DocumentVersionManager.Application.Contracts.Logging;
-using DocumentVersionManager.Application.CQRS.Model.Commands;
+using DocumentVersionManager.Application.CQRS.Model.Queries;
+using DocumentVersionManager.Application.Contracts.ResponseDTO;
+using DocumentVersionManager.Domain.Errors;
 using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.TestFlowType.Handlers

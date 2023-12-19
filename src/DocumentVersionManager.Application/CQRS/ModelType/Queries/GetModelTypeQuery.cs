@@ -11,12 +11,10 @@ using System.Threading.Tasks;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Queries
 {
-    //public class GetNewModelTypeQuery:IRequest<Either<ModelFailures, ApplicationModelTypeResponseDTO>>
-    //{
-    //    public ApplicationModelTypeRequestDTO modelTypesName { get; set; }
-    //}
+
     public record GetModelTypeQuery(ApplicationModelTypeGetRequestDTO modelTypeRequestDTO) : IRequest<Either<GeneralFailure, ApplicationModelTypeResponseDTO>>;
     public record GetModelTypeByGuidQuery(ApplicationModelTypeGetRequestByGuidDTO modelTypeRequestDTO) : IRequest<Either<GeneralFailure, ApplicationModelTypeResponseDTO>>;
     public record GetModelTypeByIdQuery(ApplicationModelTypeGetRequestByIdDTO modelTypeRequestDTO) : IRequest<Either<GeneralFailure, ApplicationModelTypeResponseDTO>>;
+    public record GetAllModelTypeQuery : IRequest<Either<GeneralFailure, IEnumerable<ApplicationModelTypeResponseDTO>>>;
 
 }

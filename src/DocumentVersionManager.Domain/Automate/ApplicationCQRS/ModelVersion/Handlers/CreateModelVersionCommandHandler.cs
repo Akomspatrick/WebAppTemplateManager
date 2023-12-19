@@ -3,6 +3,8 @@ using DocumentVersionManager.Application.Contracts.Logging;
 using LanguageExt;
 using MediatR;
 using DocumentVersionManager.Application.CQRS.Model.Commands;
+using DocumentVersionManager.Application.Contracts.ResponseDTO;
+using DocumentVersionManager.Domain.Errors;
 namespace DocumentVersionManager.Application.CQRS.ModelVersion.Handlers
 {
     public  class CreateModelVersionCommandHandler  :  IRequestHandler<CreateModelVersionCommand, Either<GeneralFailure, int>>

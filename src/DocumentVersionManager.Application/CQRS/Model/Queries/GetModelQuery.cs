@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 namespace DocumentVersionManager.Application.CQRS.Model.Queries
 {
 
-    //  public record  GetModelQuery(ApplicationModelRequestDTO modelRequestDTO) : IRequest<Either<GeneralFailure, ApplicationModelResponseDTO>>;
     public record GetModelQuery(ApplicationModelGetRequestDTO RequestModelDTO) : IRequest<Either<GeneralFailure, ApplicationModelResponseDTO>>;
-
+    public record GetModelByGuidQuery(ApplicationModelGetRequestByGuidDTO RequestModelDTO) : IRequest<Either<GeneralFailure, ApplicationModelResponseDTO>>;
+    public record GetModelByIdQuery(ApplicationModelGetRequestByIdDTO RequestModelDTO) : IRequest<Either<GeneralFailure, ApplicationModelResponseDTO>>;
+    public record GetAllModelQuery : IRequest<Either<GeneralFailure, IEnumerable<ApplicationModelResponseDTO>>>;
 }

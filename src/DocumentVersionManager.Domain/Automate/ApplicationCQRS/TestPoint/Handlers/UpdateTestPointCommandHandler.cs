@@ -3,6 +3,8 @@ using DocumentVersionManager.Application.Contracts.Logging;
 using DocumentVersionManager.Application.CQRS.Model.Commands;
 using LanguageExt;
 using MediatR;
+using DocumentVersionManager.Domain.Errors;
+using DocumentVersionManager.Application.Contracts.ResponseDTO;
 namespace DocumentVersionManager.Application.CQRS.TestPoint.Handlers
 {
     public  class UpdateTestPointCommandHandler  :  IRequestHandler<UpdateTestPointCommand, Either<GeneralFailure, int>>

@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace DocumentVersionManager.Contracts.ResponseDTO
 {
 
-        public record ModelResponseDTO(Guid ModelId, string ModelName, string ModelTypesName);
-    
+    public record ModelResponseDTO(Guid GuidId, string ModelName, string ModelTypesName);
+
 }
