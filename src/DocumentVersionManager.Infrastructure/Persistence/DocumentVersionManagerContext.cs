@@ -31,20 +31,14 @@ namespace DocumentVersionManager.Infrastructure.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
             var constr = GetConnectionstringName.GetConnectionStrName(Environment.MachineName);
             var conn = _configuration.GetConnectionString(constr);
-
             optionsBuilder.UseMySql(conn!, GeneralUtils.GetMySqlVersion());
-
-
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentVersionManagerContext).Assembly);
-
-
         }
     }
 }
