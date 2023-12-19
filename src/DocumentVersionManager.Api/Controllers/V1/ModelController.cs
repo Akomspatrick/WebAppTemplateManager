@@ -168,13 +168,5 @@ namespace DocumentVersionManager.Api.Controllers.v1
 
 
 
-
-
-
-
-
-        private async Task<Either<GeneralFailure, int>> CreateModel(ApplicationModelCreateDTO modelType, CancellationToken cancellationToken)
-           => await _sender.Send(new CreateModelCommand(modelType), cancellationToken);
-
     }
 }

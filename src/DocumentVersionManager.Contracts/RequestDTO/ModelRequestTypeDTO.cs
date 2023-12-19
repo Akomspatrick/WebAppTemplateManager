@@ -18,5 +18,5 @@ namespace DocumentVersionManager.Contracts.RequestDTO
     public record ModelTypeGetRequestByGuidDTO(Guid ModelTypeId);
     public record ModelTypeGetRequestByIdDTO(string ModelTypeId);
     public record ModelTypeGetRequestDTO(string ModelTypeName);
-    public record ModelTypeDeleteRequestDTO(Guid ModelTypeId);
+    public record ModelTypeDeleteRequestDTO(Guid guid);
 }

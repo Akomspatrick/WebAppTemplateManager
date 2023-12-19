@@ -20,8 +20,8 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 
         public async Task<Either<GeneralFailure, int>> Handle(CreateModelCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"AddNewModelTypeCommandHandler- Attempt to   Add New Model {request.ModelCreateDTO.ModelName}");
-            var entity = Domain.Entities.Model.Create(Guid.NewGuid(), request.ModelCreateDTO.ModelName, request.ModelCreateDTO.ModelTypesName);
+            _logger.LogInformation($"AddNewModelTypeCommandHandler- Attempt to   Add New Model {request.CreateModelDTO.Value.ModelName}");
+            var entity = Domain.Entities.Model.Create(Guid.NewGuid(), request.CreateModelDTO.Value.ModelName, request.CreateModelDTO.Value.ModelTypesName);
 
             return await _unitOfWork.ModelRepository.AddAsync(entity, cancellationToken);
         }
