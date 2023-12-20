@@ -41,11 +41,10 @@
         public string ShellMaterialName { get; init; } = string.Empty;
         public bool Alloy { get; init; }
         public int? DefaultCableLength { get; init; }
-
         public int? NumberOfGauges { get; init; }
         public int? Resistance { get; init; }
         public string CCNumber { get; init; } = string.Empty;
-        public string Class { get; init; } = string.Empty;
+        public string AccuracyClass { get; init; } = string.Empty;
         public string Application { get; init; } = string.Empty;
 
         public int? TemperingHardnessLow { get; init; }

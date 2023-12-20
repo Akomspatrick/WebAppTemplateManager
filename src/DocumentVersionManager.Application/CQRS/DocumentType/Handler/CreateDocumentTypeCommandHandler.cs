@@ -22,7 +22,7 @@ namespace DocumentVersionManager.Application.CQRS.DocumentType.Handler
 
         public async Task<Either<GeneralFailure, int>> Handle(CreateDocumentTypeCommand request, CancellationToken cancellationToken)
         {
-            var entity = Domain.Entities.DocumentType.Create(Guid.NewGuid(), request.documentTypeName.DocumentTypeName);
+            var entity = Domain.Entities.DocumentType.Create(request.documentTypeName.DocumentTypeName, Guid.NewGuid());
 
             return await _unitOfWork.DocumentTypeRepository.AddAsync(entity, cancellationToken);
 

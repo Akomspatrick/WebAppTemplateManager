@@ -7,19 +7,6 @@ namespace DocumentVersionManager.Domain.Entities
     public partial class CapacityDocument : BaseEntity
     {
 
-        private CapacityDocument()
-        {
-        }
-        public static CapacityDocument Create(string modelName, int capacity, string documentPath)
-        {
-            return new CapacityDocument()
-            {
-                ModelName = modelName,
-                Capacity = capacity,
-                DocumentPath = documentPath,
-            };
-
-        }
 
         public bool IsValid()
         {

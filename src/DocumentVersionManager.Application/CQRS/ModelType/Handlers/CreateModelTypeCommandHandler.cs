@@ -27,7 +27,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             //await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
             //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
             //return x;
-            var entity = Domain.Entities.ModelType.Create(Guid.NewGuid(), request.modelTypeCreateDTO.Value.ModelTypeName);
+            var entity = Domain.Entities.ModelType.Create(request.modelTypeCreateDTO.Value.ModelTypeName, Guid.NewGuid());
 
             var x = await _unitOfWork.ModelTypeRepository.AddAsync(entity, cancellationToken);
 
@@ -40,7 +40,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         public async Task<Either<GeneralFailure, Guid>> Handle(CreateModelTypeCommand request, CancellationToken cancellationToken)
         {
 
-            var entity = Domain.Entities.ModelType.Create(request.modelTypeCreateDTO.Value.GuidId, request.modelTypeCreateDTO.Value.ModelTypeName);
+            var entity = Domain.Entities.ModelType.Create(request.modelTypeCreateDTO.Value.ModelTypeName, request.modelTypeCreateDTO.Value.GuidId);
             try
             {
                 Either<GeneralFailure, int> px = await _unitOfWork.ModelTypeRepository.AddAsync(entity, cancellationToken);
