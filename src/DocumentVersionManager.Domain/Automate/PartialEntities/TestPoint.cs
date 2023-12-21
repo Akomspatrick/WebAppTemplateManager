@@ -8,18 +8,16 @@ namespace DocumentVersionManager.Domain.Entities
         private TestPoint(){}
             public string ModelName    { get; init; }  = string.Empty; 
             public int ModelVersionId    { get; init; } 
-            public int Capacity    { get; init; } 
-            public int TestPointId    { get; init; } 
+            public int CapacityTestPoint    { get; init; } 
             public ModelVersion ModelVersion    { get; init; } 
             public Guid GuidId    { get; init; } 
         
-        public static TestPoint Create(string  modelName, int  modelVersionId, int  capacity, int  testPointId, Guid  guidId)
+        public static TestPoint Create(string  modelName, int  modelVersionId, int  capacityTestPoint, Guid  guidId)
         =>new()
         {
             ModelName = modelName ,
             ModelVersionId = modelVersionId ,
-            Capacity = capacity ,
-            TestPointId = testPointId ,
+            CapacityTestPoint = capacityTestPoint ,
             GuidId = guidId ,
         };
     }

@@ -223,23 +223,23 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
             /// THIS IS THE WORK AROUND TO CREATE IDENTITY FIELD FOR TESTID, MAY BE FIXED IN THE FUTURE
 
 
-            entity.HasKey(e => new { e.ModelName, e.ModelVersionId, e.Capacity, e.TestPointId });
+            entity.HasKey(e => new { e.ModelName, e.ModelVersionId, e.CapacityTestPoint });
 
 
 
             entity.HasOne<ModelVersion>(e => e.ModelVersion).WithMany(e => e.TestPoints)
-                .HasForeignKey(e => new { e.ModelName, e.ModelVersionId, e.Capacity })
-               .HasPrincipalKey(e => new { e.ModelName, e.ModelVersionId, e.Capacity });
+                .HasForeignKey(e => new { e.ModelName, e.ModelVersionId });
+            //  .HasPrincipalKey(e => new { e.ModelName, e.ModelVersionId, e.Capacity });
             //  entity.HasIndex(e => new { e.ModelName, e.ModelVersionId, e.Capacity }).IsUnique();
 
 
 
-            entity.HasData(TestPoint.Create("FIRSTMODELNAME", 1, 100, 10000, Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
-                 TestPoint.Create("FIRSTMODELNAME", 1, 100, 2000, Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
-                  TestPoint.Create("FIRSTMODELNAME", 1, 100, 3000, Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
-                   TestPoint.Create("FIRSTMODELNAME", 1, 100, 4000, Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
+            entity.HasData(TestPoint.Create("FIRSTMODELNAME", 1, 10000, Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
+                 TestPoint.Create("FIRSTMODELNAME", 1, 2000, Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
+                  TestPoint.Create("FIRSTMODELNAME", 1, 3000, Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
+                   TestPoint.Create("FIRSTMODELNAME", 1, 4000, Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
                  // CapacityTestPoint.Create(Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63"), "FIRSTMODELNAME", 1, 102, 39, 1),
-                 TestPoint.Create("SECONDMODELNAME", 1, 100, 49, Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")));
+                 TestPoint.Create("SECONDMODELNAME", 1, 49, Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")));
 
 
         }
