@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DocumentVersionManager.Application.Contracts.RequestDTO;
+using DocumentVersionManager.Application.Contracts.ResponseDTO;
 using DocumentVersionManager.Contracts.RequestDTO;
+using DocumentVersionManager.Contracts.ResponseDTO;
 
 
 namespace DocumentVersionManager.Api.Mapping
@@ -9,12 +11,14 @@ namespace DocumentVersionManager.Api.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<ModelTypeGetRequestDTO, ApplicationModelTypeCreateRequestDTO>();
-            CreateMap<ModelTypeCreateRequestDTO, ApplicationModelTypeCreateRequestDTO>();
-            CreateMap<ModelTypeUpdateRequestDTO, ApplicationModelTypeUpdateRequestDTO>();
-            CreateMap<ModelTypeDeleteRequestDTO, ApplicationModelTypeDeleteRequestDTO>();
-            CreateMap<ModelTypeGetRequestByGuidDTO, ApplicationModelTypeGetRequestByGuidDTO>();
-            CreateMap<ModelTypeGetRequestByIdDTO, ApplicationModelTypeGetRequestByIdDTO>();
+            CreateMap<ModelTypeGetRequestDTO, ApplicationModelTypeCreateRequestDTO>().ReverseMap();
+            CreateMap<ModelTypeCreateRequestDTO, ApplicationModelTypeCreateRequestDTO>().ReverseMap();
+            CreateMap<ModelTypeUpdateRequestDTO, ApplicationModelTypeUpdateRequestDTO>().ReverseMap();
+            CreateMap<ModelTypeDeleteRequestDTO, ApplicationModelTypeDeleteRequestDTO>().ReverseMap();
+            CreateMap<ModelTypeGetRequestByGuidDTO, ApplicationModelTypeGetRequestByGuidDTO>().ReverseMap();
+            CreateMap<ModelTypeGetRequestByIdDTO, ApplicationModelTypeGetRequestByIdDTO>().ReverseMap();
+            CreateMap<ModelTypeResponseDTO, ApplicationModelTypeResponseDTO>().ReverseMap();
+            CreateMap<ModelResponseDTO, ApplicationModelResponseDTO>().ReverseMap();
 
 
 

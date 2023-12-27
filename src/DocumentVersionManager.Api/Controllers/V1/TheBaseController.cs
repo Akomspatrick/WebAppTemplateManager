@@ -1,4 +1,6 @@
 ﻿using Asp.Versioning;
+using AutoMapper;
+using DocumentVersionManager.Api.Mapping;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 namespace DocumentVersionManager.Api.Controllers.v1
@@ -12,10 +14,15 @@ namespace DocumentVersionManager.Api.Controllers.v1
     {
         protected ILogger<T> _logger;
         protected ISender _sender;
-        public TheBaseController(ILogger<T> logger, ISender sender)
+        protected readonly IMapper _mapper;
+        public TheBaseController(ILogger<T> logger, ISender sender, IMapper mapper)
         {
             _logger = logger;
             _sender = sender;
+            _mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<MappingProfile>();
+            }).CreateMapper();
         }
     }
 }

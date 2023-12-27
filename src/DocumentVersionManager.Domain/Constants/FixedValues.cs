@@ -14,9 +14,10 @@ namespace DocumentVersionManager.Domain.Constants
     {    //Database Connection String Name 
         public const string DBServerConnectionStringNameServer = "ServerConstr";
         public const string Server = "ServerMachinName";
-        public const string DBDevConnectionStringName = "Constr";
+        public const string DBDevConnectionStringName = "DevConstr";
         public const string Dev = "MASS-DSK33";
-        public const string DBClientConnectionStringName = "AppDevConstr";
+
+        public const string DBClientConnectionStringName = "ClientConstr";
         public const string Client = "";
         //ModelType Constants
         public const int modelTypesNameMaxLength = 128;

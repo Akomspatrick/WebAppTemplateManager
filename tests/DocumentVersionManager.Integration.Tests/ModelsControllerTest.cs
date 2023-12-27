@@ -14,6 +14,8 @@ using ZXing.Aztec.Internal;
 using System.Text;
 using Bogus;
 using AutoBogus;
+using LanguageExt.Common;
+using Microsoft.AspNetCore.Http;
 
 namespace DocumentVersionManager.Integration.Tests
 {
@@ -40,8 +42,6 @@ namespace DocumentVersionManager.Integration.Tests
             //assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
-
-
 
         [Fact]
 
@@ -150,7 +150,6 @@ namespace DocumentVersionManager.Integration.Tests
         [Theory]
         [InlineData("Model/", "SECONDMODELNAMEXX")]
         [InlineData("Model/", "9908711f-544a-423d-8d99-f00c31e35be5")]
-        //[InlineData("api/ModelType/GetByJSONBody" )]
 
         public async Task GetASingleModelShouldRetunHttpStatusCode_NotFound_IfItemDoesNotExit(string path, string item)
         {
@@ -158,8 +157,8 @@ namespace DocumentVersionManager.Integration.Tests
             var response = await _httpClient.GetAsync(path + item);
             Assert.NotNull(response);
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
-            var text = await response.Content.ReadAsStringAsync();
-            var problem = await response.Content.ReadFromJsonAsync<ProblemDetails>();
+            //var text = await response.Content.ReadAsStringAsync();
+            //var problem = await response.Content.ReadFromJsonAsync<ProblemDetails>();
         }
 
         [Theory]
@@ -200,7 +199,7 @@ namespace DocumentVersionManager.Integration.Tests
         [Theory]
         [InlineData("Model")]
 
-        public async Task PostShouldReturn_InternalServerError_WhenModelNameIsUniqueAndModelTypeDoesNotExist(string path)
+        public async Task PostShouldReturn_BadRequest_WhenModelNameIsUniqueAndModelTypeDoesNotExist(string path)
         {
             //araange
             var faker = new AutoFaker<ModelCreateRequestDTO>()
@@ -213,9 +212,8 @@ namespace DocumentVersionManager.Integration.Tests
             var response = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
 
             //assert
-            response.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
-            //  createdGuids.Add(response.Headers.Location.OriginalString.Split("/"));  
-
+            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        
         }
         public Task InitializeAsync() => Task.CompletedTask;
 

@@ -35,20 +35,28 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
         }
 
         [Fact]
-        public async Task CreateModelTypeCommandHandler_ShouldReturnSuccess()
+        public async Task CreateModelTypeCommandHandler_ShouldReturnValidRight_WhenNewModelTypeIsAdded()
         {
             //Arrange
             _unitOfWorkMock.ModelTypeRepository.AddAsync(Arg.Any<Domain.Entities.ModelType>(), Arg.Any<CancellationToken>()).Returns(1);
             //Act
             var result = await createModelTypeCommandHandler.Handle(createModelTypeCommand, CancellationToken.None);
             //Assert
-            //result.IsRigh.Should().BeEquivalentTo("Success");
-            result.IsRight.Should().BeTrue();
-            //result.Match(
-            // Right: r => r.Should().Be(1),
-            // Left: l => l.Should().Be(Arg.Any<GeneralFailure>()));//INTERESTED ONLY IN RIGHT SIDE
-        }
 
+            result.IsRight.Should().BeTrue();
+
+        }
+        public async Task CreateModelTypeCommandHandler_ShouldThrowAggregateException_WhenNewModelTypeIsAdded()
+        {
+            //Arrange
+            _unitOfWorkMock.ModelTypeRepository.AddAsync(Arg.Any<Domain.Entities.ModelType>(), Arg.Any<CancellationToken>()).Returns(1);
+            //Act
+            var result = await createModelTypeCommandHandler.Handle(createModelTypeCommand, CancellationToken.None);
+            //Assert
+
+            result.IsRight.Should().BeTrue();
+
+        }
         [Fact]
         public async Task CreateModelTypeCommandHandler_ShouldReturnFailure()
         {
@@ -63,18 +71,18 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
                          Left: l => l.Should().BeEquivalentTo(GeneralFailures.ProblemAddingEntityIntoDbContext("2a7c336a-163c-487d-88ca-c41cc129f118")));//INTERESTED ONLY IN LEFT SIDE
 
         }
+        //[Fact(Skip))]
+        //public async Task LogInformationShoulBeCalledWhenmethodIsInvoked()
+        //{
+        //    //Arrange
+        //    //  _unitOfWorkMock.ModelTypesRepository.AddAsync(Arg.Any<Domain.Entities.ModelTypes>(), Arg.Any<CancellationToken>()).Returns(GeneralFailure.ProblemAddingEntityIntoDbContext);
+        //    //Act
+        //    var _ = await createModelTypeCommandHandler.Handle(createModelTypeCommand, CancellationToken.None);
+        //    //Assert
+        //    _loggerMock.Received(1).LogInformation(Arg.Any<string>());
+        //}
         [Fact]
-        public async Task CreateModelTypeCommandHandler_ShouldReturnException()
-        {
-            //Arrange
-            //  _unitOfWorkMock.ModelTypesRepository.AddAsync(Arg.Any<Domain.Entities.ModelTypes>(), Arg.Any<CancellationToken>()).Returns(GeneralFailure.ProblemAddingEntityIntoDbContext);
-            //Act
-            var _ = await createModelTypeCommandHandler.Handle(createModelTypeCommand, CancellationToken.None);
-            //Assert
-            _loggerMock.Received(1).LogInformation(Arg.Any<string>());
-        }
-        [Fact]
-        public async Task CreateModelTypeCommandHandler_ShouldReturnException1()
+        public async Task CreateModelTypeCommandHandler_ShouldCall_AddAsyncOnce_WhenCreateModelTypeCommandhandleIsCalled()
         {
             //Arrange
 

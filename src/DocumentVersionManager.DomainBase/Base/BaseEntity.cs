@@ -30,6 +30,16 @@ namespace DocumentVersionManager.DomainBase.Base
         {
             throw new NotImplementedException();
         }
+
+        private  Guid GetMyGuid(int x)
+        {
+            if (x < 1)
+            {
+                return Guid.Empty;
+            }
+            return GuidId;
+        }
+
     }
 
 

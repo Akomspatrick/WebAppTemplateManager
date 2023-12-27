@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DocumentVersionManager.Api.Controllers.v1
 {
-    public class EitherActionResult : IActionResult
+    public class EitherActionResultOld : IActionResult
     {
 
         public Either<GeneralFailure, int> Value { get; set; }
         public int? StatusCode { get; set; }
         object response = null;
-        public EitherActionResult(Either<GeneralFailure, int> value)
+        public EitherActionResultOld(Either<GeneralFailure, int> value)
         {
             // Value = value;
             object response = null;

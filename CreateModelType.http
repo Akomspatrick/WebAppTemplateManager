@@ -9,7 +9,7 @@ POST {{baseUrl}}/ModelType
 Content-Type: application/json
 
 {
-  "modelTypeName": "NEW AEhddi1gghu111"
+  "modelTypeName": "NEW1hAhu1"
 }
 
 
@@ -63,16 +63,27 @@ Content-Type: application/json
 //END OF MODEL TYPE 
 ###
 // START OF MODEL
-GET {{baseUrl}}/Model/GetAllAsync
+//GET ALL  MODELTYPE QUERY
+GET {{baseUrl}}/Model/
 ###
 //GET SINGLE  MODELTYPE QUERY 
+// by JsonBody
 
-GET {{baseUrl}}/Model
+GET {{baseUrl}}/Model/JsonBody
 Content-Type: application/json
 
 {
-  "modelId": "FIRSTMODELID22"
+  "modelId": "FIRSTMODELNAME"
 }
+###
+//GET SINGLE  MODEL by Guid
+GET {{baseUrl}}/Model/b27c2c19-522b-49d1-83bf-e80d4dde8c63
+
+
+###
+// Get Single Model by ModelName
+GET {{baseUrl}}/Model/FIRSTMODELNAME
+
 
 
 

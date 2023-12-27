@@ -11,11 +11,6 @@ namespace DocumentVersionManager.Domain.Entities
         public  IReadOnlyCollection<Model> Models => _Models;
             public Guid GuidId    { get; init; } 
         
-        public static ModelType Create(string  modelTypeName, Guid  guidId)
-        =>new()
-        {
-            ModelTypeName = modelTypeName ,
-            GuidId = guidId ,
-        };
+
     }
 }

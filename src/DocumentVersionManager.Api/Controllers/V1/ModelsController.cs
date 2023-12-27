@@ -1,8 +1,12 @@
-﻿using DocumentVersionManager.Api.Extentions;
+﻿using AutoMapper;
+using DocumentVersionManager.Api.Extensions;
+using DocumentVersionManager.Api.Extentions;
 using DocumentVersionManager.Application.Contracts.RequestDTO;
 using DocumentVersionManager.Application.Contracts.ResponseDTO;
 using DocumentVersionManager.Application.CQRS.Model.Commands;
 using DocumentVersionManager.Application.CQRS.Model.Queries;
+using DocumentVersionManager.Application.CQRS.ModelType.Commands;
+using DocumentVersionManager.Application.CQRS.ModelType.Queries;
 using DocumentVersionManager.Contracts.RequestDTO;
 using DocumentVersionManager.Contracts.ResponseDTO;
 using DocumentVersionManager.Domain.Errors;
@@ -15,14 +19,13 @@ namespace DocumentVersionManager.Api.Controllers.v1
 
     public class ModelsController : TheBaseController<ModelsController>
     {
-        public ModelsController(ILogger<ModelsController> logger, ISender sender) : base(logger, sender)
+        public ModelsController(ILogger<ModelsController> logger, ISender sender,IMapper mapper) : base(logger, sender, mapper)
         {
         }
 
 
         private ModelResponseDTO MapApplicationModelResponseDTO_To_ModelResponseDTO(ApplicationModelResponseDTO result)
-        //=> throw new NotImplementedException("Please implement like below");
-         => new ModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypeName);
+         => new ModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypeName, null);
 
 
         [ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
@@ -39,12 +42,14 @@ namespace DocumentVersionManager.Api.Controllers.v1
 
         [ProducesResponseType(typeof(IEnumerable<ModelResponseDTO>), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.Model.Get, Name = DocumentVersionManagerAPIEndPoints.Model.Get)]
-        public async Task<IActionResult> Get(CancellationToken cancellationToken)
-        {
-            return (await _sender.Send<Either<GeneralFailure, IEnumerable<ApplicationModelResponseDTO>>>(new GetAllModelQuery(), cancellationToken))
-           .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
-               Right: result => new OkObjectResult(GetModelResponseResult(result)));
-        }
+        public Task<IActionResult> Get(CancellationToken cToken) => _sender.Send(new GetAllModelQuery(), cToken).ToActionResult();
+
+        //public async Task<IActionResult> Get(CancellationToken cancellationToken)
+        //{
+        //    return (await _sender.Send<Either<GeneralFailure, IEnumerable<ApplicationModelResponseDTO>>>(new GetAllModelQuery(), cancellationToken))
+        //   .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+        //       Right: result => new OkObjectResult(GetModelResponseResult(result)));
+        //}
 
         [ProducesResponseType(typeof(ModelResponseDTO), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.Model.GetById, Name = DocumentVersionManagerAPIEndPoints.Model.GetById)]
@@ -67,8 +72,8 @@ namespace DocumentVersionManager.Api.Controllers.v1
                     Right: result => new OkObjectResult(MapApplicationModelResponseDTO_To_ModelResponseDTO(result)));
             }
         }
-        private IEnumerable<ModelResponseDTO> GetModelResponseResult(IEnumerable<ApplicationModelResponseDTO> result)
-         => result.Select(x => new ModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName));
+        //private IEnumerable<ModelResponseDTO> GetModelResponseResult(IEnumerable<ApplicationModelResponseDTO> result)
+        // => result.Select(x => new ModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName));
 
 
         [HttpPost(template: DocumentVersionManagerAPIEndPoints.Model.Create, Name = DocumentVersionManagerAPIEndPoints.Model.Create)]
@@ -77,14 +82,14 @@ namespace DocumentVersionManager.Api.Controllers.v1
             var dto = new ApplicationModelCreateRequestDTO(request);
 
             return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
-                .Bind<Either<GeneralFailure, int>>(_ => (CreateModel(dto, cancellationToken).Result))
+                .Bind<Either<GeneralFailure, Guid>>(_ => (CreateModel(dto, cancellationToken).Result))
                 .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                     Right: result => result.Match<IActionResult>(
                     Left: errors2 => new BadRequestObjectResult(errors2),
-                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.Model.Create}/{dto}", dto)));
+                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.Model.Create}/{result2}", dto)));
         }
 
-        private async Task<Either<GeneralFailure, int>> CreateModel(ApplicationModelCreateRequestDTO createType, CancellationToken cancellationToken)
+        private async Task<Either<GeneralFailure, Guid>> CreateModel(ApplicationModelCreateRequestDTO createType, CancellationToken cancellationToken)
         => await _sender.Send(new CreateModelCommand(createType), cancellationToken);
 
 

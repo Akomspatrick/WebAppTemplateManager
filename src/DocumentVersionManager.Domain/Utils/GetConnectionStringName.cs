@@ -2,33 +2,15 @@
 {
     public static class GetConnectionstringName
     {
-
-        public static string GetConnectionStrName(string constr)
+        public static string GetConnectionStrName(string machineName) => machineName switch
         {
-            try
-            {
-                switch (Environment.MachineName)
-                {
-                    case Constants.FixedValues.Server:
-                        break;
-                    case Constants.FixedValues.Dev:
-                        constr = Constants.FixedValues.DBDevConnectionStringName;
-                        break;
-                    case Constants.FixedValues.Client:
-                        constr = Constants.FixedValues.Client;
-                        break;
-                    default:
-                        throw new Exception("No Connection Name Constant  Found in FixValues");
-                }
+            Constants.FixedValues.Server => Constants.FixedValues.DBServerConnectionStringNameServer,
 
-                return constr;
-            }
-            catch (Exception ex)
-            {
+            Constants.FixedValues.Dev => Constants.FixedValues.DBDevConnectionStringName,
 
-                throw new Exception("Error  retrieving Machine Name");
-            }
+            Constants.FixedValues.Client => Constants.FixedValues.DBClientConnectionStringName,
+            _ => Constants.FixedValues.DBClientConnectionStringName
 
-        }
+        };
     }
 }

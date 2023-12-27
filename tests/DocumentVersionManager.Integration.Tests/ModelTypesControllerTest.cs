@@ -133,7 +133,7 @@ namespace DocumentVersionManager.Integration.Tests
 
             //assert
             result.Should().BeAssignableTo<ModelTypeResponseDTO>();
-            result.ModelTypesId.Should().Be(Guid.Parse(item));
+            result.ModelTypeId.Should().Be(Guid.Parse(item));
         }
 
         [Theory]
@@ -159,8 +159,8 @@ namespace DocumentVersionManager.Integration.Tests
             var response = await _httpClient.GetAsync(path + item);
             Assert.NotNull(response);
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
-            var text = await response.Content.ReadAsStringAsync();
-            var problem = await response.Content.ReadFromJsonAsync<ProblemDetails>();
+            //var text = await response.Content.ReadAsStringAsync();
+            //var problem = await response.Content.ReadFromJsonAsync<ProblemDetails>();
         }
 
         [Theory]

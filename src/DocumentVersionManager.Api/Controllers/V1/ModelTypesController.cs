@@ -1,4 +1,6 @@
-﻿using DocumentVersionManager.Api.Extentions;
+﻿using AutoMapper;
+using DocumentVersionManager.Api.Extensions;
+using DocumentVersionManager.Api.Extentions;
 using DocumentVersionManager.Application.Contracts.RequestDTO;
 using DocumentVersionManager.Application.Contracts.ResponseDTO;
 using DocumentVersionManager.Application.CQRS.ModelType.Commands;
@@ -15,57 +17,79 @@ namespace DocumentVersionManager.Api.Controllers.v1
 {
     public class ModelTypesController : TheBaseController<ModelTypesController>
     {
+       
+        public ModelTypesController(ILogger<ModelTypesController> logger, ISender sender, IMapper mapper) : base(logger, sender, mapper) { }
 
-        public ModelTypesController(ILogger<ModelTypesController> logger, ISender sender) : base(logger, sender) { }
 
         [ProducesResponseType(typeof(IEnumerable<ModelTypeResponseDTO>), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.Get, Name = DocumentVersionManagerAPIEndPoints.ModelType.Get)]
-        public async Task<IActionResult> Get(CancellationToken cancellationToken)
-        {
-            return (await _sender.Send<Either<GeneralFailure, IEnumerable<ApplicationModelTypeResponseDTO>>>(new GetAllModelTypeQuery(), cancellationToken))
-           .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
-               Right: result => new OkObjectResult(GetModelTypeResponseResult(result)));
-        }
-
-        private IEnumerable<ModelTypeResponseDTO> GetModelTypeResponseResult(IEnumerable<ApplicationModelTypeResponseDTO> result)
-
-        //=> throw new NotImplementedException("Please implement like below");//
-        => result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertModelTypeResponse(x.Models)));
+        public  Task<IActionResult> Get(CancellationToken cToken) => _sender.Send(new GetAllModelTypeQuery(), cToken).ToActionResult();
 
 
-        private ICollection<ModelResponseDTO> CovertModelTypeResponse(ICollection<ApplicationModelResponseDTO> models)
-        //=> throw new NotImplementedException("Please implement like below");
-        => models.Select(x => new ModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName)).ToList();
+        //[ProducesResponseType(typeof(IEnumerable<ModelTypeResponseDTO>), StatusCodes.Status200OK)]
+        //[HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.Get, Name = DocumentVersionManagerAPIEndPoints.ModelType.Get)]
+        //public async Task<IActionResult> Get(CancellationToken cancellationToken)
+        //{
+        //    return (await _sender.Send<Either<GeneralFailure, IEnumerable<ApplicationModelTypeResponseDTO>>>(new GetAllModelTypeQuery(), cancellationToken))
+        //   .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+        //       Right: result => new OkObjectResult(GetModelTypeResponseResult(result)));
+        //}
 
+        //private IEnumerable<ModelTypeResponseDTO> GetModelTypeResponseResult(IEnumerable<ApplicationModelTypeResponseDTO> result)
+        //        => result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertModelTypeResponse(x.Models)));
+
+
+        //private ICollection<ModelResponseDTO> CovertModelTypeResponse(ICollection<ApplicationModelResponseDTO> models)
+        //        => models.Select(x => new ModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName)).ToList();
+
+        //[ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
+        //[HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.GetById, Name = DocumentVersionManagerAPIEndPoints.ModelType.GetById)]
+        //public async Task<IActionResult> GetById([FromRoute] string NameOrGuid, CancellationToken cancellationToken)
+        //{
+        //    var x = NameOrGuid.EnsureInputIsNotEmpty("Input Cannot be null");
+        //    var result = Guid.TryParse(NameOrGuid, out Guid guid);
+        //    if (result)
+        //    {
+        //        var ModelTypeRequestByIdDTO = new ModelTypeGetRequestByGuidDTO(guid);
+        //        return (await _sender.Send(new GetModelTypeByGuidQuery(new ApplicationModelTypeGetRequestByGuidDTO(ModelTypeRequestByIdDTO)), cancellationToken))
+        //        .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
+        //            Right: result => new OkObjectResult(MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(result)));
+        //    }
+        //    else
+        //    {
+        //        var ModelTypeRequestByIdDTO = new ModelTypeGetRequestByIdDTO(NameOrGuid);
+        //        return (await _sender.Send<Either<GeneralFailure, ApplicationModelTypeResponseDTO>>(new GetModelTypeByIdQuery(new ApplicationModelTypeGetRequestByIdDTO(ModelTypeRequestByIdDTO)), cancellationToken))
+        //        .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
+        //            Right: result => new OkObjectResult(MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(result)));
+        //    }
+        //}
         [ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.GetById, Name = DocumentVersionManagerAPIEndPoints.ModelType.GetById)]
-        public async Task<IActionResult> GetById([FromRoute] string NameOrGuid, CancellationToken cancellationToken)
+        public  Task<IActionResult> GetById([FromRoute] string NameOrGuid, CancellationToken cancellationToken)
         {
-            var x = NameOrGuid.EnsureInputIsNotEmpty("Input Cannot be null");
+            var _ = NameOrGuid.EnsureInputIsNotEmpty("Input Cannot be null");
             var result = Guid.TryParse(NameOrGuid, out Guid guid);
             if (result)
             {
                 var ModelTypeRequestByIdDTO = new ModelTypeGetRequestByGuidDTO(guid);
-                return (await _sender.Send(new GetModelTypeByGuidQuery(new ApplicationModelTypeGetRequestByGuidDTO(ModelTypeRequestByIdDTO)), cancellationToken))
-                .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
-                    Right: result => new OkObjectResult(MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(result)));
+                return ( _sender.Send(new GetModelTypeByGuidQuery(new ApplicationModelTypeGetRequestByGuidDTO(ModelTypeRequestByIdDTO)), cancellationToken))
+                .ToActionResult404( _mapper, typeof(ApplicationModelTypeResponseDTO), typeof(ModelTypeResponseDTO));
+                
             }
             else
             {
                 var ModelTypeRequestByIdDTO = new ModelTypeGetRequestByIdDTO(NameOrGuid);
-                return (await _sender.Send<Either<GeneralFailure, ApplicationModelTypeResponseDTO>>(new GetModelTypeByIdQuery(new ApplicationModelTypeGetRequestByIdDTO(ModelTypeRequestByIdDTO)), cancellationToken))
-                .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
-                    Right: result => new OkObjectResult(MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(result)));
+                return (_sender.Send(new GetModelTypeByIdQuery(new ApplicationModelTypeGetRequestByIdDTO(ModelTypeRequestByIdDTO)), cancellationToken))
+                    .ToActionResult404(_mapper, typeof(ApplicationModelTypeResponseDTO), typeof(ModelTypeResponseDTO)) ; //    .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
+                //        Right: result => new OkObjectResult(MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(result)));
+                //
             }
         }
-
         private ModelTypeResponseDTO MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(ApplicationModelTypeResponseDTO result)
-        //=> throw new NotImplementedException("Please implement like below");
-         => new ModelTypeResponseDTO(result.ModelTypesId, result.ModelTypesName, CovertToModelResponse(result.Models));
+         => new ModelTypeResponseDTO(result.ModelTypeId, result.ModelTypeName, CovertToModelResponse(result.Models));
 
         private ICollection<ModelResponseDTO> CovertToModelResponse(ICollection<ApplicationModelResponseDTO> models)
-         //=> throw new NotImplementedException("Please implement like below");
-         => models.Select(x => new ModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName)).ToList();
+         => models.Select(x => new ModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName, null)).ToList();
 
         [ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.GetByJSONBody, Name = DocumentVersionManagerAPIEndPoints.ModelType.GetByJSONBody)]
@@ -88,14 +112,9 @@ namespace DocumentVersionManager.Api.Controllers.v1
                     Right: result => result.Match<IActionResult>(
                     Left: errors2 => new BadRequestObjectResult(errors2),
                     Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.GetById}/{result2}", dto)));
-            // Right: result2 => NewMethod(result2, dto)));
+
         }
 
-        private CreatedAtActionResult NewMethod(Guid result2, ApplicationModelTypeCreateRequestDTO dto)
-        {
-            var result = (result2);
-            return CreatedAtAction("GetById", new { result2 }, dto);
-        }
 
         private async Task<Either<GeneralFailure, Guid>> CreateModelType(ApplicationModelTypeCreateRequestDTO createType, CancellationToken cancellationToken)
         => await _sender.Send(new CreateModelTypeCommand(createType), cancellationToken);

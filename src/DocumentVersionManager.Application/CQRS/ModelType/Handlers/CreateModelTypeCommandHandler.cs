@@ -21,52 +21,12 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailure, int>> HandleKeep(CreateModelTypeCommand request, CancellationToken cancellationToken)
-        {
-            //var entity = ModelType.Create(request.modelTypesName.modelTypesName);
-            //await _unitOfWork.ModelTypesRepository.AddAsync(entity, cancellationToken);
-            //var x = await _unitOfWork.CommitAllChanges(cancellationToken);
-            //return x;
-            var entity = Domain.Entities.ModelType.Create(request.modelTypeCreateDTO.Value.ModelTypeName, Guid.NewGuid());
-
-            var x = await _unitOfWork.ModelTypeRepository.AddAsync(entity, cancellationToken);
-
-            _logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
-            return x;
-
-
-        }
 
         public async Task<Either<GeneralFailure, Guid>> Handle(CreateModelTypeCommand request, CancellationToken cancellationToken)
         {
-
             var entity = Domain.Entities.ModelType.Create(request.modelTypeCreateDTO.Value.ModelTypeName, request.modelTypeCreateDTO.Value.GuidId);
-            try
-            {
-                Either<GeneralFailure, int> px = await _unitOfWork.ModelTypeRepository.AddAsync(entity, cancellationToken);
-
-                _logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
-                return px.Map((x) => SwapIntForGuid(x, entity));
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-
-
+            return ( await _unitOfWork.ModelTypeRepository.AddAsync(entity, cancellationToken)). Map((x) =>  entity.GuidId);
         }
-
-        private Guid SwapIntForGuid(int x, Domain.Entities.ModelType entity)
-        {
-            if (x < 1)
-            {
-                return Guid.Empty;
-            }
-            return entity.GuidId;
-        }
-
 
     }
 }

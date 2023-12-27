@@ -1,5 +1,8 @@
-﻿namespace DocumentVersionManager.Application.Contracts.ResponseDTO
+﻿using DocumentVersionManager.Contracts.ResponseDTO;
+
+namespace DocumentVersionManager.Application.Contracts.ResponseDTO
 {
 
-    public record ApplicationModelTypeResponseDTO(Guid ModelTypesId, string ModelTypesName, ICollection<ApplicationModelResponseDTO> Models);
+    public record ApplicationModelTypeResponseDTO(Guid ModelTypeId, string ModelTypeName, ICollection<ApplicationModelResponseDTO> Models);
+  
 }

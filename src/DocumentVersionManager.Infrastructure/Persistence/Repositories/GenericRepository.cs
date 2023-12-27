@@ -3,6 +3,7 @@ using DocumentVersionManager.Domain.Interfaces;
 using DocumentVersionManager.DomainBase.Base;
 using LanguageExt;
 using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
 using System.Linq.Expressions;
 
 namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
@@ -116,14 +117,6 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
                 var result = _ctx.Remove(entity);
                 return await _ctx.SaveChangesAsync(cancellationToken);
 
-                // above implies that the entity was passed in as a reference 
-                //alternatively
-                // if the id was passed in as a string
-                //var entity = await _ctx.Set<T>().FindAsync(id);
-                //if (entity == null)
-                //_ctx.Set<T>().Remove(entity);
-                //return await _ctx.SaveChangesAsync(cancellationToken);
-
             }
             catch (Exception ex)
             {
@@ -202,6 +195,12 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
                 var entity = await query.AsNoTracking().FirstOrDefaultAsync(expression, cancellationToken);
                 return entity != null ? entity : GeneralFailures.DataNotFoundInRepository(expression.ToString());
 
+            }
+            catch (MySqlException ex)
+            {
+
+                //Log this error properly
+                return GeneralFailures.ExceptionThrown("GenericRepo-Add", ex.Message,ex.StackTrace);
             }
             catch (Exception ex)
             {
