@@ -32,9 +32,9 @@ namespace DocumentVersionManager.Integration.Tests
         }
 
         [Theory]
-        [InlineData("Model/", "SECONDMODELNAME")]
-        [InlineData("Model/", "7808711f-544a-423d-8d99-f00c31e35be5")]
-        // [InlineData("Model/", "")]
+        [InlineData("Models/", "SECONDMODELNAME")]
+        [InlineData("Models/", "7808711f-544a-423d-8d99-f00c31e35be5")]
+        // [InlineData("Models/", "")]
         public async Task GetModelShouldRetunHttpStatusCode_OK(string path, string item)
         {
             // act
@@ -56,7 +56,7 @@ namespace DocumentVersionManager.Integration.Tests
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri("http://localhost:5007/api/Model/JsonBody"),
+                RequestUri = new Uri("http://localhost:5007/api/Models/JsonBody"),
 
                 Content = new StringContent(json, Encoding.UTF8, "application/json")
             };
@@ -79,7 +79,7 @@ namespace DocumentVersionManager.Integration.Tests
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri("http://localhost:5007/api/Model/JsonBody"),
+                RequestUri = new Uri("http://localhost:5007/api/Models/JsonBody"),
 
                 Content = new StringContent(json, Encoding.UTF8, "application/json")
             };
@@ -95,9 +95,9 @@ namespace DocumentVersionManager.Integration.Tests
 
 
         [Theory]
-        [InlineData("Model/", "SECONDMODELNAME")]
-        [InlineData("Model/", "7808711f-544a-423d-8d99-f00c31e35be5")]
-        [InlineData("Model/", "")]
+        [InlineData("Models/", "SECONDMODELNAME")]
+        [InlineData("Models/", "7808711f-544a-423d-8d99-f00c31e35be5")]
+        [InlineData("Models/", "")]
         public async Task GetResultShoulNotBeNullModelTypeShouldASingleModelType(string path, string item)
         {
             // act
@@ -108,7 +108,7 @@ namespace DocumentVersionManager.Integration.Tests
 
 
         [Theory]
-        [InlineData("Model/", "SECONDMODELNAME")]
+        [InlineData("Models/", "SECONDMODELNAME")]
         public async Task GetByIdModelShouldASingleModelType(string path, string item)
         {
             // act
@@ -122,7 +122,7 @@ namespace DocumentVersionManager.Integration.Tests
         }
 
         [Theory]
-        [InlineData("Model/", "7808711f-544a-423d-8d99-f00c31e35be5")]
+        [InlineData("Models/", "7808711f-544a-423d-8d99-f00c31e35be5")]
         public async Task GetByIdModeShouldASingleModelType_GUID(string path, string item)
         {
 
@@ -136,7 +136,7 @@ namespace DocumentVersionManager.Integration.Tests
         }
 
         [Theory]
-        [InlineData("Model/", "")]
+        [InlineData("Models/", "")]
         public async Task GetModelShouldAListOfModelTypes(string path, string item)
         {
             // act
@@ -148,8 +148,8 @@ namespace DocumentVersionManager.Integration.Tests
         }
 
         [Theory]
-        [InlineData("Model/", "SECONDMODELNAMEXX")]
-        [InlineData("Model/", "9908711f-544a-423d-8d99-f00c31e35be5")]
+        [InlineData("Models/", "SECONDMODELNAMEXX")]
+        [InlineData("Models/", "9908711f-544a-423d-8d99-f00c31e35be5")]
 
         public async Task GetASingleModelShouldRetunHttpStatusCode_NotFound_IfItemDoesNotExit(string path, string item)
         {
@@ -176,45 +176,88 @@ namespace DocumentVersionManager.Integration.Tests
 
 
         [Theory]
-        [InlineData("Model")]
+        [InlineData("Models")]
 
-        public async Task PostShouldReturnCreated_WhenModelNameIsUniqueAndModelTypeExist(string path)
+        public async Task PostShouldReturnCreated_WhenModelNameIsUniqueAndModelTypeExistAsForeignkey(string path)
         {
             //araange
             var faker = new AutoFaker<ModelCreateRequestDTO>()
                 .RuleFor(x => x.GuidId, f => Guid.NewGuid())
                 .RuleFor(x => x.ModelName, f => f.Commerce.ProductName())
-               .RuleFor(x => x.ModelTypesName, f => "FIRSTMODELTYPE");
-            ModelCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
+               .RuleFor(x => x.ModelTypesName, f => "FIRSTMODELTYPE");// Added an existing ModelType
+            ModelCreateRequestDTO modelGetRequestDTO = faker.Generate();
 
             //act
-            var response = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
+            var response = await _httpClient.PostAsJsonAsync(path, modelGetRequestDTO);
 
             //assert
             response.StatusCode.Should().Be(HttpStatusCode.Created);
-            //  createdGuids.Add(response.Headers.Location.OriginalString.Split("/"));  
 
         }
-
         [Theory]
-        [InlineData("Model")]
+        [InlineData("Models")]
+        public async Task PostShouldReturnBadRequest_When_DuplicateModelExistForSameModelType(string path)
+        {
+            //araange
+            var faker = new AutoFaker<ModelCreateRequestDTO>()
+                .RuleFor(x => x.GuidId, f => Guid.NewGuid())
+                .RuleFor(x => x.ModelName, f => f.Commerce.ProductName())
+               .RuleFor(x => x.ModelTypesName, f => "FIRSTMODELTYPE");// Added an existing ModelType
+            ModelCreateRequestDTO modelGetRequestDTO = faker.Generate();
 
-        public async Task PostShouldReturn_BadRequest_WhenModelNameIsUniqueAndModelTypeDoesNotExist(string path)
+            //act
+            var response1 = await _httpClient.PostAsJsonAsync(path, modelGetRequestDTO);
+            var response = await _httpClient.PostAsJsonAsync(path, modelGetRequestDTO);
+            //assert
+            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+        }
+        [Theory]
+        [InlineData("Models")]
+
+        public async Task PostShouldReturn_BadRequest_WhenModelNameIsUniqueAndModelTypeDoesNotExistAsForeignKey(string path)
         {
             //araange
             var faker = new AutoFaker<ModelCreateRequestDTO>()
                 .RuleFor(x => x.GuidId, f => Guid.NewGuid())
                 .RuleFor(x => x.ModelName, f => f.Commerce.ProductName())
                .RuleFor(x => x.ModelTypesName, f => f.Commerce.ProductName());
-            ModelCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
+            ModelCreateRequestDTO modelGetRequestDTO = faker.Generate();
 
             //act
-            var response = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
+            var response = await _httpClient.PostAsJsonAsync(path, modelGetRequestDTO);
 
             //assert
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         
         }
+
+
+
+
+        [Theory]
+        [InlineData("Model")]
+
+        public async Task PostShouldCreateModelObject_WithCorrectHeaderLocation_WhenSuccessful(string path)
+        {
+            //arrange
+            //araange
+            var faker = new AutoFaker<ModelCreateRequestDTO>()
+                .RuleFor(x => x.GuidId, f => Guid.NewGuid())
+                .RuleFor(x => x.ModelName, f => f.Commerce.ProductName())
+               .RuleFor(x => x.ModelTypesName, f => "FIRSTMODELTYPE");// Added an existing ModelType
+            ModelCreateRequestDTO modelGetRequestDTO = faker.Generate();
+            var ExpetedHeaderLocation = $"{path}/{modelGetRequestDTO.GuidId}";
+
+            //act
+            var response = await _httpClient.PostAsJsonAsync(path, modelGetRequestDTO);
+
+            //assert
+
+            response.Headers.Location?.OriginalString.Should().EndWith(ExpetedHeaderLocation);
+
+        }
+
         public Task InitializeAsync() => Task.CompletedTask;
 
         public Task DisposeAsync() => Task.CompletedTask;

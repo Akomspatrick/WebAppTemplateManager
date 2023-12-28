@@ -83,14 +83,14 @@ namespace DocumentVersionManager.Api.Controllers.v1
             var dto = new ApplicationDocumentBasePathCreateRequestDTO(request);
 
             return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
-                .Bind<Either<GeneralFailure, int>>(_ => (  CreateDocumentBasePath(dto, cancellationToken).Result   ) )
+                .Bind<Either<GeneralFailure, Guid>>(_ => (  CreateDocumentBasePath(dto, cancellationToken).Result   ) )
                 .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                     Right: result => result.Match<IActionResult>(
                     Left: errors2 => new BadRequestObjectResult(errors2),
-                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.DocumentBasePath.Create}/{dto}", dto)));
+                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.DocumentBasePath.Create}/{result2}", dto)));
         }
 
-        private async Task<Either<GeneralFailure, int>> CreateDocumentBasePath(ApplicationDocumentBasePathCreateRequestDTO createType, CancellationToken cancellationToken)
+        private async Task<Either<GeneralFailure, Guid>> CreateDocumentBasePath(ApplicationDocumentBasePathCreateRequestDTO createType, CancellationToken cancellationToken)
         => await _sender.Send(new CreateDocumentBasePathCommand(createType), cancellationToken);
 
 

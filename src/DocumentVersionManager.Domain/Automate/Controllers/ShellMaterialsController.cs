@@ -83,14 +83,14 @@ namespace DocumentVersionManager.Api.Controllers.v1
             var dto = new ApplicationShellMaterialCreateRequestDTO(request);
 
             return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
-                .Bind<Either<GeneralFailure, int>>(_ => (  CreateShellMaterial(dto, cancellationToken).Result   ) )
+                .Bind<Either<GeneralFailure, Guid>>(_ => (  CreateShellMaterial(dto, cancellationToken).Result   ) )
                 .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                     Right: result => result.Match<IActionResult>(
                     Left: errors2 => new BadRequestObjectResult(errors2),
-                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ShellMaterial.Create}/{dto}", dto)));
+                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ShellMaterial.Create}/{result2}", dto)));
         }
 
-        private async Task<Either<GeneralFailure, int>> CreateShellMaterial(ApplicationShellMaterialCreateRequestDTO createType, CancellationToken cancellationToken)
+        private async Task<Either<GeneralFailure, Guid>> CreateShellMaterial(ApplicationShellMaterialCreateRequestDTO createType, CancellationToken cancellationToken)
         => await _sender.Send(new CreateShellMaterialCommand(createType), cancellationToken);
 
 

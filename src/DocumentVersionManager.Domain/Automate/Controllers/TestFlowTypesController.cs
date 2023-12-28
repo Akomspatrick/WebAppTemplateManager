@@ -83,14 +83,14 @@ namespace DocumentVersionManager.Api.Controllers.v1
             var dto = new ApplicationTestFlowTypeCreateRequestDTO(request);
 
             return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
-                .Bind<Either<GeneralFailure, int>>(_ => (  CreateTestFlowType(dto, cancellationToken).Result   ) )
+                .Bind<Either<GeneralFailure, Guid>>(_ => (  CreateTestFlowType(dto, cancellationToken).Result   ) )
                 .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                     Right: result => result.Match<IActionResult>(
                     Left: errors2 => new BadRequestObjectResult(errors2),
-                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.TestFlowType.Create}/{dto}", dto)));
+                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.TestFlowType.Create}/{result2}", dto)));
         }
 
-        private async Task<Either<GeneralFailure, int>> CreateTestFlowType(ApplicationTestFlowTypeCreateRequestDTO createType, CancellationToken cancellationToken)
+        private async Task<Either<GeneralFailure, Guid>> CreateTestFlowType(ApplicationTestFlowTypeCreateRequestDTO createType, CancellationToken cancellationToken)
         => await _sender.Send(new CreateTestFlowTypeCommand(createType), cancellationToken);
 
 

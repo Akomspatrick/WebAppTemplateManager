@@ -4,6 +4,17 @@
 
 
 ///POST  :CREATE QUERY MODELTYPE
+// This should return an error stating GUID cannot be null
+###
+POST {{baseUrl}}/ModelType
+Content-Type: application/json
+
+{
+  "modelTypeName": "NEW1hAhu1"
+}
+
+///POST  :CREATE QUERY MODELTYPE
+// This should return an error stating GUID cannot be null
 ###
 POST {{baseUrl}}/ModelType
 Content-Type: application/json

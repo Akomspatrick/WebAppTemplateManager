@@ -7,7 +7,7 @@ using DocumentVersionManager.Application.Contracts.ResponseDTO;
 using DocumentVersionManager.Domain.Errors;
 namespace DocumentVersionManager.Application.CQRS.TestFlowType.Handlers
 {
-    public  class CreateTestFlowTypeCommandHandler  :  IRequestHandler<CreateTestFlowTypeCommand, Either<GeneralFailure, int>>
+    public  class CreateTestFlowTypeCommandHandler  :  IRequestHandler<CreateTestFlowTypeCommand, Either<GeneralFailure, Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<CreateTestFlowTypeCommandHandler> _logger;
@@ -17,9 +17,9 @@ namespace DocumentVersionManager.Application.CQRS.TestFlowType.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailure, int>> Handle(CreateTestFlowTypeCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, Guid>> Handle(CreateTestFlowTypeCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
-        }
+            //Follow the format below , initial the entity variable by calling the entity Create method;
+        }var entity =null;// Domain.Entities.TestFlowType.Create(request.modelTypeCreateDTO.Value.ModelTypeName, request.modelTypeCreateDTO.Value.GuidId);return ( await _unitOfWork.TestFlowTypeRepository.AddAsync(entity, cancellationToken)). Map((x) =>  entity.GuidId);
     }
 }

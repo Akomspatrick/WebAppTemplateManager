@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.DocumentBasePath.Commands
 {
-    public  record CreateDocumentBasePathCommand(ApplicationDocumentBasePathCreateRequestDTO  CreateDocumentBasePathDTO) :  IRequest<Either<GeneralFailure, int>>;
+    public  record CreateDocumentBasePathCommand(ApplicationDocumentBasePathCreateRequestDTO  CreateDocumentBasePathDTO) :  IRequest<Either<GeneralFailure, Guid>>;
 }

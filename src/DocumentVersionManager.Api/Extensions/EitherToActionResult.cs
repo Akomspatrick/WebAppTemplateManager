@@ -1,4 +1,5 @@
 ﻿using DocumentVersionManager.Application.Contracts.ResponseDTO;
+using DocumentVersionManager.BaseModels.Entities;
 using DocumentVersionManager.Contracts.ResponseDTO;
 using DocumentVersionManager.Domain.Errors;
 using LanguageExt;
@@ -28,20 +29,6 @@ namespace DocumentVersionManager.Api.Extensions
 //404
        public static Task<IActionResult> ToActionResult404<L, R>(this Task<Either<L, R>> either, AutoMapper.IMapper _mapper, Type sourceType, Type destinationType)
         => either.Map((x) => Match404(x, _mapper,  sourceType ,destinationType));
-        //{
-        //    var p = either;
-        //    var result = p.Result;
-
-        //    var x = either.Map((x)=>Match404(x, _mapper));
-        //    var y = x.Result;
-
-        //    return x;
-        //}
-
-        //private static ModelTypeResponseDTO MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(ApplicationModelTypeResponseDTO result)
-        // => new ModelTypeResponseDTO(result.ModelTypeId, result.ModelTypeName, CovertToModelResponse(result.Models));
-        //private static ICollection<ModelResponseDTO> CovertToModelResponse(ICollection<ApplicationModelResponseDTO> models)
-        // => models.Select(x => new ModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName,null)).ToList();
 
         public static Task<IActionResult> ToActionResult404(this Task<Either<GeneralFailure, Task>> either) =>
             either.Bind(Match404);
@@ -51,24 +38,46 @@ namespace DocumentVersionManager.Api.Extensions
                                Left: l => new NotFoundObjectResult(l),
                                               Right: r => new OkObjectResult(_mapper.Map(r, sourceType, destinationType)));
 
-        //private static ModelTypeResponseDTO ConvertT<R>(R? r , AutoMapper.IMapper _mapper)
-        //{
-        //    try
-        //    {
-        //        var x=  _mapper.Map<ModelTypeResponseDTO>(r);
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        throw ex;
-        //    }
-           
-        //  return   MapApplicationModelTypeResponseDTO_To_ModelTypeResponseDTO(r as ApplicationModelTypeResponseDTO);
-        //}
-
         private async static Task<IActionResult> Match404(Either<GeneralFailure, Task> either) =>
             await either.MatchAsync<IActionResult>(
             RightAsync: async t => { await t; return new OkResult(); },
-                                     Left: e => new NotFoundObjectResult(e));  
+                                     Left: e => new NotFoundObjectResult(e));
+
+
+
+        //ToActionResultCreated
+        public static Task<IActionResult> ToActionResultCreated<L, R>(this Task<Either<L, R>> either, string endPoint, object data)
+         => either.Map((x) => MatchCreated(x, endPoint, data ));
+
+        public static Task<IActionResult> ToActionResultCreated(this Task<Either<GeneralFailure, Task>> either) =>
+            either.Bind(MatchCreated);
+
+        private static IActionResult MatchCreated<L, R>(this Either<L, R> either, string endPoint, object data)
+        {
+
+            var p = either;
+            var x = endPoint;
+            var y = data;
+
+            return either.Match<IActionResult>(
+                                Left: l => new BadRequestObjectResult(l),
+                                               Right: r => { 
+                                                   var t = r.ToString();
+                                                   var p= new CreatedResult($"{endPoint}/{r}",  data);
+                                                   return p; 
+                                               }) ;
+        }
+        
+        private async static Task<IActionResult> MatchCreated(Either<GeneralFailure, Task> either) =>
+            await either.MatchAsync<IActionResult>(
+            RightAsync: async t => { await t; return new OkResult(); },
+                                     Left: e => new BadRequestObjectResult(e));
+
+
+
+
+
+
+        //
     }
 }

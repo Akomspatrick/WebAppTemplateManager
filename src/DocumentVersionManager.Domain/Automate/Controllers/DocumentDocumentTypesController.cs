@@ -83,14 +83,14 @@ namespace DocumentVersionManager.Api.Controllers.v1
             var dto = new ApplicationDocumentDocumentTypeCreateRequestDTO(request);
 
             return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
-                .Bind<Either<GeneralFailure, int>>(_ => (  CreateDocumentDocumentType(dto, cancellationToken).Result   ) )
+                .Bind<Either<GeneralFailure, Guid>>(_ => (  CreateDocumentDocumentType(dto, cancellationToken).Result   ) )
                 .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
                     Right: result => result.Match<IActionResult>(
                     Left: errors2 => new BadRequestObjectResult(errors2),
-                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.DocumentDocumentType.Create}/{dto}", dto)));
+                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.DocumentDocumentType.Create}/{result2}", dto)));
         }
 
-        private async Task<Either<GeneralFailure, int>> CreateDocumentDocumentType(ApplicationDocumentDocumentTypeCreateRequestDTO createType, CancellationToken cancellationToken)
+        private async Task<Either<GeneralFailure, Guid>> CreateDocumentDocumentType(ApplicationDocumentDocumentTypeCreateRequestDTO createType, CancellationToken cancellationToken)
         => await _sender.Send(new CreateDocumentDocumentTypeCommand(createType), cancellationToken);
 
 

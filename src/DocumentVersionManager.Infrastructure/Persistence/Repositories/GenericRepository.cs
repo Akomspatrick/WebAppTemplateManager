@@ -31,24 +31,26 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
             try
             {
-                var x = _ctx.Add<T>(entity);
-                var p = _ctx.SaveChanges();
-                //await _ctx.AddAsync<T>(entity, cancellationToken);
-                //return await _ctx.SaveChangesAsync(cancellationToken);
-                var t = Task.FromResult(p);
-                return await t;
+                //var x = _ctx.Add<T>(entity);
+                //var p = _ctx.SaveChanges();
+
+                //var t = Task.FromResult(p);
+                //return await t;
+
+                await _ctx.AddAsync<T>(entity, cancellationToken);
+                return await _ctx.SaveChangesAsync(cancellationToken);
             }
             catch (DbUpdateException ex)
             {
                 //Log this error properly
-                throw ex;
-                return GeneralFailures.ProblemAddingEntityIntoDbContext(entity.GuidId.ToString());
+               // throw ex;
+                return GeneralFailures.ExceptionThrown("GenericRepository-AddAsync","Problem Adding Entity with Guid"+ entity.GuidId, ex?.InnerException?.Message);
             }
             catch (Exception ex)
             {
                 //Log this error properly
                 throw ex;
-                return GeneralFailures.ProblemAddingEntityIntoDbContext(entity.GuidId.ToString());
+               // return GeneralFailures.ProblemAddingEntityIntoDbContext(entity.GuidId.ToString());
             }
 
 

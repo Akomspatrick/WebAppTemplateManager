@@ -4,5 +4,5 @@ using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.ShellMaterial.Commands
 {
-    public  record CreateShellMaterialCommand(ApplicationShellMaterialCreateRequestDTO  CreateShellMaterialDTO) :  IRequest<Either<GeneralFailure, int>>;
+    public  record CreateShellMaterialCommand(ApplicationShellMaterialCreateRequestDTO  CreateShellMaterialDTO) :  IRequest<Either<GeneralFailure, Guid>>;
 }
