@@ -19,7 +19,6 @@ namespace DocumentVersionManager.Api.Controllers.v1
 {
     public class ModelTypesController : TheBaseController<ModelTypesController>
     {
-       
         public ModelTypesController(ILogger<ModelTypesController> logger, ISender sender, IMapper mapper) : base(logger, sender, mapper) { }
 
 
@@ -28,104 +27,36 @@ namespace DocumentVersionManager.Api.Controllers.v1
         public  Task<IActionResult> Get(CancellationToken cToken) => _sender.Send(new GetAllModelTypeQuery(), cToken).ToActionResult();
 
 
-
         [ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.GetById, Name = DocumentVersionManagerAPIEndPoints.ModelType.GetById)]
         public  Task<IActionResult> GetById([FromRoute] string NameOrGuid, CancellationToken cancellationToken)
         {
-            var _ = NameOrGuid.EnsureInputIsNotEmpty("Input Cannot be null");
-            var result = Guid.TryParse(NameOrGuid, out Guid guid);
-            if (result)
-            {
-                var ModelTypeRequestByIdDTO = new ModelTypeGetRequestByGuidDTO(guid);
-                return ( _sender.Send(new GetModelTypeByGuidQuery(new ApplicationModelTypeGetRequestByGuidDTO(ModelTypeRequestByIdDTO)), cancellationToken))
-                .ToActionResult404( _mapper, typeof(ApplicationModelTypeResponseDTO), typeof(ModelTypeResponseDTO));
-                
-            }
-            else
-            {
-                var ModelTypeRequestByIdDTO = new ModelTypeGetRequestByIdDTO(NameOrGuid);
-                return (_sender.Send(new GetModelTypeByIdQuery(new ApplicationModelTypeGetRequestByIdDTO(ModelTypeRequestByIdDTO)), cancellationToken))
-                    .ToActionResult404(_mapper, typeof(ApplicationModelTypeResponseDTO), typeof(ModelTypeResponseDTO)) ; //    .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
-             }
+            return Guid.TryParse(NameOrGuid, out Guid guid)  ?
+                 (_sender.Send(new GetModelTypeByGuidQuery(new ApplicationModelTypeGetRequestByGuidDTO(new ModelTypeGetRequestByGuidDTO(guid))), cancellationToken))
+                .ToActionResult404(_mapper, typeof(ApplicationModelTypeResponseDTO), typeof(ModelTypeResponseDTO))
+                :
+                 (_sender.Send(new GetModelTypeByIdQuery(new ApplicationModelTypeGetRequestByIdDTO(new ModelTypeGetRequestByIdDTO(NameOrGuid))), cancellationToken))
+                    .ToActionResult404(_mapper, typeof(ApplicationModelTypeResponseDTO), typeof(ModelTypeResponseDTO)); 
         }
-
 
         [ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.GetByJSONBody, Name = DocumentVersionManagerAPIEndPoints.ModelType.GetByJSONBody)]
         public  Task<IActionResult> GetByJSONBody([FromBody] ModelTypeGetRequestDTO request, CancellationToken cancellationToken)
-        {
-            var x = request.EnsureInputIsNotNull("Input Cannot be null");
-            return ( _sender.Send(new GetModelTypeQuery(new ApplicationModelTypeGetRequestDTO(request)), cancellationToken))
+            => ( _sender.Send(new GetModelTypeQuery(new ApplicationModelTypeGetRequestDTO(request)), cancellationToken))
                 .ToActionResult404(_mapper, typeof(ApplicationModelTypeResponseDTO), typeof(ModelTypeResponseDTO));
-        }
-
-        //[HttpPost(template: DocumentVersionManagerAPIEndPoints.ModelType.Create, Name = DocumentVersionManagerAPIEndPoints.ModelType.Create)]
-        //public async Task<IActionResult> Create(ModelTypeCreateRequestDTO request, CancellationToken cancellationToken)
-        //{
-        //    var dto = new ApplicationModelTypeCreateRequestDTO(request);
-
-        //    return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
-        //        .Bind<Either<GeneralFailure, Guid>>(_ => ( _sender.Send(new CreateModelTypeCommand(dto), cancellationToken).Result))
-        //        .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
-        //            Right: result => result.Match<IActionResult>(
-        //            Left: errors2 => new BadRequestObjectResult(errors2),
-        //            Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.Create}/{result2}", dto)));
-
-        //}
-
 
         [HttpPost(template: DocumentVersionManagerAPIEndPoints.ModelType.Create, Name = DocumentVersionManagerAPIEndPoints.ModelType.Create)]
         public  Task<IActionResult> Create(ModelTypeCreateRequestDTO request, CancellationToken cancellationToken)
-        {
-            var dto = new ApplicationModelTypeCreateRequestDTO(request);
-
-            //return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
-            //    .Bind<Either<GeneralFailure, Guid>>(_ => (_sender.Send(new CreateModelTypeCommand(dto), cancellationToken).Result))
-            //    .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
-            //                         Right: result => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.Create}/{result}", dto));
-            var x = dto.EnsureInputIsNotEmpty("Input Cannot be Empty");
-            return (_sender.Send(new CreateModelTypeCommand(dto), cancellationToken))
-              .ToActionResultCreated($"{DocumentVersionManagerAPIEndPoints.ModelType.Create}", dto);
-              //.Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
-              //                     Right: result => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.Create}/{result}", dto));
-
-
-        }
-
-        //private async Task<Either<GeneralFailure, Guid>> CreateModelType(ApplicationModelTypeCreateRequestDTO dto, CancellationToken cancellationToken)
-        //=> await _sender.Send(new CreateModelTypeCommand(dto), cancellationToken);
-
-
+             => (_sender.Send(new CreateModelTypeCommand(new ApplicationModelTypeCreateRequestDTO(request)), cancellationToken))
+              .ToActionResultCreated($"{DocumentVersionManagerAPIEndPoints.ModelType.Create}", new ApplicationModelTypeCreateRequestDTO(request));
+        
         [HttpPut(template: DocumentVersionManagerAPIEndPoints.ModelType.Update, Name = DocumentVersionManagerAPIEndPoints.ModelType.Update)]
-        public async Task<IActionResult> Update(ModelTypeUpdateRequestDTO request, CancellationToken cancellationToken)
-        {
-            var dto = new ApplicationModelTypeUpdateRequestDTO(request);
-
-            return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
-                .Bind<Either<GeneralFailure, int>>(modelType =>  _sender.Send(new UpdateModelTypeCommand(dto), cancellationToken).Result)
-                .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
-                     Right: result => result.Match<IActionResult>(
-                     Left: errors2 => new BadRequestObjectResult(errors2),
-                     Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ModelType.Create}/{dto}", dto)));
-
-        }
-
-        //private async Task<Either<GeneralFailure, int>> UpdateModelType(ApplicationModelTypeUpdateRequestDTO updateType, CancellationToken cancellationToken)
-        //=> await _sender.Send(new UpdateModelTypeCommand(updateType), cancellationToken);
-
-
-    
+        public  Task<IActionResult> Update(ModelTypeUpdateRequestDTO request, CancellationToken cancellationToken)
+                => (_sender.Send(new UpdateModelTypeCommand(new ApplicationModelTypeUpdateRequestDTO(request)), cancellationToken))
+                  .ToActionResultCreated($"{DocumentVersionManagerAPIEndPoints.ModelType.Create}", new ApplicationModelTypeUpdateRequestDTO(request));
+   
         [HttpDelete(template: DocumentVersionManagerAPIEndPoints.ModelType.Delete, Name = DocumentVersionManagerAPIEndPoints.ModelType.Delete)]
         public  Task<IActionResult> Delete([FromRoute] Guid request, CancellationToken cancellationToken)
-        {
-            var result = new ModelTypeDeleteRequestDTO(request);
-            var guid = new ApplicationModelTypeDeleteRequestDTO(result);
-            var _ = guid.EnsureInputIsNotEmpty("Input Cannot be null");
-   
-            return _sender.Send(new DeleteModelTypeCommand(guid), cancellationToken).ToActionResult();
-        }
-
-
+            => _sender.Send(new DeleteModelTypeCommand(new ApplicationModelTypeDeleteRequestDTO(new ModelTypeDeleteRequestDTO(request))), cancellationToken).ToActionResult();
     }
 }
