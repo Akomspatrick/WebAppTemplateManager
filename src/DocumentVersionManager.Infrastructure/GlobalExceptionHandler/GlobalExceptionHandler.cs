@@ -25,11 +25,9 @@ namespace DocumentVersionManager.Infrastructure.GlobalExceptionHandler
         }
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
-
+            _logger.LogError(exception, $"Exception occured {exception.Message} {exception.Source}");
 
             var exceptionHandlerFeature =httpContext.Features.Get<IExceptionHandlerFeature>();
-
-
           
             (int statusCode, string title) = exception switch
             {   InvalidCastException invalidCastException => (400, invalidCastException.Message),
@@ -43,15 +41,16 @@ namespace DocumentVersionManager.Infrastructure.GlobalExceptionHandler
                 //ForbidException => (403, "Forbidden"),
                 BadHttpRequestException => (400, "Bad request"),
                // NotFoundException notfnotfound => (404, "Directory not found"),
-                _ => (500, "An error occured" + exception.Source)
+                _ => (500, "An error occured @" + exception.Message)
             };
 
-            _logger.LogError(exception, $"Exception occured {exception.Message} {exception.Source}");
+           
 
             var problemDetails = new ProblemDetails
             {
                 //  Detail = exception.Message, //details are not passes to the client but are logged
-                Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
+                Detail = exception.InnerException?.Message,
+                Type = nameof(exception),
                 Title = title,//"An error occured from " + exception.Source,
                 Status = statusCode,// (int)HttpStatusCode.InternalServerError,
                 Instance = exceptionHandlerFeature?.Endpoint?.ToString() ??    httpContext.Request.Path,

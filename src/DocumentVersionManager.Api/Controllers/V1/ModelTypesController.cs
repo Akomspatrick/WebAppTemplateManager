@@ -31,6 +31,7 @@ namespace DocumentVersionManager.Api.Controllers.v1
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ModelType.GetById, Name = DocumentVersionManagerAPIEndPoints.ModelType.GetById)]
         public  Task<IActionResult> GetById([FromRoute] string NameOrGuid, CancellationToken cancellationToken)
         {
+            throw new System.NotImplementedException();
             return Guid.TryParse(NameOrGuid, out Guid guid)  ?
                  (_sender.Send(new GetModelTypeByGuidQuery(new ApplicationModelTypeGetRequestByGuidDTO(new ModelTypeGetRequestByGuidDTO(guid))), cancellationToken))
                 .ToActionResult404(_mapper, typeof(ApplicationModelTypeResponseDTO), typeof(ModelTypeResponseDTO))
