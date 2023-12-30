@@ -6,7 +6,7 @@ using System.Net.Mime;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-
+// wathis this video https://www.youtube.com/watch?v=Zwqo8lX7uP8
 namespace MailSender
 {
     public static class SendUsingGSmtp

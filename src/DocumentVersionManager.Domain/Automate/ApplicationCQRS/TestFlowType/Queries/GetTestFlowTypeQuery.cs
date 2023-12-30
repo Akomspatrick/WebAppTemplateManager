@@ -1,11 +1,11 @@
-using DocumentVersionManager.Application.Contracts.RequestDTO;
-using DocumentVersionManager.Application.Contracts.ResponseDTO;
+using DocumentVersionManager.Contracts.RequestDTO;
+using DocumentVersionManager.Contracts.ResponseDTO;
 using DocumentVersionManager.Domain.Errors;
 using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.TestFlowType.Queries{
-    public  record GetTestFlowTypeQuery(ApplicationTestFlowTypeGetRequestDTO  RequestTestFlowTypeDTO) :  IRequest<Either<GeneralFailure, ApplicationTestFlowTypeResponseDTO>>;
-    public  record GetTestFlowTypeByGuidQuery(ApplicationTestFlowTypeGetRequestByGuidDTO  RequestTestFlowTypeDTO) :  IRequest<Either<GeneralFailure, ApplicationTestFlowTypeResponseDTO>>;
-    public  record GetTestFlowTypeByIdQuery(ApplicationTestFlowTypeGetRequestByIdDTO  RequestTestFlowTypeDTO) :  IRequest<Either<GeneralFailure, ApplicationTestFlowTypeResponseDTO>>;
-    public  record GetAllTestFlowTypeQuery :  IRequest<Either<GeneralFailure, IEnumerable<ApplicationTestFlowTypeResponseDTO>>>;
+    public  record GetTestFlowTypeQuery(TestFlowTypeGetRequestDTO  RequestTestFlowTypeDTO) :  IRequest<Either<GeneralFailure, TestFlowTypeResponseDTO>>;
+    public  record GetTestFlowTypeByGuidQuery(TestFlowTypeGetRequestByGuidDTO  RequestTestFlowTypeDTO) :  IRequest<Either<GeneralFailure, TestFlowTypeResponseDTO>>;
+    public  record GetTestFlowTypeByIdQuery(TestFlowTypeGetRequestByIdDTO  RequestTestFlowTypeDTO) :  IRequest<Either<GeneralFailure, TestFlowTypeResponseDTO>>;
+    public  record GetAllTestFlowTypeQuery :  IRequest<Either<GeneralFailure, IEnumerable<TestFlowTypeResponseDTO>>>;
 }

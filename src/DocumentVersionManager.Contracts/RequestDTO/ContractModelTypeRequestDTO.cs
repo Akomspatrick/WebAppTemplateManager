@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 namespace DocumentVersionManager.Contracts.RequestDTO
 {
 
-    //public record ModelTypeCreateDTO(string modelTypesId, string modelTypesName);
-    //public record ModelTypeUpdateDTO(string modelTypesId, string modelTypesName);
-    //public record ModelTypeRequestDTO(string modelTypesId);
-    //public record ModelTypeDeleteDTO(string modelTypesId);
+
     public record ModelTypeCreateRequestDTO(Guid GuidId, string ModelTypeName);
 
 

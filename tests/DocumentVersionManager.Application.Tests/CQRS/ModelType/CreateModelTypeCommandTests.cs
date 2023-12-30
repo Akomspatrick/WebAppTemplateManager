@@ -1,5 +1,5 @@
 ﻿using DocumentVersionManager.Application.Contracts.Logging;
-using DocumentVersionManager.Application.Contracts.RequestDTO;
+
 using DocumentVersionManager.Application.CQRS.ModelType.Commands;
 using DocumentVersionManager.Application.CQRS.ModelType.Handlers;
 using DocumentVersionManager.Contracts.RequestDTO;
@@ -20,10 +20,8 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
 
     {
         private static readonly ModelTypeCreateRequestDTO modelTypeCreateDTO = new(Guid.NewGuid(), "ML101");
-        private static readonly CreateModelTypeCommand createModelTypeCommand = new(new ApplicationModelTypeCreateRequestDTO(modelTypeCreateDTO));
-
+        private static readonly CreateModelTypeCommand createModelTypeCommand = new(CreateModelTypeDTO: modelTypeCreateDTO);
         private readonly CreateModelTypeCommandHandler createModelTypeCommandHandler;
-
         private readonly IUnitOfWork _unitOfWorkMock;
         private readonly IAppLogger<CreateModelTypeCommandHandler> _loggerMock;
 
@@ -46,6 +44,7 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
             result.IsRight.Should().BeTrue();
 
         }
+        // implement below for exception handling
         public async Task CreateModelTypeCommandHandler_ShouldThrowAggregateException_WhenNewModelTypeIsAdded()
         {
             //Arrange

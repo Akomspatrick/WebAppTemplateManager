@@ -1,6 +1,6 @@
 ﻿using DocumentVersionManager.Application.Contracts.Logging;
-using DocumentVersionManager.Application.Contracts.ResponseDTO;
 using DocumentVersionManager.Application.CQRS.Model.Queries;
+using DocumentVersionManager.Contracts.ResponseDTO;
 using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
 using LanguageExt;
@@ -8,7 +8,7 @@ using MediatR;
 
 namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 {
-    public class GetModelQueryHandler : IRequestHandler<GetModelQuery, Either<GeneralFailure, ApplicationModelResponseDTO>>
+    public class GetModelQueryHandler : IRequestHandler<GetModelQuery, Either<GeneralFailure, ModelResponseDTO>>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -18,12 +18,12 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
-        public async Task<Either<GeneralFailure, ApplicationModelResponseDTO>> Handle(GetModelQuery request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, ModelResponseDTO>> Handle(GetModelQuery request, CancellationToken cancellationToken)
         {
 
             return (await _unitOfWork.ModelRepository
-                    .GetMatch(s => (s.ModelName == request.RequestModelDTO.Value.ModelName), null, cancellationToken))
-                    .Map((result) => new ApplicationModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypeName, null));
+                    .GetMatch(s => (s.ModelName == request.RequestModelDTO.ModelName), null, cancellationToken))
+                    .Map((result) => new ModelResponseDTO(result.GuidId, result.ModelName, result.ModelTypeName, null));
         }
 
     }

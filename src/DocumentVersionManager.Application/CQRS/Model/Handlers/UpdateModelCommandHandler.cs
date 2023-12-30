@@ -21,7 +21,7 @@ namespace DocumentVersionManager.Application.CQRS.Model.Handlers
 
         public async Task<Either<GeneralFailure, int>> Handle(UpdateModelCommand request, CancellationToken cancellationToken)
         {
-            var entity = Domain.Entities.Model.Create(request.UpdateModelDTO.Value.ModelName, request.UpdateModelDTO.Value.ModelTypesName, Guid.NewGuid());
+            var entity = Domain.Entities.Model.Create(request.UpdateModelDTO.ModelName, request.UpdateModelDTO.ModelTypesName, Guid.NewGuid());
 
 
             //entity.AddDomainEvent(new ModelUpdatedEvent(entity));

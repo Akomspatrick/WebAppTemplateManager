@@ -6,7 +6,7 @@
 ///POST  :CREATE QUERY MODELTYPE
 // This should return an error stating GUID cannot be null
 ###
-POST {{baseUrl}}/ModelType
+POST {{baseUrl}}/ModelTypes
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 ///POST  :CREATE QUERY MODELTYPE
 // This should return an error stating GUID cannot be null
 ###
-POST {{baseUrl}}/ModelType
+POST {{baseUrl}}/ModelTypes
 Content-Type: application/json
 
 {
@@ -27,19 +27,19 @@ Content-Type: application/json
 ###
 //GET SINGLE  MODELTYPE QUERY 
 
-GET {{baseUrl}}/ModelType/ML-0011
+GET {{baseUrl}}/ModelTypes/ML-0011
 ###
 //GET SINGLE  MODELTYPE QUERY 
-GET {{baseUrl}}/ModelType/FIRSTMODELTYPE
+GET {{baseUrl}}/ModelTypes/FIRSTMODELTYPE
 
 ###
 //GET SINGLE  MODELTYPE QUERY 
-GET {{baseUrl}}/ModelType/58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b
+GET {{baseUrl}}/ModelTypes/58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b
 
 ###
 //GET SINGLE  MODELTYPE QUERY 
 
-GET {{baseUrl}}/ModelType/JsonBody
+GET {{baseUrl}}/ModelTypes/JsonBody
 Content-Type: application/json
 
 {
@@ -51,7 +51,7 @@ Content-Type: application/json
 
 ###
 ///GET ALL  MODELTYPE QUERY 
-GET http://localhost:5007/api/ModelType
+GET http://localhost:5007/api/ModelTypes
 
 ###
 ///GET ALL  MODELTYPE QUERY 
@@ -75,12 +75,12 @@ Content-Type: application/json
 ###
 // START OF MODEL
 //GET ALL  MODELTYPE QUERY
-GET {{baseUrl}}/Model/
+GET {{baseUrl}}/Models/
 ###
 //GET SINGLE  MODELTYPE QUERY 
 // by JsonBody
 
-GET {{baseUrl}}/Model/JsonBody
+GET {{baseUrl}}/Models/JsonBody
 Content-Type: application/json
 
 {
@@ -88,19 +88,19 @@ Content-Type: application/json
 }
 ###
 //GET SINGLE  MODEL by Guid
-GET {{baseUrl}}/Model/b27c2c19-522b-49d1-83bf-e80d4dde8c63
+GET {{baseUrl}}/Models/b27c2c19-522b-49d1-83bf-e80d4dde8c63
 
 
 ###
 // Get Single Model by ModelName
-GET {{baseUrl}}/Model/FIRSTMODELNAME
+GET {{baseUrl}}/Models/FIRSTMODELNAME
 
 
 
 
 ///POST  :CREATE QUERY MODEL
 ###
-POST {{baseUrl}}/Model
+POST {{baseUrl}}/Models
 Content-Type: application/json
 
 {

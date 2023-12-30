@@ -20,6 +20,6 @@ namespace DocumentVersionManager.Application.CQRS.DocumentDocumentType.Handlers
         public async Task<Either<GeneralFailure, Guid>> Handle(CreateDocumentDocumentTypeCommand request, CancellationToken cancellationToken)
         {
             //Follow the format below , initial the entity variable by calling the entity Create method;
-        }var entity =null;// Domain.Entities.DocumentDocumentType.Create(request.modelTypeCreateDTO.Value.ModelTypeName, request.modelTypeCreateDTO.Value.GuidId);return ( await _unitOfWork.DocumentDocumentTypeRepository.AddAsync(entity, cancellationToken)). Map((x) =>  entity.GuidId);
+        }var entity =null;// Domain.Entities.DocumentDocumentType.Create(request.modelTypeCreateDTO.ModelTypeName, request.modelTypeCreateDTO.Value.GuidId);return ( await _unitOfWork.DocumentDocumentTypeRepository.AddAsync(entity, cancellationToken)). Map((x) =>  entity.GuidId);
     }
 }

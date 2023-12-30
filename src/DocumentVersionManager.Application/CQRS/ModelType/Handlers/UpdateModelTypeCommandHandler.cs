@@ -1,6 +1,6 @@
 ﻿using DocumentVersionManager.Application.Contracts.Logging;
-using DocumentVersionManager.Application.Contracts.RequestDTO;
 using DocumentVersionManager.Application.CQRS.ModelType.Commands;
+using DocumentVersionManager.Contracts.RequestDTO;
 using DocumentVersionManager.Domain.Entities;
 using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
@@ -22,14 +22,14 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
         public async Task<Either<GeneralFailure, int>> Handle(UpdateModelTypeCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException("Operation Not Allowed ");
-            var entity = Domain.Entities.ModelType.Create(request.modelTypeUpdateDTO.Value.ModelTypeName, request.modelTypeUpdateDTO.Value.ModelTypeId);
+            var entity = Domain.Entities.ModelType.Create(request.UpdateModelTypeDTO.ModelTypeName, request.UpdateModelTypeDTO.ModelTypeId);
             return await _unitOfWork.ModelTypeRepository.UpdateAsync(entity, cancellationToken);
             //_logger.LogInformation("AddNewModelTypeCommandHandler- New data Added");
         }
 
-        private Domain.Entities.ModelType modify(Domain.Entities.ModelType x, ApplicationModelTypeUpdateRequestDTO modelTypeUpdateDTO)
+        private Domain.Entities.ModelType modify(Domain.Entities.ModelType x, ModelTypeUpdateRequestDTO modelTypeUpdateDTO)
         {
-            return Domain.Entities.ModelType.Create(modelTypeUpdateDTO.Value.ModelTypeName, x.GuidId);
+            return Domain.Entities.ModelType.Create(modelTypeUpdateDTO.ModelTypeName, x.GuidId);
         }
     }
 }

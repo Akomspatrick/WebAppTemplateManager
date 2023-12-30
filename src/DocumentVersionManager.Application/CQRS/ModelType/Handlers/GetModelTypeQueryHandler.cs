@@ -1,6 +1,7 @@
 ﻿using DocumentVersionManager.Application.Contracts.Logging;
-using DocumentVersionManager.Application.Contracts.ResponseDTO;
+
 using DocumentVersionManager.Application.CQRS.ModelType.Queries;
+using DocumentVersionManager.Contracts.ResponseDTO;
 using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
 using LanguageExt;
@@ -8,7 +9,7 @@ using MediatR;
 
 namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 {
-    public class GetModelTypeQueryHandler : IRequestHandler<GetModelTypeQuery, Either<GeneralFailure, ApplicationModelTypeResponseDTO>>
+    public class GetModelTypeQueryHandler : IRequestHandler<GetModelTypeQuery, Either<GeneralFailure, ModelTypeResponseDTO>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<GetModelTypeQueryHandler> _logger;
@@ -17,19 +18,19 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
-        public async Task<Either<GeneralFailure, ApplicationModelTypeResponseDTO>> Handle(GetModelTypeQuery request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, ModelTypeResponseDTO>> Handle(GetModelTypeQuery request, CancellationToken cancellationToken)
         {
 
             List<string> includes = new List<string>() { "Models" };
             return (await _unitOfWork.ModelTypeRepository
-                    .GetMatch(s => (s.ModelTypeName == request.modelTypeRequestDTO.Value.ModelTypeName), includes, cancellationToken))
-                    .Map((result) => new ApplicationModelTypeResponseDTO(result.GuidId, result.ModelTypeName, convertToModelDto(result.Models)));
+                    .GetMatch(s => (s.ModelTypeName == request.RequestModelTypeDTO.ModelTypeName), includes, cancellationToken))
+                    .Map((result) => new ModelTypeResponseDTO(result.GuidId, result.ModelTypeName, convertToModelDto(result.Models)));
 
         }
 
-        private ICollection<ApplicationModelResponseDTO> convertToModelDto(IEnumerable<Domain.Entities.Model> models)
+        private ICollection<ModelResponseDTO> convertToModelDto(IEnumerable<Domain.Entities.Model> models)
         {
-            return models.Select(x => new ApplicationModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName, null)).ToList();
+            return models.Select(x => new ModelResponseDTO(x.GuidId, x.ModelName, x.ModelTypeName, null)).ToList();
         }
     }
 }

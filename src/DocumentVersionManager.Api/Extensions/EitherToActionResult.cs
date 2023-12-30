@@ -1,4 +1,4 @@
-﻿using DocumentVersionManager.Application.Contracts.ResponseDTO;
+﻿
 using DocumentVersionManager.BaseModels.Entities;
 using DocumentVersionManager.Contracts.ResponseDTO;
 using DocumentVersionManager.Domain.Errors;
@@ -27,17 +27,17 @@ namespace DocumentVersionManager.Api.Extensions
 
 
 //404
-       public static Task<IActionResult> ToActionResult404<L, R>(this Task<Either<L, R>> either, AutoMapper.IMapper _mapper, Type sourceType, Type destinationType)
-        => either.Map((x) => Match404(x, _mapper,  sourceType ,destinationType));
+       public static Task<IActionResult> ToActionResult404<L, R>(this Task<Either<L, R>> either)
+        => either.Map((x) => Match404(x));
 
         public static Task<IActionResult> ToActionResult404(this Task<Either<GeneralFailure, Task>> either) =>
             either.Bind(Match404);
 
-        private static IActionResult Match404<L, R>(this Either<L, R> either, AutoMapper.IMapper _mapper, Type sourceType ,Type destinationType) =>
+        private static IActionResult Match404<L, R>(this Either<L, R> either) =>
             either.Match<IActionResult>(
                                Left: l => new NotFoundObjectResult(l),
-                                              Right: r => new OkObjectResult(_mapper.Map(r, sourceType, destinationType)));
-
+                                            
+                                              Right: r => new OkObjectResult(r));
         private async static Task<IActionResult> Match404(Either<GeneralFailure, Task> either) =>
             await either.MatchAsync<IActionResult>(
             RightAsync: async t => { await t; return new OkResult(); },

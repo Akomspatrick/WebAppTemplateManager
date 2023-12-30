@@ -9,7 +9,7 @@ using MediatR;
 
 namespace DocumentVersionManager.Application.CQRS.DocumentType.Handler
 {
-    public class CreateDocumentTypeCommandHandler : IRequestHandler<CreateDocumentTypeCommand, Either<GeneralFailure, int>>
+    public class CreateDocumentTypeCommandHandler : IRequestHandler<CreateDocumentTypeCommand, Either<GeneralFailure, Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<CreateModelTypeCommandHandler> _logger;
@@ -20,12 +20,12 @@ namespace DocumentVersionManager.Application.CQRS.DocumentType.Handler
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailure, int>> Handle(CreateDocumentTypeCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, Guid>> Handle(CreateDocumentTypeCommand request, CancellationToken cancellationToken)
         {
-            var entity = Domain.Entities.DocumentType.Create(request.documentTypeName.DocumentTypeName, Guid.NewGuid());
+          //  var entity = Domain.Entities.DocumentType.Create(request.CreateDocumentTypeDTO.Value.ToString(), Guid.NewGuid());
 
-            return await _unitOfWork.DocumentTypeRepository.AddAsync(entity, cancellationToken);
-
+      //return await _unitOfWork.DocumentTypeRepository.AddAsync(entity, cancellationToken);
+            return    null;
         }
 
     }

@@ -14,15 +14,15 @@ namespace DocumentVersionManager.Api.Controllers.v1
     {
         protected ILogger<T> _logger;
         protected ISender _sender;
-        protected readonly IMapper _mapper;
-        public TheBaseController(ILogger<T> logger, ISender sender, IMapper mapper)
+    
+        public TheBaseController(ILogger<T> logger, ISender sender)
         {
             _logger = logger;
             _sender = sender;
-            _mapper = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<MappingProfile>();
-            }).CreateMapper();
+            //_mapper = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.AddProfile<MappingProfile>();
+            //}).CreateMapper();
         }
     }
 }
