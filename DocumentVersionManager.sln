@@ -51,9 +51,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentVersionManager.Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailSender", "src\MailSender\MailSender.csproj", "{0D379605-2C17-4ECF-8DB6-44A9B3CC3116}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentVersionManager.Domain.Tests", "tests\DocumentVersionManager.Domain.Tests\DocumentVersionManager.Domain.Tests.csproj", "{F0195184-78E5-48E8-AEA4-5DC96FAA500F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentVersionManager.Domain.Tests", "tests\DocumentVersionManager.Domain.Tests\DocumentVersionManager.Domain.Tests.csproj", "{F0195184-78E5-48E8-AEA4-5DC96FAA500F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExtTestingConsoleApp", "LanguageExtTestingConsoleApp\LanguageExtTestingConsoleApp.csproj", "{95EC33CD-93EE-47D2-B4EB-483087091302}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageExtTestingConsoleApp", "LanguageExtTestingConsoleApp\LanguageExtTestingConsoleApp.csproj", "{95EC33CD-93EE-47D2-B4EB-483087091302}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRApp", "SignalRApp\SignalRApp.csproj", "{0E8D77F1-344A-4AFF-A992-4D286DC16263}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -133,6 +135,10 @@ Global
 		{95EC33CD-93EE-47D2-B4EB-483087091302}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95EC33CD-93EE-47D2-B4EB-483087091302}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95EC33CD-93EE-47D2-B4EB-483087091302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E8D77F1-344A-4AFF-A992-4D286DC16263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E8D77F1-344A-4AFF-A992-4D286DC16263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E8D77F1-344A-4AFF-A992-4D286DC16263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E8D77F1-344A-4AFF-A992-4D286DC16263}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

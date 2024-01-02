@@ -1,4 +1,6 @@
 
+using SignalRApp.Controllers;
+
 namespace SignalRApp
 {
     public class Program
@@ -13,6 +15,7 @@ namespace SignalRApp
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
 
@@ -27,7 +30,11 @@ namespace SignalRApp
 
             app.UseAuthorization();
 
-
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+              //  endpoints.MapHub<ChatHubController>("/weatherforecasthub");
+            });
             app.MapControllers();
 
             app.Run();
