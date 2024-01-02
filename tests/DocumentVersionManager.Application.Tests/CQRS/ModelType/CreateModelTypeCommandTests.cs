@@ -70,16 +70,16 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
                          Left: l => l.Should().BeEquivalentTo(GeneralFailures.ProblemAddingEntityIntoDbContext("2a7c336a-163c-487d-88ca-c41cc129f118")));//INTERESTED ONLY IN LEFT SIDE
 
         }
-        //[Fact(Skip))]
-        //public async Task LogInformationShoulBeCalledWhenmethodIsInvoked()
-        //{
-        //    //Arrange
-        //    //  _unitOfWorkMock.ModelTypesRepository.AddAsync(Arg.Any<Domain.Entities.ModelTypes>(), Arg.Any<CancellationToken>()).Returns(GeneralFailure.ProblemAddingEntityIntoDbContext);
-        //    //Act
-        //    var _ = await createModelTypeCommandHandler.Handle(createModelTypeCommand, CancellationToken.None);
-        //    //Assert
-        //    _loggerMock.Received(1).LogInformation(Arg.Any<string>());
-        //}
+        [Fact(Skip = "I have removed logging  from this handler so test will fail for now, but its a good sample for testing logging")]
+        public async Task LogInformationShoulBeCalledWhenmethodIsInvoked()
+        {
+            //Arrange
+            //  _unitOfWorkMock.ModelTypesRepository.AddAsync(Arg.Any<Domain.Entities.ModelTypes>(), Arg.Any<CancellationToken>()).Returns(GeneralFailure.ProblemAddingEntityIntoDbContext);
+            //Act
+            var _ = await createModelTypeCommandHandler.Handle(createModelTypeCommand, CancellationToken.None);
+            //Assert
+            _loggerMock.Received(1).LogInformation(Arg.Any<string>());
+        }
         [Fact]
         public async Task CreateModelTypeCommandHandler_ShouldCall_AddAsyncOnce_WhenCreateModelTypeCommandhandleIsCalled()
         {

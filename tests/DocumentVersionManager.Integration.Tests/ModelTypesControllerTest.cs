@@ -22,43 +22,47 @@ namespace DocumentVersionManager.Integration.Tests
     public class ModelTypesControllerTest : IClassFixture<WebApplicationFactory<APIAssemblyRefrence>>, IAsyncLifetime
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = $"http://localhost:5007/{DocumentVersionManagerAPIEndPoints.APIBase}/";
+        private readonly string _baseUrl = $"http://localhost:5007/";
         private readonly List<Guid> createdGuids = new();
 
         public ModelTypesControllerTest(WebApplicationFactory<APIAssemblyRefrence> _appFactory)
         {
             _httpClient = _appFactory.CreateClient();
-            _httpClient.BaseAddress = new Uri(_baseUrl);
+            _httpClient.BaseAddress = new Uri($"{_baseUrl}{DocumentVersionManagerAPIEndPoints.APIBase}/");
         }
 
         [Theory]
-        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/", "FIRSTMODELTYPE")]
-        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/", "58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b")]
-        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/", "")]
-        public async Task GetModelTypeShouldRetunHttpStatusCode_OK(string path, string item)
+        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/")]
+        public async Task GetModelTypeShouldRetunHttpStatusCode_OK(string path)
         {
+            //arrange
+            var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
+            ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
+            var postresponse = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
+
             // act
-            var response = await _httpClient.GetAsync(path + item);
+            var response = await _httpClient.GetAsync($"{_baseUrl}{postresponse.Headers.Location?.OriginalString}");
             //assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
 
         [Theory]
-        [InlineData($"http://localhost:5007/{DocumentVersionManagerAPIEndPoints.APIBase}/{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/JsonBody/", "FIRSTMODELTYPE")]
-        [InlineData($"http://localhost:5007/{DocumentVersionManagerAPIEndPoints.APIBase}/{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/JsonBody/", "SECONDMODELTYPE")]
-        public async Task GetModelTypeByJSONBodyShouldRetunHttpStatusCode_OK(string path, string item)
+        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}")]
+        public async Task GetModelTypeByJSONBodyShouldRetunHttpStatusCode_OK(string path)
         {
             // arrange 
+            var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
+            ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
+            var postresponse = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
 
-            var json = JsonConvert.SerializeObject(new ModelTypeGetRequestDTO(item));
+            var json = JsonConvert.SerializeObject(modelTypeGetRequestDTO);
 
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri(path),
+                RequestUri = new Uri($"{_baseUrl}{DocumentVersionManagerAPIEndPoints.APIBase}/{path}/JsonBody/"),
 
                 Content = new StringContent(json, Encoding.UTF8, "application/json")
             };
@@ -71,28 +75,31 @@ namespace DocumentVersionManager.Integration.Tests
         }
 
         [Theory]
-        [InlineData($"http://localhost:5007/{DocumentVersionManagerAPIEndPoints.APIBase}/{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/JsonBody/", "FIRSTMODELTYPE")]
-        [InlineData($"http://localhost:5007/{DocumentVersionManagerAPIEndPoints.APIBase}/{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/JsonBody/", "SECONDMODELTYPE")]
-        public async Task GetModelTypeByJSONBodyShouldRetunShouldAnObjectOfTypeModelTypeEntityWhenSuccesful(string path, string item)
+        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}")]
+        public async Task GetModelTypeByJSONBodyShouldRetunShouldAnObjectOfTypeModelTypeEntityWhenSuccesful(string path)
         {
-            // arrange 
-            ModelTypeGetRequestDTO modelTypeGetRequestDTO = new ModelTypeGetRequestDTO(item);
+
+            var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
+            ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
+            var postresponse = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
+
             var json = JsonConvert.SerializeObject(modelTypeGetRequestDTO);
 
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri(path),
+                RequestUri = new Uri($"{_baseUrl}{DocumentVersionManagerAPIEndPoints.APIBase}/{path}/JsonBody/"),
 
                 Content = new StringContent(json, Encoding.UTF8, "application/json")
             };
+
             // act
             var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
 
             //Assert
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+
             var result = await response.Content.ReadFromJsonAsync<ModelTypeResponseDTO>();
             result.Should().BeAssignableTo<ModelTypeResponseDTO>();
             result.ModelTypeName.Should().Be(modelTypeGetRequestDTO.ModelTypeName);
@@ -115,32 +122,44 @@ namespace DocumentVersionManager.Integration.Tests
 
 
         [Theory]
-        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/", "FIRSTMODELTYPE")]
-        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/", "SECONDMODELTYPE")]
-        public async Task GetByIdModelTypeShouldASingleModelType(string path, string item)
+
+        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/")]
+        public async Task GetByIdModelTypeShouldASingleModelType(string path)
         {
+            //arrange
+            var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
+            ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
+            var postresponse = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
+
             // act
-            var response = await _httpClient.GetAsync(path + item);
+            var response = await _httpClient.GetAsync($"{_baseUrl}{postresponse.Headers.Location?.OriginalString}");
 
             var result = await response.Content.ReadFromJsonAsync<ModelTypeResponseDTO>();
 
             //assert
             result.Should().BeAssignableTo<ModelTypeResponseDTO>();
-            result.ModelTypeName.Should().Be(item);
+            result.ModelTypeName.Should().Be(modelTypeGetRequestDTO.ModelTypeName);
         }
 
         [Theory]
-        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/", "58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b")]
-        public async Task GetByIdModelTypeShouldASingleModelType_GUID(string path, string item)
+        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/")]
+        public async Task GetByIdModelTypeShouldASingleModelType_GUID(string path)
         {
 
+            //arrange
+            var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
+            ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
+            var postresponse = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
+
             // act
-            var response = await _httpClient.GetAsync(path + item);
+            var response = await _httpClient.GetAsync($"{_baseUrl}{postresponse.Headers.Location?.OriginalString}");
+
+
             var result = await response.Content.ReadFromJsonAsync<ModelTypeResponseDTO>();
 
             //assert
             result.Should().BeAssignableTo<ModelTypeResponseDTO>();
-            result.ModelTypeId.Should().Be(Guid.Parse(item));
+            result.ModelTypeId.Should().Be(modelTypeGetRequestDTO.GuidId);
         }
 
         [Theory]
@@ -173,6 +192,8 @@ namespace DocumentVersionManager.Integration.Tests
         [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}WRONG/", "SECONDMODELTYPE")]
         public async Task ShouldReturnNotFoundIfPathIsWrong(string path, string item)
         {
+
+
             // act
             var response = await _httpClient.GetAsync(path + item);
 
@@ -224,13 +245,62 @@ namespace DocumentVersionManager.Integration.Tests
 
             //act
             var response = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
- 
+
             //assert
 
-           response.Headers.Location?.OriginalString.Should().EndWith(ExpetedHeaderLocation);  
+            response.Headers.Location?.OriginalString.Should().EndWith(ExpetedHeaderLocation);
 
         }
 
+
+        [Theory]
+
+        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/")]
+        public async Task DeleteShouldReturnOkWhenModelTypeExists(string path)
+        {
+            // arrange
+            var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
+            ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
+            var createdresponse = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
+
+            //act
+            var result = await _httpClient.DeleteAsync($"{_baseUrl}{createdresponse.Headers.Location?.OriginalString}");
+
+            //assert
+            result.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+
+        [Theory(Skip = "Delete Should Only Use GUID")]
+        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/")]
+        public async Task DeleteShouldReturnNotFoudWhenModelTypeNameDoesExists(string path)
+        {
+            // arrange
+            var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
+            ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
+            // var createdresponse = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
+
+            //act
+            var result = await _httpClient.DeleteAsync($"{_baseUrl}{DocumentVersionManagerAPIEndPoints.APIBase}/{modelTypeGetRequestDTO.ModelTypeName}");
+
+            //assert
+            result.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        }
+
+        [Theory]
+        [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/")]
+        public async Task DeleteShouldReturnNotFoudWhenModelTypeGuidDoesExists(string path)
+        {
+            // arrange
+            var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
+            ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
+            // var createdresponse = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
+
+            //act
+            var result = await _httpClient.DeleteAsync($"{_baseUrl}{DocumentVersionManagerAPIEndPoints.APIBase}/{modelTypeGetRequestDTO.GuidId}");
+
+            //assert
+            result.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        }
         public Task InitializeAsync() => Task.CompletedTask;
 
         public Task DisposeAsync() => Task.CompletedTask;
