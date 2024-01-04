@@ -55,7 +55,6 @@ namespace DocumentVersionManager.Integration.Tests
             var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
             ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
             var postresponse = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
-
             var json = JsonConvert.SerializeObject(modelTypeGetRequestDTO);
 
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -78,11 +77,10 @@ namespace DocumentVersionManager.Integration.Tests
         [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}")]
         public async Task GetModelTypeByJSONBodyShouldRetunShouldAnObjectOfTypeModelTypeEntityWhenSuccesful(string path)
         {
-
+            //arrange
             var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
             ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
             var postresponse = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
-
             var json = JsonConvert.SerializeObject(modelTypeGetRequestDTO);
 
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -99,13 +97,10 @@ namespace DocumentVersionManager.Integration.Tests
 
             //Assert
 
-
             var result = await response.Content.ReadFromJsonAsync<ModelTypeResponseDTO>();
             result.Should().BeAssignableTo<ModelTypeResponseDTO>();
             result.ModelTypeName.Should().Be(modelTypeGetRequestDTO.ModelTypeName);
-
         }
-
 
 
         [Theory]
@@ -145,7 +140,6 @@ namespace DocumentVersionManager.Integration.Tests
         [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}/")]
         public async Task GetByIdModelTypeShouldASingleModelType_GUID(string path)
         {
-
             //arrange
             var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
             ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
@@ -153,8 +147,6 @@ namespace DocumentVersionManager.Integration.Tests
 
             // act
             var response = await _httpClient.GetAsync($"{_baseUrl}{postresponse.Headers.Location?.OriginalString}");
-
-
             var result = await response.Content.ReadFromJsonAsync<ModelTypeResponseDTO>();
 
             //assert
@@ -192,8 +184,6 @@ namespace DocumentVersionManager.Integration.Tests
         [InlineData($"{DocumentVersionManagerAPIEndPoints.ModelType.Controller}WRONG/", "SECONDMODELTYPE")]
         public async Task ShouldReturnNotFoundIfPathIsWrong(string path, string item)
         {
-
-
             // act
             var response = await _httpClient.GetAsync(path + item);
 
@@ -226,11 +216,10 @@ namespace DocumentVersionManager.Integration.Tests
             ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
 
             //act
-            var response1 = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
+            var ignoreResult = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
             var response = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
             //assert
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-
         }
 
 
@@ -247,9 +236,7 @@ namespace DocumentVersionManager.Integration.Tests
             var response = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
 
             //assert
-
             response.Headers.Location?.OriginalString.Should().EndWith(ExpetedHeaderLocation);
-
         }
 
 
@@ -277,7 +264,6 @@ namespace DocumentVersionManager.Integration.Tests
             // arrange
             var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
             ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
-            // var createdresponse = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
 
             //act
             var result = await _httpClient.DeleteAsync($"{_baseUrl}{DocumentVersionManagerAPIEndPoints.APIBase}/{modelTypeGetRequestDTO.ModelTypeName}");
@@ -293,7 +279,6 @@ namespace DocumentVersionManager.Integration.Tests
             // arrange
             var faker = new AutoFaker<ModelTypeCreateRequestDTO>().RuleFor(x => x.ModelTypeName, f => f.Commerce.ProductName());
             ModelTypeCreateRequestDTO modelTypeGetRequestDTO = faker.Generate();
-            // var createdresponse = await _httpClient.PostAsJsonAsync(path, modelTypeGetRequestDTO);
 
             //act
             var result = await _httpClient.DeleteAsync($"{_baseUrl}{DocumentVersionManagerAPIEndPoints.APIBase}/{modelTypeGetRequestDTO.GuidId}");

@@ -70,7 +70,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             DocumentBasePathId = "DOCPATHID",
                             DocumentDescription = "SIMPLE DESCRITION OF DOCUMENT",
                             GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
-                            Timestamp = new DateTime(2023, 12, 21, 20, 23, 12, 536, DateTimeKind.Utc).AddTicks(7447)
+                            Timestamp = new DateTime(2024, 1, 4, 0, 4, 4, 991, DateTimeKind.Utc).AddTicks(7195)
                         },
                         new
                         {
@@ -82,7 +82,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             DocumentBasePathId = "DOCPATHID",
                             DocumentDescription = "SIMPLE DESCRITION OF DOCUMENT",
                             GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
-                            Timestamp = new DateTime(2023, 12, 21, 20, 23, 12, 536, DateTimeKind.Utc).AddTicks(7467)
+                            Timestamp = new DateTime(2024, 1, 4, 0, 4, 4, 991, DateTimeKind.Utc).AddTicks(7211)
                         },
                         new
                         {
@@ -94,7 +94,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             DocumentBasePathId = "DOCPATHID",
                             DocumentDescription = "SIMPLE DESCRITION OF DOCUMENT",
                             GuidId = new Guid("7808711f-544a-423d-8d99-f00c31e35be5"),
-                            Timestamp = new DateTime(2023, 12, 21, 20, 23, 12, 536, DateTimeKind.Utc).AddTicks(7469)
+                            Timestamp = new DateTime(2024, 1, 4, 0, 4, 4, 991, DateTimeKind.Utc).AddTicks(7212)
                         },
                         new
                         {
@@ -106,7 +106,7 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             DocumentBasePathId = "DOCPATHID",
                             DocumentDescription = "SIMPLE DESCRITION OF DOCUMENT",
                             GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
-                            Timestamp = new DateTime(2023, 12, 21, 20, 23, 12, 536, DateTimeKind.Utc).AddTicks(7471)
+                            Timestamp = new DateTime(2024, 1, 4, 0, 4, 4, 991, DateTimeKind.Utc).AddTicks(7215)
                         });
                 });
 
@@ -298,7 +298,13 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     b.Property<Guid>("GuidId")
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("ModelTypeGroupName")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("ModelTypeName");
+
+                    b.HasIndex("ModelTypeGroupName");
 
                     b.ToTable("ModelTypes");
 
@@ -306,17 +312,64 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                         new
                         {
                             ModelTypeName = "FIRSTMODELTYPE",
-                            GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63")
+                            GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63"),
+                            ModelTypeGroupName = "LOADCELLS_GROUP"
                         },
                         new
                         {
                             ModelTypeName = "SECONDMODELTYPE",
-                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b")
+                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
+                            ModelTypeGroupName = "TESTLINKS_GROUP"
                         },
                         new
                         {
                             ModelTypeName = "THIRDMODELTYPE",
-                            GuidId = new Guid("3c69923e-a68e-4348-b06c-7007f527355d")
+                            GuidId = new Guid("3c69923e-a68e-4348-b06c-7007f527355d"),
+                            ModelTypeGroupName = "SCALES/PAD"
+                        });
+                });
+
+            modelBuilder.Entity("DocumentVersionManager.Domain.Entities.ModelTypeGroup", b =>
+                {
+                    b.Property<string>("ModelTypeGroupName")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("GuidId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("TestingMode")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("ModelTypeGroupName");
+
+                    b.ToTable("ModelTypeGroups");
+
+                    b.HasData(
+                        new
+                        {
+                            ModelTypeGroupName = "LOADCELLS_GROUP",
+                            Description = "FLOW TYPES FOR LOADCELL",
+                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
+                            TestingMode = "AUTOMATIC"
+                        },
+                        new
+                        {
+                            ModelTypeGroupName = "TESTLINKS_GROUP",
+                            Description = "FLOW TYPES FOR TESTLINKS",
+                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
+                            TestingMode = "MANUAL"
+                        },
+                        new
+                        {
+                            ModelTypeGroupName = "SCALES/PAD",
+                            Description = "FLOW TYPES FOR SCALES/PAD",
+                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
+                            TestingMode = "MANUAL"
                         });
                 });
 
@@ -451,20 +504,20 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             MinimumDeadLoad = 1,
                             ModelVersionName = "FIRST_VERSION_FIRSTMODEL_NAME",
                             NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 12, 21, 20, 23, 12, 543, DateTimeKind.Utc).AddTicks(812),
+                            NTEPCertificationTimestamp = new DateTime(2024, 1, 4, 0, 4, 4, 996, DateTimeKind.Utc).AddTicks(3306),
                             NominalOutput = 1.0,
                             NominalOutputPercentage = 1m,
                             NonlinearityPercentage = 1m,
                             NumberOfGauges = 1,
                             OIMLCertificationId = "OIMLCERTIFICATIONID1",
-                            OIMLCertificationTimestamp = new DateTime(2023, 12, 21, 20, 23, 12, 543, DateTimeKind.Utc).AddTicks(812),
+                            OIMLCertificationTimestamp = new DateTime(2024, 1, 4, 0, 4, 4, 996, DateTimeKind.Utc).AddTicks(3306),
                             Resistance = 1,
                             SafeLoad = 1,
                             ShellMaterialName = "SHELLMATERIAL1",
                             TemperingHardnessHigh = 1,
                             TemperingHardnessLow = 1,
                             TestPointDirection = true,
-                            Timestamp = new DateTime(2023, 12, 21, 20, 23, 12, 543, DateTimeKind.Utc).AddTicks(808),
+                            Timestamp = new DateTime(2024, 1, 4, 0, 4, 4, 996, DateTimeKind.Utc).AddTicks(3304),
                             UltimateLoad = 1,
                             UserName = "OLADEJI",
                             VersionDescription = "SPECIAL DESIGN",
@@ -486,20 +539,20 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             MinimumDeadLoad = 2,
                             ModelVersionName = "SECOND_VERSION_FIRSTMODELNAME",
                             NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 12, 21, 20, 23, 12, 543, DateTimeKind.Utc).AddTicks(846),
+                            NTEPCertificationTimestamp = new DateTime(2024, 1, 4, 0, 4, 4, 996, DateTimeKind.Utc).AddTicks(3329),
                             NominalOutput = 2.0,
                             NominalOutputPercentage = 2m,
                             NonlinearityPercentage = 2m,
                             NumberOfGauges = 2,
                             OIMLCertificationId = "OIMLCERTIFICATIONID1",
-                            OIMLCertificationTimestamp = new DateTime(2023, 12, 21, 20, 23, 12, 543, DateTimeKind.Utc).AddTicks(846),
+                            OIMLCertificationTimestamp = new DateTime(2024, 1, 4, 0, 4, 4, 996, DateTimeKind.Utc).AddTicks(3330),
                             Resistance = 2,
                             SafeLoad = 2,
                             ShellMaterialName = "SHELLMATERIAL1",
                             TemperingHardnessHigh = 2,
                             TemperingHardnessLow = 2,
                             TestPointDirection = true,
-                            Timestamp = new DateTime(2023, 12, 21, 20, 23, 12, 543, DateTimeKind.Utc).AddTicks(839),
+                            Timestamp = new DateTime(2024, 1, 4, 0, 4, 4, 996, DateTimeKind.Utc).AddTicks(3327),
                             UltimateLoad = 2,
                             UserName = "OLADEJI",
                             VersionDescription = "AUTO DESIGN TO COMBAT SPLIILING",
@@ -521,20 +574,20 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             MinimumDeadLoad = 1,
                             ModelVersionName = "FIRST_VERSION_SECONDMODELNAME",
                             NTEPCertificationId = "NTEPCERTIFICATIONID",
-                            NTEPCertificationTimestamp = new DateTime(2023, 12, 21, 20, 23, 12, 543, DateTimeKind.Utc).AddTicks(851),
+                            NTEPCertificationTimestamp = new DateTime(2024, 1, 4, 0, 4, 4, 996, DateTimeKind.Utc).AddTicks(3333),
                             NominalOutput = 1.0,
                             NominalOutputPercentage = 1m,
                             NonlinearityPercentage = 1m,
                             NumberOfGauges = 1,
                             OIMLCertificationId = "OIMLCERTIFICATIONID1",
-                            OIMLCertificationTimestamp = new DateTime(2023, 12, 21, 20, 23, 12, 543, DateTimeKind.Utc).AddTicks(852),
+                            OIMLCertificationTimestamp = new DateTime(2024, 1, 4, 0, 4, 4, 996, DateTimeKind.Utc).AddTicks(3333),
                             Resistance = 1,
                             SafeLoad = 1,
                             ShellMaterialName = "SHELLMATERIAL1",
                             TemperingHardnessHigh = 1,
                             TemperingHardnessLow = 1,
                             TestPointDirection = true,
-                            Timestamp = new DateTime(2023, 12, 21, 20, 23, 12, 543, DateTimeKind.Utc).AddTicks(851),
+                            Timestamp = new DateTime(2024, 1, 4, 0, 4, 4, 996, DateTimeKind.Utc).AddTicks(3332),
                             UltimateLoad = 1,
                             UserName = "OLADEJI",
                             VersionDescription = "INITIAL DESIGN",
@@ -576,6 +629,10 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     b.Property<string>("ModelName")
                         .IsRequired()
                         .HasColumnType("varchar(128)");
+
+                    b.Property<string>("ModelTypeGroupName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("ModelVersionId")
                         .HasColumnType("int");
@@ -653,51 +710,6 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                             ShellMaterialName = "ShellMaterial4",
                             Alloy = true,
                             GuidId = new Guid("b27c2c19-522b-49d1-83bf-e80d4dde8c63")
-                        });
-                });
-
-            modelBuilder.Entity("DocumentVersionManager.Domain.Entities.TestFlowType", b =>
-                {
-                    b.Property<int>("TestingModeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<Guid>("GuidId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("TestingMode")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("TestingModeId");
-
-                    b.ToTable("TestFlowTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            TestingModeId = 1,
-                            Description = "FLOW TYPES FOR LOADCELL",
-                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
-                            TestingMode = "AUTOMATIC"
-                        },
-                        new
-                        {
-                            TestingModeId = 2,
-                            Description = "FLOW TYPES FOR TESTLINKS",
-                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
-                            TestingMode = "MANUAL"
-                        },
-                        new
-                        {
-                            TestingModeId = 3,
-                            Description = "FLOW TYPES FOR SCALES/PAD",
-                            GuidId = new Guid("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"),
-                            TestingMode = "SCALES/PAD"
                         });
                 });
 
@@ -798,6 +810,17 @@ namespace DocumentVersionManager.Infrastructure.Migrations
                     b.Navigation("ModelTypes");
                 });
 
+            modelBuilder.Entity("DocumentVersionManager.Domain.Entities.ModelType", b =>
+                {
+                    b.HasOne("DocumentVersionManager.Domain.Entities.ModelTypeGroup", "ModelTypeGroup")
+                        .WithMany("ModelTypes")
+                        .HasForeignKey("ModelTypeGroupName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ModelTypeGroup");
+                });
+
             modelBuilder.Entity("DocumentVersionManager.Domain.Entities.ModelVersion", b =>
                 {
                     b.HasOne("DocumentVersionManager.Domain.Entities.Model", "Models")
@@ -857,6 +880,11 @@ namespace DocumentVersionManager.Infrastructure.Migrations
             modelBuilder.Entity("DocumentVersionManager.Domain.Entities.ModelType", b =>
                 {
                     b.Navigation("Models");
+                });
+
+            modelBuilder.Entity("DocumentVersionManager.Domain.Entities.ModelTypeGroup", b =>
+                {
+                    b.Navigation("ModelTypes");
                 });
 
             modelBuilder.Entity("DocumentVersionManager.Domain.Entities.ModelVersion", b =>

@@ -25,7 +25,7 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             return (await _unitOfWork.ModelTypeRepository
                   .GetAllAsync(s => true, new List<string>() { "Models" }, null, cancellationToken))
                   .Map(task => task
-                 .Select(result => new ModelTypeResponseDTO(result.GuidId, result.ModelTypeName, ConvertTo(result.Models))));
+                 .Select(result => new ModelTypeResponseDTO(result.GuidId, result.ModelTypeName, result.ModelTypeGroupName, ConvertTo(result.Models))));
         }
 
         private ICollection<ModelResponseDTO> ConvertTo(IEnumerable<Domain.Entities.Model> models)

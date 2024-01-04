@@ -31,10 +31,10 @@ namespace DocumentVersionManager.Infrastructure.Persistence
         public DbSet<DocumentType> DocumentTypes { get; private set; }
         public DbSet<Model> Models { get; private set; }
         public DbSet<ModelType> ModelTypes { get; private set; }
+        public DbSet<ModelTypeGroup> ModelTypeGroups { get; private set; }
         public DbSet<ModelVersion> ModelVersions { get; private set; }
         public DbSet<Product> Products { get; private set; }
         public DbSet<ShellMaterial> ShellMaterials { get; private set; }
-        public DbSet<TestFlowType> TestFlowTypes { get; private set; }
         public DbSet<TestPoint> TestPoints { get; private set; }
     }
 }

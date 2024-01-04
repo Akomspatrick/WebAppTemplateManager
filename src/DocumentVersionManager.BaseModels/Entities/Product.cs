@@ -14,6 +14,7 @@
         public required int CableLength { get; init; } = 0;
         public required int InspectionResult { get; init; } = 0;
         public string DefaultTestingMode { get; init; } = string.Empty; // Manual, Automatic from the Model Version
+        public string ModelTypeGroupName { get; init; } = string.Empty;// DefaultTestingMode and ModelTypeGroupName should be taken from the ModelTypeGroup via ModelType
         public string UsedCalibrationMode { get; init; } = string.Empty; // Manual, Automatic from the Model Type
         public string ThermexPurcharseOrderNo { get; init; } = string.Empty;
         public string MachiningPurcharseOrderNo { get; init; } = string.Empty;

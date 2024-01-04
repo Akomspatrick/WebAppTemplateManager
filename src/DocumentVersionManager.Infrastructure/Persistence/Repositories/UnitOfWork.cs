@@ -34,7 +34,6 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
 
 
         // Work on before 
-        public ICapacityDocumentRepository CapacityDocumentRepository => throw new NotImplementedException();
 
         public IDocumentBasePathRepository DocumentBasePathRepository => throw new NotImplementedException();
 
@@ -47,9 +46,11 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
         public IShellMaterialRepository ShellMaterialRepository => throw new NotImplementedException();
 
 
-        public ITestFlowTypeRepository TestFlowTypeRepository => throw new NotImplementedException();
+        //  public ITestFlowTypeRepository TestFlowTypeRepository => throw new NotImplementedException();
 
         public ITestPointRepository TestPointRepository => throw new NotImplementedException();
+
+        public IModelTypeGroupRepository ModelTypeGroupRepository => throw new NotImplementedException();
 
         // AsyncRepository may not work as expected because it will keep generating new instance of GenericRepository for each call
         // therefore i will go back to indivial repository instance untill i figure out how to make it work

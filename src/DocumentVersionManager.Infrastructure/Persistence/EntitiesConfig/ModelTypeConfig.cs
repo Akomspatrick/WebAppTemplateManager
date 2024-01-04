@@ -14,11 +14,11 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
             entity.HasKey(e => e.ModelTypeName);
             entity.Property(e => e.ModelTypeName).IsRequired().HasMaxLength(FixedValues.modelTypesNameMaxLength);
 
-            //
+            entity.HasOne<ModelTypeGroup>(e => e.ModelTypeGroup).WithMany(e => e.ModelTypes).HasForeignKey(e => new { e.ModelTypeGroupName });
 
-            entity.HasData(ModelType.Create("FIRSTMODELTYPE", Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
-                           ModelType.Create("SECONDMODELTYPE", Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b")),
-                           ModelType.Create("THIRDMODELTYPE", Guid.Parse("3c69923e-a68e-4348-b06c-7007f527355d")));
+            entity.HasData(ModelType.Create("FIRSTMODELTYPE", "LOADCELLS_GROUP", Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")),
+                           ModelType.Create("SECONDMODELTYPE", "TESTLINKS_GROUP", Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b")),
+                           ModelType.Create("THIRDMODELTYPE", "SCALES/PAD", Guid.Parse("3c69923e-a68e-4348-b06c-7007f527355d")));
         }
     }
     public class ModelConfig : IEntityTypeConfiguration<Model>
@@ -36,15 +36,15 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
         }
     }
 
-    public class TestFlowTypePathConfig : IEntityTypeConfiguration<TestFlowType>
+    public class ModelTypeGroupPathConfig : IEntityTypeConfiguration<ModelTypeGroup>
     {
-        public void Configure(EntityTypeBuilder<TestFlowType> entity)
+        public void Configure(EntityTypeBuilder<ModelTypeGroup> entity)
         {
-            entity.HasKey(e => new { e.TestingModeId });
+            entity.HasKey(e => new { e.ModelTypeGroupName });
             entity.Property(e => e.TestingMode).IsRequired();
-            entity.HasData(TestFlowType.Create(1, "AUTOMATIC", "FLOW TYPES FOR LOADCELL", Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b")),
-                TestFlowType.Create(2, "MANUAL", "FLOW TYPES FOR TESTLINKS", Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b")),
-                TestFlowType.Create(3, "SCALES/PAD", "FLOW TYPES FOR SCALES/PAD", Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b")));
+            entity.HasData(ModelTypeGroup.Create("LOADCELLS_GROUP", "AUTOMATIC", "FLOW TYPES FOR LOADCELL", Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b")),
+                ModelTypeGroup.Create("TESTLINKS_GROUP", "MANUAL", "FLOW TYPES FOR TESTLINKS", Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b")),
+                ModelTypeGroup.Create("SCALES/PAD", "MANUAL", "FLOW TYPES FOR SCALES/PAD", Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b")));
 
 
         }
@@ -78,27 +78,6 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
         }
     }
 
-    // public static ModelVersion Create(int modelVersionId, string versionDescription, string modelVersionName,
-    //     string modelName, string defaultTestingMode, 
-    //     DateTime timestamp, string userName, 
-    //     int capacity, Double nominalOutput, decimal nominalOutputPercentage, decimal nonlinearityPercentage, int minimumDeadLoad, Double vMin, int nMax, int safeLoad, int ultimateLoad, string shellMaterialName, Boolean alloy,
-    //     int defaultCableLength, int numberOfGauges, int resistance, string cCNumber, string accuracyClass, string application,
-    //     int temperingHardnessLow, int temperingHardnessHigh, string nTEPCertificationId, DateTime nTEPCertificationTimestamp, string oIMLCertificationId, DateTime oIMLCertificationTimestamp, Boolean testPointDirection, Guid guidId)
-
-
-    //     public static ModelVersion Create(Guid modelVersionGUID, string modelVersionName, int modelVersionId, string versionDescription,
-    //     string modelName, string defaultTestingMode,
-    //     string username, DateTime timestamp,
-    // int capacity, double nominalOutput, decimal nominalOutputPercentage, decimal  nonlinearityPercentage, int minimumDeadLoad, double vMin, int nMax, int safeLoad, int ultimateLoad, stringshellMaterialName, bool alloy,
-    // int defaultCableLength,int numberOfGauges,int resistance, string cCNumber, string @class, string application,
-
-
-
-    //int temperingHardnessLow,   int temperingHardnessHigh, string nTEPCertificationId, DateTime nTEPCertificationTimestamp, string  oIMLCertificationId, DateTime oIMLCertificationTimestamp, bool testPointDirection
-
-
-
-    //)
     public class DocumentConfig : IEntityTypeConfiguration<Document>
     {
         public void Configure(EntityTypeBuilder<Document> entity)
@@ -116,8 +95,6 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
     }
 
 
-
-
     public class DocumentTypeConfig : IEntityTypeConfiguration<DocumentType>
     {
         public void Configure(EntityTypeBuilder<DocumentType> entity)
@@ -131,48 +108,6 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
                    DocumentType.Create("Wiring", Guid.Parse("b27c2c19-522b-49d1-83bf-e80d4dde8c63")));
         }
     }
-
-
-    //public class SpecificationConfig : IEntityTypeConfiguration<Specification>
-    //{
-    //    public void Configure(EntityTypeBuilder<Specification> entity)
-    //    {
-    //        //entity.HasKey(e => new { e.Capacity, e.ModelName, e.ModelVersionId });
-    //        entity.HasKey(e => new { e.ModelName, e.ModelVersionId });
-    //        entity.Property(e => e.Capacity).IsRequired();
-
-
-    //        entity.HasOne<ShellMaterial>(e => e.ShellMaterial).WithMany(e => e.CapacitySpecifications)
-    //            .HasForeignKey(e => new { e.ShellMaterialName });
-    //        entity.HasOne<ModelVersion>(e => e.ModelVersion).WithOne(e => e.Specification).HasForeignKey<Specification>(e => new { e.ModelName, e.ModelVersionId });
-    //        // .HasForeignKey(e => new { e.ModelName, e.ModelVersionId });
-
-    //        entity.HasData(
-    //            Specification.Create(
-    //            100,  1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL1", true, 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
-    //            , 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID1", DateTime.UtcNow,true),
-
-    //                  //      Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 1,
-    //                  //101, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
-    //                  //, 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
-
-    //                  //      Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 1,
-    //                  //102, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
-    //                  //, 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
-
-    //                  Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "FIRSTMODELNAME", 2,
-    //            100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL2", true, 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
-    //            , 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID2", DateTime.UtcNow),
-
-
-    //            Specification.Create(Guid.Parse("58dcf5c5-5a00-4ffa-bb37-9374a8d3c69b"), "SECONDMODELNAME", 1,
-    //            100, DateTime.UtcNow, "OLADEJI", 1, 1, 1, 1, 1, 1, 1, 1, "SHELLMATERIAL3", true, 20, 1, 1, "CCNUMBER", "CLASS", "APPLICATION", 1
-    //            , 1, "NTEPCERTIFICATIONID", DateTime.UtcNow, "OIMLCERTIFICATIONID3", DateTime.UtcNow));
-    //    }
-    //}
-
-
-
 
 
     public class DocumentDocumentTypeConfig : IEntityTypeConfiguration<DocumentDocumentType>
@@ -224,9 +159,6 @@ namespace DocumentVersionManager.Infrastructure.Persistence.EntitiesConfig
 
 
             entity.HasKey(e => new { e.ModelName, e.ModelVersionId, e.CapacityTestPoint });
-
-
-
             entity.HasOne<ModelVersion>(e => e.ModelVersion).WithMany(e => e.TestPoints)
                 .HasForeignKey(e => new { e.ModelName, e.ModelVersionId });
             //  .HasPrincipalKey(e => new { e.ModelName, e.ModelVersionId, e.Capacity });

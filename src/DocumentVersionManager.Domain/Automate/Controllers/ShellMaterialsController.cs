@@ -1,4 +1,6 @@
 using DocumentVersionManager.Api.Extentions;
+using DocumentVersionManager.Application.Contracts.RequestDTO;
+using DocumentVersionManager.Application.Contracts.ResponseDTO;
 using DocumentVersionManager.Application.CQRS.ShellMaterial.Commands;
 using DocumentVersionManager.Application.CQRS.ShellMaterial.Queries;
 using DocumentVersionManager.Contracts.RequestDTO;
@@ -18,35 +20,111 @@ namespace DocumentVersionManager.Api.Controllers.v1
 
         [ProducesResponseType(typeof(IEnumerable<ShellMaterialResponseDTO>), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ShellMaterial.Get, Name = DocumentVersionManagerAPIEndPoints.ShellMaterial.Get)]
-        public Task<IActionResult> Get(CancellationToken cToken) => _sender.Send(new GetAllShellMaterialQuery(), cToken).ToActionResult();
+        public async Task<IActionResult> Get( CancellationToken cancellationToken)
+        {
+             return (await _sender.Send<Either<GeneralFailure, IEnumerable<ApplicationShellMaterialResponseDTO>>>(new GetAllShellMaterialQuery(), cancellationToken))
+            .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+                Right: result => new OkObjectResult(GetShellMaterialResponseResult(result)));
+        }
+
+        private IEnumerable<ShellMaterialResponseDTO> GetShellMaterialResponseResult(IEnumerable<ApplicationShellMaterialResponseDTO> result)
+        
+        => throw new NotImplementedException("Please implement like below");
+        //=> result.Select(x => new ModelTypeResponseDTO(x.ModelTypesId, x.ModelTypesName, CovertShellMaterialResponse(x.Models)));
+        
+
+        private ICollection<ModelResponseDTO> CovertModelTypeResponse(ICollection<ApplicationModelResponseDTO> models)
+        => throw new NotImplementedException("Please implement like below");
+        //=> models.Select(x => new ModelResponseDTO(x.ModelId, x.ModelName, x.ModelTypesName)).ToList();
 
         [ProducesResponseType(typeof(ShellMaterialResponseDTO), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ShellMaterial.GetById, Name = DocumentVersionManagerAPIEndPoints.ShellMaterial.GetById)]
-        public Task<IActionResult> GetById([FromRoute] string NameOrGuid, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetById([FromRoute] string NameOrGuid, CancellationToken cancellationToken)
         {
-            return Guid.TryParse(NameOrGuid, out Guid guid)  ?
-                (_sender.Send(new GetShellMaterialByGuidQuery(new ShellMaterialGetRequestByGuidDTO(guid)), cancellationToken)).ToActionResult404()
-                :
-                (_sender.Send(new GetShellMaterialByIdQuery(new ShellMaterialGetRequestByIdDTO(NameOrGuid)), cancellationToken)).ToActionResult404();
+            var x = NameOrGuid.EnsureInputIsNotEmpty("Input Cannot be null");
+            var result = Guid.TryParse(NameOrGuid, out Guid guid);
+            if (result)
+            {
+                var ShellMaterialRequestByIdDTO = new ShellMaterialGetRequestByGuidDTO(guid);
+                return (await _sender.Send(new GetShellMaterialByGuidQuery(new ApplicationShellMaterialGetRequestByGuidDTO(ShellMaterialRequestByIdDTO)), cancellationToken))
+                .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
+                    Right: result => new OkObjectResult(MapApplicationShellMaterialResponseDTO_To_ShellMaterialResponseDTO(result)));
+            }
+            else
+            {
+                var ShellMaterialRequestByIdDTO = new ShellMaterialGetRequestByIdDTO(NameOrGuid);
+                return (await _sender.Send<Either<GeneralFailure, ApplicationShellMaterialResponseDTO>>(new GetShellMaterialByIdQuery(new ApplicationShellMaterialGetRequestByIdDTO(ShellMaterialRequestByIdDTO)), cancellationToken))
+                .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
+                    Right: result => new OkObjectResult(MapApplicationShellMaterialResponseDTO_To_ShellMaterialResponseDTO(result)));
+            }
         }
+
+        private ShellMaterialResponseDTO MapApplicationShellMaterialResponseDTO_To_ShellMaterialResponseDTO(ApplicationShellMaterialResponseDTO result)
+        => throw new NotImplementedException("Please implement like below");
+        // => new ModelTypeResponseDTO(result.ModelTypesId, result.ModelTypesName, CovertToModelResponse(result.Models));
+
+         private ICollection<ModelResponseDTO> CovertToModelResponse(ICollection<ApplicationModelResponseDTO> models)
+        => throw new NotImplementedException("Please implement like below");
+        // => models.Select(x => new ModelResponseDTO(x.ModelId, x.ModelName, x.ModelTypesName)).ToList();
 
         [ProducesResponseType(typeof(ModelTypeResponseDTO), StatusCodes.Status200OK)]
         [HttpGet(template: DocumentVersionManagerAPIEndPoints.ShellMaterial.GetByJSONBody, Name = DocumentVersionManagerAPIEndPoints.ShellMaterial.GetByJSONBody)]
-        public Task<IActionResult> GetByJSONBody([FromBody] ShellMaterialGetRequestDTO request, CancellationToken cancellationToken)
-                => ( _sender.Send(new GetShellMaterialQuery(request), cancellationToken)) .ToActionResult404();
+        public async Task<IActionResult> GetByJSONBody([FromBody] ShellMaterialGetRequestDTO request, CancellationToken cancellationToken)
+        {
+            var x = request.EnsureInputIsNotNull("Input Cannot be null");
+            return (await _sender.Send(new GetShellMaterialQuery(new ApplicationShellMaterialGetRequestDTO(request)), cancellationToken))
+            .Match<IActionResult>(Left: errors => new NotFoundObjectResult(errors),
+                Right: result => new OkObjectResult(MapApplicationShellMaterialResponseDTO_To_ShellMaterialResponseDTO(result)));
+        }
 
         [HttpPost(template: DocumentVersionManagerAPIEndPoints.ShellMaterial.Create, Name = DocumentVersionManagerAPIEndPoints.ShellMaterial.Create)]
-        public Task<IActionResult> Create(ShellMaterialCreateRequestDTO request, CancellationToken cancellationToken)
-             => (_sender.Send(new CreateShellMaterialCommand(request), cancellationToken)).ToActionResultCreated($"{DocumentVersionManagerAPIEndPoints.ShellMaterial.Create}", request);
+        public async Task<IActionResult> Create(ShellMaterialCreateRequestDTO request, CancellationToken cancellationToken)
+        {
+            var dto = new ApplicationShellMaterialCreateRequestDTO(request);
+
+            return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
+                .Bind<Either<GeneralFailure, int>>(_ => (  CreateShellMaterial(dto, cancellationToken).Result   ) )
+                .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+                    Right: result => result.Match<IActionResult>(
+                    Left: errors2 => new BadRequestObjectResult(errors2),
+                    Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ShellMaterial.Create}/{dto}", dto)));
+        }
+
+        private async Task<Either<GeneralFailure, int>> CreateShellMaterial(ApplicationShellMaterialCreateRequestDTO createType, CancellationToken cancellationToken)
+        => await _sender.Send(new CreateShellMaterialCommand(createType), cancellationToken);
+
 
         [HttpPut(template: DocumentVersionManagerAPIEndPoints.ShellMaterial.Update, Name = DocumentVersionManagerAPIEndPoints.ShellMaterial.Update)]
-        public Task<IActionResult> Update(ShellMaterialUpdateRequestDTO request, CancellationToken cancellationToken)
-            => (_sender.Send(new UpdateShellMaterialCommand(request), cancellationToken)) .ToActionResultCreated($"{DocumentVersionManagerAPIEndPoints.ShellMaterial.Create}", request);
+        public async Task<IActionResult> Update(ShellMaterialUpdateRequestDTO request, CancellationToken cancellationToken)
+        {
+            var dto = new ApplicationShellMaterialUpdateRequestDTO(request);
+
+            return dto.EnsureInputIsNotEmpty("Input Cannot be Empty")
+                .Bind<Either<GeneralFailure, int>>(modelType => UpdateShellMaterial(dto, cancellationToken).Result)
+                .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+                     Right: result => result.Match<IActionResult>(
+                     Left: errors2 => new     BadRequestObjectResult(errors2),
+                     Right: result2 => Created($"/{DocumentVersionManagerAPIEndPoints.ShellMaterial.Create}/{dto}", dto)));
+
+         }
+
+        private async Task<Either<GeneralFailure, int>> UpdateShellMaterial(ApplicationShellMaterialUpdateRequestDTO updateType, CancellationToken cancellationToken)
+        => await _sender.Send(new UpdateShellMaterialCommand(updateType), cancellationToken);
 
 
         [HttpDelete(template: DocumentVersionManagerAPIEndPoints.ShellMaterial.Delete, Name = DocumentVersionManagerAPIEndPoints.ShellMaterial.Delete)]
-        public Task<IActionResult> Delete([FromRoute] Guid request, CancellationToken cancellationToken)
-            =>_sender.Send(new DeleteShellMaterialCommand(new ShellMaterialDeleteRequestDTO(request)), cancellationToken).ToActionResult();
+        public async Task<IActionResult> Delete([FromRoute] Guid request, CancellationToken cancellationToken)
+        {
+        var result = new ShellMaterialDeleteRequestDTO(request);
+        var guid = new ApplicationShellMaterialDeleteRequestDTO(result);
+        return guid.EnsureInputIsNotEmpty("Input Cannot be null")
+            .Bind<Either<GeneralFailure, int>>(guid => DeleteShellMaterial(guid, cancellationToken).Result)
+            .Match<IActionResult>(Left: errors => new BadRequestObjectResult(errors),
+                Right: result => new OkObjectResult(result));
+        }
+
+        private async Task<Either<GeneralFailure, int>> DeleteShellMaterial(ApplicationShellMaterialDeleteRequestDTO dto, CancellationToken cancellationToken)
+        =>  await _sender.Send(new DeleteShellMaterialCommand(dto), cancellationToken);
 
     }
 }

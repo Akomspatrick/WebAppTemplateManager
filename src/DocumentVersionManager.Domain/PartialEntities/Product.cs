@@ -17,6 +17,7 @@ namespace DocumentVersionManager.Domain.Entities
             public int CableLength    { get; init; } 
             public int InspectionResult    { get; init; } 
             public string DefaultTestingMode    { get; init; }  = string.Empty; 
+            public string ModelTypeGroupName    { get; init; }  = string.Empty; 
             public string UsedCalibrationMode    { get; init; }  = string.Empty; 
             public string ThermexPurcharseOrderNo    { get; init; }  = string.Empty; 
             public string MachiningPurcharseOrderNo    { get; init; }  = string.Empty; 
@@ -24,7 +25,7 @@ namespace DocumentVersionManager.Domain.Entities
             public string BatcNo    { get; init; }  = string.Empty; 
             public ModelVersion ModelVersion    { get; init; } 
         
-        public static Product Create(int  productId, int  modelVersionId, string  modelName, int  capacity, DateTime  timestamp, string  stage, string  subStage, string  salesOrderId, int  cableLength, int  inspectionResult, string  defaultTestingMode, string  usedCalibrationMode, string  thermexPurcharseOrderNo, string  machiningPurcharseOrderNo, string  steelPurcharseOrderNo, string  batcNo)
+        public static Product Create(int  productId, int  modelVersionId, string  modelName, int  capacity, DateTime  timestamp, string  stage, string  subStage, string  salesOrderId, int  cableLength, int  inspectionResult, string  defaultTestingMode, string  modelTypeGroupName, string  usedCalibrationMode, string  thermexPurcharseOrderNo, string  machiningPurcharseOrderNo, string  steelPurcharseOrderNo, string  batcNo)
         =>new()
         {
             ProductId = productId ,
@@ -38,6 +39,7 @@ namespace DocumentVersionManager.Domain.Entities
             CableLength = cableLength ,
             InspectionResult = inspectionResult ,
             DefaultTestingMode = defaultTestingMode ,
+            ModelTypeGroupName = modelTypeGroupName ,
             UsedCalibrationMode = usedCalibrationMode ,
             ThermexPurcharseOrderNo = thermexPurcharseOrderNo ,
             MachiningPurcharseOrderNo = machiningPurcharseOrderNo ,

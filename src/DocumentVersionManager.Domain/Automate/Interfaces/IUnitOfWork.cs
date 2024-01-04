@@ -12,10 +12,10 @@ namespace DocumentVersionManager.Domain.Interfaces
         IDocumentTypeRepository DocumentTypeRepository { get; }
         IModelRepository ModelRepository { get; }
         IModelTypeRepository ModelTypeRepository { get; }
+        IModelTypeGroupRepository ModelTypeGroupRepository { get; }
         IModelVersionRepository ModelVersionRepository { get; }
         IProductRepository ProductRepository { get; }
         IShellMaterialRepository ShellMaterialRepository { get; }
-        ITestFlowTypeRepository TestFlowTypeRepository { get; }
         ITestPointRepository TestPointRepository { get; }
     }
 }

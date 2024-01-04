@@ -23,7 +23,7 @@ namespace DocumentVersionManager.Domain.Entities
 
         // Meaning that modelTypesName may evetualy become modelTypesId
         private List<Document> _documents = Enumerable.Empty<Document>().ToList();
-        private List<CapacityDocument> _capacityDocuments = Enumerable.Empty<CapacityDocument>().ToList();
+        //private List<CapacityDocument> _capacityDocuments = Enumerable.Empty<CapacityDocument>().ToList();
         //private List<Specification> _capacitySpecifications = Enumerable.Empty<Specification>().ToList();
 
         //These 3 were commented out for now  entity framework wants them created while cretating model table

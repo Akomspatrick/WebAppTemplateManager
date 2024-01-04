@@ -19,7 +19,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence
         public DbSet<ShellMaterial> ShellMaterials { get; private set; }
         public DbSet<Product> Products { get; private set; }
         public DbSet<DocumentBasePath> DocumentBasePaths { get; private set; }
-        public DbSet<TestFlowType> TestFlowTypes { get; private set; }
+        public DbSet<ModelTypeGroup> ModelTypeGroups { get; private set; }
 
 
         public DocumentVersionManagerContext(DbContextOptions<DocumentVersionManagerContext> options, IConfiguration configuration) : base(options)

@@ -45,8 +45,14 @@ namespace DocumentVersionManager.Domain.Entities
         //    }
 
         //}
-
-        public static ModelType Create(string modelTypeName, Guid guidId)
+        //        public static ModelType Create(string modelTypeName, string modelTypeGroupName, Guid guidId)
+        //=> new()
+        //{
+        //    ModelTypeName = modelTypeName,
+        //    ModelTypeGroupName = modelTypeGroupName,
+        //    GuidId = guidId,
+        //};
+        public static ModelType Create(string modelTypeName, string modelTypeGroupName, Guid guidId)
         {
             if (string.IsNullOrWhiteSpace(modelTypeName))
             {
@@ -66,7 +72,7 @@ namespace DocumentVersionManager.Domain.Entities
                 var x = new ArgumentException($"ModelType Guid Value cannot be empty {nameof(guidId)}");
                 throw x;
             }
-            return new ModelType() { GuidId = guidId, ModelTypeName = modelTypeName };
+            return new ModelType() { GuidId = guidId, ModelTypeName = modelTypeName, ModelTypeGroupName = modelTypeGroupName };
         }
 
 

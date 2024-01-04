@@ -19,7 +19,7 @@ namespace DocumentVersionManager.Application.Tests.CQRS.ModelType
     public class CreateModelTypeCommandTests
 
     {
-        private static readonly ModelTypeCreateRequestDTO modelTypeCreateDTO = new(Guid.NewGuid(), "ML101");
+        private static readonly ModelTypeCreateRequestDTO modelTypeCreateDTO = new(Guid.NewGuid(), "ML101", "111");
         private static readonly CreateModelTypeCommand createModelTypeCommand = new(CreateModelTypeDTO: modelTypeCreateDTO);
         private readonly CreateModelTypeCommandHandler createModelTypeCommandHandler;
         private readonly IUnitOfWork _unitOfWorkMock;
