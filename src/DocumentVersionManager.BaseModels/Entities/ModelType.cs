@@ -1,9 +1,12 @@
-﻿namespace DocumentVersionManager.BaseModels.Entities
+﻿using CodeGeneratorAttributesLibrary;
+
+namespace DocumentVersionManager.BaseModels.Entities
 {
 
     public class ModelType : BaseEntity
     {
         // public Guid ModelTypeId { get; private set; } 
+        [ProjectBaseModelsAttribute(32, 2, true)]
         public string ModelTypeName { get; private set; } = string.Empty;
         public string ModelTypeGroupName { get; private set; } = string.Empty;
         public ModelTypeGroup ModelTypeGroup { get; init; }

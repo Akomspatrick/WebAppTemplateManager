@@ -1,7 +1,10 @@
-﻿namespace DocumentVersionManager.BaseModels.Entities
+﻿using CodeGeneratorAttributesLibrary;
+
+namespace DocumentVersionManager.BaseModels.Entities
 {
     public class Document : BaseEntity
     {
+        [ProjectBaseModelsAttribute(30, 2, false)]
         public string DocumentName { get; init; } = string.Empty;
         public string ModelName { get; init; } = string.Empty;
         public int ModelVersionId { get; init; }
