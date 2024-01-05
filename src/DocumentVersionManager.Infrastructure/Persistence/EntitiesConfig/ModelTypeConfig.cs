@@ -1,7 +1,6 @@
 ﻿using DocumentVersionManager.Domain.Constants;
 using DocumentVersionManager.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 

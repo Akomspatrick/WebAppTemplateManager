@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<IsPackable>false</IsPackable>
+		<IsTestProject>true</IsTestProject>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentAssertions" Version="7.0.0-alpha.3" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+		<PackageReference Include="NetArchTest.Rules" Version="1.3.2" />
+		<PackageReference Include="FluentAssertions" Version="7.0.0-alpha.3" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+		<PackageReference Include="xunit" Version="2.4.2" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="coverlet.collector" Version="6.0.0">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\DocumentVersionManager.Api\DocumentVersionManager.Api.csproj" />
+		<ProjectReference Include="..\..\src\DocumentVersionManager.Application\DocumentVersionManager.Application.csproj" />
+		<ProjectReference Include="..\..\src\DocumentVersionManager.BaseModels\DocumentVersionManager.BaseModels.csproj" />
+		<ProjectReference Include="..\..\src\DocumentVersionManager.Contracts\DocumentVersionManager.Contracts.csproj" />
+		<ProjectReference Include="..\..\src\DocumentVersionManager.DomainBase\DocumentVersionManager.DomainBase.csproj" />
+		<ProjectReference Include="..\..\src\DocumentVersionManager.Domain\DocumentVersionManager.Domain.csproj" />
+		<ProjectReference Include="..\..\src\DocumentVersionManager.Infrastructure\DocumentVersionManager.Infrastructure.csproj" />
+	</ItemGroup>
+
+</Project>

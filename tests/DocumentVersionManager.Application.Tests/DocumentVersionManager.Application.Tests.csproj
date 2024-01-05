@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\DocumentVersionManager.Application\DocumentVersionManager.Application.csproj" />
+	  <ProjectReference Include="..\..\src\DocumentVersionManager.Api\DocumentVersionManager.Api.csproj" />
 	</ItemGroup>
 
 </Project>

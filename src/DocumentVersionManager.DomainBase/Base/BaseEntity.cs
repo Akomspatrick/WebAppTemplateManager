@@ -2,12 +2,12 @@
 using DocumentVersionManager.DomainBase.Interfaces;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DocumentVersionManager.DomainBase.Base
+namespace DocumentVersionManager.DomainBase
 {
     public abstract class BaseEntity : IDomainEvents
     {
 
-        public Guid  GuidId { get; set; } = default;
+        public Guid GuidId { get; set; } = default;
 
         private readonly List<BaseDomainEvent> _domainEvents = new();
         [NotMapped]
@@ -31,7 +31,7 @@ namespace DocumentVersionManager.DomainBase.Base
             throw new NotImplementedException();
         }
 
-        private  Guid GetMyGuid(int x)
+        private Guid GetMyGuid(int x)
         {
             if (x < 1)
             {

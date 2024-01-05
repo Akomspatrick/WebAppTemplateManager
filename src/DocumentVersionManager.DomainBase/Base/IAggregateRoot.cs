@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentVersionManager.DomainBase.Base
+namespace DocumentVersionManager.DomainBase
 {
     internal interface IAggregateRoot
     {

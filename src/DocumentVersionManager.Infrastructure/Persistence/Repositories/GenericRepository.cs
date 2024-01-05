@@ -1,6 +1,6 @@
 ﻿using DocumentVersionManager.Domain.Errors;
 using DocumentVersionManager.Domain.Interfaces;
-using DocumentVersionManager.DomainBase.Base;
+using DocumentVersionManager.DomainBase;
 using LanguageExt;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
@@ -43,14 +43,14 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             catch (DbUpdateException ex)
             {
                 //Log this error properly
-               // throw ex;
-                return GeneralFailures.ExceptionThrown("GenericRepository-AddAsync","Problem Adding Entity with Guid"+ entity.GuidId, ex?.InnerException?.Message);
+                // throw ex;
+                return GeneralFailures.ExceptionThrown("GenericRepository-AddAsync", "Problem Adding Entity with Guid" + entity.GuidId, ex?.InnerException?.Message);
             }
             catch (Exception ex)
             {
                 //Log this error properly
                 throw ex;
-               // return GeneralFailures.ProblemAddingEntityIntoDbContext(entity.GuidId.ToString());
+                // return GeneralFailures.ProblemAddingEntityIntoDbContext(entity.GuidId.ToString());
             }
 
 
@@ -202,7 +202,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence.Repositories
             {
 
                 //Log this error properly
-                return GeneralFailures.ExceptionThrown("GenericRepo-Add", ex.Message,ex.StackTrace);
+                return GeneralFailures.ExceptionThrown("GenericRepo-Add", ex.Message, ex.StackTrace);
             }
             catch (Exception ex)
             {

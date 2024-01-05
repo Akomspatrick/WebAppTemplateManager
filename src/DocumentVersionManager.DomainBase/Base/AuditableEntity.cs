@@ -2,7 +2,7 @@
 
 using DocumentVersionManager.DomainBase.Interfaces;
 
-namespace DocumentVersionManager.DomainBase.Base
+namespace DocumentVersionManager.DomainBase
 {
     public class AuditableEntity : IAuditableEntity
     {

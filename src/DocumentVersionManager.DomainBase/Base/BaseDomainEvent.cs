@@ -2,7 +2,7 @@
 using System;
 
 
-namespace DocumentVersionManager.DomainBase.Base
+namespace DocumentVersionManager.DomainBase
 {
     public class BaseDomainEvent : INotification
     {

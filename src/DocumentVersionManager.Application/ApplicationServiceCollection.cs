@@ -22,7 +22,7 @@ public static class ApplicationServiceCollection
     {
 
         var applicationAssembly = typeof(ApplicationServiceCollection).Assembly;
-        services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Class1>());
+        services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<ApplicationAssemblyReferenceMarker>());
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehaviour<,>));
         services.AddScoped<IPipelineBehavior<CreateModelTypeCommand, int>, ValidationModelTypeBehaviour>();
         //Instead of adding individual fluent validation we can add Fluentvalidation asp.netcore package and then 

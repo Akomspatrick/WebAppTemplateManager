@@ -1,4 +1,4 @@
-using DocumentVersionManager.DomainBase.Base;
+using DocumentVersionManager.DomainBase;
 namespace DocumentVersionManager.Domain.Entities
 {
     using System.ComponentModel.DataAnnotations;

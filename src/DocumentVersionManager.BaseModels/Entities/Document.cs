@@ -13,6 +13,7 @@
         public string DocumentDescription { get; init; } = string.Empty;
         public DateTime Timestamp { get; init; }
 
+
         public ModelVersion ModelVersion { get; init; }
 
         public ICollection<DocumentDocumentType> DocumentDocumentTypes { get; set; }

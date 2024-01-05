@@ -1,5 +1,5 @@
 ﻿
-using DocumentVersionManager.DomainBase.Base;
+using DocumentVersionManager.DomainBase;
 
 
 namespace DocumentVersionManager.DomainBase.Interfaces

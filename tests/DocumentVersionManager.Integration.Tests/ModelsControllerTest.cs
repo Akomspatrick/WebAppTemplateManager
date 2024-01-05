@@ -19,13 +19,13 @@ using Microsoft.AspNetCore.Http;
 
 namespace DocumentVersionManager.Integration.Tests
 {
-    public class ModelsControllerTest : IClassFixture<WebApplicationFactory<APIAssemblyRefrence>>, IAsyncLifetime
+    public class ModelsControllerTest : IClassFixture<WebApplicationFactory<APIAssemblyRefrenceMarker>>, IAsyncLifetime
     {
         private readonly HttpClient _httpClient;
         private readonly string _baseUrl = "http://localhost:5007/api/";
         private readonly List<Guid> createdGuids = new();
 
-        public ModelsControllerTest(WebApplicationFactory<APIAssemblyRefrence> _appFactory)
+        public ModelsControllerTest(WebApplicationFactory<APIAssemblyRefrenceMarker> _appFactory)
         {
             _httpClient = _appFactory.CreateClient();
             _httpClient.BaseAddress = new Uri(_baseUrl);

@@ -3,6 +3,7 @@ using DocumentVersionManager.Domain.Utils;
 using DocumentVersionManager.Infrastructure.GlobalExceptionHandler;
 using DocumentVersionManager.Infrastructure.Persistence;
 using DocumentVersionManager.Infrastructure.Utils;
+using LanguageExt.TypeClasses;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,6 +46,8 @@ public static class APIServiceCollection
         // services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>());
         return services;
     }
-
-
 }
+
+
+
+
