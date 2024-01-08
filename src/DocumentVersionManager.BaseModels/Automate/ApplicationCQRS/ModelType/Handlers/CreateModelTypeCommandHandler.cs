@@ -7,7 +7,7 @@ using DocumentVersionManager.Application.Contracts.ResponseDTO;
 using DocumentVersionManager.Domain.Errors;
 namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
 {
-    public  class CreateModelTypeCommandHandler  :  IRequestHandler<CreateModelTypeCommand, Either<GeneralFailure, int>>
+    public  class CreateModelTypeCommandHandler  :  IRequestHandler<CreateModelTypeCommand, Either<GeneralFailure, Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAppLogger<CreateModelTypeCommandHandler> _logger;
@@ -17,9 +17,9 @@ namespace DocumentVersionManager.Application.CQRS.ModelType.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Either<GeneralFailure, int>> Handle(CreateModelTypeCommand request, CancellationToken cancellationToken)
+        public async Task<Either<GeneralFailure, Guid>> Handle(CreateModelTypeCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
-        }
+            //Follow the format below , initial the entity variable by calling the entity Create method;
+        }var entity =null;// Domain.Entities.ModelType.Create(request.modelTypeCreateDTO.ModelTypeName, request.modelTypeCreateDTO.Value.GuidId);return ( await _unitOfWork.ModelTypeRepository.AddAsync(entity, cancellationToken)). Map((x) =>  entity.GuidId);
     }
 }

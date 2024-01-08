@@ -1,11 +1,11 @@
-using DocumentVersionManager.Application.Contracts.RequestDTO;
-using DocumentVersionManager.Application.Contracts.ResponseDTO;
+using DocumentVersionManager.Contracts.RequestDTO;
+using DocumentVersionManager.Contracts.ResponseDTO;
 using DocumentVersionManager.Domain.Errors;
 using LanguageExt;
 using MediatR;
 namespace DocumentVersionManager.Application.CQRS.ShellMaterial.Queries{
-    public  record GetShellMaterialQuery(ApplicationShellMaterialGetRequestDTO  RequestShellMaterialDTO) :  IRequest<Either<GeneralFailure, ApplicationShellMaterialResponseDTO>>;
-    public  record GetShellMaterialByGuidQuery(ApplicationShellMaterialGetRequestByGuidDTO  RequestShellMaterialDTO) :  IRequest<Either<GeneralFailure, ApplicationShellMaterialResponseDTO>>;
-    public  record GetShellMaterialByIdQuery(ApplicationShellMaterialGetRequestByIdDTO  RequestShellMaterialDTO) :  IRequest<Either<GeneralFailure, ApplicationShellMaterialResponseDTO>>;
-    public  record GetAllShellMaterialQuery :  IRequest<Either<GeneralFailure, IEnumerable<ApplicationShellMaterialResponseDTO>>>;
+    public  record GetShellMaterialQuery(ShellMaterialGetRequestDTO  RequestShellMaterialDTO) :  IRequest<Either<GeneralFailure, ShellMaterialResponseDTO>>;
+    public  record GetShellMaterialByGuidQuery(ShellMaterialGetRequestByGuidDTO  RequestShellMaterialDTO) :  IRequest<Either<GeneralFailure, ShellMaterialResponseDTO>>;
+    public  record GetShellMaterialByIdQuery(ShellMaterialGetRequestByIdDTO  RequestShellMaterialDTO) :  IRequest<Either<GeneralFailure, ShellMaterialResponseDTO>>;
+    public  record GetAllShellMaterialQuery :  IRequest<Either<GeneralFailure, IEnumerable<ShellMaterialResponseDTO>>>;
 }

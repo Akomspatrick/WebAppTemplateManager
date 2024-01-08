@@ -4,8 +4,13 @@ namespace DocumentVersionManager.BaseModels.Entities
 {
     public class Document : BaseEntity
     {
-        [ProjectBaseModelsAttribute(30, 2, false)]
+        // ProjectBaseModelsAttribute(int maxSize, int minSize, bool isKey, bool isUnique, bool isRequired, bool isForeignKey, string defaultStringValue, bool hasDefaultStringValue)
+
+        [ProjectBaseModelsAttribute(30, 2, true, true, true, false, false, "")]
         public string DocumentName { get; init; } = string.Empty;
+
+
+        [ProjectBaseModelsAttribute(30, 2, true, true, true, false, false, "")]
         public string ModelName { get; init; } = string.Empty;
         public int ModelVersionId { get; init; }
         //public Guid DocumentGuid { get; init; }
