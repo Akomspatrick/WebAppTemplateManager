@@ -3,6 +3,7 @@ using System;
 using DocumentVersionManager.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DocumentVersionManager.Infrastructure.Migrations
 {
     [DbContext(typeof(DocumentVersionManagerContext))]
-    partial class DocumentVersionManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20240109182337_newupdates")]
+    partial class newupdates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
