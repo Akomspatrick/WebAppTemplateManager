@@ -4,6 +4,7 @@ using DocumentVersionManager.Api.Middleware;
 
 using DocumentVersionManager.Application;
 using DocumentVersionManager.Infrastructure;
+using DocumentVersionManager.Infrastructure.Persistence;
 using Microsoft.OpenApi.Models;
 
 
@@ -62,4 +63,8 @@ app.MapControllers();
 //    await ctx.Response.WriteAsync($"Hello World! from {useragent}");
 //});
 
+if (app.Environment.IsDevelopment())
+{
+    await TrySeedData.EnsureUsers(app);
+}
 app.Run();

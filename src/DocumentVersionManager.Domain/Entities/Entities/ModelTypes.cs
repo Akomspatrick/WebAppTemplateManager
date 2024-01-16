@@ -52,28 +52,28 @@ namespace DocumentVersionManager.Domain.Entities
         //    ModelTypeGroupName = modelTypeGroupName,
         //    GuidId = guidId,
         //};
-        public static ModelType Create(string modelTypeName, string modelTypeGroupName, Guid guidId)
-        {
-            if (string.IsNullOrWhiteSpace(modelTypeName))
-            {
-                throw new ArgumentNullException(nameof(modelTypeName));
+        //public static ModelType Create(string modelTypeName, string modelTypeGroupName, Guid guidId)
+        //{
+        //    if (string.IsNullOrWhiteSpace(modelTypeName))
+        //    {
+        //        throw new ArgumentNullException(nameof(modelTypeName));
 
-            }
-            if (modelTypeName.Length > FixedValues.modelTypesNameMaxLength)
-            {
-                throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.modelTypesNameMaxLength} characters {nameof(modelTypeName)} but it is  {modelTypeName.Length}");
-            }
-            if (modelTypeName.Length < FixedValues.modelTypesNameMinLength)
-            {
-                throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.modelTypesNameMinLength} characters {nameof(modelTypeName)} but it is {modelTypeName.Length}");
-            }
-            if (guidId == Guid.Empty)
-            {
-                var x = new ArgumentException($"ModelType Guid Value cannot be empty {nameof(guidId)}");
-                throw x;
-            }
-            return new ModelType() { GuidId = guidId, ModelTypeName = modelTypeName, ModelTypeGroupName = modelTypeGroupName };
-        }
+        //    }
+        //    if (modelTypeName.Length > FixedValues.modelTypesNameMaxLength)
+        //    {
+        //        throw new ArgumentException($"Model Type Name cannot be more than {FixedValues.modelTypesNameMaxLength} characters {nameof(modelTypeName)} but it is  {modelTypeName.Length}");
+        //    }
+        //    if (modelTypeName.Length < FixedValues.modelTypesNameMinLength)
+        //    {
+        //        throw new ArgumentException($"Model Type Name cannot be less than {FixedValues.modelTypesNameMinLength} characters {nameof(modelTypeName)} but it is {modelTypeName.Length}");
+        //    }
+        //    if (guidId == Guid.Empty)
+        //    {
+        //        var x = new ArgumentException($"ModelType Guid Value cannot be empty {nameof(guidId)}");
+        //        throw x;
+        //    }
+        //    return new ModelType() { GuidId = guidId, ModelTypeName = modelTypeName, ModelTypeGroupName = modelTypeGroupName };
+        //}
 
 
     }

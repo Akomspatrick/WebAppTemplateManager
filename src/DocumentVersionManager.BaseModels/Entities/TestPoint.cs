@@ -1,33 +1,17 @@
-﻿namespace DocumentVersionManager.BaseModels.Entities
+﻿using CodeGeneratorAttributesLibrary;
+
+namespace DocumentVersionManager.BaseModels.Entities
 {
+    [BaseModelsForeignKeyAttribute("ModelVersion", "TestPoints")]
     public class TestPoint : BaseEntity
     {
-        //public static TestPoint Create(Guid capacityTestPointGuid, string modelName, int modelVersionId, int capacity, int testId, int weight)
-        //{
-        //    return new TestPoint()
-        //    {
-        //        ModelName = modelName,
-        //        ModelVersionId = modelVersionId,
-        //        Capacity = capacity,
-        //        TestPointId = weight,
-        //        //TestId = testId,
-        //        GuidId = capacityTestPointGuid
-        //    };
-        //}
-
-        //public static TestPoint Create(Guid capacityTestPointGuid, string modelName, int modelVersionId, int capacity, int weight)
-        //{
-        //    return new TestPoint()
-        //    {
-        //        ModelName = modelName,
-        //        ModelVersionId = modelVersionId,
-        //        Capacity = capacity,
-        //        TestPointId = weight,
-        //        GuidId = capacityTestPointGuid
-        //    };
-        //}
+        [BaseModelBasicAttribute(32, 0, true, true, false)]
         public string ModelName { get; init; } = string.Empty;
+
+        [BaseModelBasicAttribute(true, true)]
         public int ModelVersionId { get; init; }
+
+        [BaseModelBasicAttribute(true)]
         public int CapacityTestPoint { get; init; }// these are the test points/weights for the capacity test
                                                    // we dont need to specify capacity again because the Modelversion already has it
 

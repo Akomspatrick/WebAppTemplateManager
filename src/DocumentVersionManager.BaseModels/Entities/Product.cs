@@ -1,9 +1,17 @@
-﻿namespace DocumentVersionManager.BaseModels.Entities
+﻿using CodeGeneratorAttributesLibrary;
+
+namespace DocumentVersionManager.BaseModels.Entities
 {
-    public class Product
+    [BaseModelsForeignKeyAttribute("ModelVersion", "Products")]
+    public class Product : BaseEntity
     {
+        [BaseModelBasicAttribute(true)]
         public required int ProductId { get; init; } // SerialNo
+
+        [BaseModelBasicAttribute(false, true)]
         public int ModelVersionId { get; init; }
+
+        [BaseModelBasicAttribute(32, 0, false, true, false)]
         public required string ModelName { get; init; } = string.Empty;
         public required int Capacity { get; init; }
         public required DateTime Timestamp { get; init; }
@@ -20,7 +28,7 @@
         public string MachiningPurcharseOrderNo { get; init; } = string.Empty;
         public string SteelPurcharseOrderNo { get; init; } = string.Empty;
 
-        public string BatcNo { get; init; } = string.Empty;
+        public int BatcNo { get; init; }
 
         public ModelVersion? ModelVersion { get; init; }
 

@@ -9,6 +9,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence
     public class DocumentVersionManagerContext : DbContext
     {
         private readonly IConfiguration _configuration;
+        public DbSet<ModelTypeGroup> ModelTypeGroups { get; private set; }
         public DbSet<ModelType> ModelTypes { get; private set; }
         public DbSet<Model> Models { get; private set; }
         public DbSet<ModelVersion> ModelVersions { get; private set; }
@@ -19,12 +20,13 @@ namespace DocumentVersionManager.Infrastructure.Persistence
         public DbSet<ShellMaterial> ShellMaterials { get; private set; }
         public DbSet<Product> Products { get; private set; }
         public DbSet<DocumentBasePath> DocumentBasePaths { get; private set; }
-        public DbSet<ModelTypeGroup> ModelTypeGroups { get; private set; }
+
 
 
         public DocumentVersionManagerContext(DbContextOptions<DocumentVersionManagerContext> options, IConfiguration configuration) : base(options)
         {
             _configuration = configuration;
+
             // Database.EnsureCreated();
 
         }
@@ -39,6 +41,7 @@ namespace DocumentVersionManager.Infrastructure.Persistence
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DocumentVersionManagerContext).Assembly);
+
         }
     }
 }
