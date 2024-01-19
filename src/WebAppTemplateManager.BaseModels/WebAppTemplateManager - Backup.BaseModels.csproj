@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Automate\**" />
+		<EmbeddedResource Remove="Automate\**" />
+		<None Remove="Automate\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\WebAppTemplateManager.DomainBase\WebAppTemplateManager.DomainBase.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="CodeGeneratorAttributesLibrary">
+			<HintPath>..\..\..\SolutionCodeGenerator\src\CodeGeneratorAttributesLibrary\bin\Debug\net8.0\CodeGeneratorAttributesLibrary.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+</Project>
